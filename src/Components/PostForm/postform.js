@@ -7,7 +7,8 @@ import Axios from "axios";
 
 function CreateAnn() {
   /* Variables d'état */
-  const [file, setFile]= useState()
+  const [file, setFile]= useState({file1:"",file2:"", file3:""})
+  const [arrayList, setArrayList]=useState([])
   let [images, setImages] = useState([]);
   const [emptyField, setMessage] = useState("");
   const [feed, setFeed] = useState([]);
@@ -27,15 +28,18 @@ function CreateAnn() {
     etat: "",
   });
   
-  /*const maxNumber = 5;
+  const maxNumber = 5;
 
   const onChange = (imageList, addUpdateIndex) => {
-    //console.log(imageList, addUpdateIndex);
+    console.log(imageList, addUpdateIndex);
+    console.log(imageList[addUpdateIndex].file);
+    setFile({...file, file1:imageList[addUpdateIndex].file});
+    setFile({...file, file2:imageList[addUpdateIndex].file});
+    setFile({...file, file3:imageList[addUpdateIndex+2].file});
+    setArrayList(addUpdateIndex);
+    console.log("NIANIA "+file.file2)
     setImages(imageList);
-    data.append("file", images);
-    console.log(data);
-    console.log(images);
-  };*/
+  };
 
 
   /* Fonctions de mise à jour du titre et du contenu */
@@ -93,7 +97,7 @@ function CreateAnn() {
     setStatus({ ...status, monthly_cost: e.target.value });
     console.log("content on change :" + e.target.value);
   };
-  const onChangeCni = e => {
+  /*const onChangeCni = e => {
     if (e.target.files[0]) {
       setFile(e.target.files[0]);
       const reader = new FileReader();
@@ -102,9 +106,9 @@ function CreateAnn() {
         });
       reader.readAsDataURL(e.target.files[0]);
     }
-  };
-  const post = (event) => {
-    event.preventDefault()
+  };*/
+  const post = () => {
+    //event.preventDefault()
     const data = new FormData();
     data.append("title",status.title)
     data.append("content",status.content)
@@ -116,7 +120,21 @@ function CreateAnn() {
     data.append("type",status.type)
     data.append("gross_rent_by_year",status.gross_rent_by_year)
     data.append("monthly_cost",status.monthly_cost)
-    data.append("file",file)
+    data.append("file",file.file1)
+    data.append("file",file.file2)
+    data.append("file",file.file3)
+    //data.append("file",file)
+    console.log(data.get("file"))
+  /*  for (let i = 0 ; i < images.length ; i++) {
+      console.log ("image length :" + images.length)
+      data.append("file", file[i]);
+      console.log(data.get("file"))
+  } */
+
+    
+  
+  
+    //data.append("file",file)
     
         
     if (status.title === "" && status.content === "" && status.city === "" && status.zip_code === "" && status.region === "" && status.price === ""
@@ -140,7 +158,68 @@ function CreateAnn() {
 
       <div><br/>
 
+
       <h6>Ajoutez des photos à l'annonce :</h6>
+
+      
+      <ImageUploading
+  multiple
+  value={images}
+  onChange={onChange}
+  maxNumber={maxNumber}
+  dataURLKey="data_url"
+>
+  {({
+    imageList,
+    onImageUpload,
+    onImageRemoveAll,
+    onImageUpdate,
+    onImageRemove,
+    isDragging,
+    dragProps,
+  }) => (
+    <div>
+      <div>
+        <button
+          className="btn btn-primary"
+          style={isDragging ? { color: "red" } : undefined}
+          onClick={onImageUpload}
+          {...dragProps}
+        >
+          Cliquez ou collez votre image ici
+        </button>
+        <br />
+        <br />
+
+        <button
+          className="btn btn-danger"
+          onClick={onImageRemoveAll}
+        >
+          Supprimez toutes les photos
+        </button>
+      </div>
+      {imageList.map((image, index) => (
+        <div key={index} className="col-lg-12">
+          <img src={image["data_url"]} />
+          <div className="image-item__btn-wrapper">
+            <button
+              className="btn btn-primary"
+              onClick={() => onImageUpdate(index)}
+            >
+              Modifier
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => onImageRemove(index)}
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</ImageUploading>
 
 <br/>
 
@@ -149,19 +228,19 @@ function CreateAnn() {
 
         <form id="annonceDetails"><br/>
 
-        <div>
-              <div>
+            {/*<div>
+               <div>
                 <p>Uploader la CNI :</p>
-               {/* <input name="file" type="file" onChange={event =>{
+               <input name="file" type="file" onChange={event =>{
                   const file = event.target.files[0];
                   setFile(file)
-                }} />*/}
+                }} />
                 <input name="file" type="file" onChange={onChangeCni} />
               </div>
               <div >
                 <img  src={images} />
               </div>
-            </div>
+            </div>*/}
 
           <input
             id="postTitle"
@@ -279,9 +358,11 @@ function CreateAnn() {
 
           </div>
           
-          <button onClick={post} >Publier</button><br/>
-
             </form>
+
+            <button onClick={() => post()} >Publier</button><br/>
+
+          
 
         <br/>
       </div>
