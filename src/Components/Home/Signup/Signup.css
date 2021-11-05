@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Kaushan+Script&family=Montserrat:wght@100&family=Roboto:wght@100&display=swap');
+
+.signup {
+    margin: auto;     
+    border: 0.1px solid darkblue;
+    border-radius: 3px;
+    padding: 2rem;
+    width: min-content;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container-nomprenom, .signup-container-motdepasse {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.signup-container-mdp, .signup-container-verifmdp, .signup-container-nom, .signup-container-prenom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.signup-container-email, .signup-container-tel, .signup-container-societe {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.prenom {
+    margin-left: 0.3rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    .signup-container-nomprenom, .signup-container-motdepasse  {
+        flex-wrap: wrap;
+    }
+  }
+
+.singup-input{
+    height: 2.2rem;
+    border: 0.1px solid darkblue;
+    border-radius: 3px;
+    padding: 0.5rem;
+} 
+
+.singup-input:focus{
+    box-shadow: inset 0 1px 1px darkblue, 0 0 0.4rem blue;
+    }
+
+label{
+    color: darkblue;
+    font-weight: bolder;
+    margin-top: 0.5rem;
+}
+
+.signup-title {
+    color: darkblue;
+}
+.signup-title::before, .signup-title::after{
+    content:'"';
+    font-size: 4rem;
+    opacity: 0.4;
+    font-family: 'Alex Brush', cursive;
+}
+
+
+.signup-button{
+    color: white;
+    width: 30%;
+    margin:auto;
+    margin-top: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+    
+}
+
+.required:after { 
+    content:"*";
+    color: red; }
+
+.signup-fasle-link {
+    margin-top: 0.3rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: darkblue;
+    }
+
+.signup-fasle-link:hover{
+     color: rgb(117, 117, 180);
+     text-decoration: underline;
+    }
