@@ -9,7 +9,8 @@ import AllAnnounces from './Components/AllAnnounces/AllAnnounces';
 import Footer from './Components/Footer/Footer';
 import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
-import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail'
+import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
+import StableCoins from './Components/StableCoins/StableCoins';
 //temporaire :
 import UploadPics from './Components/Uploads/docs';
 const  axios  =  require ( 'axios' ) ;
@@ -68,6 +69,9 @@ function App() {
           </Route>
           <Route path="/announce-detail">
             <AnnounceDetail />
+          </Route>
+          <Route path="/stable-coins">
+            <StableCoins />
           </Route>
         </Switch>
         {/* A Afficher plus tard <Footer/> */}

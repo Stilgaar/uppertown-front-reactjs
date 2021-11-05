@@ -1,9 +1,11 @@
 .detail-container {
-  border: 2px solid black;
+  border: 2px solid lightgray;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   margin: 5px;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 .detail-upper-container {
@@ -21,42 +23,76 @@
   background-color: black;
 }
 
+.detail-input {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.detail-input label {
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-input input {
+margin: 2px;
+
+}
+
+.detail-input button {
+  margin: 2px
+}
+
 .detail-image-container img {
   max-width: 100%;
   display: flex;
   justify-content: center;
+  
 }
 
 .detail-description-container {
-  border-left: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid lightgray;
   border-radius: 3px;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
 }
 
 .detail-lower-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  border-top: 2px solid black;
+  border-top: 2px solid lightgray;
 }
 
 .detail-economic-container {
+  display: flex;
+  flex-direction: column;
   border-radius: 3px;
   width: 100%;
-  border-right: 2px solid black;
-  padding: 5px;
+  border-right: 2px solid lightgray;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .detail-rent-container {
+  display: flex;
+  flex-direction: column;
   border-radius: 3px;
   width: 100%;
-  border-right: 2px solid black;
-  padding: 5px;
+  border-right: 2px solid lightgray;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .detail-geographical-container {
+  display: flex;
+  flex-direction: column;
   border-radius: 3px;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
