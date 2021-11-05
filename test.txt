@@ -1,3 +1,0 @@
-git branch nomdelabranche
-
-git push -u origin nomdelabranche
