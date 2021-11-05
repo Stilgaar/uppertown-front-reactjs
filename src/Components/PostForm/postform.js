@@ -2,11 +2,12 @@ import { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
-import "./postform.css"
+import "./postform.css";
+import Axios from "axios";
 
 function CreateAnn() {
   /* Variables d'état */
-  const [dataFile, setDataFile]= useState()
+  const [file, setFile]= useState()
   let [images, setImages] = useState([]);
   const [emptyField, setMessage] = useState("");
   const [feed, setFeed] = useState([]);
@@ -94,10 +95,7 @@ function CreateAnn() {
   };
   const onChangeCni = e => {
     if (e.target.files[0]) {
-      let data = new FormData;
-      data.append("NewImage", e.target.files[0]);
-      console.log(data.get("NewImage"));
-      setDataFile(data);
+      setFile(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
       setImages(reader.result)
@@ -105,8 +103,21 @@ function CreateAnn() {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-  const post = (e) => {
-    e.preventDefault()
+  const post = (event) => {
+    event.preventDefault()
+    const data = new FormData();
+    data.append("title",status.title)
+    data.append("content",status.content)
+    data.append("city",status.city)
+    data.append("zip_code",status.zip_code)
+    data.append("price",status.price)
+    data.append("share_price",status.share_price)
+    data.append("share_number",status.share_number)
+    data.append("type",status.type)
+    data.append("gross_rent_by_year",status.gross_rent_by_year)
+    data.append("monthly_cost",status.monthly_cost)
+    data.append("file",file)
+    
         
     if (status.title === "" && status.content === "" && status.city === "" && status.zip_code === "" && status.region === "" && status.price === ""
     && status.share_price === "" && status.share_number === "" && status.type === "" && status.gross_rent_by_year === ""
@@ -118,41 +129,9 @@ function CreateAnn() {
       document.querySelector(".postInput").value = "";
     }
 
-    const postURL = "http://localhost:1337/api/announces/allAnnounces"; //chemin vers le backend
-    fetch(postURL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "multipart/form-data"
-      },
-      
-      body: JSON.stringify({
-        // on récupère le contenu du body
-        title: status.title,
-        content: status.content,
-        city: status.city,
-        zip_code: status.zip_code,
-        region: status.region,
-        price: status.price,
-        share_price: status.share_price,
-        share_number: status.share_number,
-        gross_rent_by_year: status.gross_rent_by_year,
-        monthly_cost: status.monthly_cost,
-        type: status.type,
-        image : dataFile
-      
-      }),
-    }).then(() => {
-      Swal.fire({
-        title: "Annonce publiée !",
-        //text: "Thanks",
-        type: "success",
-      });
-      // vérification :
-      console.log("Datas : " + dataFile );
-    });
-  };
-
+    Axios.post("http://localhost:1337/api/announces/allAnnounces",data)
+    .then(res=>console.log(res)).catch(err=>console.log(err))
+  }
   return (
     <div className="postForm">
       <br/>
@@ -173,9 +152,9 @@ function CreateAnn() {
         <div>
               <div>
                 <p>Uploader la CNI :</p>
-                {/*<input name="file" type="file" onChange={event =>{
+               {/* <input name="file" type="file" onChange={event =>{
                   const file = event.target.files[0];
-                  setDataFile(file)
+                  setFile(file)
                 }} />*/}
                 <input name="file" type="file" onChange={onChangeCni} />
               </div>
@@ -188,6 +167,7 @@ function CreateAnn() {
             id="postTitle"
             className="postInput"
             type="text"
+            name="title"
             onChange={getTitle}
             placeholder="Ajouter un titre : "
             defaultValue={status.title}
