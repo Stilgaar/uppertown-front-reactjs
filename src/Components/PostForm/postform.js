@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ImageUploading from "react-images-uploading";
+//import ImageUploading from "react-images-uploading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
 import "./postform.css";
@@ -7,9 +7,10 @@ import Axios from "axios";
 
 function CreateAnn() {
   /* Variables d'état */
-  const [file, setFile]= useState({file1:"",file2:"", file3:""})
-  const [arrayList, setArrayList]=useState([])
-  let [images, setImages] = useState([]);
+  const [file, setFile]= useState({file1:"",file2:"",file3:""});
+  //const [file, setFile]= useState();
+  let [images, setImages] = useState({image1:"",image2:"",image3:""});
+  //const [images, setImages] = useState();
   const [emptyField, setMessage] = useState("");
   const [feed, setFeed] = useState([]);
 
@@ -28,20 +29,6 @@ function CreateAnn() {
     etat: "",
   });
   
-  const maxNumber = 5;
-
-  const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
-    console.log(imageList[addUpdateIndex].file);
-    setFile({...file, file1:imageList[addUpdateIndex].file});
-    setFile({...file, file2:imageList[addUpdateIndex].file});
-    setFile({...file, file3:imageList[addUpdateIndex+2].file});
-    setArrayList(addUpdateIndex);
-    console.log("NIANIA "+file.file2)
-    setImages(imageList);
-  };
-
-
   /* Fonctions de mise à jour du titre et du contenu */
   const getTitle = (e) => {
     setStatus({ ...status, title: e.target.value });
@@ -97,16 +84,42 @@ function CreateAnn() {
     setStatus({ ...status, monthly_cost: e.target.value });
     console.log("content on change :" + e.target.value);
   };
-  /*const onChangeCni = e => {
+
+  const onChangeFile1 = e => {
     if (e.target.files[0]) {
-      setFile(e.target.files[0]);
+      console.log("FILE : "+e.target.files[0])
+      setFile({...file,file1:e.target.files[0]});
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-      setImages(reader.result)
+      setImages({...images, image1:reader.result})
+      //console.log("READER RESULT : " +reader.result)
         });
       reader.readAsDataURL(e.target.files[0]);
     }
-  };*/
+  };
+
+ const onChangeFile2 = e => {
+    if (e.target.files[0]) {
+      setFile({...file,file2:e.target.files[0]});
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+      setImages({...images, image2:reader.result})
+        });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const onChangeFile3 = e => {
+    if (e.target.files[0]) {
+      setFile({...file, file3:e.target.files[0]});
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+      setImages({...images, image3:reader.result})
+        });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   const post = () => {
     //event.preventDefault()
     const data = new FormData();
@@ -120,35 +133,38 @@ function CreateAnn() {
     data.append("type",status.type)
     data.append("gross_rent_by_year",status.gross_rent_by_year)
     data.append("monthly_cost",status.monthly_cost)
-    data.append("file",file.file1)
-    data.append("file",file.file2)
-    data.append("file",file.file3)
-    //data.append("file",file)
+    
+    data.append("file1",file.file1)
+    data.append("file2",file.file2)
+    data.append("file3",file.file3)
     console.log(data.get("file"))
-  /*  for (let i = 0 ; i < images.length ; i++) {
+    //console.log(data.get("file2"))
+    //console.log(data.get("file3"))
+  /*for (let i = 0 ; i < images.length ; i++) {
       console.log ("image length :" + images.length)
       data.append("file", file[i]);
       console.log(data.get("file"))
-  } */
+  }*/ 
 
-    
-  
-  
-    //data.append("file",file)
-    
-        
-    if (status.title === "" && status.content === "" && status.city === "" && status.zip_code === "" && status.region === "" && status.price === ""
-    && status.share_price === "" && status.share_number === "" && status.type === "" && status.gross_rent_by_year === ""
-    && status.monthly_cost === "" && images === "") {
+    if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
+    || status.share_price === "" || status.share_number === "" || status.type === "" || status.gross_rent_by_year === ""
+    || status.monthly_cost === "") {
       setMessage("Tous les champs sont requis");
     } else {
       setFeed([...feed, status]);
+      console.log ("FEED : " +feed)
       setStatus({ ...status.etat, etat: "Posted" });
-      document.querySelector(".postInput").value = "";
+      
     }
 
     Axios.post("http://localhost:1337/api/announces/allAnnounces",data)
-    .then(res=>console.log(res)).catch(err=>console.log(err))
+    .then(res=>console.log(res))
+    .then(Swal.fire({
+      title: "Images hava been uploaded successfully.",
+      text: "Thanks",
+      type: "success",
+    }))
+    .catch(err=>console.log(err))
   }
   return (
     <div className="postForm">
@@ -161,86 +177,48 @@ function CreateAnn() {
 
       <h6>Ajoutez des photos à l'annonce :</h6>
 
-      
-      <ImageUploading
-  multiple
-  value={images}
-  onChange={onChange}
-  maxNumber={maxNumber}
-  dataURLKey="data_url"
->
-  {({
-    imageList,
-    onImageUpload,
-    onImageRemoveAll,
-    onImageUpdate,
-    onImageRemove,
-    isDragging,
-    dragProps,
-  }) => (
-    <div>
-      <div>
-        <button
-          className="btn btn-primary"
-          style={isDragging ? { color: "red" } : undefined}
-          onClick={onImageUpload}
-          {...dragProps}
-        >
-          Cliquez ou collez votre image ici
-        </button>
-        <br />
-        <br />
-
-        <button
-          className="btn btn-danger"
-          onClick={onImageRemoveAll}
-        >
-          Supprimez toutes les photos
-        </button>
-      </div>
-      {imageList.map((image, index) => (
-        <div key={index} className="col-lg-12">
-          <img src={image["data_url"]} />
-          <div className="image-item__btn-wrapper">
-            <button
-              className="btn btn-primary"
-              onClick={() => onImageUpdate(index)}
-            >
-              Modifier
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => onImageRemove(index)}
-            >
-              Supprimer
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-  )}
-</ImageUploading>
-
 <br/>
 
 
         <p id="emptyMessage">{emptyField}</p>
 
-        <form id="annonceDetails"><br/>
-
-            {/*<div>
+        <div>
                <div>
-                <p>Uploader la CNI :</p>
-               <input name="file" type="file" onChange={event =>{
+                <p>Ajouter une première photo :</p>
+               {/*<input name="file" type="file" onChange={event =>{
                   const file = event.target.files[0];
-                  setFile(file)
-                }} />
-                <input name="file" type="file" onChange={onChangeCni} />
+                  setFile1(file)
+                }} />*/}
+                <input name="file1" type="file" onChange={onChangeFile1} />
               </div>
               <div >
-                <img  src={images} />
+                <img  src={images.image1} />
               </div>
-            </div>*/}
+            </div>
+
+            <div>
+               <div>
+                <p>Ajouter une deuxième photo :</p>
+                <input name="file2" type="file" onChange={onChangeFile2} />
+              </div>
+              <div >
+                <img  src={images.image2} />
+              </div>
+            </div>
+
+            <div>
+               <div>
+                <p>Ajouter une troisième photo :</p>
+                <input name="file3" type="file" onChange={onChangeFile3} />
+              </div>
+              <div >
+                <img  src={images.image3} />
+              </div>
+            </div>
+
+        <form id="annonceDetails"><br/>
+
+            
 
           <input
             id="postTitle"
@@ -360,9 +338,7 @@ function CreateAnn() {
           
             </form>
 
-            <button onClick={() => post()} >Publier</button><br/>
-
-          
+            <button onClick={post} >Publier</button><br/>
 
         <br/>
       </div>

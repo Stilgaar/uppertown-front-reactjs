@@ -10,7 +10,7 @@ function Announce({ announce }) {
         const url = "http://localhost:1337/api/announces/"+announce._id
 
         fetch(url, {
-            method: "GET",
+            method: "DELETE",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
@@ -23,7 +23,7 @@ function Announce({ announce }) {
               type: "success",
             });
             // vérification :
-            console.log("Uploaded images : " + announce._id);
+            console.log("Content deleted : " + announce._id);
           });
         }
 
@@ -43,10 +43,7 @@ function Announce({ announce }) {
           </li>
           </ul>
         <div className="announce-container-image">
-          <img src={announce.image[0]} />
-          <img src={announce?.gallery[0]?.data_url} />
-          <img src={announce?.gallery[1]?.data_url} />
-          <img src={announce?.gallery[2]?.data_url} />
+          <img src={announce?.image[0]} />
         </div>
 
         <div className="announce-container-title">
