@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import React from "react";
 import "./Announce.css"
 import { Link } from "react-router-dom";
 
@@ -17,7 +16,7 @@ function Announce({ announce }) {
     <div className="announce-container" href="/announce-detail">
       <div className="announce-upper-container">
         <div className="announce-container-image">
-          <img src={announce.image[0]} />
+          <img alt="" src={announce?.image?.[0]} />
         </div>
 
         <div className="announce-container-title">

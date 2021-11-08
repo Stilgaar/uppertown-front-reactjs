@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import Axios from "axios";
-import Announce from "../Announce/Announce";
-import AllAnnounces from "../AllAnnounces/AllAnnounces";
+
 
 import "./AnnounceDetail.css";
 
