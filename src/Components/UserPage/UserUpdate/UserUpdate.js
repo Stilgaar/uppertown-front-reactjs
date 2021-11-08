@@ -5,7 +5,7 @@ const axios = require('axios');
 function UserUpdate({ user }) {
 
 
-    // variables d'état pour les boutons modifier/annuler
+    // USESTATE POUR MODIFIER LETAT DES DIFFERENTES BOITES
     const [nameBox, setNameBox] = useState(false);
     const [emailBox, setEmailBox] = useState(false);
     const [telBox, setTelBox] = useState(false);
@@ -13,9 +13,10 @@ function UserUpdate({ user }) {
     const [adressBox, setAdressBox] = useState(false);
     const [piBox, setPiBox] = useState(false);
     const [JDDbox, setJDDbox] = useState(false);
-    const [avisFiscbox,setAvisFiscbox] = useState(false);
+    const [avisFiscbox, setAvisFiscbox] = useState(false);
 
 
+    // USESTATE POUR METTRE A JOUR LES DONNES DE LUSER
     const [newlastname, setNewLastName] = useState();
     const [newfirstname, setNewFirstName] = useState();
     const [newemail, setNewEmail] = useState();
@@ -23,71 +24,39 @@ function UserUpdate({ user }) {
     const [newbrandname, setNewBranName] = useState();
     const [newadress, setNewAdress] = useState();
 
-   //  const [newPi, setNewPi] = useState([]);
-   //  const [newJJD, setNewJDD] = useState([]);
-   //  const [newAvisFisc, setNewAvisFisc] = useState([]);
- const [file, setFile] = useState('');
- console.log("FILE", file)
-   //  const [JDD, setJDD] = useState();
-   //  const [avisFiscal, setAvisFisc] = useState();
+    const [pi, setPi] = useState();
 
-   const [piUploaded, setPiUploaded] = useState();
-  // console.log("PIUPLOADED", piUploaded)
-
-//console.log(pi?.name) // NOM DU FICHIER A ENVOYER SUR LE FTP => NOM DU FICHIER A ENVOYER SUR MONGO SERA PI.NAME 
-// POUR LE LIRE DANS LE FRONT ON L'ECRIRA COMME CA : `https://www.jeffphoto.fr/wp-content/uppertown/${pi?.name}`
-// L'IDEAL POUR LE BACK SERA DE LECRIRE COMME CA : `${ftp.name}${pi?.name}` <-- FOR LATER
-// LIDEAL IDEAL SERA DE FAIRE COMME CA A LECRITURE : `${ftp.name}/${usermail}/${pi?.name}` <-- CREE UN DOSSIER SPECIAL POUR CHAQUE UTILISATEUR
+    //console.log(pi?.name) // NOM DU FICHIER A ENVOYER SUR LE FTP => NOM DU FICHIER A ENVOYER SUR MONGO SERA PI.NAME 
+    // POUR LE LIRE DANS LE FRONT ON L'ECRIRA COMME CA : `https://www.jeffphoto.fr/wp-content/uppertown/${pi?.name}`
+    // L'IDEAL POUR LE BACK SERA DE LECRIRE COMME CA : `${ftp.name}${pi?.name}` <-- FOR LATER
+    // LIDEAL IDEAL SERA DE FAIRE COMME CA A LECRITURE : `${ftp.name}/${usermail}/${pi?.name}` <-- CREE UN DOSSIER SPECIAL POUR CHAQUE UTILISATEUR
 
     // fonction générale pour la modification de données dans la BD
     // à voir si UNE seule suffira ou si je dois éventuellement en faire une par ligne. (pour le moment je vais partir sur une seule grosse)
     const modifyContent = (email) => {
 
- let file = file.name
+        let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress }
 
-        let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, file}
-               
         axios.patch("http://localhost:1337/api/users/modifyUser",
             submit)
             .then((res) => console.log(res.data))
             .catch((err) => console.log("console.log modify content", err))
     }
 
- const upload = async (e) => {
+    const uploadPI = (id, e) => {
+        e.preventDefault();
 
-     const formData = new FormData();
+        const formData = new FormData();
+        formData.append('pieceidentite', pi)
 
-     formData.append('file', file)
 
-     try {
-        const res = await axios.post("http://localhost:1337/up" , formData, {
-            headers: { 'Content-Type': 'multipart/form-data'}
+        axios.post("http://localhost:1337/up", formData, {
+            
+            headers: { 'Content-Type': 'multipart/form-data' }
         })
-
-        const {fileName, filePath} = res.data;
-        setPiUploaded({fileName, filePath})
-     } catch(err) {
-         if(err.response.status === 500) {console.log ("probleme de serveur");}
-         else {console.log(err.response.data.msg)}
-     }
- }
-   
-
-    const onFileChange00 = (e) => {
-        setFile(e.target.files[0])   
     }
 
-    const onFileChange01 = () => {
-        console.log("Onchange01")   
-    }
-
-
-    const onFileChange02 = () => {
-        console.log("Onchange02")
-    }
-
-
-     const handleInput = (e, setter) => { setter(e.target.value) }
+    const handleInput = (e, setter) => { setter(e.target.value) }
 
     return (
 
@@ -197,7 +166,7 @@ function UserUpdate({ user }) {
                                     </div>
                                     <div className="userupdate-container-warning">Attention toute modification de votre Nom ou Prénom vous obligera à nous faire parvenir
                                         au plus vite un nouveau justificatif de domicile</div>
-                                    <button className="userupdate-button-validate" onClick={upload}>Valider</button>
+                                    <button className="userupdate-button-validate" onClick={() => modifyContent(user.email)}>Valider</button>
                                 </form>
                             </div>
                         }
@@ -206,17 +175,22 @@ function UserUpdate({ user }) {
 
 
                 <div className="userupdate-singlecontainer">
-                    <div className="userupdate-container-modify">{piBox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Pièce d'identité</div> <div><img className="userupdate-image-container"src="" alt="pièce d'identité" /></div></div>}
+                    <div className="userupdate-container-modify">{piBox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Pièce d'identité</div> <div><img className="userupdate-image-container" src="" alt="pièce d'identité" /></div></div>}
                         {piBox &&
                             <div >
-                                <form>
+
+                                <form onSubmit={(e) => uploadPI(user._id, e)}>
+
                                     <div className="userupdate-container-label">
+
                                         <label className="userupdate-label">Pièce d'identité</label>
-                                        <input className="userupdate-input" type="file" name="file" placeholder="Envoyez votre pièce d'identité" onChange={onFileChange00} />
+                                        <input className="userupdate-input" type="file" name="file" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setPi(e.target.files[0])} />
                                     </div>
                                     <div className="userupdate-container-warning">Pour vous donner plus d'options nous avons besoin de votre pièce d'identité</div>
-                                    <button className="userupdate-button-validate" onClick={upload}>Valider</button>
+                                    <button className="userupdate-button-validate" type="submit">Valider</button>
+
                                 </form>
+
                             </div>
                         }
                     </div>
@@ -225,18 +199,18 @@ function UserUpdate({ user }) {
 
 
                 <div className="userupdate-singlecontainer">
-                    <div className="userupdate-container-modify">{JDDbox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Justificatif de domicile</div> <div><img className="userupdate-image-container"src="" alt="justificatif domicile" /></div></div>}
+                    <div className="userupdate-container-modify">{JDDbox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Justificatif de domicile</div> <div><img className="userupdate-image-container" src="" alt="justificatif domicile" /></div></div>}
                         {JDDbox &&
                             <div >
                                 <form>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Justificatif de domicile</label>
-                                        <input className="userupdate-input" type="file" name="file" placeholder="De moins de trois mois" onChange={onFileChange01} />
+                                        <input className="userupdate-input" type="file" name="file" placeholder="De moins de trois mois" />
                                     </div>
                                     <div className="userupdate-container-warning">Pour valider votre justificatif de domicile celui-ci devra dater de moins de 3 mois</div>
                                     <button className="userupdate-button-validate" onClick={() => modifyContent(user.email)}>Valider</button>
                                 </form>
-                               
+
                             </div>
                         }
                     </div>
@@ -251,12 +225,12 @@ function UserUpdate({ user }) {
                                 <form>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre avis Fiscal</label>
-                                        <input className="userupdate-input" type="file" name="file" placeholder="Envoyez votre pièce d'identité" onChange={onFileChange02} />
+                                        <input className="userupdate-input" type="file" name="file" placeholder="Envoyez votre pièce d'identité" />
                                     </div>
                                     <div className="userupdate-container-warning">Pour vous donner plus d'options nous avons besoin de votre avis fiscal</div>
                                     <button className="userupdate-button-validate" onClick={() => modifyContent(user.email)}>Valider</button>
                                 </form>
-        
+
                             </div>
                         }
                     </div>
