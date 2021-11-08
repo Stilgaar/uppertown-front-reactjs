@@ -1,49 +1,23 @@
-import React, { useState, useEffect } from "react";
-//import Axios from "axios";
 import "./AllAnnounces.css"
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 function Announce({ announce }) {
 
-    function deleteAnnounces () {
-
-        const url = "http://localhost:1337/api/announces/"+announce._id
-
-        fetch(url, {
-            method: "DELETE",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            
-          }).then(() => {
-            Swal.fire({
-              title: "Annonce supprimée !",
-              //text: "Thanks",
-              type: "success",
-            });
-            // vérification :
-            console.log("Content deleted : " + announce._id);
-          });
-        }
-
-   /* useEffect(() => {
-        deleteAnnounces()
-      }, []);*/
-
   return (
-    <div className="announce-container">
+    <Link to={{ 
+      pathname: '/announce-detail-admin',
+      state:{
+        data: announce
+      },
+    }}  
+    style={{textDecoration: "none", color: "black"}}>
+    <div className="announce-container" href="/announce-detail-admin">
       <div className="announce-upper-container">
-        <ul>
-          <li>
-          <a href="#" class="delete" onClick={deleteAnnounces}>Supprimer l'annonce</a>
-          </li>
-          <li>
-          <a href="#" class="update">Modifier l'annonce</a>
-          </li>
-          </ul>
         <div className="announce-container-image">
-          <img src={announce?.image[0]} />
+        <img src={announce?.image[0]} />
+          <img src={announce?.image[0].image1} />
+          <img src={announce?.image[0].image2} />
+          <img src={announce?.image[0].image3} />
         </div>
 
         <div className="announce-container-title">
@@ -69,6 +43,7 @@ function Announce({ announce }) {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
 

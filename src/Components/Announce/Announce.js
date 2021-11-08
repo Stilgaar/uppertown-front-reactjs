@@ -18,10 +18,6 @@ function Announce({ announce }) {
       <div className="announce-upper-container">
         <div className="announce-container-image">
           <img src={announce?.image[0]} />
-          <img src={announce?.image1} />
-          <img src={announce?.image2} />
-          <img src={announce?.image3} />
-          <img src={announce?.res} />
         </div>
 
         <div className="announce-container-title">

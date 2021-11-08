@@ -14,6 +14,7 @@ import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail'
 //temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
+import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
 const  axios  =  require ( 'axios' ) ;
 
 function App() {
@@ -70,6 +71,9 @@ function App() {
           </Route>
           <Route path="/allannouncesadmin">
             <AllAnnouncesAdmin/>
+          </Route>
+          <Route path="/announce-detail-admin">
+            <AnnounceDetailAdmin/>
           </Route>
           <Route path="/announce-detail">
             <AnnounceDetail />

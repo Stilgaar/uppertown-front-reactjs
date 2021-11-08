@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import ImageUploading from "react-images-uploading";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
 import "./postform.css";
@@ -7,10 +6,8 @@ import Axios from "axios";
 
 function CreateAnn() {
   /* Variables d'état */
-  const [file, setFile]= useState({file1:"",file2:"",file3:""});
-  //const [file, setFile]= useState();
-  let [images, setImages] = useState({image1:"",image2:"",image3:""});
-  //const [images, setImages] = useState();
+  const [file, setFile]= useState({file1:"",file2:"",file3:"", file4:"", file5:""});
+  let [images, setImages] = useState({image1:"",image2:"",image3:"",image4:"", image5:""});
   const [emptyField, setMessage] = useState("");
   const [feed, setFeed] = useState([]);
 
@@ -120,6 +117,28 @@ function CreateAnn() {
     }
   };
 
+  const onChangeFile4 = e => {
+    if (e.target.files[0]) {
+      setFile({...file, file4:e.target.files[0]});
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+      setImages({...images, image4:reader.result})
+        });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const onChangeFile5 = e => {
+    if (e.target.files[0]) {
+      setFile({...file, file5:e.target.files[0]});
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+      setImages({...images, image5:reader.result})
+        });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
   const post = () => {
     //event.preventDefault()
     const data = new FormData();
@@ -137,34 +156,31 @@ function CreateAnn() {
     data.append("file1",file.file1)
     data.append("file2",file.file2)
     data.append("file3",file.file3)
-    console.log(data.get("file"))
-    //console.log(data.get("file2"))
-    //console.log(data.get("file3"))
-  /*for (let i = 0 ; i < images.length ; i++) {
-      console.log ("image length :" + images.length)
-      data.append("file", file[i]);
-      console.log(data.get("file"))
-  }*/ 
-
-    if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
+    data.append("file3",file.file4)
+    data.append("file3",file.file5)
+    console.log(data.get("file1"))
+    
+    /*if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
     || status.share_price === "" || status.share_number === "" || status.type === "" || status.gross_rent_by_year === ""
     || status.monthly_cost === "") {
       setMessage("Tous les champs sont requis");
-    } else {
+    } else*/ {
       setFeed([...feed, status]);
-      console.log ("FEED : " +feed)
       setStatus({ ...status.etat, etat: "Posted" });
+      console.log ("FEED : " + status.etat)
+      
+      
+      Axios.post("http://localhost:1337/api/announces/allAnnounces",data)
+      .then(res=>console.log(res))
+      .then(Swal.fire({
+        title: "Annonce déposée !",
+        //text: "Thanks",
+        type: "success",
+      }))
+      .catch(err=>console.log(err))
       
     }
 
-    Axios.post("http://localhost:1337/api/announces/allAnnounces",data)
-    .then(res=>console.log(res))
-    .then(Swal.fire({
-      title: "Images hava been uploaded successfully.",
-      text: "Thanks",
-      type: "success",
-    }))
-    .catch(err=>console.log(err))
   }
   return (
     <div className="postForm">
@@ -180,16 +196,10 @@ function CreateAnn() {
 <br/>
 
 
-        <p id="emptyMessage">{emptyField}</p>
-
         <div>
                <div>
                 <p>Ajouter une première photo :</p>
-               {/*<input name="file" type="file" onChange={event =>{
-                  const file = event.target.files[0];
-                  setFile1(file)
-                }} />*/}
-                <input name="file1" type="file" onChange={onChangeFile1} />
+               <input name="file1" type="file" onChange={onChangeFile1} />
               </div>
               <div >
                 <img  src={images.image1} />
@@ -216,9 +226,27 @@ function CreateAnn() {
               </div>
             </div>
 
-        <form id="annonceDetails"><br/>
+            <div>
+               <div>
+                <p>Ajouter une quatrième photo :</p>
+                <input name="file4" type="file" onChange={onChangeFile4} />
+              </div>
+              <div >
+                <img  src={images.image4} />
+              </div>
+            </div>
 
-            
+            <div>
+               <div>
+                <p>Ajouter une cinquième photo :</p>
+                <input name="file5" type="file" onChange={onChangeFile5} />
+              </div>
+              <div >
+                <img  src={images.image5} />
+              </div>
+            </div>
+
+        <form id="annonceDetails"><br/>
 
           <input
             id="postTitle"
@@ -337,6 +365,8 @@ function CreateAnn() {
           </div>
           
             </form>
+
+            <p id="emptyMessage">{emptyField}</p>
 
             <button onClick={post} >Publier</button><br/>
 
