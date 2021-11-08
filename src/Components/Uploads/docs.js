@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 //import axios from 'axios';
 import Swal from "sweetalert2";
 
@@ -86,7 +86,7 @@ const upload = (e) => {
                 <input type="file" onChange={onChangeCni} />
               </div>
               <div >
-                <img  src={imgDataCni} />
+                <img alt="" src={imgDataCni} />
               </div>
             </div>
             <div>
@@ -101,7 +101,7 @@ const upload = (e) => {
                 <input type="file" onChange={onChangeAdress} />
               </div>
               <div >
-                <img src={imgDataAdress} />
+                <img alt="" src={imgDataAdress} />
               </div>
             </div>
             <div>
@@ -116,7 +116,7 @@ const upload = (e) => {
                 <input type="file" onChange={onChangeAvisFisc} />
               </div>
               <div >
-                <img src={imgDataAvisFisc} />
+                <img alt="" src={imgDataAvisFisc} />
               </div>
             </div>
             <div>

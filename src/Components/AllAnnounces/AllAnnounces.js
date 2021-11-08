@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
 import "./AllAnnounces.css";
-import AnnounceDetail from "../AnnounceDetail/AnnounceDetail";
+
 
 function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
@@ -25,7 +25,7 @@ function AllAnnounces() {
     );
     setFilteredList(filteredList);
     console.log("liste filtrée", filteredList);
-  }, [filter]);
+  }, [filter, announcesList]);
 
   function handleInput(e) {
     setFilter(e.target.value);
