@@ -33,8 +33,7 @@ function AllAnnounces() {
 
   function verifyCorrespondance(announce) {
     let regex = new RegExp(filter.toLowerCase());
-    /* let result = () || (announce.region.toLowerCase()) || (announce.zip_code.toLowerCase())); */
-    if (regex.test(announce.city.toLowerCase()) || regex.test(announce.region.toLowerCase()) || regex.test(announce.zip_code.toLowerCase())) {
+    if (regex.test(announce?.city?.toLowerCase()) || regex.test(announce?.region?.toLowerCase()) || regex.test(announce?.zip_code?.toLowerCase())) {
       return announce;
     }
   }
