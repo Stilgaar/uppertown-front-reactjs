@@ -71,7 +71,7 @@ function App() {
             <AnnounceDetail />
           </Route>
           <Route path="/stable-coins">
-            <StableCoins />
+            <StableCoins user={user} />
           </Route>
         </Switch>
         {/* A Afficher plus tard <Footer/> */}
