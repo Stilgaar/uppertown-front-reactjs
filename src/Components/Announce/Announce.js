@@ -37,7 +37,7 @@ function Announce({ announce }) {
 
         <div className="announce-container-price">
           <p>Prix total: {announce.price}€</p>
-          <p>Prix du jeton: {announce.share_price}€</p>
+          <p>Prix du jeton: {announce.share_price} SC</p>
           <p>Nombre de jetons: {announce.share_number}</p>
         </div>
       </div>

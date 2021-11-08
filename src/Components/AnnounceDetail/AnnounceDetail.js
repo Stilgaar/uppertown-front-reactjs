@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 
 import "./AnnounceDetail.css";
 
 function AnnounceDetail() {
+
+  const [invest, setInvest] = useState()
+
   const location = useLocation();
   const announce = location.state?.data;
   console.log("annonce: ", announce);
+
+  function handleInput(e) {
+    setInvest(e.target.value);
+  }
+
+  function handleClick() {
+    alert(`Vous souhaitez investir ${invest} jeton(s)`)
+    console.log(invest)
+  }
 
   return (
     <>
@@ -20,8 +32,8 @@ function AnnounceDetail() {
           <div className="detail-description-container">
             <div className="detail-input">
               <label>Investissement désiré:</label>
-              <input type="number" placeholder="Investissement désiré" />
-              <button>Valider</button>
+              <input type="number" placeholder="Investissement désiré" onInput={(e) => handleInput(e)}/>
+              <button onClick={handleClick}>Valider</button>
             </div>
             <h3>{announce.title}</h3>
             <p>{announce.type}</p>
@@ -40,7 +52,7 @@ function AnnounceDetail() {
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {announce.price} €</p>
-            <p>Prix du jeton: {announce.share_price} €</p>
+            <p>Prix du jeton: {announce.share_price} SC</p>
             <p>Nombre de jetons: {announce.share_number}</p>
           </div>
           <div className="detail-rent-container">

@@ -3,7 +3,7 @@ import Axios from "axios";
 import "./StableCoins.css";
 
 
-function StableCoins() {
+function StableCoins({user}) {
     
     const [coins, setCoins] = useState();
 
@@ -12,25 +12,26 @@ function StableCoins() {
     }
 
     function handleClick() {
-        setCoins("");
-        alert(`Vous venez de créditer ${coins} stable coins!`)
-
-        Axios.post("http://localhost:1337/api/announces/stableCoins", {
-            stableCoins: {coins}
+        alert(`Vous venez de créditer ${coins} stable coins!`);
+        
+        Axios.post("http://localhost:1337/api/users/addCoins", {
+            "stableCoins": coins,
+            "id": user._id
         })
         .then(function (response) {
             console.log(response);
         }) 
         .catch(function (error) {
             console.log(error);
-        })
-            
+        });
+        
+        setCoins("");
     
 }
 
     return(
         <div>
-            <h2>Changer des euros en stable coins</h2>
+            <h2>Changer des euros en SC (stable coins)</h2>
             <div className="stableC-container">
                 <label>Entez un montant en euro pour créditer votre compte en stable coins</label>
                 <div className="stableC-input">
