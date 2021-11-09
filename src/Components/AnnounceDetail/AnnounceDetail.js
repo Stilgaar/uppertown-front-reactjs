@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Axios from "axios";
-import Announce from "../Announce/Announce";
-import AllAnnounces from "../AllAnnounces/AllAnnounces";
+
 
 import "./AnnounceDetail.css";
 
 function AnnounceDetail() {
-const location = useLocation()
-const announce = location.state?.data;
-    console.log("annonce: ", announce);
-   
+
+  const [invest, setInvest] = useState()
+
+  const location = useLocation();
+  const announce = location.state?.data;
+  console.log("annonce: ", announce);
+
+  function handleInput(e) {
+    setInvest(e.target.value);
+  }
+
+  function handleClick() {
+    alert(`Vous souhaitez investir ${invest} jeton(s)`)
+    console.log(invest)
+  }
 
   return (
     <>
@@ -18,12 +27,14 @@ const announce = location.state?.data;
       <div className="detail-container">
         <div className="detail-upper-container">
           <div className="detail-image-container">
-            <img
-              src={announce.image[0]}
-              alt="Photos du bien"
-            />
+            <img src={announce.image[0]} alt="Photos du bien" />
           </div>
           <div className="detail-description-container">
+            <div className="detail-input">
+              <label>Investissement désiré:</label>
+              <input type="number" placeholder="Investissement désiré" onInput={(e) => handleInput(e)}/>
+              <button onClick={handleClick}>Valider</button>
+            </div>
             <h3>{announce.title}</h3>
             <p>{announce.type}</p>
             <p>{announce.content}</p>
@@ -41,14 +52,17 @@ const announce = location.state?.data;
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {announce.price} €</p>
-            <p>Prix du jeton: {announce.share_price} €</p>
-            <p>Nombre de jetons: {announce.share_number} €</p>
+            <p>Prix du jeton: {announce.share_price} SC</p>
+            <p>Nombre de jetons: {announce.share_number}</p>
           </div>
           <div className="detail-rent-container">
             <p>Loyer par an brut: {announce.gross_rent_by_year} €</p>
             <p>Loyer par mois brut: {announce.gross_rent_by_year / 12} €</p>
             <p>Coûts mensuels: {announce.monthly_cost} €</p>
-            <p>Loyer net par mois: {(announce.gross_rent_by_year / 12) - announce.monthly_cost} €</p>
+            <p>
+              Loyer net par mois:{" "}
+              {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
+            </p>
           </div>
           <div className="detail-geographical-container">
             <p>Ville: {announce.city}</p>
