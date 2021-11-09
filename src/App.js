@@ -65,7 +65,7 @@ function App() {
             <AdminPage />
           </Route>
           <Route path="/userpage" >
-            <UserPage user={user} />
+            <UserPage user={user} hardRefresh={hardRefresh}/>
           </Route>
           {/*TEMPORAIRE :*/}
           <Route path="/createann" >

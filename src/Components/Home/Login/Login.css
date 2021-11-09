@@ -37,20 +37,17 @@
 
 .login-title {
     color: darkblue;
+    text-align: center;
 }
 
-.login-title::before, .login-title::after{
-    content:'"';
-    font-size: 4rem;
-    opacity: 0.4;
-    font-family: 'Alex Brush', cursive;
-}
+
 
 .login-input{
     height: 2.2rem;
     border: 0.1px solid darkblue;
     border-radius: 3px;
     padding: 0.5rem;
+    width: 250px;
 } 
 
 .login-input:focus{
