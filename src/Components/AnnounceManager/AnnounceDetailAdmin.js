@@ -6,6 +6,7 @@ import Axios from "axios";
 import "./AnnounceDetailAdmin.css";
 
 function AnnounceDetailAdmin() {
+
 const location = useLocation()
 const announce = location.state?.data;
 console.log("annonce: ", announce);
@@ -16,12 +17,16 @@ const history = useHistory();
     const [typeBox, setTypeBox] = useState(false);
     const [contentBox, setContentBox] = useState(false);
     const [priceBox, setPriceBox] = useState(false);
-    const [tokenBox, setTokenBox] = useState(false);
-    const [nbreTokenBox, setNbreTokenBox] = useState(false);
+    const [bedroomsBox, setBedroomsBox] = useState(false);
+    const [surfaceBox, setSurfaceBox] = useState(false);
+    const [nbreTokenBox, setNbreTokenBox]= useState(false)
     const [rentBox, setRentBox] = useState(false);
     const [townBox, setTownBox] = useState(false);
     const [districtBox, setDistrictBox] = useState(false);
     const [zipBox, setZipBox] = useState(false);
+    const [optionsBox, setOptionsBox] = useState(false);
+
+    
 
     const [status, setStatus] = useState({
         content: announce.content,
@@ -35,8 +40,13 @@ const history = useHistory();
         gross_rent_by_year: announce.gross_rent_by_year,
         monthly_cost:announce.monthly_cost,
         type: announce.type,
+        bedrooms: announce.bedrooms,
+        surface:announce.surface,
         etat: "",
       });
+
+      const [options, setOptions] = useState({piscine:announce?.options[0],tennis:announce?.options[1],
+        jardin:announce?.options[2],parking:announce?.options[3],jacuzzi:announce?.options[4]});
 
     const getTitle = (e) => {
         setStatus({...status, title:e.target.value});
@@ -82,6 +92,41 @@ const history = useHistory();
         setStatus({...status, gross_rent_by_year: e.target.value});
         console.log("content on change :" + e.target.value);
       };
+
+      const getSurface = (e) => {
+        setStatus({...status, surface: e.target.value});
+        console.log("content on change :" + e.target.value);
+      };
+
+      const getBedrooms = (e) => {
+        setStatus({...status, bedrooms: e.target.value});
+        console.log("content on change :" + e.target.value);
+      };
+
+      const getOption1 = (e) => {
+        setOptions({ ...options, piscine: e.target.value });
+        console.log("content on change :" + e.target.value);
+      };
+    
+      const getOption2 = (e) => {
+        setOptions({ ...options, tennis: e.target.value });
+        console.log("content on change :" + e.target.value);
+      };
+    
+      const getOption3 = (e) => {
+        setOptions({ ...options, jardin: e.target.value });
+        console.log("content on change :" + e.target.value);
+      };
+    
+      const getOption4 = (e) => {
+        setOptions({ ...options, parking: e.target.value });
+        console.log("content on change :" + e.target.value);
+      };
+    
+      const getOption5 = (e) => {
+        setOptions({ ...options, jacuzzi: e.target.value });
+        console.log("content on change :" + e.target.value);
+      };
     
     function deleteAnnounces () {
 
@@ -109,8 +154,8 @@ const history = useHistory();
           
           }
 
-          function modifyContent (e) {
-              e.preventDefault()
+          function modifyContent () {
+             // e.preventDefault()
             
             const data = {
                 title:status.title,
@@ -122,10 +167,11 @@ const history = useHistory();
                 gross_rent_by_year:status.gross_rent_by_year,
                 city:status.city,
                 region: status.region,
-                zip_code:status.zip_code
-            }
+                zip_code:status.zip_code,
+                surface: status.surface,
+                bedrooms: status.bedrooms,
 
-            console.log(data);
+            }
 
             const url = "http://localhost:1337/api/announces/"+announce._id
   
@@ -140,8 +186,7 @@ const history = useHistory();
           
           }
   
-           /* useEffect(() => {
-              modifyContent()
+            /*useEffect(() => {
             }, [])*/
 
   return (
@@ -164,7 +209,7 @@ const history = useHistory();
           {titleBox && <div>
             <form>
             <label >Nouveau titre :</label><br/>
-            <input type="text" placeholder="Nouveau Titre" onChange={getTitle} /><br/>
+            <input type="text" placeholder="Nouveau Titre"  onChange={getTitle} /><br/>
             </form></div>}
             <button onClick={() => setTitleBox(current => !current)}>{titleBox ? "Annuler" : "Modifier le titre"}</button><br/><br/>
             
@@ -249,10 +294,60 @@ const history = useHistory();
             <input type="text" placeholder="Nouveau code postal" onChange={getZip} /><br/>
             </form></div>}
 
-            <button onClick={modifyContent} >Enregistrer les modifications</button><br/>
+            {surfaceBox ? <div></div> : <p>Superficie: {announce?.surface}</p>}
+            <button onClick={() => setSurfaceBox(current => !current)}>{surfaceBox ? "Annuler" : "Modifier la superficie"}</button><br/><br/>
+            {surfaceBox && 
+            <div>
+            <form>
+            <label >Nouvelle surface :</label><br/>
+            <input type="text" placeholder="Superficie :" onChange={getSurface} /><br/>
+            </form></div>}
 
-          </div>
-        </div>
+            {bedroomsBox ? <div></div> : <p>Nombre de chambres: {announce?.bedrooms}</p>}
+            <button onClick={() => setBedroomsBox(current => !current)}>{bedroomsBox ? "Annuler" : "Modifier le nombre de chambres"}</button><br/><br/>
+            {bedroomsBox && 
+            <div>
+            <form>
+            <label >Nombre de chambres :</label><br/>
+            <input type="text" placeholder="Nombre de chambres :" onChange={getBedrooms} /><br/>
+            </form></div>}
+
+            {optionsBox ? <div></div> : <p>Options: {announce?.options[0]},{announce.options[1]}, {announce.options[2]}, {announce.options[3]},{announce.options[4]}</p>}
+            <button onClick={() => setOptionsBox(current => !current)}>{bedroomsBox ? "Annuler" : "Modifier les options"}</button><br/><br/>
+            {optionsBox && 
+            <div>
+            <form>
+            <label >Options :</label><br/>
+            <label>
+          <input type="checkbox" defaultValue="Piscine" onChange={getOption1} />
+          Piscine
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Tennis" onChange={getOption2} />
+          Tennis
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Jardin" onChange={getOption3} />
+          Jardin
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Parking" onChange={getOption4} />
+          Parking
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Jacuzzi" onChange={getOption5} />
+          Jacuzzi
+          </label><br/>
+            </form></div>}
+
+            </div>
+            </div>
+            <button onClick={modifyContent} >Enregistrer les modifications</button><br/>
+          
       </div>
     </>
   );

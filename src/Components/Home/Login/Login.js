@@ -46,7 +46,7 @@ function Login({formState, setFormState, hardRefresh}) {
         <div className="login" onClick={(e) => e.stopPropagation()}>
 
             <form className="login-container">
-            <h4 className="login-title"> Log in </h4>
+            <h4 className="login-title"> Se Connecter</h4>
                 <div className="login-container-email">
 
                     <div className="login-container-email">
@@ -63,7 +63,7 @@ function Login({formState, setFormState, hardRefresh}) {
                 </div>
                 <button className="login-button" onClick={(e) =>handleSumbit(e)}>Valider</button>
             </form>
-            <p className="login-fasle-link" onClick={goSigninForm}>Je n'ai de compte</p>
+            <p className="login-fasle-link" onClick={goSigninForm}>Créer un compte</p>
 
         </div>
         </div>
