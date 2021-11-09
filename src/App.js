@@ -12,7 +12,10 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 //temporaire :
-import UploadPics from './Components/Uploads/docs';
+//temporaire :
+import CreateAnn from './Components/PostForm/postform';
+import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
+import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
 const  axios  =  require ( 'axios' ) ;
 
 function App() {
@@ -64,8 +67,14 @@ function App() {
             <UserPage user={user}/>
           </Route>
           {/*TEMPORAIRE :*/}
-          <Route path="/uploads" >
-            <UploadPics />
+          <Route path="/createann" >
+            <CreateAnn/>
+          </Route>
+          <Route path="/allannouncesadmin">
+            <AllAnnouncesAdmin/>
+          </Route>
+          <Route path="/announce-detail-admin">
+            <AnnounceDetailAdmin/>
           </Route>
           <Route path="/announce-detail">
             <AnnounceDetail />
