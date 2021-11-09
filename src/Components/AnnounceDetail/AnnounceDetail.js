@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-
-
 import "./AnnounceDetail.css";
 
 function AnnounceDetail() {
 
-  const [invest, setInvest] = useState()
+  const [invest, setInvest] = useState();
 
   const location = useLocation();
   const announce = location.state?.data;
@@ -17,7 +15,7 @@ function AnnounceDetail() {
   }
 
   function handleClick() {
-    alert(`Vous souhaitez investir ${invest} jeton(s)`)
+    alert(`Vous souhaitez investir ${invest} jeton(s)`);
     console.log(invest)
   }
 
@@ -31,8 +29,8 @@ function AnnounceDetail() {
           </div>
           <div className="detail-description-container">
             <div className="detail-input">
-              <label>Investissement désiré:</label>
-              <input type="number" placeholder="Investissement désiré" onInput={(e) => handleInput(e)}/>
+              <label>Investissement désiré en jetons:</label>
+              <input type="number" placeholder="Investissement désiré" value={invest} onInput={(e) => handleInput(e)}/>
               <button onClick={handleClick}>Valider</button>
             </div>
             <h3>{announce.title}</h3>
@@ -63,6 +61,7 @@ function AnnounceDetail() {
               Loyer net par mois:{" "}
               {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
             </p>
+            <p>Gain mensuel par jeton: {((announce.gross_rent_by_year / 12 - announce.monthly_cost) / announce.share_number).toFixed(2)} €</p>
           </div>
           <div className="detail-geographical-container">
             <p>Ville: {announce.city}</p>
