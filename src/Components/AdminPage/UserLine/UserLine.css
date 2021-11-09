@@ -1,0 +1,25 @@
+.gestionutilistatuers-container-lastname, 
+.gestionutilistatuers-container-firstname,
+.gestionutilistatuers-container-email,
+.gestionutilistatuers-container-verification {
+    margin-left: 0.5rem;
+}
+
+.gestionutilisateurs-container-container {
+    border: 0.1rem solid darkblue;
+    display: flex;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 3px;    
+}
+
+.userupdate-mapped{
+    border: 1px solid black;
+    display: flex; 
+    flex-direction: row;
+    padding: 0.5rem;
+}
+
+.userupdate-image {
+    height: 20px;
+}

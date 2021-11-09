@@ -81,3 +81,17 @@ margin: auto;
 .userupdate-image-container {
     height: 5rem;
 }    
+
+.test {
+    height :500px;
+    width: 200px;
+}
+
+.userupdate-imageuser {
+    height:80px;
+}
+
+.userupdate-imagecontainer {
+    display: flex;
+    flex-direction: row;
+}

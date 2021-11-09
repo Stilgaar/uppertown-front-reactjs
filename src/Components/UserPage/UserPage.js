@@ -4,7 +4,7 @@ import './UserPage.scss';
 import React from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
 
-function UserPage( {user}) {
+function UserPage({user, hardRefresh}) {
 
     //recupere l'ID venant des props de App
     //fais une requete avec l'id et recupere toutes les infos 
@@ -19,7 +19,7 @@ function UserPage( {user}) {
     return (
         <div className="user-page">
             <h1>User Page</h1>
-            <UserUpdate user={user} />
+            <UserUpdate user={user} hardRefresh={hardRefresh} />
         </div>
     )
 }

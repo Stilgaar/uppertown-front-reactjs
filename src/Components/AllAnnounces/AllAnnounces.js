@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
+import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 
 
@@ -49,6 +50,7 @@ function AllAnnounces() {
           onChange={(e) => handleInput(e)}
         />
       </div>
+        <Selector />
       <div className="announces-page">
         {filteredList &&
           filteredList.map((announce, index) => {

@@ -12,15 +12,19 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import Selector from './Components/Selector/Selector'
+import UserDetail from './Components/AdminPage/UserDetail/UserDetail';
 //temporaire :
-import UploadPics from './Components/Uploads/docs';
-const  axios  =  require ( 'axios' ) ;
+//temporaire :
+import CreateAnn from './Components/PostForm/postform';
+import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
+import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
+const axios = require('axios');
 
 function App() {
 
   const [formState, setFormState] = useState("none");
   const [user, setUser] = useState({});
-        
+
   //un state pour determiner l'etat du log / le niveau (user/valider/admin)
   //a passer a la navbar pour son affichage conditionnel
   //un state pour l'id user
@@ -32,20 +36,20 @@ function App() {
   let isLog = user !== null;
 
   function hardRefresh() {
-    let localToken = localStorage.getItem("@updownstreet-token"); 
+    let localToken = localStorage.getItem("@updownstreet-token");
     if (localToken === null) {
-      return setUser(null)    
-     }
-    axios.get("http://localhost:1337/api/users/token", { headers: { authorization: `Bearer ${localToken}`} })
+      return setUser(null)
+    }
+    axios.get("http://localhost:1337/api/users/token", { headers: { authorization: `Bearer ${localToken}` } })
       .then((res) => {
         setUser(res.data);
       })
       .catch(err => console.log(err))
   }
 
-   useEffect(() => {
+  useEffect(() => {
     hardRefresh();
-  },[])
+  }, [])
 
   return (
     <div className="app">
@@ -53,7 +57,7 @@ function App() {
         <NavBar formState={formState} setFormState={setFormState} isLog={isLog} user={user} />
         <Switch>
           <Route exact path="/" >
-            <Home formState={formState} setFormState={setFormState} hardRefresh={hardRefresh}/>
+            <Home formState={formState} setFormState={setFormState} hardRefresh={hardRefresh} />
           </Route>
           <Route path="/announces" >
             <AllAnnounces />
@@ -62,11 +66,20 @@ function App() {
             <AdminPage />
           </Route>
           <Route path="/userpage" >
-            <UserPage user={user}/>
+            <UserPage user={user} hardRefresh={hardRefresh}/>
           </Route>
           {/*TEMPORAIRE :*/}
-          <Route path="/uploads" >
-            <UploadPics />
+          <Route path="/createann" >
+            <CreateAnn />
+          </Route>
+          <Route path="/allannouncesadmin">
+            <AllAnnouncesAdmin />
+          </Route>
+          <Route path="/announce-detail-admin">
+            <AnnounceDetailAdmin />
+          </Route>
+          <Route path="/user-detail">
+            <UserDetail />
           </Route>
           <Route path="/announce-detail">
             <AnnounceDetail />
