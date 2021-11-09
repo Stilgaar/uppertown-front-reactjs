@@ -145,6 +145,7 @@ function CreateAnn() {
     data.append("title",status.title)
     data.append("content",status.content)
     data.append("city",status.city)
+    data.append("region",status.region)
     data.append("zip_code",status.zip_code)
     data.append("price",status.price)
     data.append("share_price",status.share_price)

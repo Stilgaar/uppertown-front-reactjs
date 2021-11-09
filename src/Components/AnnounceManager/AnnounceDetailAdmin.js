@@ -24,17 +24,17 @@ const history = useHistory();
     const [zipBox, setZipBox] = useState(false);
 
     const [status, setStatus] = useState({
-        content: "",
-        title: "",
-        city: "",
-        zip_code: "",
-        region: "",
-        price: "",
-        share_price: "",
-        share_number: "",
-        gross_rent_by_year: "",
-        monthly_cost:"",
-        type: "",
+        content: announce.content,
+        title: announce.title,
+        city: announce.city,
+        zip_code: announce.zip_code,
+        region: announce.region,
+        price: announce.price,
+        share_price: announce.share_price,
+        share_number: announce.share_number,
+        gross_rent_by_year: announce.gross_rent_by_year,
+        monthly_cost:announce.monthly_cost,
+        type: announce.type,
         etat: "",
       });
 
