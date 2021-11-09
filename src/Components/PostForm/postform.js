@@ -12,7 +12,7 @@ function CreateAnn() {
   const [feed, setFeed] = useState([]);
   const [options, setOptions] = useState({piscine:"",tennis:"",jardin:"",parking:"",jacuzzi:""});
  
-  
+  const d = new Date();
 
   const [status, setStatus] = useState({
     content: "",
@@ -200,6 +200,7 @@ function CreateAnn() {
     data.append("options",options.parking)
     data.append("options",options.jacuzzi)
     data.append("options",options.jardin)
+    data.append("created_at",d)
     
     data.append("file1",file.file1)
     data.append("file2",file.file2)

@@ -41,6 +41,9 @@ function Announce({ announce }) {
           <p>Prix de la part: {announce.share_price}€</p>
           <p>Nombre de parts: {announce.share_number}</p>
         </div>
+        <div><br/>
+        <b>Annonce publiée le : {(announce?.created_at instanceof Date) ? announce?.created_at.toLocaleDateString() : new Date(announce?.created_at).toLocaleDateString()}</b>
+        </div>
       </div>
     </div>
     </Link>
