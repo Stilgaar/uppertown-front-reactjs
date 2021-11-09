@@ -35,10 +35,15 @@ function Login({formState, setFormState, hardRefresh}) {
     function goSigninForm(){
         setFormState("signin");
     }
+    function closeModal() {
+        setFormState()
+    }
 
 
     return (
-        <div className="login">
+        <div className="login-form" onClick={closeModal}>
+
+        <div className="login" onClick={(e) => e.stopPropagation()}>
 
             <form className="login-container">
             <h4 className="login-title"> Log in </h4>
@@ -60,6 +65,7 @@ function Login({formState, setFormState, hardRefresh}) {
             </form>
             <p className="login-fasle-link" onClick={goSigninForm}>Je n'ai de compte</p>
 
+        </div>
         </div>
 
     )

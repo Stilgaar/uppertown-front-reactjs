@@ -13,6 +13,8 @@ function Signup({formState, setFormState}) {
     const [password, setPassword] = useState();
     const [verifpassword, setVerifPassword] = useState();
 
+    const [responceMessage , setResponceMessage] = useState();
+
     // 400 = element manquant
     // 401 = passwords correspondent pas
     // 403 = email existe déjà
@@ -25,8 +27,34 @@ function Signup({formState, setFormState}) {
         submit )
         .then((res) => {
             console.log(res.data)
-            console.log(res.status)
-            setFormState("login")
+            switch (res.data) {
+                case "empty":
+                    setResponceMessage("Tous les champs ne sont pas remplis")
+                    setTimeout(function(){
+                        setResponceMessage()
+                    },2000)
+                    break;
+                case "mail":
+                    setResponceMessage("Votre mail est deja utilisé")
+                    setTimeout(function(){
+                        setResponceMessage()
+                    },2000)
+                    break;
+                case "password":
+                    setResponceMessage("Les mots de passe de correspondent pas")
+                    setTimeout(function(){
+                        setResponceMessage();
+                    },2000)
+                    break;
+                case "ok":
+                    setResponceMessage("Compte crée avec succés")
+                    setTimeout(function(){
+                        setResponceMessage();
+                        setFormState("login")},2000)
+                    break;
+                default:
+                    break;
+            }
         })
         .catch((err) => console.log(err))
  }
@@ -39,12 +67,15 @@ function Signup({formState, setFormState}) {
         setFormState("login");
     }
 
+    function closeModal() {
+        setFormState()
+    }
+
     return (
-
-        <div className="signup">
-
-            <form className="signup-container">
-            <h4 className="signup-title"> Sign Up </h4>
+        <div className="signup-form" onClick={closeModal}>
+            <div className="signup" onClick={(e) => e.stopPropagation()}>
+                <form className="signup-container">
+                <h4 className="signup-title"> Créer mon compte</h4>
                 <div className="signup-container-nomprenom">
                     
                     <div className="signup-container-nom">
@@ -89,7 +120,8 @@ function Signup({formState, setFormState}) {
             </form>
 
             <p className="signup-fasle-link" onClick={goLoginForm}>J'ai deja un compte</p>
-
+            </div>
+            {responceMessage && <div className="message-box">{responceMessage}</div>}
         </div>
    
    )
