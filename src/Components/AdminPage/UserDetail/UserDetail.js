@@ -7,6 +7,30 @@ function UserDetail() {
     const userdata = locationUser.state?.data
     console.log("userdata ", userdata)
 
+    const reverif = () => {
+        console.log("reverif")
+    }
+    const verifPi = () => {
+        console.log("verifPI")
+    }
+    
+    const verfJDD = () => {
+        console.log("verifJDD")
+    }
+    
+    const verifAVIS = () => {
+        console.log("verifRIB")
+    }
+
+    const gogoAdmin = () => {
+        console.log("gogo EMO RANGERS")
+    }
+    
+    const nonoAdmin = () => {
+        console.log("génération non non ")
+    }
+
+
     return (
         <div>
             <h2>Utilisateur en Détail</h2>
@@ -51,12 +75,12 @@ function UserDetail() {
                 </div>
             </div>   
 
-            <button>En attente de reverification</button>  
-            <button>Identité Verifiée</button>
-            <button>Justificatif de Domcile Verifié</button>
-            <button>Avis d'imposition verifié</button>
-            <button>Passer Admin</button>
-            <button>Retirer Admin</button>      
+            <button onClick={reverif}>En attente de reverification</button>  
+            <button onClick={verifPi}>Identité Verifiée</button>
+            <button onClick={verfJDD}>Justificatif de Domcile Verifié</button>
+            <button onClick={verifAVIS}>Avis d'imposition verifié</button>
+            <button onClick={gogoAdmin}>Passer Admin</button>
+            <button onClick={nonoAdmin}>Retirer Admin</button>      
 
         </div>
 
