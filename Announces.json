@@ -2,6 +2,9 @@
     {
         "title": "Joli immeuble en plein 16ème",
         "content": "Transformation d'un immeuble pour futur location.",
+        "bedrooms": "7+",
+        "surface": "1000m²",
+        "options": ["parking", "salle de sport"],
         "city": "Paris",
         "zip_code": "75016",
         "region": "Ile de France",
@@ -17,6 +20,9 @@
     {
         "title": "Immeuble de charme à Nice",
         "content": "Transformation d'un immeuble pour futur location.",
+        "bedrooms": "7+",
+        "surface": "1000m²",
+        "options": ["parking", "piscine"],
         "city": "Nice",
         "zip_code": "06000",
         "region": "Alpes Maritimes",
@@ -33,6 +39,9 @@
     {
         "title": "Hôtel dans 17ème",
         "content": "Transformation d'un hôtel.",
+        "bedrooms": "7+",
+        "surface": "1200m²",
+        "options": ["parking", "salle de sport"],
         "city": "Paris",
         "zip_code": "75016",
         "region": "Ile de France",
@@ -48,6 +57,9 @@
     {
         "title": "Belle maison au Abords de Bordeaux",
         "content": "Beau projet de rénovation d'une maison.",
+        "bedrooms": "4",
+        "surface": "190m²",
+        "options": ["parking", "jacuzzi", "piscine"],
         "city": "Bordeaux",
         "zip_code": "30072",
         "region": "Gironde",
@@ -64,6 +76,9 @@
     {
         "title": "Beau duplex à Marseille",
         "content": "Très beau duplex dans la cité de la Castelane. Très beau quartier, dans la plus pure tradition Française.",
+        "bedrooms": "3",
+        "surface": "100m²",
+        "options": ["parking"],
         "city": "Marseille",
         "zip_code": "13000",
         "region": "Bouches-du-Rhônes",
@@ -77,6 +92,9 @@
     {
         "title": "Joli immeuble dans 14ème",
         "content": "Transformation d'un immeuble.",
+        "bedrooms": "7+",
+        "surface": "1100m²",
+        "options": ["parking"],
         "city": "Paris",
         "zip_code": "75014",
         "region": "Ile de France",
@@ -92,6 +110,9 @@
     {
         "title": "Appartement de charme à Lyon",
         "content": "Transformation d'un appartement pour location.",
+        "bedrooms": "3",
+        "surface": "95m²",
+        "options": ["parking"],
         "city": "Lyon",
         "zip_code": "69000",
         "region": "Rhône-Alpes",
@@ -108,6 +129,9 @@
     {
         "title": "Charmante villa à Strasbourg",
         "content": "Villa en location saisonnière.",
+        "bedrooms": "3",
+        "surface": "100m²",
+        "options": ["parking", "piscine"],
         "city": "Strasbourg",
         "zip_code": "67000",
         "region": "Bas-Rhin",
@@ -124,6 +148,9 @@
     {
         "title": "Bel Immeuble à Toulouse",
         "content": "Transformation d'un immeuble pour futur location.",
+        "bedrooms": "7+",
+        "surface": "1000m²",
+        "options": ["parking"],
         "city": "Toulouse",
         "zip_code": "31000",
         "region": "Haute-Garonne",

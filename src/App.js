@@ -11,6 +11,7 @@ import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
+import Selector from './Components/Selector/Selector'
 //temporaire :
 import UploadPics from './Components/Uploads/docs';
 const  axios  =  require ( 'axios' ) ;
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route path="/stable-coins">
             <StableCoins user={user} />
+          </Route>
+          <Route path="/selector">
+            <Selector user={user} />
           </Route>
         </Switch>
         {/* A Afficher plus tard <Footer/> */}
