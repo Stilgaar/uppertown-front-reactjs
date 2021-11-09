@@ -23,7 +23,7 @@
     border: 0.1px solid darkblue;
     border-radius: 3px;
     padding: 2rem;
-    width: 25%;
+    width: min-content;
     background-color: white;
 }
 
