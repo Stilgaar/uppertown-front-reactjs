@@ -9,6 +9,8 @@ function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
+  const [filterRegion, setFilterRegion] = useState();
+  const [filterBedrooms, setFilterBedrooms] = useState();
 
   useEffect(() => {
     Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
@@ -28,6 +30,11 @@ function AllAnnounces() {
     console.log("liste filtrée", filteredList);
   }, [filter, announcesList]);
 
+  useEffect(() => {
+    console.log(filterBedrooms);
+    
+  }, [filterBedrooms])
+
   function handleInput(e) {
     setFilter(e.target.value);
   }
@@ -38,6 +45,8 @@ function AllAnnounces() {
       return announce;
     }
   }
+
+  
 
   return (
     <>
@@ -50,7 +59,8 @@ function AllAnnounces() {
           onChange={(e) => handleInput(e)}
         />
       </div>
-        <Selector />
+        <Selector filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
+        filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}/>
       <div className="announces-page">
         {filteredList &&
           filteredList.map((announce, index) => {
