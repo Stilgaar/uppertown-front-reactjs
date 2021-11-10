@@ -56,7 +56,7 @@ function AnnounceDetail() {
               dolor laborum incididunt eiusmod veniam enim labore.
             </p>
             <p>Nombre de chambres: {announce.bedrooms}</p>
-            <p>Surface habitable: {announce.surface}</p>
+            <p>Surface habitable: {announce.surface}m²</p>
             <p>Options:</p>
             <ul>
               {immo?.options?.map((option, index) => {

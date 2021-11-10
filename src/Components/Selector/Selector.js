@@ -5,7 +5,7 @@ import './Selector.css'
 
 
 const region = [
-  { value: "all", label:"Toutes les regions"},
+  { value: "all", label: "Toutes les régions" },
   { value: "Auvergne-Rhône-Alpes", label: "Auvergne-Rhône-Alpes" },
   { value: "Bourgogne-Franche-Comté", label: "Bourgogne-Franche-Comté" },
   { value: "Bretagne", label: "Bretagne" },
@@ -22,7 +22,7 @@ const region = [
 ];
 
 const bedrooms = [
-  {value: "all", label: "Tous"},
+  {value: "all", label: "Tous les biens"},
   {value: 1, label: "1"},
   {value: 2, label: "2"},
   {value: 3, label: "3"},
@@ -60,6 +60,7 @@ function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedro
         placeholder="Choisissez par nombre de chambres"
         value={bedrooms.find(obj => obj.value === filterBedrooms)}
         onChange={(e) => handleBedrooms(e)}
+        isSearchable
         />
        
       </div>
