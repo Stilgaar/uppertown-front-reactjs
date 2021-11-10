@@ -5,13 +5,11 @@ import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import "./AllAnnounces.scss";
 
-
 function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
-  const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
-  const [filterRegion, setFilterRegion] = useState();
-  const [filterBedrooms, setFilterBedrooms] = useState();
+  const [filterRegion, setFilterRegion] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
 
   useEffect(() => {
     Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
@@ -23,44 +21,54 @@ function AllAnnounces() {
     );
   }, []);
 
+  //____________________________________
+
   useEffect(() => {
     const filteredList = announcesList.filter((announce) =>
       verifyCorrespondance(announce)
     );
     setFilteredList(filteredList);
     console.log("liste filtrée", filteredList);
-  }, [filter, announcesList]);
+  }, [filterRegion, filterBedrooms]);
 
   useEffect(() => {
+    console.log(filterRegion);
     console.log(filterBedrooms);
-    
-  }, [filterBedrooms])
+  }, [filterRegion, filterBedrooms]);
 
-  function handleInput(e) {
-    setFilter(e.target.value);
-  }
+  //____________________________________
 
   function verifyCorrespondance(announce) {
-    let regex = new RegExp(filter.toLowerCase());
-    if (regex.test(announce?.city?.toLowerCase()) || regex.test(announce?.region?.toLowerCase()) || regex.test(announce?.zip_code)) {
-      return announce;
+    if (filterRegion === "all") {
+      if (filterBedrooms === "all") {
+        return announce;
+      } else if (announce.bedrooms === filterBedrooms) {
+        return announce;
+      }
+    } else {
+      if (filterBedrooms === "all") {
+        if (announce.region === filterRegion) {
+          return announce;
+        }
+      } else if (
+        announce.region === filterRegion &&
+        announce.bedrooms === filterBedrooms
+      ) {
+        return announce;
+      }
     }
   }
-
-  
 
   return (
     <div className="announces-page-container">
       <div className="announces-search">
-          <label>Cherchez un bien par ville, code postal ou departement:</label>
-        <input
-          type="text"
-          placeholder="rechercher par ville, code postal ou departement"
-          onChange={(e) => handleInput(e)}
-        />
+      <Selector
+        filterRegion={filterRegion}
+        setFilterRegion={setFilterRegion}
+        filterBedrooms={filterBedrooms}
+        setFilterBedrooms={setFilterBedrooms}
+      />
       </div>
-        <Selector filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
-        filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}/>
       <div className="announces-page">
         {filteredList &&
           filteredList.map((announce, index) => {
