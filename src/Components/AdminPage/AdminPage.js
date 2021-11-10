@@ -2,6 +2,8 @@ import React from 'react'
 import './AdminPage.css';
 import './AdminPage.scss';
 import GestionUtils from './GestionUtils/GestionUtils';
+import SearchUser from './SearchUser/SearchUser';
+const axios = require('axios');
 
 
 function AdminPage() {
@@ -18,7 +20,8 @@ function AdminPage() {
     return (
         <div className="admin-page">
             <h1>Page Admin</h1>
-                <GestionUtils />
+            <SearchUser />
+            <GestionUtils />
         </div>
     )
 }
