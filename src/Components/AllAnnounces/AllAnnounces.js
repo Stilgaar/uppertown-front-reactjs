@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
+import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import "./AllAnnounces.scss";
 
@@ -9,6 +10,8 @@ function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
+  const [filterRegion, setFilterRegion] = useState();
+  const [filterBedrooms, setFilterBedrooms] = useState();
 
   useEffect(() => {
     Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
@@ -28,6 +31,11 @@ function AllAnnounces() {
     console.log("liste filtrée", filteredList);
   }, [filter, announcesList]);
 
+  useEffect(() => {
+    console.log(filterBedrooms);
+    
+  }, [filterBedrooms])
+
   function handleInput(e) {
     setFilter(e.target.value);
   }
@@ -39,6 +47,8 @@ function AllAnnounces() {
     }
   }
 
+  
+
   return (
     <div className="announces-page-container">
       <div className="announces-search">
@@ -49,6 +59,8 @@ function AllAnnounces() {
           onChange={(e) => handleInput(e)}
         />
       </div>
+        <Selector filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
+        filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}/>
       <div className="announces-page">
         {filteredList &&
           filteredList.map((announce, index) => {
