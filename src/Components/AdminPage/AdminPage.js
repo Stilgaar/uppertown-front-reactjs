@@ -19,7 +19,6 @@ function AdminPage() {
 
     return (
         <div className="admin-page">
-            <h1>Page Admin</h1>
             <SearchUser />
             <GestionUtils />
         </div>

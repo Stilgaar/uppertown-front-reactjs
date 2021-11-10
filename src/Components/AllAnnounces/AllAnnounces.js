@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
 import "./AllAnnounces.css";
+import "./AllAnnounces.scss";
 
 
 function AllAnnounces() {
@@ -39,8 +40,7 @@ function AllAnnounces() {
   }
 
   return (
-    <>
-      <h2>Pages Annonces</h2>
+    <div className="announces-page-container">
       <div className="announces-search">
           <label>Cherchez un bien par ville, code postal ou departement:</label>
         <input
@@ -59,7 +59,7 @@ function AllAnnounces() {
             );
           })}
       </div>
-    </>
+    </div>
   );
 }
 

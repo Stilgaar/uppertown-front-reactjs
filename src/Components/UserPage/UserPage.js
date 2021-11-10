@@ -19,7 +19,6 @@ function UserPage({user, hardRefresh}) {
 
     return (
         <div className="user-page">
-            <h1>User Page</h1>
             <UserVirement user={user} hardRefresh={hardRefresh}/>
             <UserUpdate user={user} hardRefresh={hardRefresh} />
         </div>

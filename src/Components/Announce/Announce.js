@@ -1,5 +1,6 @@
 import React from "react";
 import "./Announce.css"
+import "./Announce.scss"
 import { Link } from "react-router-dom";
 
 function Announce({ announce }) {
