@@ -10,6 +10,9 @@ function CreateAnn() {
   let [images, setImages] = useState({image1:"",image2:"",image3:"",image4:"", image5:""});
   const [emptyField, setMessage] = useState("");
   const [feed, setFeed] = useState([]);
+  const [options, setOptions] = useState({piscine:"",tennis:"",jardin:"",parking:"",jacuzzi:""});
+ 
+  
 
   const [status, setStatus] = useState({
     content: "",
@@ -23,6 +26,8 @@ function CreateAnn() {
     gross_rent_by_year: "",
     monthly_cost:"",
     type: "",
+    bedrooms:"",
+    surface:"",
     etat: "",
   });
   
@@ -79,6 +84,41 @@ function CreateAnn() {
 
   const getCost = (e) => {
     setStatus({ ...status, monthly_cost: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getBedrooms = (e) => {
+    setStatus({ ...status, bedrooms: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getSurface = (e) => {
+    setStatus({ ...status, surface: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getOption1 = (e) => {
+    setOptions({ ...options, piscine: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getOption2 = (e) => {
+    setOptions({ ...options, tennis: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getOption3 = (e) => {
+    setOptions({ ...options, jardin: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getOption4 = (e) => {
+    setOptions({ ...options, parking: e.target.value });
+    console.log("content on change :" + e.target.value);
+  };
+
+  const getOption5 = (e) => {
+    setOptions({ ...options, jacuzzi: e.target.value });
     console.log("content on change :" + e.target.value);
   };
 
@@ -153,6 +193,13 @@ function CreateAnn() {
     data.append("type",status.type)
     data.append("gross_rent_by_year",status.gross_rent_by_year)
     data.append("monthly_cost",status.monthly_cost)
+    data.append("bedrooms",status.bedrooms)
+    data.append("surface",status.surface)
+    data.append("options",options.piscine)
+    data.append("options",options.tennis)
+    data.append("options",options.parking)
+    data.append("options",options.jacuzzi)
+    data.append("options",options.jardin)
     
     data.append("file1",file.file1)
     data.append("file2",file.file2)
@@ -167,10 +214,9 @@ function CreateAnn() {
       setMessage("Tous les champs sont requis");
     } else*/ {
       setFeed([...feed, status]);
-      setStatus({ ...status.etat, etat: "Posted" });
+      setStatus({ ...status, etat: "Posted" });
       console.log ("FEED : " + status.etat)
-      
-      
+
       Axios.post("http://localhost:1337/api/announces/allAnnounces",data)
       .then(res=>console.log(res))
       .then(Swal.fire({
@@ -182,7 +228,10 @@ function CreateAnn() {
       
     }
 
+    document.querySelector(".postInput").value="";
+      
   }
+
   return (
     <div className="postForm">
       <br/>
@@ -290,13 +339,57 @@ function CreateAnn() {
           />
           <br/><br/>
 
-          <input
-            id="postRegion"
+          <label>
+          Région :<br/>
+          <select className="postInput" onChange={getRegion}>
+            <option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
+            <option value="Bourgogne-Franche-Comté">Bourgogne-Franche-Comté</option>
+            <option value="Bretagne">Bretagne</option>
+            <option value="Centre-Val de Loire">Centre-Val de Loire</option>
+            <option value="Corse">Corse</option>
+            <option value="Grand Est">Grand Est</option>
+            <option value="Hauts-de-France">Hauts-de-France</option>
+            <option value="Île-de-France">Île-de-France</option>
+            <option value="Normandie">Normandie</option>
+            <option value="Nouvelle Aquitaine">Nouvelle Aquitaine</option>
+            <option value="Occitanie">Occitanie</option>
+            <option value="Pays de la Loire">Pays de la Loire</option>
+            <option value="Provence Alpes Côte d'Azur">Provence Alpes Côte d'Azur</option>
+            <option value="Outre-Mer">Outre-Mer</option>
+            <option value="International">International</option>
+          </select>
+        </label><br/><br/>
+
+        <label>
+          Type de bien :<br/>
+          <select className="postInput" onChange={getType}>
+            <option value="Appartements anciens">Appartements anciens</option>
+            <option value="Appartements neufs">Appartements neufs (VEFA)</option>
+            <option value="Châlet de montagne">Châlet de montagne</option>
+            <option value="Maisons anciennes">Maisons anciennes</option>
+            <option value="Maisons neuves">Maisons neuves</option>
+            <option value="Résidences de service">Résidences de service (Seniors, étudiantes, coliving)</option>
+            <option value="terrains constructibles">Terrains constructibles</option>
+          </select>
+        </label><br/><br/>
+
+        <input
+            id="postBedrooms"
             className="postInput"
-            type="text"
-            onChange={getRegion}
-            placeholder="Ajouter une région : "
-            defaultValue={status.region}
+            type="number"
+            onChange={getBedrooms}
+            placeholder="Nombre de chambres : "
+            defaultValue={status.bedrooms}
+          />
+          <br/><br/>
+
+          <input
+            id="postSurface"
+            className="postInput"
+            type="number"
+            onChange={getSurface}
+            placeholder="Superficie totale du bien : "
+            defaultValue={status.surface}
           />
           <br/><br/>
 
@@ -330,14 +423,33 @@ function CreateAnn() {
           />
           <br/><br/>
 
-          <input
-            id="postType"
-            className="postInput"
-            type="text"
-            onChange={getType}
-            placeholder="Type de bien : "
-            defaultValue={status.type}
-          />
+          <h6>Options :</h6>
+
+          <label>
+          <input type="checkbox" defaultValue="Piscine" onChange={getOption1} />
+          Piscine
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Tennis" onChange={getOption2} />
+          Tennis
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Jardin" onChange={getOption3} />
+          Jardin
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Parking" onChange={getOption4} />
+          Parking
+          </label><br/>
+
+          <label>
+          <input type="checkbox" defaultValue="Jacuzzi" onChange={getOption5} />
+          Jacuzzi
+          </label>
+
           <br/><br/>
 
           <input
