@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
+import './Selector.css'
 
 const region = [
   { value: "Auvergne-Rhône-Alpes", label: "Auvergne-Rhône-Alpes" },
@@ -23,6 +24,8 @@ const options = [
   { value: "piscine", label: "Piscine" },
   { value: "salle de sport", label: "Salle de sport" },
   { value: "jacuzzi", label: "Jacuzzi" },
+  { value: "jardin", label: "Jardin" },
+  { value: "tennis", label: "Tennis" },
 ];
 
 function Selector() {
@@ -30,20 +33,23 @@ function Selector() {
     
 
   return (
-    <>
+    <div className="selector-selecteur">
       <div>
         <label>Choisissez une région:</label>
-        <Select options={region} />
+        <Select options={region}
+        placeholder="Choisissez une région"
+        />
       </div>
       <div>
         <label>Choisissez une ou plusieurs options:</label>
         <Select options={options} 
+        placeholder="Choisissez une ou plusieurs options"
         isMulti
         autoFocus
         isSearchable
         />
       </div>
-    </>
+    </div>
   );
 }
 
