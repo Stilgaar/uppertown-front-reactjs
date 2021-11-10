@@ -1,40 +1,47 @@
 import './UserDetail.css'
 import { useLocation } from "react-router-dom";
+import axios from 'axios';
 
 
 function UserDetail() {
     const locationUser = useLocation()
     const userdata = locationUser.state?.data
-    console.log("userdata ", userdata)
 
     const reverif = () => {
         console.log("reverif")
     }
-    const verifPi = () => {
-        console.log("verifPI")
-    }
     
-    const verfJDD = () => {
-        console.log("verifJDD")
-    }
+    const verifPi = (data) => {    
+        let email = {data}
+       axios.post("http://localhost:1337/admin/verifPi", email)
+       .then((res) => console.log(res.data))}
     
-    const verifAVIS = () => {
-        console.log("verifRIB")
-    }
+    const verfJDD = (data) => {
+        let email = {data}
+        axios.post("http://localhost:1337/admin/verifJDD", email)
+        .then((res) => console.log(res.data))}
+    
+    const verifAVIS = (data) => {
+        let email = {data}
+        axios.post("http://localhost:1337/admin/verifAVIS", email)
+        .then((res) => console.log(res.data))}
 
-    const gogoAdmin = () => {
-        console.log("gogo EMO RANGERS")
-    }
+    const gogoAdmin = (data) => {
+        let email = {data}
+        axios.post("http://localhost:1337/admin/goAdmin", email)
+        .then((res) => console.log(res.data))}
     
-    const nonoAdmin = () => {
-        console.log("génération non non ")
-    }
-
+    const nonoAdmin = (data) => {
+        let email = {data}
+        axios.post("http://localhost:1337/admin/noAdmin", email)
+        .then((res) => console.log(res.data))}
+    
 
     return (
         <div>
             <h2>Utilisateur en Détail</h2>
-            <div>Prénom {userdata.firstname} Nom : {userdata.lastname}</div>
+            <div>ID : {userdata._id}</div>
+            <div>Prénom {userdata.firstname} | Nom : {userdata.lastname}</div>
             <div>Email : {userdata.email}</div>
             <div>Téléphone : {userdata.tel}</div>
             {userdata.brandname && <div>Entreprise : {userdata.brandname}</div>}
@@ -75,12 +82,12 @@ function UserDetail() {
                 </div>
             </div>   
 
-            <button onClick={reverif}>En attente de reverification</button>  
-            <button onClick={verifPi}>Identité Verifiée</button>
-            <button onClick={verfJDD}>Justificatif de Domcile Verifié</button>
-            <button onClick={verifAVIS}>Avis d'imposition verifié</button>
-            <button onClick={gogoAdmin}>Passer Admin</button>
-            <button onClick={nonoAdmin}>Retirer Admin</button>      
+            <button onClick={() => reverif(userdata.email)}>En attente de reverification</button>  
+            <button onClick={() => verifPi(userdata.email)}>Identité Verifiée</button>
+            <button onClick={() => verfJDD(userdata.email)}>Justificatif de Domcile Verifié</button>
+            <button onClick={() => verifAVIS(userdata.email)}>Avis d'imposition verifié</button>
+            <button onClick={() => gogoAdmin(userdata.email)}>Passer Admin</button>
+            <button onClick={() => nonoAdmin(userdata.email)}>Retirer Admin</button>      
 
         </div>
 

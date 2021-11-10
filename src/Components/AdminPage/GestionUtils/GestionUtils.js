@@ -25,7 +25,7 @@ function GestionUtils() {
 
     return (
 
-        <div className="gestionutilisateurs-container">
+        <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
             <div className="gestionutilisateurs-container-section"> <button onClick={() => setUsersType1Box(current => !current)}><h3>Utilisateurs sans aucune verifications</h3> </button>
                 {usersType1Box &&
                     <div>
