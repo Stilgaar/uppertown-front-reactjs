@@ -60,7 +60,7 @@ function AllAnnounces() {
   
   return (
     <div className="announces-page-container">
-        <Selector 
+        <Selector
           filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
           filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
         />

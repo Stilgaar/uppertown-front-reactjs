@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import makeAnimated from 'react-select/animated';
 import './Selector.css'
-
+import './Selector.scss'
 
 const region = [
   { value: "all", label: "Toutes les régions" },
@@ -22,7 +21,7 @@ const region = [
 ];
 
 const bedrooms = [
-  {value: "all", label: "Tous les biens"},
+  {value: "all", label: "N'importe"},
   {value: 1, label: "1"},
   {value: 2, label: "2"},
   {value: 3, label: "3"},
@@ -34,35 +33,36 @@ const bedrooms = [
 
 function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedrooms}) {
 
-  
   function handleRegion(e) {
     setFilterRegion(e.value);
   }
-  
-   function handleBedrooms(e) {
+  function handleBedrooms(e) {
     setFilterBedrooms(e.value);
   } 
 
   return (
-    <div className="selector-selecteur">
-      <div>
-        <label>Choisissez une région:</label>
-        <Select options={region}
-        placeholder="Choisissez une région"
-        value={region.find(obj => obj.value === filterRegion)}
-        onChange={handleRegion}
-        isSearchable
+    <div className="selector-line">
+      <div className="select-block">
+        <label>Dans quelle région:</label>
+        <Select 
+          className="select-region"
+          options={region}
+          placeholder="Choisissez une région"
+          value={region.find(obj => obj.value === filterRegion)}
+          onChange={handleRegion}
+          isSearchable
         />
       </div>
-      <div>
-        <label>Choisissez un nombre de chambre:</label>
-        <Select options={bedrooms}
-        placeholder="Choisissez par nombre de chambres"
-        value={bedrooms.find(obj => obj.value === filterBedrooms)}
-        onChange={(e) => handleBedrooms(e)}
-        isSearchable
+      <div className="select-block">
+        <label>Nombre de chambre:</label>
+        <Select 
+          className="select-chambre"
+          options={bedrooms}
+          placeholder="Choisissez par nombre de chambres"
+          value={bedrooms.find(obj => obj.value === filterBedrooms)}
+          onChange={(e) => handleBedrooms(e)}
+          isSearchable
         />
-       
       </div>
     </div>
   );
