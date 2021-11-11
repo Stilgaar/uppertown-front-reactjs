@@ -5,6 +5,17 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
+.modal-externe{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.493);
+}
 
 .gestionutilisateurs-container-container {
     border: 0.1rem solid darkblue;
@@ -46,5 +57,18 @@
 
 .userline-button-search {
     border: none;
-    width: 100%;  
+    width: 100%;
+    cursor: pointer;  
+}
+
+.close-btn{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

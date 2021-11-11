@@ -32,10 +32,10 @@ function AllAnnounces() {
     const filteredByBedrooms = filteredByRegion.filter((announce) => verifyBedrooms(announce))
     // le resultat est mis dans le setter
     setFilteredList(filteredByBedrooms);
-  }, [filterRegion, filterBedrooms]);
+  }, [filterRegion, filterBedrooms] )
 
   //fonction qui filtre par rapport a la region
-  function verifyRegion(announce) {
+  const verifyRegion = (announce) => {
     //Si le filtre region = all
     if (filterRegion === "all") {
       return announce
@@ -45,7 +45,7 @@ function AllAnnounces() {
     }
   }
   //fonction qui filtre par rapport au nb de chambre
-  function verifyBedrooms(announce) {
+  const verifyBedrooms = (announce) => {
     //si le filtre nb de chambre = all
     if (filterBedrooms === "all") {
       return announce

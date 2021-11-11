@@ -6,10 +6,6 @@ import React from 'react'
 
 function NavBar({formState, setFormState, isLog, user}) {
 
-    //Recupere de App le niveau de permission du user pour afficher de maniere conditionnel le menu
-        //si log tous le menu sauf admin
-        //si admin tous
-
     function showForm(){
         setFormState("signin")
     }
@@ -17,9 +13,6 @@ function NavBar({formState, setFormState, isLog, user}) {
         localStorage.removeItem("@updownstreet-token");
         document.location.replace('/');
     }
-
-    console.log(user?.isAdmin);
-
     return (
         <div className="navbar">
             <h1 className="logo"> <img className="logo-image" src="UpperLogo.png" alt="" /> UpDownStreet</h1>

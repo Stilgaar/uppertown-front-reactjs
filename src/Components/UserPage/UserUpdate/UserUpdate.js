@@ -1,5 +1,5 @@
 import './UserUpdate.css';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const axios = require('axios');
 
 function UserUpdate({user, hardRefresh}) {

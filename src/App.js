@@ -88,7 +88,7 @@ function App() {
             <Selector user={user} />
           </Route>
         </Switch>
-        {/* A Afficher plus tard <Footer/> */}
+        <Footer/>
       </Router>
     </div>
   );

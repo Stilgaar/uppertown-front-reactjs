@@ -8,11 +8,9 @@ function AnnounceDetail() {
 
   const location = useLocation();
   const announce = location.state?.data;
-  console.log("annonce: ", announce);
 
   useEffect(() => {
     setImmo(announce);
-    console.log("immo", immo);
   }, [announce]);
 
   function handleInput(e) {
@@ -21,7 +19,6 @@ function AnnounceDetail() {
 
   function handleClick() {
     alert(`Vous souhaitez investir ${invest} jeton(s)`);
-    console.log(invest);
   }
 
   return (

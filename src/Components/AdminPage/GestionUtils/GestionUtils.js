@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import UserLine from '../UserLine/UserLine';
 import './GestionUtils.css'
-const axios = require('axios');
 
-function GestionUtils({ users, key, adminRefresh }) {
+function GestionUtils({ users, adminRefresh }) {
 
  
     const [usersType1Box, setUsersType1Box] = useState(false);

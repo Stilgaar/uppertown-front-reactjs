@@ -1,5 +1,5 @@
 import './UserLine.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 
@@ -59,7 +59,7 @@ function UserLine({ userdata, adminRefresh }) {
     return (
 
         <div>
-            <button className="userline-button-search" onClick={() => setModal(current => !current)}>
+            <div className="userline-button-search" onClick={() => setModal(current => !current)}>
 
                 <div className="gestionutilisateurs-container-container">
 
@@ -92,10 +92,14 @@ function UserLine({ userdata, adminRefresh }) {
 
                     </div>}
                 </div>
-            </button>
+            </div>
 
             {modal &&
-                <div className="userline-modal-container">
+                <div className="modal-externe" onClick={()=>setModal(current => !current)}>
+
+                <div className="userline-modal-container" onClick={(e) => e.stopPropagation()}>
+                <button className="close-btn" onClick={() => setModal(current => !current)}>X</button>
+
                     <div>
                         <h2>Utilisateur en Détail</h2>
                         <div>ID : {userdata._id}</div>
@@ -153,7 +157,7 @@ function UserLine({ userdata, adminRefresh }) {
 
                     </div>
 
-                    <button onClick={() => setModal(current => !current)}>FERMER</button>
+                    </div>
                 </div>}
 
         </div>
