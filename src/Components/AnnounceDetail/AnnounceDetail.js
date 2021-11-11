@@ -172,20 +172,14 @@ function AnnounceDetail() {
             <p>{announce.type}</p>
             <p>{announce.content}</p>
             <p>
-              Non dolore fugiat et tempor velit consectetur cupidatat eu ea. Qui
-              non consectetur in Lorem. Velit commodo ad dolor nulla dolore
-              consectetur deserunt labore occaecat duis cupidatat dolore amet
-              laboris. Exercitation ipsum Lorem reprehenderit amet nostrud
-              dolore labore qui fugiat. Elit aliquip consequat mollit excepteur
-              eu. Minim est ullamco ea et do dolore amet do minim eu anim. Lorem
-              dolor laborum incididunt eiusmod veniam enim labore.
+              Non dolore fugiat et tempor velit consectetur cupidatat eu ea...
             </p>
           </div>
         </div>
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {announce.price} €</p>
-            <p>Prix du jeton: { announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price} SC</p>
+            <p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>
             <p>Nombre de jetons: {announce.share_number && invest ? announce.share_number - invest : announce.share_number } </p> 
           </div>
           <div className="detail-rent-container">

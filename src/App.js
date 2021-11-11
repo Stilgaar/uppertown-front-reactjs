@@ -13,10 +13,10 @@ import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import UserDetail from './Components/AdminPage/UserDetail/UserDetail';
 //temporaire :
-//temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
+import UserPropertiesSmart from './Components/UserPage/UserProperties/userPropertiesSmart';
 const axios = require('axios');
 
 function App() {
@@ -82,6 +82,9 @@ function App() {
           </Route>
           <Route path="/announce-detail">
             <AnnounceDetail />
+          </Route>
+          <Route path="/user-properties">
+            <UserPropertiesSmart />
           </Route>
           <Route path="/stable-coins">
             <StableCoins user={user} hardRefresh={hardRefresh}/>
