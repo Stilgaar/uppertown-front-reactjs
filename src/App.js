@@ -11,6 +11,7 @@ import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
+import Selector from './Components/Selector/Selector'
 import UserDetail from './Components/AdminPage/UserDetail/UserDetail';
 //temporaire :
 //temporaire :
@@ -84,7 +85,10 @@ function App() {
             <AnnounceDetail />
           </Route>
           <Route path="/stable-coins">
-            <StableCoins user={user} hardRefresh={hardRefresh}/>
+            <StableCoins user={user} />
+          </Route>
+          <Route path="/selector">
+            <Selector user={user} />
           </Route>
         </Switch>
         {/* A Afficher plus tard <Footer/> */}
