@@ -17,3 +17,7 @@
 .gestionutilisateurs-element-texte {
     font-weight: bolder;
 }
+
+.gestion-utilisateurs-buttons {
+    border: none; 
+}
