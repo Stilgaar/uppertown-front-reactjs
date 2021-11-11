@@ -22,7 +22,7 @@ function NavBar({formState, setFormState, isLog, user}) {
 
     return (
         <div className="navbar">
-            <h1 className="logo">UpDownStreet</h1>
+            <h1 className="logo"> <img className="logo-image" src="UpperLogo.png" alt="" /> UpDownStreet</h1>
             <div className="menu">
                 {isLog ?
                 <>

@@ -1,13 +1,25 @@
 import React from 'react'
 import './AdminPage.css';
 import './AdminPage.scss';
+import { useEffect, useState } from 'react';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';
+import AddRib from './Addrib/AddRib';
 const axios = require('axios');
 
 
 function AdminPage() {
 
+
+    const [users, setUsers] = useState([]);
+
+    const adminRefresh = () => {
+        axios.get("http://localhost:1337/api/users/users")
+            .then((res) => setUsers(res.data))}
+            
+    useEffect(() => {
+    adminRefresh();
+            },[])
     //a l'affichage requete qui recupere tous les users
     //a l'affichage requete qui recupere tous les biens
 
@@ -19,8 +31,9 @@ function AdminPage() {
 
     return (
         <div className="admin-page">
-            <SearchUser />
-            <GestionUtils />
+            <SearchUser users={users} adminRefresh={adminRefresh} />
+            <GestionUtils users={users} adminRefresh={adminRefresh}/>
+            <AddRib />
         </div>
     )
 }

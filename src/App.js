@@ -12,7 +12,7 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import Selector from './Components/Selector/Selector'
-import UserDetail from './Components/AdminPage/UserDetail/UserDetail';
+
 //temporaire :
 //temporaire :
 import CreateAnn from './Components/PostForm/postform';
@@ -77,10 +77,7 @@ function App() {
           </Route>
           <Route path="/announce-detail-admin">
             <AnnounceDetailAdmin />
-          </Route>
-          <Route path="/user-detail">
-            <UserDetail />
-          </Route>
+          </Route>          
           <Route path="/announce-detail">
             <AnnounceDetail />
           </Route>

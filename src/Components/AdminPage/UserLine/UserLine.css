@@ -2,24 +2,49 @@
 .gestionutilistatuers-container-firstname,
 .gestionutilistatuers-container-email,
 .gestionutilistatuers-container-verification {
-    margin-left: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .gestionutilisateurs-container-container {
     border: 0.1rem solid darkblue;
-    display: flex;
+    display: flex; 
     margin: 0.5rem;
     padding: 0.5rem;
-    border-radius: 3px;    
+    border-radius: 3px; 
+
 }
 
 .userupdate-mapped{
     border: 1px solid black;
     display: flex; 
     flex-direction: row;
-    padding: 0.5rem;
+    padding: 0.5rem; 
 }
 
 .userupdate-image {
     height: 20px;
+}
+
+.userline-modal-container {
+    height: fit-content;
+    width: fit-content;
+    background-color: white;
+    z-index: 100;
+    padding: 50px;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+    position: absolute;
+    
+    
+}
+
+.userdetail-image-mignature {
+    height: 50px;
+}
+
+.userline-button-search {
+    border: none;
+    width: 100%;  
 }

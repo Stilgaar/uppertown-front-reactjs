@@ -1,9 +1,9 @@
 import './SearchUser.css'
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import UserLine from '../UserLine/UserLine';
 
-function SearchUser() {
+function SearchUser({ adminRefresh }) {
     // tous les Users
     const [users, setUsers] = useState([]);
     // filtres pour une personne
@@ -15,7 +15,8 @@ function SearchUser() {
             .then((res) => {
                 setUsers(res.data);
                 setFiltrerdListOne(res.data)
-            }) }, [])
+            })
+    }, [])
 
     const handleOne = (e) => {
         setFilterOne(e.target.value);
@@ -28,6 +29,9 @@ function SearchUser() {
         setFiltrerdListOne(filtrerdListOne);
     }, [filterOne, users]);
 
+
+    // filtrage par nom de famille, prenom, email ou ID
+    // id pour trouver les personnes pour faire les virements == simplicité \o/
     const verifiyOne = (userOne) => {
         let regex = new RegExp(filterOne.toLowerCase());
         if (regex.test(userOne?.lastname?.toLowerCase()) || regex.test(userOne?.firstname?.toLowerCase()) || regex.test(userOne?.email?.toLowerCase()) || regex.test(userOne?._id?.toLowerCase())) {
@@ -42,22 +46,12 @@ function SearchUser() {
                 {filtrerdListOne &&
                     filtrerdListOne.map((userdata, key) => {
                         return (
-                            <Link to={{
-                                pathname: '/user-detail',
-                                state: {
-                                    data: userdata
-                                },
-                            }} style={{ textDecoration: "none", color: "black" }}>
-                                <div className="searchuser-separated-stuff" key={key}>
-                                    Prenom :  {userdata.firstname} {" "}
-                                    Nom : {userdata.lastname} {" "}
-                                    {userdata?.pi?.[0] ? " Piece identité : Oui" : "Piece d'itendité : Non "} {" "}
-                                    {userdata?.JDD?.[0] ? " Justificatif domicile : Oui" : "Justificatif domicile: Non "} {" "}
-                                    {userdata?.avisFiscal?.[0] ? " Fiscalité : Oui" : "Fiscalité : Non "} {" "}
-                                </div>
-                            </Link>
+                           
+                                <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh}/>
+                           
                         )
                     })}
+
 
             </div>
         </div>

@@ -1,0 +1,22 @@
+.infos-container-container {
+    display: flex; 
+    flex-direction: row;
+    width: max-content;
+    margin:auto; 
+    padding: 1rem;
+    font-size: 150%;
+}
+
+.infos-container {
+    display : flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.infos-container div {
+    padding: 2rem;
+    border-radius: 3px;
+    margin: 0.3rem;
+    text-align: center;
+    border: 0.1rem solid darkblue;
+}
