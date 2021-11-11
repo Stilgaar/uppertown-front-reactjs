@@ -68,9 +68,7 @@ function AllAnnounces() {
           {filteredList &&
             filteredList.map((announce, index) => {
               return (
-              <div key={index}>
-                <Announce announce={announce} />
-              </div>
+                <Announce announce={announce} key={index}/>
             );
           })}
       </div>
