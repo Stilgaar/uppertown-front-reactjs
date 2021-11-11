@@ -6,6 +6,7 @@ function Login({formState, setFormState, hardRefresh}) {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [responceMessage, setresponceMessage ] = useState();
 
     function handleSumbit(e) {
         e.preventDefault();
@@ -15,6 +16,7 @@ function Login({formState, setFormState, hardRefresh}) {
                     submit, )
 
             .then((res) => {
+                console.log(res.status);
             localStorage.setItem("@updownstreet-token", res.data.token)
             localStorage.setItem("id", res.data.userId)
             setFormState(null)
@@ -22,7 +24,12 @@ function Login({formState, setFormState, hardRefresh}) {
             document.location.replace('/');
             
         }).then()
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                setresponceMessage('Vérifiez les infos entrées dans les champs')
+                setTimeout(()=>{
+                    setresponceMessage()},2000)
+                console.log(err)
+            })
     }
             
 
@@ -46,7 +53,7 @@ function Login({formState, setFormState, hardRefresh}) {
         <div className="login" onClick={(e) => e.stopPropagation()}>
 
             <form className="login-container">
-            <h4 className="login-title"> Log in </h4>
+            <h4 className="login-title"> Se Connecter</h4>
                 <div className="login-container-email">
 
                     <div className="login-container-email">
@@ -63,9 +70,9 @@ function Login({formState, setFormState, hardRefresh}) {
                 </div>
                 <button className="login-button" onClick={(e) =>handleSumbit(e)}>Valider</button>
             </form>
-            <p className="login-fasle-link" onClick={goSigninForm}>Je n'ai de compte</p>
-
+            <p className="login-fasle-link" onClick={goSigninForm}>Créer un compte</p>
         </div>
+            {responceMessage && <div className="message-box-login">{responceMessage}</div>}
         </div>
 
     )
