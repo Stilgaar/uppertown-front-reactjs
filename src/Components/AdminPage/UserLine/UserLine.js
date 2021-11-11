@@ -1,27 +1,30 @@
 import './UserLine.css';
 import { Link } from "react-router-dom";
 
-function UserLine({ userdata }) {
+function UserLine({ userdata, adminRefresh }) {
 
     return (
         <Link to={{
             pathname: '/user-detail',
             state: {
-            data : userdata
+                data: userdata
             },
         }}
             style={{ textDecoration: "none", color: "black" }}>
 
             <div className="gestionutilisateurs-container-container">
 
-                <div className="gestionutilistatuers-container-lastname"><span className="gestionutilisateurs-element-texte">Nom de famille :
-                </span>{userdata.lastname}</div>
+                <div className="gestionutilistatuers-container-lastname">
+                    <span className="gestionutilisateurs-element-texte">Nom de famille :
+                    </span>{userdata.lastname}</div>
 
-                <div className="gestionutilistatuers-container-firstname"><span className="gestionutilisateurs-element-texte">Prénom :
-                </span>{userdata.firstname}</div>
+                <div className="gestionutilistatuers-container-firstname">
+                    <span className="gestionutilisateurs-element-texte">Prénom :
+                    </span>{userdata.firstname}</div>
 
-                <div className="gestionutilistatuers-container-email"><span className="gestionutilisateurs-element-texte">Email :
-                </span>{userdata.email}</div>
+                <div className="gestionutilistatuers-container-email">
+                    <span className="gestionutilisateurs-element-texte">Email :
+                    </span>{userdata.email}</div>
 
                 {userdata.pi[0] && <div className="userupdate-mapped"> Pieces d'ID
                     {userdata.pi.map((data) =>
@@ -37,8 +40,11 @@ function UserLine({ userdata }) {
                     {userdata.avisFiscal.map((data) =>
                         <div> <img className="userupdate-image" src={data} alt="" /></div>
                     )}
+                
                 </div>}
+
             </div>
+
         </Link>
 
     )

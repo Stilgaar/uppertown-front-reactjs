@@ -11,26 +11,42 @@ function GestionUtils() {
     const [usersType3Box, setUsersType3Box] = useState(false);
     const [usersType4Box, setUsersType4Box] = useState(false);
     const [adminBox, setAdminBox] = useState(false);
+    const [awaitingBox, setAwaitingBox] = useState(false);
+
+    const adminRefresh = () => {
+        axios.get("http://localhost:1337/api/users/users")
+            .then((res) => setUsers(res.data))}
 
     useEffect(() => {
-        axios.get("http://localhost:1337/api/users/users")
-            .then((res) => setUsers(res.data))
-    }, [])
+    adminRefresh();
+            },[])
 
     const allUser1 = users.filter(user => user.userType === "userType1")
     const allUser2 = users.filter(user => user.userType === "userType2")
     const allUser3 = users.filter(user => user.userType === "userType3")
     const allUser4 = users.filter(user => user.userType === "userType4")
     const allUserAdmin = users.filter(user => user.isAdmin === true)
+    const transfertPending = users.filter(user => user.awaiting === true)
 
     return (
 
         <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
+
+            <div className="gestionutilisateurs-container-section"> <button onClick={() => setAwaitingBox(current => !current)}><h3>Utilisateurs en attente de Stable Coins</h3> </button>
+                {awaitingBox &&
+                    <div>
+                        {transfertPending.map((userdata) =>
+                            <UserLine userdata={userdata} adminRefresh={adminRefresh} />
+                        )}
+                    </div>
+                }
+            </div>
+
             <div className="gestionutilisateurs-container-section"> <button onClick={() => setUsersType1Box(current => !current)}><h3>Utilisateurs sans aucune verifications</h3> </button>
                 {usersType1Box &&
                     <div>
                         {allUser1.map((userdata) =>
-                            <UserLine userdata={userdata} />
+                            <UserLine userdata={userdata} adminRefresh={adminRefresh}/>
                         )}
                     </div>
                 }
@@ -40,7 +56,7 @@ function GestionUtils() {
                 {usersType2Box &&
                     <div>
                         {allUser2.map((userdata) =>
-                            <UserLine userdata={userdata} />
+                            <UserLine userdata={userdata} adminRefresh={adminRefresh}/>
                         )}
                     </div>
                 }
@@ -50,7 +66,7 @@ function GestionUtils() {
                 {usersType3Box &&
                     <div>
                         {allUser3.map((userdata) =>
-                            <UserLine userdata={userdata} />
+                            <UserLine userdata={userdata} adminRefresh={adminRefresh} />
                         )}
                     </div>
                 }
@@ -60,7 +76,7 @@ function GestionUtils() {
                 {usersType4Box &&
                     <div>
                         {allUser4.map((userdata) =>
-                            <UserLine userdata={userdata} />
+                            <UserLine userdata={userdata}adminRefresh={adminRefresh} />
                         )}
                     </div>
                 }
@@ -70,7 +86,7 @@ function GestionUtils() {
                 {adminBox &&
                     <div>
                         {allUserAdmin.map((userdata) =>
-                            <UserLine userdata={userdata} />
+                            <UserLine userdata={userdata} adminRefresh={adminRefresh} />
                         )}
                     </div>
                 }

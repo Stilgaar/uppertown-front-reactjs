@@ -6,10 +6,9 @@ import axios from 'axios';
 function UserDetail() {
     const locationUser = useLocation()
     const userdata = locationUser.state?.data
-
+        
     const reverif = () => {
-        console.log("reverif")
-    }
+        console.log("reverif") }
     
     const verifPi = (data) => {    
         let email = {data}
@@ -35,7 +34,19 @@ function UserDetail() {
         let email = {data}
         axios.post("http://localhost:1337/admin/noAdmin", email)
         .then((res) => console.log(res.data))}
-    
+
+    const transfertDone = (argent, email) => {
+        let sumbit = {argent, email} 
+        axios.post("http://localhost:1337/api/users/archiveMoney" ,sumbit)
+        .then((res) => console.log(res.data))
+    }
+
+    const transactionDone = (data) => {
+        let email = {data}
+        axios.post("http://localhost:1337/api/users/transactionDone", email)
+        .then((res) => console.log(res.data))
+
+    }
 
     return (
         <div>
@@ -47,7 +58,17 @@ function UserDetail() {
             {userdata.brandname && <div>Entreprise : {userdata.brandname}</div>}
             <div>Nombre de Tokens : {userdata.stableCoins}</div>
             <div>RIB : {userdata.rib}</div>
+            <div>A transferer de l'argent : {userdata.awaiting ? "oui" : "non" }<button onClick={() => transactionDone(userdata.email)}>Operations finies</button></div> 
+            
+            <div>Montants tranférés en attentte de verifiactions : 
+                </div> {userdata.montant.map((argent) => 
+                <div>{argent}<button onClick={() => transfertDone(argent, userdata.email)}>Stable Coins Transférés</button>
+                </div> )}
+
+            <div>Historique des anciens montants :
+            </div> {userdata.ancientMontants.map((argent )=> <div>{argent}</div> )}
             <br />
+            
 
             <div> Pieces d'identité :
                 <div>

@@ -54,6 +54,7 @@ function SearchUser() {
                                     {userdata?.pi?.[0] ? " Piece identité : Oui" : "Piece d'itendité : Non "} {" "}
                                     {userdata?.JDD?.[0] ? " Justificatif domicile : Oui" : "Justificatif domicile: Non "} {" "}
                                     {userdata?.avisFiscal?.[0] ? " Fiscalité : Oui" : "Fiscalité : Non "} {" "}
+                                    {userdata?.awaiting ? "Fond en Attente" : <></> }
                                 </div>
                             </Link>
                         )

@@ -3,6 +3,7 @@ import './AdminPage.css';
 import './AdminPage.scss';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';
+import AddRib from './Addrib/AddRib';
 const axios = require('axios');
 
 
@@ -22,6 +23,7 @@ function AdminPage() {
             <h1>Page Admin</h1>
             <SearchUser />
             <GestionUtils />
+            <AddRib />
         </div>
     )
 }
