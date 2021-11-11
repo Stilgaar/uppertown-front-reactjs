@@ -31,7 +31,9 @@ const bedrooms = [
   {value: 7, label: "7+"}
 ]
 
-function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedrooms}) {
+function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedrooms, filterPrice, setFilterPrice}) {
+
+  
 
   function handleRegion(e) {
     setFilterRegion(e.value);
@@ -39,6 +41,16 @@ function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedro
   function handleBedrooms(e) {
     setFilterBedrooms(e.value);
   } 
+
+  const handlePrice = (e) =>{
+    setFilterPrice(e.target.value);
+  }
+  //fonction trouver sur google pour espacer les chiffres des prix
+  function numberWithSpaces(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  }
 
   return (
     <div className="selector-line">
@@ -63,6 +75,12 @@ function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedro
           onChange={(e) => handleBedrooms(e)}
           isSearchable
         />
+        <div>
+          <label>Prix Max : </label>
+          <input className="price-slider" type="range" id="volume" name="volume"
+                min="0" max="10000000" onChange={handlePrice} step="10000" value={filterPrice}/>
+          <label className="selected-price" for="price">{numberWithSpaces(filterPrice)} €</label>
+        </div>
       </div>
     </div>
   );

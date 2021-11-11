@@ -10,6 +10,7 @@ function AllAnnounces() {
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterPrice, setFilterPrice] = useState(10000000)
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
     Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
@@ -30,9 +31,11 @@ function AllAnnounces() {
     const filteredByRegion = announcesList.filter((announce) =>  verifyRegion(announce))
     //2: prend l'array du dessus et le re filtre par rapport au filtre du nb de chambre et return un array
     const filteredByBedrooms = filteredByRegion.filter((announce) => verifyBedrooms(announce))
+    //3: prend l'array du dessus et le re filtre par rapport au filtre du prix
+    const filteredByPrice = filteredByBedrooms.filter((announce) => verifyPrice(announce))
     // le resultat est mis dans le setter
-    setFilteredList(filteredByBedrooms);
-  }, [filterRegion, filterBedrooms] )
+    setFilteredList(filteredByPrice);
+  }, [filterRegion, filterBedrooms, filterPrice] )
 
   //fonction qui filtre par rapport a la region
   const verifyRegion = (announce) => {
@@ -57,12 +60,20 @@ function AllAnnounces() {
       return announce
     }
   }
+  //fonction qui filtre par rapport au prix
+  const verifyPrice = (announce) => {
+    //si le prix du bien est inf ou egale au filtre du prix
+    if (announce.price <= filterPrice) {
+      return announce
+    } 
+  }
   
   return (
     <div className="announces-page-container">
         <Selector
           filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
           filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
+          filterPrice={filterPrice} setFilterPrice={setFilterPrice}
         />
         <div className="announces-page">
           {filteredList &&
