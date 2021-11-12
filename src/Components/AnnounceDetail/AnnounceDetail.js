@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
 
 function AnnounceDetail() {
@@ -11,6 +13,9 @@ function AnnounceDetail() {
 
   useEffect(() => {
     setImmo(announce);
+    announce.image.map((a) => {
+      console.log(a)
+    })
   }, [announce]);
 
   function handleInput(e) {
@@ -27,7 +32,26 @@ function AnnounceDetail() {
       <div className="detail-container">
         <div className="detail-upper-container">
           <div className="detail-image-container">
-            <img src={announce.image[0]} alt="Photos du bien" />
+            <Carousel
+              className="carousel"
+              infiniteLoop={true}
+              autoPlay={true}
+              interval="5000"
+              showThumbs={false}
+              showStatus={false}
+              dynamicHeight={false}
+              centerMode={true}
+              centerSlidePercentage= {100}
+            >
+              {announce.image.map((item, index) => {
+                return(
+                  <div key={index}>
+                    <img className="image-carousel" src={item} alt="photo" />
+                  </div>
+                )
+                })}
+              
+            </Carousel>
           </div>
           <div className="detail-description-container">
             <div className="detail-input">
