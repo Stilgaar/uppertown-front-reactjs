@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import Axios from "axios";
 
 function AnnounceDetail() {
-
   const [invest, setInvest] = useState();
   const [wallet, setWallet] = useState();
   const [firstName, setFirstName]= useState()
@@ -40,6 +39,7 @@ function AnnounceDetail() {
 
   function convertInSc() {
     setSc({...sc, stableCoin:invest * announce.share_price})
+    alert(`Vous souhaitez investir ${invest} jeton(s)`);
   }
 
   function getUserDatas () {
@@ -154,7 +154,12 @@ function AnnounceDetail() {
           <div className="detail-description-container">
             <div className="detail-input">
               <label>Investissement désiré en jetons:</label>
-              <input type="number" placeholder="Investissement désiré" value={invest} onInput={(e) => handleInput(e) }/>
+              <input
+                type="number"
+                placeholder="Investissement désiré"
+                value={invest}
+                onInput={(e) => handleInput(e)}
+              />
               <button onClick={handleClick}>Valider</button>
               <p>{emptyVal}</p>
               <p>{showInvest}</p>
@@ -174,6 +179,14 @@ function AnnounceDetail() {
             <p>
               Non dolore fugiat et tempor velit consectetur cupidatat eu ea...
             </p>
+            <p>Nombre de chambres: {announce.bedrooms}</p>
+            <p>Surface habitable: {announce.surface}m²</p>
+            <p>Options:</p>
+            <ul>
+              {immo?.options?.map((option, index) => {
+                return <li key={index}>{announce?.options?.[index]}</li>;
+              })}
+            </ul>
           </div>
         </div>
         <div className="detail-lower-container">
@@ -190,7 +203,14 @@ function AnnounceDetail() {
               Loyer net par mois:{" "}
               {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
             </p>
-            <p>Gain mensuel par jeton: {((announce.gross_rent_by_year / 12 - announce.monthly_cost) / announce.share_number).toFixed(2)} €</p>
+            <p>
+              Gain mensuel par jeton:{" "}
+              {(
+                (announce.gross_rent_by_year / 12 - announce.monthly_cost) /
+                announce.share_number
+              ).toFixed(2)}{" "}
+              €
+            </p>
           </div>
           <div className="detail-geographical-container">
             <p>Ville: {announce.city}</p>

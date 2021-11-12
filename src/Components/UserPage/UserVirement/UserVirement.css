@@ -1,0 +1,76 @@
+.uservirement-container-general {
+    border:1px solid darkblue;
+    width: 70%;
+    margin: auto;
+    padding: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.uservirement-button-validate{ 
+    color: white;
+    width: 7rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+}
+
+.uservirement-singlecontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border:1px solid darkblue;
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+.uservirement-span-id {
+    font-weight: bolder;
+    background-color: rgb(194, 194, 216);
+    border: 1px solid darkblue;
+    border-radius: 5px;
+}
+
+.uservirement-container-totalRIB {
+    display: flex;
+    flex-direction: row;
+    margin: auto; 
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.uservirement-container-rib, .uservirement-container-iban, .uservirement-container-bic {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    margin: 0.2rem;
+}
+
+.uservirement-container-rib-iban-bic {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 0.2rem;
+    text-align: center;
+}
+
+.uservirement-container-value, .uservirement-container-value-iban-bic {
+    display: flex;
+    flex-direction: column;
+    margin: 0.2rem;
+}
+
+.uservirement-container-value {
+    border: 1px solid black;
+}
+
+.uservirement-container-value-iban-bic {
+    margin: auto;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+}
+

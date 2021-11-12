@@ -4,6 +4,7 @@ import './Home.scss';
 import React from 'react'
 import Signup from './Signup/Signup'
 import Login from './Login/Login';
+import Infos from './Infos/Infos';
 
 // Afficher composant <About/> avec un lorem pseudo presentation de la societe
 // Afficher un composant <Annonce/> qui affiche une annonce random
@@ -31,6 +32,7 @@ function Home({formState, setFormState, hardRefresh}) {
     
 
     return (
+        <div>
         <div className="home">
             {formState === "signin" && <Signup formState={formState} setFormState={setFormState} />}
             {formState === "login" && <Login formState={formState} setFormState={setFormState} hardRefresh={hardRefresh}/>}
@@ -39,6 +41,8 @@ function Home({formState, setFormState, hardRefresh}) {
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa enim inventore dolor mollitia laudantium. Ex perferendis ipsa, temporibus molestiae alias excepturi est ullam in quos quam natus, ut necessitatibus, beatae aperiam voluptate! Saepe, vero provident! Assumenda corporis eaque aliquid repudiandae cupiditate explicabo praesentium nisi ex nulla. Asperiores, veritatis, voluptatem modi error eum vitae commodi illo, praesentium et tempore dignissimos cumque!</p>
             </div>
             
+        </div>
+        <Infos />
         </div>
     )
 }

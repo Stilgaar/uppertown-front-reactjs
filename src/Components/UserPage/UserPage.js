@@ -3,6 +3,7 @@ import './UserPage.scss';
 
 import React from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
+import UserVirement from './UserVirement/UserVirement';
 
 function UserPage({user, hardRefresh}) {
 
@@ -18,7 +19,7 @@ function UserPage({user, hardRefresh}) {
 
     return (
         <div className="user-page">
-            <h1>User Page</h1>
+            <UserVirement user={user} hardRefresh={hardRefresh}/>
             <UserUpdate user={user} hardRefresh={hardRefresh} />
         </div>
     )

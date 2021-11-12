@@ -1,65 +1,78 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
+import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
-
+import "./AllAnnounces.scss";
 
 function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
-  const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
-
+  const [filterRegion, setFilterRegion] = useState("all");
+  const [filterBedrooms, setFilterBedrooms] = useState("all");
+  //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
     Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
       (response) => {
+        //Place la reponse dans les states
+          //State des annonces global
         setAnnouncesList(response.data);
+          //State des annonces filtrées, initialisé avec toutes les annonces
         setFilteredList(response.data);
-        console.log(response.data);
       }
     );
   }, []);
-
+  
+  //A chaque changement dans les filtres
+  //passe a la moulinette les annonces
   useEffect(() => {
-    const filteredList = announcesList.filter((announce) =>
-      verifyCorrespondance(announce)
-    );
-    setFilteredList(filteredList);
-    console.log("liste filtrée", filteredList);
-  }, [filter, announcesList]);
+    //1: prend toutes les annonces et les filtre par rapport au filtre de region et return un array
+    const filteredByRegion = announcesList.filter((announce) =>  verifyRegion(announce))
+    //2: prend l'array du dessus et le re filtre par rapport au filtre du nb de chambre et return un array
+    const filteredByBedrooms = filteredByRegion.filter((announce) => verifyBedrooms(announce))
+    // le resultat est mis dans le setter
+    setFilteredList(filteredByBedrooms);
+  }, [filterRegion, filterBedrooms] )
 
-  function handleInput(e) {
-    setFilter(e.target.value);
-  }
-
-  function verifyCorrespondance(announce) {
-    let regex = new RegExp(filter.toLowerCase());
-    if (regex.test(announce?.city?.toLowerCase()) || regex.test(announce?.region?.toLowerCase()) || regex.test(announce?.zip_code)) {
-      return announce;
+  //fonction qui filtre par rapport a la region
+  const verifyRegion = (announce) => {
+    //Si le filtre region = all
+    if (filterRegion === "all") {
+      return announce
+      // Si la region de l'annonce = la region du filtre
+    } else if (announce.region === filterRegion) {
+      return announce
     }
   }
-
+  //fonction qui filtre par rapport au nb de chambre
+  const verifyBedrooms = (announce) => {
+    //si le filtre nb de chambre = all
+    if (filterBedrooms === "all") {
+      return announce
+      //si le nb de chambre de l'annonce = le filtre nb de chambre
+    } else if (announce.bedrooms === filterBedrooms) {
+      return announce
+      //si le filtre du nb de chambre = 7 et que l'annonce a 7 chambre et +
+    } else if (filterBedrooms === 7 && announce.bedrooms >= 7) {
+      return announce
+    }
+  }
+  
   return (
-    <>
-      <h2>Pages Annonces</h2>
-      <div className="announces-search">
-          <label>Cherchez un bien par ville, code postal ou departement:</label>
-        <input
-          type="text"
-          placeholder="rechercher par ville, code postal ou departement"
-          onChange={(e) => handleInput(e)}
+    <div className="announces-page-container">
+        <Selector
+          filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
+          filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
         />
-      </div>
-      <div className="announces-page">
-        {filteredList &&
-          filteredList.map((announce, index) => {
-            return (
-              <div key={index}>
-                <Announce announce={announce} />
-              </div>
+        <div className="announces-page">
+          {filteredList &&
+            filteredList.map((announce, index) => {
+              return (
+                <Announce announce={announce} key={index}/>
             );
           })}
       </div>
-    </>
+    </div>
   );
 }
 

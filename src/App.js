@@ -11,7 +11,8 @@ import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
-import UserDetail from './Components/AdminPage/UserDetail/UserDetail';
+import Selector from './Components/Selector/Selector'
+
 //temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
@@ -76,21 +77,24 @@ function App() {
           </Route>
           <Route path="/announce-detail-admin">
             <AnnounceDetailAdmin />
-          </Route>
-          <Route path="/user-detail">
-            <UserDetail />
-          </Route>
+          </Route>          
           <Route path="/announce-detail">
             <AnnounceDetail />
           </Route>
           <Route path="/user-properties">
             <UserPropertiesSmart />
           </Route>
+          {/*<Route path="/user-properties-list">
+            <UserPropertiesList />
+          </Route>*/}
           <Route path="/stable-coins">
-            <StableCoins user={user} hardRefresh={hardRefresh}/>
+            <StableCoins user={user} />
+          </Route>
+          <Route path="/selector">
+            <Selector user={user} />
           </Route>
         </Switch>
-        {/* A Afficher plus tard <Footer/> */}
+        <Footer/>
       </Router>
     </div>
   );
