@@ -26,8 +26,7 @@ const history = useHistory();
     const [zipBox, setZipBox] = useState(false);
     const [optionsBox, setOptionsBox] = useState(false);
 
-    
-
+  
     const [status, setStatus] = useState({
         content: announce.content,
         title: announce.title,

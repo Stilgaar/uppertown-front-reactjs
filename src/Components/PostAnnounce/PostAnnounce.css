@@ -1,0 +1,28 @@
+.postannounce-container-container {
+    margin: auto;
+    margin-top: 150px;
+    width: 90%;
+}
+
+.postannounce-container {
+margin: auto;
+border:1px solid darkblue;
+width: 80%;
+}
+
+.postannounce {
+    margin: auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.postannounce-button-validate {
+    color: white;
+    width: fit-content;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+}
