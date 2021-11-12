@@ -90,14 +90,12 @@ function App() {
           <Route path="/selector">
             <Selector user={user} />
           </Route>
-<<<<<<< src/App.js
           <Route path="/postAnnounce">
             <PostAnnounce/>
-=======     </Route>
-            <Route path="/slideshow">
-                <SlideShow user={user} />
->>>>>>> src/App.js
-            </Route>
+          </Route>
+          <Route path="/slideshow">
+            <SlideShow user={user} />
+          </Route>
         </Switch>
         </div>
         <Footer/>
