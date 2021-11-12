@@ -78,7 +78,7 @@ function Selector({filterRegion, setFilterRegion, filterBedrooms, setFilterBedro
         <div>
           <label>Prix Max : </label>
           <input className="price-slider" type="range" id="volume" name="volume"
-                min="0" max="10000000" onChange={handlePrice} step="10000" value={filterPrice}/>
+                min="0" max="10000000" onChange={handlePrice} step="50000" value={filterPrice}/>
           <label className="selected-price" for="price">{numberWithSpaces(filterPrice)} €</label>
         </div>
       </div>
