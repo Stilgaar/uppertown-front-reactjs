@@ -8,7 +8,7 @@ function PostAnnounce() {
     const [content, setContent] = useState();
     const [city, setCity] = useState()
     const [zip_code, setZip_Code] = useState()
-    const [region, setRegion] = useState()
+    const [region, setRegion] = useState("Auvergne-Rhône-Alpes")
     const [type, setType] = useState()
     const [bedrooms, setBedrooms] = useState()
     const [surface, setSurface] = useState()
@@ -18,12 +18,6 @@ function PostAnnounce() {
     const [monthly_cost, setMonthly_cost] = useState()
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
-
-    console.log("IMAGE0", image[0])
-    console.log("IMAGE1", image[1])
-    console.log("IMAGE2", image[2])
-    console.log("IMAGE3", image[3])
-    console.log("IMAGE4", image[4])
 
     const handleInput = (setter, e) => { setter(e.target.value) }
 
