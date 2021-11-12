@@ -18,6 +18,7 @@ import Selector from './Components/Selector/Selector'
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
+import SlideShow from './Components/SlideShow/SlideShow';
 const axios = require('axios');
 
 function App() {
@@ -86,6 +87,9 @@ function App() {
           </Route>
           <Route path="/selector">
             <Selector user={user} />
+          </Route>
+          <Route path="/slideshow">
+            <SlideShow user={user} />
           </Route>
         </Switch>
         <Footer/>
