@@ -11,6 +11,8 @@ function AnnounceDetail() {
   const [lastName, setLastName]= useState()
   const d = new Date();
 
+  const [immo, setImmo] = useState();
+
   const userOnline = localStorage.getItem("id")
   //console.log("USERID : "+userOnline);
 
@@ -18,7 +20,7 @@ function AnnounceDetail() {
   const announce = location.state?.data;
   //console.log("annonce: ", announce);
 
-  const [sc, setSc] = useState({stableCoin:""})
+  const [sc, setSc] = useState({stableCoin:"", validated:false})
   const [showInvest, setShowinvest]= useState("");
   const [message1, setMessage1]= useState("");
   const [emptyVal, setEmptyVal]= useState("");
@@ -28,7 +30,6 @@ function AnnounceDetail() {
     }
 
   function handleClick() {
-    //alert(`Vous souhaitez investir ${invest} jeton(s)`);
     if (!invest){
       setEmptyVal("Veuillez définir le montant à investir")
     }else{
@@ -39,7 +40,6 @@ function AnnounceDetail() {
 
   function convertInSc() {
     setSc({...sc, stableCoin:invest * announce.share_price})
-    alert(`Vous souhaitez investir ${invest} jeton(s)`);
   }
 
   function getUserDatas () {
@@ -72,11 +72,10 @@ function AnnounceDetail() {
         userId:userOnline,
         token:invest,
         sc:sc.stableCoin,
+        type:"Purchase",
         created_at:d
     }
 
-    
-    
     const url = "http://localhost:1337/api/transactions/buy"
   
             Axios.post(url,data)
@@ -119,12 +118,15 @@ function AnnounceDetail() {
         },
         body: JSON.stringify({
           share_number: announce.share_number - invest,
-          share_price: announce.price/(announce.share_number - invest)
+          //share_price: announce.price/(announce.share_number - invest)
         }),
       }).then(() => {
         // vérification :
-        console.log("New share price : " + announce.share_price/(announce.share_number - invest) );
+        console.log("New share number : " + announce.share_number - invest );
+        setSc({...sc, validated:true})
         });
+
+      
     };
 
     //}
@@ -142,9 +144,16 @@ function AnnounceDetail() {
     getUserDatas()
 }, [])
 
+    useEffect(() => {
+    setImmo(announce);
+}, [announce]);
+
+
+
+
   return (
     <>
-    <h3>Bonjour Mr {firstName} {lastName}, montant actuel de votre portefeuille : { wallet ? (wallet - sc.stableCoin) : wallet} </h3>
+    <h3>Bonjour Mr {firstName} {lastName}, montant actuel de votre portefeuille : { wallet ? (wallet - sc.stableCoin) : wallet} SC</h3>
       <h2>Annonce en détail</h2>
       <div className="detail-container">
         <div className="detail-upper-container">
@@ -157,21 +166,21 @@ function AnnounceDetail() {
               <input
                 type="number"
                 placeholder="Investissement désiré"
-                value={invest}
+                value={!sc.validated && invest}
                 onInput={(e) => handleInput(e)}
               />
               <button onClick={handleClick}>Valider</button>
               <p>{emptyVal}</p>
-              <p>{showInvest}</p>
-              {showInvest && <button onClick={convertInSc}>Veuiller confirmer le montant de l'investissement</button>}
-              {sc.stableCoin && <p>Montant de l'achat : {sc.stableCoin}</p>} 
+              <p>{!sc.validated && showInvest}</p>
+              {showInvest && !sc.validated ? <button onClick={convertInSc}>Veuiller confirmer le montant de l'investissement</button> : <div></div>}
+              {sc.stableCoin && !sc.validated ? <p>Montant de l'achat : {sc.stableCoin} SC</p> : <div></div>} 
             {/*J'ai mis ça en <h6> mais bien sûr il faudra améliorer ce style !! */}
-              {sc.stableCoin && <h6>En cliquant sur le bouton ci-dessous, vous confirmez vous porter acquéreur du nombre de parts précédemment 
-               choisies et la transaction sera alors effective :</h6>}
-               {sc.stableCoin && <button onClick={sendTransac}>Finaliser la transaction</button>}
-               {sc.stableCoin && <button onClick={cancelTransac}>Annuler la transaction</button>}
+              {sc.stableCoin && !sc.validated ? <h6>En cliquant sur le bouton ci-dessous, vous confirmez vous porter acquéreur du nombre de parts précédemment 
+               choisies et la transaction sera alors effective :</h6> : <div></div>}
+               {sc.stableCoin && !sc.validated ? <button onClick={sendTransac}>Finaliser la transaction</button> :  <div></div>}
+               {sc.stableCoin && !sc.validated ? <button onClick={cancelTransac}>Annuler la transaction</button>  :  <div></div>}
                {sc.stableCoin && <p style={{color:"red"}}>{message1}</p>}
-               {message1 && <p>Braquez une banque puis veuillez alimenter votre portefeuille en cliquant ici : <a href="/stable-coins">Portefeuille</a></p>}
+               {message1 && <p>Veuillez alimenter votre portefeuille en cliquant ici : <a href="/stable-coins">Portefeuille</a></p>}
             </div>
             <h3>{announce.title}</h3>
             <p>{announce.type}</p>
@@ -183,7 +192,7 @@ function AnnounceDetail() {
             <p>Surface habitable: {announce.surface}m²</p>
             <p>Options:</p>
             <ul>
-              {immo?.options?.map((option, index) => {
+            {immo?.options?.map((option, index) => {
                 return <li key={index}>{announce?.options?.[index]}</li>;
               })}
             </ul>
@@ -192,7 +201,8 @@ function AnnounceDetail() {
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {announce.price} €</p>
-            <p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>
+            {/*<p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>*/}
+            <p>Prix du jeton: { (announce.share_price).toFixed(2)} SC</p>
             <p>Nombre de jetons: {announce.share_number && invest ? announce.share_number - invest : announce.share_number } </p> 
           </div>
           <div className="detail-rent-container">

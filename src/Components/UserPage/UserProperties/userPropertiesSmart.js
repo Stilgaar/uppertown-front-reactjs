@@ -6,14 +6,10 @@ function UserPropertiesSmart(props){
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [wallet, setWallet]= useState()
-
-
-    //const d = new Date();
-  
     const userOnline = localStorage.getItem("id")
     console.log("USERID : "+userOnline);
   
-  
+    
     function getUserDatas () {
       
       const url = "http://localhost:1337/api/users/"+userOnline
@@ -35,15 +31,15 @@ function UserPropertiesSmart(props){
     
     }
 
-    
-
     useEffect(() => {
     getUserDatas()
-  }, [])
+    
+}, [])
 
   return(
       <div>
-          <UserPropertiesDumb firstName={firstName} lastName={lastName} wallet={wallet}/>
+        <h3>Bonjour {firstName} {lastName}, montant actuel de votre portefeuille : {wallet} </h3>
+          <UserPropertiesDumb/>
       </div>
   )
 }
