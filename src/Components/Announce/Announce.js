@@ -3,6 +3,13 @@ import "./Announce.scss"
 import { Link } from "react-router-dom";
 
 function Announce({ announce }) {
+
+  //fonction trouver sur google pour espacer les chiffres des prix
+  function numberWithSpaces(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  }
  
 
   return (
@@ -22,15 +29,15 @@ function Announce({ announce }) {
       <div className="bottom-container">
         <div className="price-block">
           <p className="title-block">Prix</p>
-          <p className="data-block">{announce.price}</p>
+          <p className="data-block">{numberWithSpaces(announce.price)} €</p>
         </div>
         <div className="surface-block">
           <p className="title-block">m²</p>
-          <p className="data-block">{announce.surface}</p>
+          <p className="data-block">{announce.surface} m²</p>
         </div>
         <div className="bedroom-block">
           <p className="title-block">Chambre(s)</p>
-          <p className="data-block">{announce.bedrooms}</p>
+          <p className="data-block">{announce.bedrooms} ch</p>
         </div>
       </div>
     </Link>
