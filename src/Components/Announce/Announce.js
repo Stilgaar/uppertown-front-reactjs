@@ -15,7 +15,7 @@ function Announce({ announce }) {
     style={{textDecoration: "none", color: "black"}}
     className="announce-container">
       <div className="top-container">
-        <img src={announce?.image} alt="" />
+        <img src={announce?.image[0]} alt="" />
       </div>
       <p className="image-bottom-grey-bar">{announce?.region} / {announce?.city}</p>
       <h6 className="announce-title">{announce?.title}</h6>
