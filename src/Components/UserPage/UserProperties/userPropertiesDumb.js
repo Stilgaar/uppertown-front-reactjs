@@ -5,11 +5,36 @@ import { useState, useEffect } from "react";
 function UserPropertiesDumb(props) {
 
     const [ann, setAnn] = useState([]) 
+    const [obj, setObj] = useState({user:"",announce:""})
     const userOnline = localStorage.getItem("id")
-    const [obj, setObj] = useState([])
     
     function getTransac () {
+
+      //on prend toutes les annonces :
+
+      const todb = "http://localhost:1337/api/announces/allannounces"
+      fetch(todb,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json()) 
+        .then((res) => {
+          console.log("Success ALL ANNONCES:", res);
+          setAnn(res)
+         /* let announceBasic = [];    
+            for(let i=0;i<res.length;i++){ 
+            announceBasic.push(res[i]._id);
+            setAnnBasic(res[i]._id)
+            }
+          console.log("Success ANNBASIC:", announceBasic);*/
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
       
+      // on essaie de filtrer :
+
       const url = "http://localhost:1337/api/transactions/history"
       fetch(url,
         {
@@ -19,13 +44,21 @@ function UserPropertiesDumb(props) {
         .then((response) => response.json()) 
         .then((result) => {
           console.log("Success TRANSAC :", result);
-          let announce = [];    
+          let userId = [];    
             for(let i=0;i<result.length;i++){ 
-            announce.push(result[i].announceId);
-            setObj(result[i].announceId)
+            userId.push(result[i].userId);
+            setObj({...obj, user:result[i].userId})
             }
-            //setObj(result.announce_id)
-            console.log("OBJET :"+obj)
+            let announceId = [];    
+            for(let i=0;i<result.length;i++){ 
+            announceId.push(result[i].announceId);
+            setObj({...obj, announce:result[i].announceId})
+            }
+            //setObj(announce)
+            console.log("ANNONCE :"+announceId)
+            console.log("USER :"+userId)
+            console.log("USER SETTE :"+obj.user)
+            console.log("ANN SETTE :"+obj.announce)
           
           
         })
@@ -33,79 +66,64 @@ function UserPropertiesDumb(props) {
           console.error("Error:", error);
         });
 
-        const todb = "http://localhost:1337/api/announces/allannounces"
-        fetch(todb,
-          {
-            method: "GET",
-          }
-        )
-          .then((response) => response.json()) 
-          .then((res) => {
-            console.log("Success ALL ANNONCES:", res);
-            setAnn(res)
-            
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      
-    
     }
     
      const transacUser = (ann) => {
-        return ann.map((item) => {
-          if(item.obj===item._id){
-            console.log("USER ID MAP : "+item.obj, userOnline)
+        return ann.map((ann) => {
+          if(ann._id===obj.announce){
+            console.log("ANNONCE ID MAP : "+obj.user + " ANNBASIC :" +obj.announce)
             return (
               
               <div>
                     <h2>Annonce en détail</h2>
-                    <div>ID de l'annonce : {item._id}</div>
+                    <div>Identifiant du bien : {ann._id}</div>
                     <div className="detail-container">
                       <div className="detail-upper-container">
                         <div className="detail-image-container">
-                          <img src={item.image} alt="Photos du bien" />
+                          <img src={ann.image} alt="Photos du bien" />
                         </div>
                         <div className="detail-description-container">
-                        <h3>{item.title}</h3>
-                          <p>{item.type}</p>
-                          <p>{item.content}</p>
+                        <h3>{ann.title}</h3>
+                          <p>{ann.type}</p>
+                          <p>{ann.content}</p>
                         </div>
                       </div>
                       <div className="detail-lower-container">
                         <div className="detail-economic-container">
-                          <p>Identifiant du bien: {item?.announceId} €</p>
-                          <p>Prix du bien: {item?.price} €</p>
+                          <p>Identifiant du bien: {ann?.announceId} €</p>
+                          <p>Prix du bien: {ann?.price} €</p>
                           <p>Prix actuel du jeton: { //props?.share_price.toFixed(2)
-                          item?.share_price} SC</p>
-                          <p>Nombre de jetons restants: {item?.share_number} </p>
+                          ann?.share_price} SC</p>
+                          <p>Nombre de jetons restants: {ann?.share_number} </p>
                            
                         </div>
-                        <div className="detail-economic-container">
-                        <h6>Liste des transactions (Achat, unité: stable coins) : </h6>
-                        <UserTransac/>
-                        </div>
+                        
                         <div className="detail-rent-container">
-                          <p>Loyer par an brut: {item.gross_rent_by_year} €</p>
-                          <p>Loyer par mois brut: {item.gross_rent_by_year / 12} €</p>
-                          <p>Coûts mensuels: {item.monthly_cost} €</p>
+                          <p>Loyer par an brut: {ann.gross_rent_by_year} €</p>
+                          <p>Loyer par mois brut: {ann.gross_rent_by_year / 12} €</p>
+                          <p>Coûts mensuels: {ann.monthly_cost} €</p>
                           <p>
                             Loyer net par mois:{" "}
-                            {item.gross_rent_by_year / 12 - item.monthly_cost} €
+                            {ann.gross_rent_by_year / 12 - ann.monthly_cost} €
                           </p>
-                          <p>Gain mensuel par jeton: {(((item.gross_rent_by_year / 12) - item.monthly_cost) / item.share_number).toFixed(2)} €</p>
+                          <p>Gain mensuel par jeton: {(((ann.gross_rent_by_year / 12) - ann.monthly_cost) / ann.share_number).toFixed(2)} €</p>
                         </div>
                         <div className="detail-geographical-container">
-                          <p>Ville: {item.city}</p>
-                          <p>Département: {item.region}</p>
-                          <p>Code postal: {item.zip_code}</p>
+                          <p>Ville: {ann.city}</p>
+                          <p>Département: {ann.region}</p>
+                          <p>Code postal: {ann.zip_code}</p>
                         </div>
                       </div>
+                    </div>
+                    {/*LISTE DES TRANSACTIONS : */}
+                    <div className="detail-economic-container">
+                        <h6>Liste des transactions (Achat, unité: stable coins) : </h6>
+                        <UserTransac/>
                     </div>
                 </div>
             
             )
-            }
+             }
         })
     }
 

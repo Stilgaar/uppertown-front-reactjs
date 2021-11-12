@@ -5,8 +5,7 @@ function UserTransac() {
     const [obj, setObj] = useState([])
 
     const userOnline = localStorage.getItem("id")
-    console.log("USERID TRANSAC DUMB : "+userOnline);
-
+    
     function getTransac () {
       
         const url = "http://localhost:1337/api/transactions/history"
@@ -17,7 +16,7 @@ function UserTransac() {
         )
           .then((response) => response.json()) 
           .then((result) => {
-            console.log("Success TRANSAC :", result);
+           // console.log("Success TRANSAC :", result);
             setObj(result)
             
           })
@@ -30,9 +29,10 @@ function UserTransac() {
       const transacUser = (obj) => {
         return obj.map((transac) => {
           if(userOnline==transac.userId){
-            console.log("USER ID MAP from collec: "+transac.userId+" localstore :"+ userOnline)
+            //console.log("USER ID MAP from collec: "+transac.userId+" localstore :"+ userOnline)
             return (
                 <div>
+                <h6>Identifiant de la transaction : {transac._id}</h6>
                 <p>Jetons acquis dans la propriété: {transac.token} tokens</p>
                 <p>Montant de la transaction : {transac.sc} SC</p>
                 <p>Date de la transaction : {transac.created_at}</p>
