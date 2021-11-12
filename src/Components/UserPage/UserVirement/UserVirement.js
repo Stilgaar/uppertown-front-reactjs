@@ -9,6 +9,8 @@ function UserVirement({ user, hardRefresh }) {
     const [rib, setRIB] = useState()
     const [montant, setMontant] = useState();
     const [validation, setValidation] = useState(false);
+    const [stable, setStable] = useState(false)
+    const [euro, setEuro] = useState(false)
 
     useEffect(() => {
         axios.get("http://localhost:1337/admin/getRib")
@@ -93,12 +95,12 @@ function UserVirement({ user, hardRefresh }) {
                             <button className="uservirement-button-validate" type="submit">Valider</button>
                         </form>
 
-                    {validation &&
-                    <div>
-                        <div>Code : "<span className="uservirement-span-id"> {user._id} Uppertown</span>" </div>
-                        <div>Ce code permet d'associer votre dépôt à votre compte. <br/> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
-                        </div>
-                    }
+                        {validation &&
+                            <div>
+                                <div>Code : "<span className="uservirement-span-id"> {user._id} Uppertown</span>" </div>
+                                <div>Ce code permet d'associer votre dépôt à votre compte. <br /> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
+                            </div>
+                        }
                     </div>}
 
             </div>
@@ -107,7 +109,28 @@ function UserVirement({ user, hardRefresh }) {
                 <button className="uservirement-button-validate" onClick={() => setVendre(current => !current)}>Vendre</button>
 
                 {vendre &&
-                    <div className="uservirement-singlecontainer">Pouet Pouet
+                    <div className="uservirement-singlecontainer">
+
+                        <div className="uservirement-buttons-container">
+                            <div><button className="uservirement-button-vendre" onClick={() => setStable(current => !current)}>Echanger des Stable Coins</button></div>
+                            <div><button className="uservirement-button-vendre" onClick={() => setEuro(current => !current)}>Echanger des Euros</button></div>
+                        </div>
+
+                        {stable &&
+                            <div className="uservirement-singlecontainer">Pouet Pouet</div>}
+
+
+
+                        {euro &&
+                            <div className="uservirement-singlecontainer">
+                                Vous disposez de {user.stableCoins}
+                                
+                                
+                                
+                                </div>}
+
+
+
 
 
                     </div>}
