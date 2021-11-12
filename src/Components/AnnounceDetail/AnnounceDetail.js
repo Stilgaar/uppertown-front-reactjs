@@ -42,6 +42,7 @@ function AnnounceDetail() {
               dynamicHeight={false}
               centerMode={true}
               centerSlidePercentage= {100}
+              
             >
               {announce.image.map((item, index) => {
                 return(
