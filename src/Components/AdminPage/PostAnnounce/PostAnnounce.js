@@ -8,7 +8,7 @@ function PostAnnounce() {
     const [content, setContent] = useState();
     const [city, setCity] = useState()
     const [zip_code, setZip_Code] = useState()
-    const [region, setRegion] = useState()
+    const [region, setRegion] = useState("Auvergne-Rhône-Alpes")
     const [type, setType] = useState()
     const [bedrooms, setBedrooms] = useState()
     const [surface, setSurface] = useState()

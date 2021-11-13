@@ -16,6 +16,8 @@ function UserVirement({ user, hardRefresh }) {
 
     console.log(user.rib)
 
+    console.log(user.rib)
+
     let currentStable = user.stableCoins
 
     useEffect(() => {
@@ -120,7 +122,7 @@ function UserVirement({ user, hardRefresh }) {
                     <div className="uservirement-singlecontainer">
 
 
-                        {user.rib == null ?  <div> Vous disposez de {user.stableCoins} StableCoins
+                        {user?.rib?.[0] !== undefined ?  <div> Vous disposez de {user.stableCoins} StableCoins
                             
                         <form onSubmit={(e) => virement(e, user._id)}>
                             <label>Sur quel compte désirez vous réaliser votre virement ?</label>
@@ -138,8 +140,7 @@ function UserVirement({ user, hardRefresh }) {
                                 Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
                                 </div>
                                 :
-                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>
-                        }
+                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>}
                     </div>}
 
 

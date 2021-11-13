@@ -12,6 +12,7 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import Selector from './Components/Selector/Selector'
+import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
 //temporaire :
 //temporaire :
@@ -89,6 +90,12 @@ function App() {
           <Route path="/selector">
             <Selector user={user} />
           </Route>     
+          <Route path="/slideshow">
+            <SlideShow user={user} />
+          </Route>
+          <Route path="/postAnnounce">
+            <PostAnnounce/>
+          </Route>
           <Route path="/slideshow">
             <SlideShow user={user} />
           </Route>
