@@ -6,6 +6,7 @@ import Axios from "axios";
 
 function CreateAnn() {
   /* Variables d'état */
+  
   const [file, setFile] = useState({
     file1: "",
     file2: "",
@@ -227,6 +228,8 @@ function CreateAnn() {
     data.append("file3", file.file5);
     //console.log(data.get("file1"));
 
+    
+
     /*if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
     || status.share_price === "" || status.share_number === "" || status.type === "" || status.gross_rent_by_year === ""
     || status.monthly_cost === "") {
@@ -246,8 +249,10 @@ function CreateAnn() {
           })
         )
         .catch((err) => console.log(err));
-    }
 
+        
+  
+      }
     document.querySelector(".postInput").value = "";
   };
 

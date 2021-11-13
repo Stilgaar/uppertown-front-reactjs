@@ -72,7 +72,11 @@ function AnnounceDetail() {
         userId:userOnline,
         token:invest,
         sc:sc.stableCoin,
-        type:"Purchase",
+        title:announce.title,
+        content: announce.content,
+        type: announce.type,
+        price: announce.price,
+        image: announce.image,
         created_at:d
     }
 
@@ -108,7 +112,7 @@ function AnnounceDetail() {
         console.log("New Wallet : " + (wallet - sc.stableCoin) );
 
       });
-
+      
       const updateToken = "http://localhost:1337/api/announces/"+announce._id; //chemin vers le backend
       fetch(updateToken, {
         method: "PUT",
@@ -126,6 +130,39 @@ function AnnounceDetail() {
         setSc({...sc, validated:true})
         });
 
+        //updownstreet.properties.find({idUser}, {"_id" : 1});
+        const addProperties = "http://localhost:1337/api/properties/allProperties"; //chemin vers le backend
+        fetch(addProperties, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idUser:userOnline,
+          announceId:announce._id,
+          title:announce.title,
+          content:announce.content,
+          price: announce.price,
+          share_price: announce.share_price,
+          totalToken: invest,
+          type:announce.type,
+          gross_rent_by_year:announce.gross_rent_by_year,
+          city: announce.city,
+          region: announce.region,
+          zip_code:announce.zip_code,
+          bedrooms: announce.bedrooms,
+          surface: announce.surface,
+          option: announce.options,
+          image: announce.image
+           }),
+      }).then(() => {
+        // vérification :
+        console.log("New share number : " +invest );
+        });
+
+      
+    
       
     };
 
@@ -148,19 +185,18 @@ function AnnounceDetail() {
     setImmo(announce);
 }, [announce]);
 
-
-
-
   return (
     <>
     <h3>Bonjour Mr {firstName} {lastName}, montant actuel de votre portefeuille : { wallet ? (wallet - sc.stableCoin) : wallet} SC</h3>
       <h2>Annonce en détail</h2>
       <div className="detail-container">
         <div className="detail-upper-container">
+         
           <div className="detail-image-container">
             <img src={announce.image[0]} alt="Photos du bien" />
           </div>
           <div className="detail-description-container">
+          annonce id : {announce._id}
             <div className="detail-input">
               <label>Investissement désiré en jetons:</label>
               <input
@@ -202,7 +238,7 @@ function AnnounceDetail() {
           <div className="detail-economic-container">
             <p>Prix: {announce.price} €</p>
             {/*<p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>*/}
-            <p>Prix du jeton: { (announce.share_price).toFixed(2)} SC</p>
+            <p>Prix du jeton: { (announce?.share_price).toFixed(2)} SC</p>
             <p>Nombre de jetons: {announce.share_number && invest ? announce.share_number - invest : announce.share_number } </p> 
           </div>
           <div className="detail-rent-container">

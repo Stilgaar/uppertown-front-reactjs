@@ -17,7 +17,7 @@ import Selector from './Components/Selector/Selector'
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
-import UserPropertiesSmart from './Components/UserPage/UserProperties/userPropertiesSmart';
+import AllTransacSmart from './Components/UserPage/UserProperties/allTransacSmart';
 const axios = require('axios');
 
 function App() {
@@ -81,8 +81,8 @@ function App() {
           <Route path="/announce-detail">
             <AnnounceDetail />
           </Route>
-          <Route path="/user-properties">
-            <UserPropertiesSmart />
+          <Route path="/user-transac">
+            <AllTransacSmart/>
           </Route>
           {/*<Route path="/user-properties-list">
             <UserPropertiesList />
