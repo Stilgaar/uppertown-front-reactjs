@@ -14,10 +14,6 @@ function UserVirement({ user, hardRefresh }) {
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
 
-    console.log(user.rib)
-
-    console.log(user.rib)
-
     let currentStable = user.stableCoins
 
     useEffect(() => {

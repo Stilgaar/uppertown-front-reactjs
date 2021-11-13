@@ -31,7 +31,6 @@ function App() {
   //a passer a la navbar pour son affichage conditionnel
   //un state pour l'id user
   // a passer a certaine page (userpage/admin ect...)
-
   //Créer une fonction qui des l'affichage check le localStorage et verifie le token avec un requete <- recupere l'id
   //et mettre l'id dans un state pour le passé apres dans certains composant enfants ex:userpag
 
