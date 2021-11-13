@@ -6,11 +6,15 @@ function UserVirement({ user, hardRefresh }) {
 
     const [acheter, setAcheter] = useState(false);
     const [vendre, setVendre] = useState(false);
+    const [validation, setValidation] = useState(false);
+    const [pending, setPending] = useState(false)
+
     const [rib, setRIB] = useState()
     const [montant, setMontant] = useState();
-    const [validation, setValidation] = useState(false);
-    const [stable, setStable] = useState(false)
-    const [euro, setEuro] = useState(false)
+    const [change, setChange] = useState()
+    const [theRib, setTheRib] = useState();
+
+    let currentStable = user.stableCoins
 
     useEffect(() => {
         axios.get("http://localhost:1337/admin/getRib")
@@ -19,16 +23,22 @@ function UserVirement({ user, hardRefresh }) {
 
     const payement = (e, email) => {
         e.preventDefault();
-
         let sumbit = { email, montant }
         axios.post("http://localhost:1337/api/users/addMoney", sumbit)
             .then((res) => console.log(res.data))
             .then(() => setValidation(true))
     }
 
-    const handleInput = (e, setter) => {
-        setter(e.target.value)
+    const virement = (e, id) => {
+        e.preventDefault()
+        let submit = { change, theRib, id, currentStable }
+        axios.post("http://localhost:1337/api/users/askMoney", submit)
+            .then((res) => console.log(res.data))
+            .then(() => setPending(true))
+            .then(() => hardRefresh())
     }
+
+    const handleInput = (e, setter) => { setter(e.target.value) }
 
     return (
 
@@ -85,10 +95,6 @@ function UserVirement({ user, hardRefresh }) {
                             </div>
                         </div>
 
-
-
-
-
                         <form onSubmit={(e) => payement(e, user.email)}>
                             <label>Combien désirez vous transferer ?</label>
                             <input type="number" placeholder="Montant" onInput={(e) => handleInput(e, setMontant)} />
@@ -111,29 +117,29 @@ function UserVirement({ user, hardRefresh }) {
                 {vendre &&
                     <div className="uservirement-singlecontainer">
 
-                        <div className="uservirement-buttons-container">
-                            <div><button className="uservirement-button-vendre" onClick={() => setStable(current => !current)}>Echanger des Stable Coins</button></div>
-                            <div><button className="uservirement-button-vendre" onClick={() => setEuro(current => !current)}>Echanger des Euros</button></div>
-                        </div>
 
-                        {stable &&
-                            <div className="uservirement-singlecontainer">Pouet Pouet</div>}
+                        {user?.rib?.[0] !== undefined ?  <div> Vous disposez de {user.stableCoins} StableCoins
+                            
+                        <form onSubmit={(e) => virement(e, user._id)}>
+                            <label>Sur quel compte désirez vous réaliser votre virement ?</label>
+                            {user.rib.map((ribz, index) => <div>
+                                <input type="radio" value="rib" name="rib" key={index} onChange={() => setTheRib(ribz)} /> RIB #{index + 1} - {ribz} </div>
+                            )}
 
+                            <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
+                            <input type="number" onInput={(e) => handleInput(e, setChange)} />
+                            <button className="uservirement-button-vendre" type="submit">Valider</button>
+                        </form>
 
-
-                        {euro &&
-                            <div className="uservirement-singlecontainer">
-                                Vous disposez de {user.stableCoins}
-                                
-                                
-                                
-                                </div>}
-
-
-
-
-
+                        {pending &&
+                            <div>Votre demande à bien été prise en compte. <br />
+                                Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
+                                </div>
+                                :
+                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>}
                     </div>}
+
+
             </div>
 
 

@@ -206,7 +206,7 @@ function UserUpdate({user, hardRefresh}) {
                 <button className="userupdate-button-modify" onClick={() => setAdressBox(current => !current)}>{ribBox ? "Annuler" : "Modifier"}</button></div>
 
                 <div className="userupdate-singlecontainer">
-                    <div className="userupdate-container-modify">{ribBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Relevé d'identité Bancaire</div> {user?.rib?.map((data) => <div>RIB {data}<button onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>)}</div>}
+                    <div className="userupdate-container-modify">{ribBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Relevé d'identité Bancaire</div> {user?.rib?.map((data) => <div>RIB {data} <button className="userupdate-button-validate" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>)}</div>}
                         {ribBox &&
                             <div >
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setRibBox(current => !current) }}>
@@ -233,7 +233,7 @@ function UserUpdate({user, hardRefresh}) {
 
 
                                         <label className="userupdate-label">Pièce d'identité</label>
-                                        <input className="userupdate-input" type="file" name="pieceidentite" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setPi(e.target.files[0])} />
+                                        <input type="file" name="pieceidentite" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setPi(e.target.files[0])} />
                                     </div>
                                     <div className="userupdate-container-warning">Pour vous donner plus d'options nous avons besoin de votre pièce d'identité</div>
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
@@ -244,7 +244,7 @@ function UserUpdate({user, hardRefresh}) {
                                     <div> <p>Vos Pièces d'identité actuelles</p>
                                         <div className="userupdate-imagecontainer">
                                             {user.pi.map((data, index) =>
-                                                <div> <img className="userupdate-imageuser" src={data} alt="" /> <button onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
+                                                <div> <img className="userupdate-imageuser" src={data} alt="" /> <button className="userupdate-button-delete" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
                                             )}
                                         </div>
                                     </div>}
@@ -262,7 +262,7 @@ function UserUpdate({user, hardRefresh}) {
                                 <form onSubmit={(e) => { uploadJustifDomicile(user.email, e); setJDDbox(current => !current)}} >
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Justificatif de domicile</label>
-                                        <input className="userupdate-input" type="file" name="justificatifdomicile" placeholder="De moins de trois mois" onChange={(e) => setJustifDom(e.target.files[0])} />
+                                        <input type="file" name="justificatifdomicile" placeholder="De moins de trois mois" onChange={(e) => setJustifDom(e.target.files[0])} />
                                     </div>
                                     <div className="userupdate-container-warning">Pour valider votre justificatif de domicile celui-ci devra dater de moins de 3 mois</div>
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
@@ -272,7 +272,7 @@ function UserUpdate({user, hardRefresh}) {
                                 {user?.JDD[0] && <div> <p>Vos Justificatifs de Domicile</p>
                                     <div className="userupdate-imagecontainer">
                                         {user.JDD.map((data) =>
-                                            <div> <img className="userupdate-imageuser" src={data} alt="" /><button onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
+                                            <div> <img className="userupdate-imageuser" src={data} alt="" /> <button className="userupdate-button-delete" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
                                         )}
                                     </div>
                                 </div>}
@@ -289,7 +289,7 @@ function UserUpdate({user, hardRefresh}) {
                                 <form onSubmit={(e) => { uploadAvisFiscal(user.email, e); setAvisFiscbox(current => !current)} }>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre avis Fiscal</label>
-                                        <input className="userupdate-input" type="file" name="avisfiscal" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setAvisFisc(e.target.files[0])} />
+                                        <input type="file" name="avisfiscal" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setAvisFisc(e.target.files[0])} />
                                     </div>
                                     <div className="userupdate-container-warning">Pour vous donner plus d'options nous avons besoin de votre avis fiscal</div>
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
@@ -298,7 +298,7 @@ function UserUpdate({user, hardRefresh}) {
                                 {user?.avisFiscal[0] && <div> <p>Vos Avis Fiscaux</p>
                                     <div className="userupdate-imagecontainer">
                                         {user.avisFiscal.map((data) =>
-                                            <div> <img className="userupdate-imageuser" src={data} alt="" /><button onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
+                                            <div> <img className="userupdate-imageuser" src={data} alt="" /> <button className="userupdate-button-delete" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
                                         )}
                                     </div>
                                 </div>}
@@ -316,7 +316,7 @@ function UserUpdate({user, hardRefresh}) {
                                 <form onSubmit={(e) => uploadRib(user.email, e)}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre Rib</label>
-                                        <input className="userupdate-input" type="file" name="rib" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setPicRib(e.target.files[0])} />
+                                        <input type="file" name="rib" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setPicRib(e.target.files[0])} />
                                     </div>
                                     <div className="userupdate-container-warning">L'indispensable</div>
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
@@ -324,7 +324,7 @@ function UserUpdate({user, hardRefresh}) {
                                 {user?.picrib[0] && <div> <p>Votre RIB</p>
                                     <div className="userupdate-imagecontainer">   
                                     {user.picrib.map((data) =>                                 
-                                            <div> <img className="userupdate-imageuser" src={data} alt="" /><button onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
+                                            <div> <img className="userupdate-imageuser" src={data} alt="" /> <button className="userupdate-button-delete" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
                                    )}</div>
                                 </div>}
                             </div>

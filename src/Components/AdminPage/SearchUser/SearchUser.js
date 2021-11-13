@@ -3,19 +3,23 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import UserLine from '../UserLine/UserLine';
 
-function SearchUser({ adminRefresh }) {
+function SearchUser() {
     // tous les Users
     const [users, setUsers] = useState([]);
     // filtres pour une personne
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
 
-    useEffect(() => {
+
+    const adminRefresh = () => {
         axios.get("http://localhost:1337/api/users/users")
             .then((res) => {
                 setUsers(res.data);
                 setFiltrerdListOne(res.data)
-            })
+            })}
+
+    useEffect(() => {
+        adminRefresh()
     }, [])
 
     const handleOne = (e) => {
@@ -46,9 +50,9 @@ function SearchUser({ adminRefresh }) {
                 {filtrerdListOne &&
                     filtrerdListOne.map((userdata, key) => {
                         return (
-                           
-                                <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh}/>
-                           
+
+                            <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh} />
+
                         )
                     })}
 
