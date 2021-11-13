@@ -9,7 +9,7 @@ function PostAnnounce() {
     const [city, setCity] = useState()
     const [zip_code, setZip_Code] = useState()
     const [region, setRegion] = useState("Auvergne-Rhône-Alpes")
-    const [type, setType] = useState()
+    const [type, setType] = useState("Appartements anciens")
     const [bedrooms, setBedrooms] = useState()
     const [surface, setSurface] = useState()
     const [price, setPrice] = useState()
@@ -18,9 +18,7 @@ function PostAnnounce() {
     const [monthly_cost, setMonthly_cost] = useState()
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
-
-    console.log(image[0])
-
+    
     const handleInput = (setter, e) => { setter(e.target.value) }
 
     const handleSumbit = (e) => {
@@ -78,13 +76,13 @@ function PostAnnounce() {
                         <input type="text" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setTitle, e)} />
 
                         <label>Description</label>
-                        <input type="text" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setContent, e)} />
+                        <input type="text" placeholder="Meilleure déscritpion pour l'annonce" onChange={(e) => handleInput(setContent, e)} />
 
                         <label>Ville</label>
-                        <input type="text" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setCity, e)} />
+                        <input type="text" placeholder="Ville" onChange={(e) => handleInput(setCity, e)} />
 
                         <label>Code Postal</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setZip_Code, e)} />
+                        <input type="number" placeholder="Zip Code" onChange={(e) => handleInput(setZip_Code, e)} />
 
                         <label> Région :  </label>
                         <select onChange={(e) => handleInput(setRegion, e)}>
@@ -117,16 +115,16 @@ function PostAnnounce() {
                         </select>
 
                         <label>Nombre de Chambres</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setBedrooms, e)} />
+                        <input type="number" placeholder="Chambres" onChange={(e) => handleInput(setBedrooms, e)} />
 
                         <label>Superficie</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setSurface, e)} />
+                        <input type="number" placeholder="en m²" onChange={(e) => handleInput(setSurface, e)} />
 
                         <label>Prix du bien</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setPrice, e)} />
+                        <input type="number" placeholder="Prix général" onChange={(e) => handleInput(setPrice, e)} />
 
                         <label>Prix de la part</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setShare_Price, e)} />
+                        <input type="number" placeholder="" onChange={(e) => handleInput(setShare_Price, e)} />
 
                         <label>Options</label>
                         {options.piscine == "" ?
@@ -146,10 +144,10 @@ function PostAnnounce() {
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "" })} /> Jaccuzi</div>}
 
                         <label>Rentabilité Annuelle</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setGross_rent_by_year, e)} />
+                        <input type="number" onChange={(e) => handleInput(setGross_rent_by_year, e)} />
 
                         <label>Loyer</label>
-                        <input type="number" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setMonthly_cost, e)} />
+                        <input type="number" onChange={(e) => handleInput(setMonthly_cost, e)} />
 
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>

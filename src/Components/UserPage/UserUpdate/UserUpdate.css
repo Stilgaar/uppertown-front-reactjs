@@ -21,7 +21,7 @@
 margin: auto; 
 }
 
-.userupdate-button-modify, .userupdate-button-validate {
+.userupdate-button-modify, .userupdate-button-validate, .userupdate-button-delete {
     color: white;
     width: 7rem;
     height: 2.5rem;
@@ -30,6 +30,14 @@ margin: auto;
     border-radius: 3px;
     background-color: rgb(37, 37, 107);
 }
+
+.userupdate-button-delete {
+    transform:rotate(7deg);
+  -ms-transform:rotate(90deg); /* IE 9 */
+  -moz-transform:rotate(90deg); /* Firefox */
+  -webkit-transform:rotate(90deg); /* Safari and Chrome */
+  -o-transform:rotate(90deg); /* Opera */}
+
 
 .userupdate-button-validate {
     margin-top: 0.2rem;
