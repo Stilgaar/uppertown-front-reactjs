@@ -12,13 +12,13 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import Selector from './Components/Selector/Selector'
-import PostAnnounce from './Components/PostAnnounce/PostAnnounce';
 
 //temporaire :
 //temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
+import SlideShow from './Components/SlideShow/SlideShow';
 const axios = require('axios');
 
 function App() {
@@ -88,14 +88,14 @@ function App() {
           </Route>
           <Route path="/selector">
             <Selector user={user} />
-          </Route>
-          <Route path="/postAnnounce">
-        <PostAnnounce/>
+          </Route>     
+          <Route path="/slideshow">
+            <SlideShow user={user} />
           </Route>
         </Switch>
         </div>
         <Footer/>
-      </Router>
+      </Router> 
     </div>
   );
 }

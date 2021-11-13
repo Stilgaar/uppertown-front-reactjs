@@ -19,11 +19,7 @@ function PostAnnounce() {
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
 
-    console.log("IMAGE0", image[0])
-    console.log("IMAGE1", image[1])
-    console.log("IMAGE2", image[2])
-    console.log("IMAGE3", image[3])
-    console.log("IMAGE4", image[4])
+    console.log(image[0])
 
     const handleInput = (setter, e) => { setter(e.target.value) }
 
@@ -158,6 +154,7 @@ function PostAnnounce() {
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
                         <input type="file" name="image" multiple onChange={(e) => setImage(e.target.files)} />
+                                  
 
                         <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
                 </form>

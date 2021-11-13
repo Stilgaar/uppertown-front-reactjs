@@ -1,12 +1,15 @@
 .postannounce-container-container {
-    margin: auto;
-    margin-top: 150px;
-    width: 90%;
+    width: 80%;
+    margin:auto;
+    margin-bottom: 1rem;
+    border: 0.2rem solid darkblue;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-top: 2rem; 
 }
 
 .postannounce-container {
 margin: auto;
-border:1px solid darkblue;
 width: 80%;
 }
 
