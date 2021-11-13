@@ -1,8 +1,8 @@
 import UserTransac from "./userTransacDumb";
-import "./userProperties.css"
+import "./userTransac.css"
 import { useState, useEffect } from "react";
 
-function UserPropertiesDumb(props) {
+function AllTransacDumb(props) {
 
     const [ann, setAnn] = useState([]) 
     const [obj, setObj] = useState({user:"",announce:""})
@@ -141,4 +141,4 @@ function UserPropertiesDumb(props) {
     
   }
   
-  export default UserPropertiesDumb;
+  export default AllTransacDumb;

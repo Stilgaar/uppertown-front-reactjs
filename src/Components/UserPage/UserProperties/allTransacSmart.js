@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import UserPropertiesDumb from "./userPropertiesDumb";
+import AllTransacDumb from "./allTransacDumb";
 
-function UserPropertiesSmart(props){
+function AllTransacSmart(props){
 
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
@@ -87,7 +87,7 @@ function UserPropertiesSmart(props){
           //console.log("USER ID MAP from collec: "+transac.userId+" localstore :"+ userOnline)
           return (
               <div>
-                <UserPropertiesDumb/>
+                <AllTransacDumb/>
               </div>
            )
           }
@@ -107,4 +107,4 @@ function UserPropertiesSmart(props){
   )
 }
 
-export default UserPropertiesSmart;
+export default AllTransacSmart;
