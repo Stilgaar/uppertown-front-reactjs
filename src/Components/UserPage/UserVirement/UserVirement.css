@@ -4,6 +4,7 @@
     margin: auto;
     padding: 2rem;
     margin-bottom: 0.5rem;
+    border-radius: 3px;
 }
 
 .uservirement-button-validate{ 
@@ -74,3 +75,16 @@
     margin-bottom: 0.3rem;
 }
 
+.uservirement-buttons-container {
+    display: flex;
+}
+
+.uservirement-button-vendre {
+    color: white;
+    width: fit-content;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+}
