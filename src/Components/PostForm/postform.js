@@ -230,11 +230,11 @@ function CreateAnn() {
 
     
 
-    /*if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
+    if (status.title === "" || status.content === "" || status.city === "" || status.zip_code === "" || status.region === "" || status.price === ""
     || status.share_price === "" || status.share_number === "" || status.type === "" || status.gross_rent_by_year === ""
     || status.monthly_cost === "") {
       setMessage("Tous les champs sont requis");
-    } else*/ {
+    } else {
       setFeed([...feed, status]);
       setStatus({ ...status, etat: "Posted" });
       console.log("FEED : " + status.etat);
@@ -529,7 +529,7 @@ function CreateAnn() {
             className="postInput"
             type="text"
             onChange={getRent}
-            placeholder="Rentabilité annuelle : "
+            placeholder="Loyer brut annuel : "
             defaultValue={status.gross_rent_by_year}
           />
           <br />
@@ -540,7 +540,7 @@ function CreateAnn() {
             className="postInput"
             type="text"
             onChange={getCost}
-            placeholder="Loyer : "
+            placeholder="Coût mensuel: "
             defaultValue={status.monthly_cost}
           />
           <br />

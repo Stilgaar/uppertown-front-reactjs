@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import AllTransacDumb from "./allTransacDumb";
+import UserProperties from "./propertiesDumb";
 import "./userTransac.css"
 
-function AllTransacSmart() {
+function AllPropertiesSmart() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [wallet, setWallet] = useState();
@@ -35,9 +35,9 @@ function AllTransacSmart() {
         Bonjour {firstName} {lastName}, montant actuel de votre portefeuille :{" "}
         {wallet}{" "}
       </h3>
-      <AllTransacDumb />
+      <UserProperties />
     </div>
   );
 }
 
-export default AllTransacSmart;
+export default AllPropertiesSmart;

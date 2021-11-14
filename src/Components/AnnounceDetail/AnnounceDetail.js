@@ -26,12 +26,9 @@ function AnnounceDetail() {
   const [showInvest, setShowinvest]= useState("");
   const [message1, setMessage1]= useState("");
   const [emptyVal, setEmptyVal]= useState("");
-  useEffect(() => {
-    setImmo(announce);
-    announce.image.map((a) => {
-      console.log(a)
-    })
-  }, [announce]);
+  const [idProp, setIdProp]= useState();
+  const [totalToken, setTotalToken]= useState()
+  const [propExist, setPropExist]=useState("")
 
   function handleInput(e) {
     setInvest(e.target.value);
@@ -69,8 +66,50 @@ function AnnounceDetail() {
         console.error("Error:", error);
       });
   
-  }
+    }
 
+    const ifExists = () => {
+
+      const url = "http://localhost:1337/api/properties/"+userOnline+"/"+announce._id
+      fetch(url,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json()) 
+        .then((result) => {
+          console.log("Success EXISTS:", result);
+          setPropExist(result)
+          
+          })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    
+    }
+
+    
+    const getDatasProperty = () => {
+
+      const url2 = "http://localhost:1337/api/properties/datas/"+userOnline+"/"+announce._id
+      fetch(url2,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json()) 
+        .then((result) => {
+        console.log("Success PROP datas:", result.idUser+" tokens :"+ result.totalToken);
+          
+        setIdProp(result.idUser)
+        setTotalToken(result.totalToken)
+
+          })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    
+    }
   const sendTransac = () =>{
     
     if(wallet > sc.stableCoin){
@@ -121,6 +160,7 @@ function AnnounceDetail() {
 
       });
       
+      let newsharenumber = Number(announce.share_number) - Number(invest)
       const updateToken = "http://localhost:1337/api/announces/"+announce._id; //chemin vers le backend
       fetch(updateToken, {
         method: "PUT",
@@ -129,16 +169,16 @@ function AnnounceDetail() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          share_number: announce.share_number - invest,
+          share_number: newsharenumber,
           //share_price: announce.price/(announce.share_number - invest)
         }),
       }).then(() => {
         // vérification :
-        console.log("New share number : " + announce.share_number - invest );
+        console.log("New share number : " + newsharenumber);
         setSc({...sc, validated:true})
         });
 
-        //updownstreet.properties.find({idUser}, {"_id" : 1});
+         if(idProp!=userOnline){
         const addProperties = "http://localhost:1337/api/properties/allProperties"; //chemin vers le backend
         fetch(addProperties, {
         method: "POST",
@@ -163,18 +203,31 @@ function AnnounceDetail() {
           surface: announce.surface,
           option: announce.options,
           image: announce.image
-           }),
+          }),
       }).then(() => {
         // vérification :
         console.log("New share number : " +invest );
         });
-
-      
-    
-      
+      }else{
+        let newtotaltoken = (Number(totalToken)+ Number(invest))
+        const updateProperties = "http://localhost:1337/api/properties/"+userOnline+"/"+announce._id;
+        fetch(updateProperties, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          totalToken: newtotaltoken,
+           }),
+      }).then(() => {
+        // vérification :
+        console.log("New share number : " + newtotaltoken);
+        });
+      }
     };
-
-    //}
+  
+    
 
     const cancelTransac = () =>{
 
@@ -187,10 +240,16 @@ function AnnounceDetail() {
 
     useEffect(() => {
     getUserDatas()
+    ifExists()
+    getDatasProperty()
+
 }, [])
 
-    useEffect(() => {
-    setImmo(announce);
+useEffect(() => {
+  setImmo(announce);
+  announce.image.map((a) => {
+    console.log(a)
+  })
 }, [announce]);
 
   return (
@@ -223,16 +282,18 @@ function AnnounceDetail() {
             </Carousel>
           </div>
           <div className="detail-description-container">
-          annonce id : {announce._id}
+            {idProp===userOnline && <p>Vous possédez déjà {totalToken} token sur ce bien</p>}
             <div className="detail-input">
+              {/* SI LE NOMBRE DE TOKEN EST STRICTEMENT SUPERIEUR A ZERO : */}
               <label>Investissement désiré en jetons:</label>
-              <input
+           {announce.share_number<=0 && <p>Cette propriété n'est plus à vendre</p>}
+           {announce.share_number != 0 && announce.share_number > 0 && <input
                 type="number"
                 placeholder="Investissement désiré"
                 value={!sc.validated && invest}
                 onInput={(e) => handleInput(e)}
-              />
-              <button onClick={handleClick}>Valider</button>
+              />}
+            {announce.share_number!=0 && <button onClick={handleClick}>Valider</button>}
               <p>{emptyVal}</p>
               <p>{!sc.validated && showInvest}</p>
               {showInvest && !sc.validated ? <button onClick={convertInSc}>Veuiller confirmer le montant de l'investissement</button> : <div></div>}
