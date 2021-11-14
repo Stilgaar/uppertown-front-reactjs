@@ -12,7 +12,6 @@ import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
-import Selector from './Components/Selector/Selector'
 import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
 //temporaire :
@@ -20,7 +19,6 @@ import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
-import SlideShow from './Components/SlideShow/SlideShow';
 const axios = require('axios');
 
 function App() {
@@ -87,17 +85,8 @@ function App() {
           <Route path="/stable-coins">
             <StableCoins user={user} />
           </Route>
-          <Route path="/selector">
-            <Selector user={user} />
-          </Route>     
-          <Route path="/slideshow">
-            <SlideShow user={user} />
-          </Route>
           <Route path="/postAnnounce">
             <PostAnnounce/>
-          </Route>
-          <Route path="/slideshow">
-            <SlideShow user={user} />
           </Route>
         </Switch>
         </div>
