@@ -1,5 +1,5 @@
 import "./PostAnnounce.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const axios = require('axios');
 
 function PostAnnounce() {
@@ -13,13 +13,13 @@ function PostAnnounce() {
     const [bedrooms, setBedrooms] = useState()
     const [surface, setSurface] = useState()
     const [price, setPrice] = useState()
-    const [share_price, setShare_Price] = useState()
+    const [share_number, setShare_number] = useState();
     const [gross_rent_by_year, setGross_rent_by_year] = useState()
     const [monthly_cost, setMonthly_cost] = useState()
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
-    
-    const handleInput = (setter, e) => { setter(e.target.value) }
+
+    const handleInput = (setter, e) => { setter(e.target.value) }             
 
     const handleSumbit = (e) => {
         e.preventDefault()
@@ -29,7 +29,8 @@ function PostAnnounce() {
         let jardin = options?.jardin
         let parking = options?.parking
         let jaccuzi = options?.jaccuzi
-        
+        let share_price = price /share_number
+
         const d = new FormData();
         d.append('image', image[0])
         d.append('image', image[1])
@@ -46,6 +47,7 @@ function PostAnnounce() {
         d.append('bedrooms', bedrooms)
         d.append('price', price)
         d.append('share_price', share_price)
+        d.append('share_number', share_number)
         d.append('gross_rent_by_year', gross_rent_by_year)
         d.append('monthly_cost', monthly_cost)
         d.append('piscine', piscine)
@@ -123,8 +125,14 @@ function PostAnnounce() {
                         <label>Prix du bien</label>
                         <input type="number" placeholder="Prix général" onChange={(e) => handleInput(setPrice, e)} />
 
-                        <label>Prix de la part</label>
-                        <input type="number" placeholder="" onChange={(e) => handleInput(setShare_Price, e)} />
+                        <label>Prix de la part </label>
+                        {price !== undefined && share_number !== undefined ? 
+                        <div>{price / share_number}</div> : <div>0</div>}
+                       
+
+                        <label> Nombre de parts </label>
+                        <div><input type="radio" value="10000" name="parts" onChange={((e) => handleInput(setShare_number, e))} /> 10.000</div>
+                        <div><input type="radio" value="100000" name="parts" onChange={((e) => handleInput(setShare_number, e))} /> 100.000</div>
 
                         <label>Options</label>
                         {options.piscine === "" ?
@@ -152,7 +160,7 @@ function PostAnnounce() {
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
                         <input type="file" name="image" multiple onChange={(e) => setImage(e.target.files)} />
-                                  
+
 
                         <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
                 </form>
