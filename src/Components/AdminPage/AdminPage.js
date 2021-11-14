@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';
 import AddRib from './Addrib/AddRib';
-import PostAnnounce from './PostAnnounce/PostAnnounce'
+import PostAnnounce from './PostAnnounce/PostAnnounce';
+import AdminText from './AdminText/AdminText';
 const axios = require('axios');
 
 
@@ -16,6 +17,7 @@ function AdminPage() {
     const [showGestion, setShowGestion] = useState(false)
     const [showAddRib, setShowAddRib] = useState(false)
     const [showPostAnn, setShowPostAnn] = useState(false)
+    const [showAdminText, setShowAdminText] = useState(false)
 
     const [users, setUsers] = useState([]);
 
@@ -41,25 +43,38 @@ function AdminPage() {
         setShowGestion(false)
         setShowAddRib(false)
         setShowPostAnn(false)
+        setShowAdminText(false)
     }
     const gestion = () => {
         setShowSearch(false)
         setShowGestion(current => !current)
         setShowAddRib(false)
         setShowPostAnn(false)
+        setShowAdminText(false)
     }
     const rib = () => {
         setShowSearch(false)
         setShowGestion(false)
         setShowAddRib(current => !current)
         setShowPostAnn(false)
+        setShowAdminText(false)
     }
     const ann = () => {
         setShowSearch(false)
         setShowGestion(false)
         setShowAddRib(false)
         setShowPostAnn(current => !current)
+        setShowAdminText(false)
     }
+
+    const text = () => {
+        setShowSearch(false)
+        setShowGestion(false)
+        setShowAddRib(false)
+        setShowPostAnn(false)
+        setShowAdminText(current => !current)
+    }
+
 
     return (
         <div className="admin-page">
@@ -71,6 +86,7 @@ function AdminPage() {
                     <button className="adminpage-button-validate" onClick={() => gestion()}>Gestion utilisteur</button>
                     <button className="adminpage-button-validate" onClick={() => rib()}>Ajouter/Modifier le Rib</button>
                     <button className="adminpage-button-validate" onClick={() => ann()}>Poster une nouvelle annonce</button>
+                    <button className="adminpage-button-validate" onClick={() => text()}>Modification texte sur le site</button>
                 </div>
 
                 <div className="adminpage-components">
@@ -85,6 +101,9 @@ function AdminPage() {
 
                     {showPostAnn &&
                         <PostAnnounce />}
+
+                    {showAdminText &&
+                     <AdminText />}
                 </div>
  
             </div>
