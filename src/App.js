@@ -12,6 +12,7 @@ import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
 import Selector from './Components/Selector/Selector'
+import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
 //temporaire :
 //temporaire :
@@ -30,7 +31,6 @@ function App() {
   //a passer a la navbar pour son affichage conditionnel
   //un state pour l'id user
   // a passer a certaine page (userpage/admin ect...)
-
   //Créer une fonction qui des l'affichage check le localStorage et verifie le token avec un requete <- recupere l'id
   //et mettre l'id dans un state pour le passé apres dans certains composant enfants ex:userpag
 
@@ -55,6 +55,7 @@ function App() {
   return (
     <div className="app">
       <Router>
+        <div className="main">
         <NavBar formState={formState} setFormState={setFormState} isLog={isLog} user={user} />
         <Switch>
           <Route exact path="/" >
@@ -87,13 +88,20 @@ function App() {
           </Route>
           <Route path="/selector">
             <Selector user={user} />
+          </Route>     
+          <Route path="/slideshow">
+            <SlideShow user={user} />
+          </Route>
+          <Route path="/postAnnounce">
+            <PostAnnounce/>
           </Route>
           <Route path="/slideshow">
             <SlideShow user={user} />
           </Route>
         </Switch>
+        </div>
         <Footer/>
-      </Router>
+      </Router> 
     </div>
   );
 }

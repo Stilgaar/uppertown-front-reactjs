@@ -72,3 +72,36 @@
     right: 10px;
     top: 10px;
 }
+
+.userline-infodebase {
+    border: 1px solid darkblue;
+    width: fit-content;
+    padding:0.5rem;
+    border-radius: 3px;
+}
+
+.userline-span-usertext {
+    font-weight: bolder;
+    color: darkblue;
+}
+
+.userline-buttons-admin {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-left: 3%;
+}
+
+.userline-infodebase-buttons-admin {
+    display: flex;
+    flex-direction: row;
+}
+
+.userline-button-validate {
+color: white;
+height: fit-content;
+padding: 0.5rem;
+border: 0.2px solid darkblue;
+border-radius: 3px;
+background-color: rgb(37, 37, 107);
+}

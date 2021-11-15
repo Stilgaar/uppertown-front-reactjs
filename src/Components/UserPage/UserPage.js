@@ -4,6 +4,7 @@ import './UserPage.scss';
 import React from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
+import UserTransac from './UserTransac/UserTransac';
 
 function UserPage({user, hardRefresh}) {
 
@@ -19,6 +20,7 @@ function UserPage({user, hardRefresh}) {
 
     return (
         <div className="user-page">
+            <UserTransac user={user} hardRefresh={hardRefresh} />
             <UserVirement user={user} hardRefresh={hardRefresh}/>
             <UserUpdate user={user} hardRefresh={hardRefresh} />
         </div>

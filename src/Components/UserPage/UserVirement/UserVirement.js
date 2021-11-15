@@ -6,9 +6,15 @@ function UserVirement({ user, hardRefresh }) {
 
     const [acheter, setAcheter] = useState(false);
     const [vendre, setVendre] = useState(false);
+    const [validation, setValidation] = useState(false);
+    const [pending, setPending] = useState(false)
+
     const [rib, setRIB] = useState()
     const [montant, setMontant] = useState();
-    const [validation, setValidation] = useState(false);
+    const [change, setChange] = useState()
+    const [theRib, setTheRib] = useState();
+
+    let currentStable = user.stableCoins
 
     useEffect(() => {
         axios.get("http://localhost:1337/admin/getRib")
@@ -17,16 +23,22 @@ function UserVirement({ user, hardRefresh }) {
 
     const payement = (e, email) => {
         e.preventDefault();
-
         let sumbit = { email, montant }
         axios.post("http://localhost:1337/api/users/addMoney", sumbit)
             .then((res) => console.log(res.data))
             .then(() => setValidation(true))
     }
 
-    const handleInput = (e, setter) => {
-        setter(e.target.value)
+    const virement = (e, id) => {
+        e.preventDefault()
+        let submit = { change, theRib, id, currentStable }
+        axios.post("http://localhost:1337/api/users/askMoney", submit)
+            .then((res) => console.log(res.data))
+            .then(() => setPending(true))
+            .then(() => hardRefresh())
     }
+
+    const handleInput = (e, setter) => { setter(e.target.value) }
 
     return (
 
@@ -83,22 +95,18 @@ function UserVirement({ user, hardRefresh }) {
                             </div>
                         </div>
 
-
-
-
-
                         <form onSubmit={(e) => payement(e, user.email)}>
                             <label>Combien désirez vous transferer ?</label>
                             <input type="number" placeholder="Montant" onInput={(e) => handleInput(e, setMontant)} />
                             <button className="uservirement-button-validate" type="submit">Valider</button>
                         </form>
 
-                    {validation &&
-                    <div>
-                        <div>Code : "<span className="uservirement-span-id"> {user._id} Uppertown</span>" </div>
-                        <div>Ce code permet d'associer votre dépôt à votre compte. <br/> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
-                        </div>
-                    }
+                        {validation &&
+                            <div>
+                                <div>Code : "<span className="uservirement-span-id"> {user._id} Uppertown</span>" </div>
+                                <div>Ce code permet d'associer votre dépôt à votre compte. <br /> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
+                            </div>
+                        }
                     </div>}
 
             </div>
@@ -107,10 +115,31 @@ function UserVirement({ user, hardRefresh }) {
                 <button className="uservirement-button-validate" onClick={() => setVendre(current => !current)}>Vendre</button>
 
                 {vendre &&
-                    <div className="uservirement-singlecontainer">Pouet Pouet
+                    <div className="uservirement-singlecontainer">
 
 
+                        {user?.rib?.[0] !== undefined ?  <div> Vous disposez de {user.stableCoins} StableCoins
+                            
+                        <form onSubmit={(e) => virement(e, user._id)}>
+                            <label>Sur quel compte désirez vous réaliser votre virement ?</label>
+                            {user.rib.map((ribz, index) => <div>
+                                <input type="radio" value="rib" name="rib" key={index} onChange={() => setTheRib(ribz)} /> RIB #{index + 1} - {ribz} </div>
+                            )}
+
+                            <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
+                            <input type="number" onInput={(e) => handleInput(e, setChange)} />
+                            <button className="uservirement-button-vendre" type="submit">Valider</button>
+                        </form>
+
+                        {pending &&
+                            <div>Votre demande à bien été prise en compte. <br />
+                                Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
+                                </div>
+                                :
+                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>}
                     </div>}
+
+
             </div>
 
 
