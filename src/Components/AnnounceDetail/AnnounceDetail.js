@@ -111,6 +111,7 @@ function AnnounceDetail() {
         });
     
     }
+
   const sendTransac = () =>{
     
     if(wallet > sc.stableCoin){
@@ -176,7 +177,7 @@ function AnnounceDetail() {
       }).then(() => {
         // vérification :
         console.log("New share number : " + newsharenumber);
-        setSc({...sc, validated:true})
+        //setSc({...sc, validated:true})
         });
 
          if(idProp!=userOnline){
@@ -259,7 +260,6 @@ useEffect(() => {
       <h2>Annonce en détail</h2>
       <div className="detail-container">
         <div className="detail-upper-container">
-         
           <div className="detail-image-container">
             <Carousel
               className="carousel"
@@ -284,7 +284,8 @@ useEffect(() => {
             </Carousel>
           </div>
           <div className="detail-description-container">
-            {idProp===userOnline && <p>Vous possédez déjà {totalToken} token sur ce bien</p>}
+            {/*ID PROP :{idProp}, USERONLINE {userOnline}*/}
+            {idProp===userOnline && <p>Vous possédez déjà {totalToken} token sur ce bien</p>} {/* */}
             <div className="detail-input">
               {/* SI LE NOMBRE DE TOKEN EST STRICTEMENT SUPERIEUR A ZERO : */}
               <label>Investissement désiré en jetons:</label>

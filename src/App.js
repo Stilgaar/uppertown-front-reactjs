@@ -20,6 +20,7 @@ import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
 import AllTransacSmart from './Components/UserPage/UserProperties/allTransacSmart';
 import AllPropertiesSmart from './Components/UserPage/UserProperties/propertiesSmart';
+import AllUpToSales from './Components/UserPage/UserProperties/userSalesSmart';
 
 const axios = require('axios');
 
@@ -95,6 +96,10 @@ function App() {
           </Route>
           <Route path="/postAnnounce">
             <PostAnnounce/>
+          </Route>
+          {/* TEMPORAIRE : */}
+          <Route path="/sell">
+            <AllUpToSales/>
           </Route>
         </Switch>
         </div>
