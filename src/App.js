@@ -15,10 +15,12 @@ import StableCoins from './Components/StableCoins/StableCoins';
 import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
 //temporaire :
-//temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
+import AllTransacSmart from './Components/UserPage/UserProperties/allTransacSmart';
+import AllPropertiesSmart from './Components/UserPage/UserProperties/propertiesSmart';
+
 const axios = require('axios');
 
 function App() {
@@ -81,6 +83,12 @@ function App() {
           </Route>          
           <Route path="/announce-detail">
             <AnnounceDetail />
+          </Route>
+          <Route path="/user-transac">
+            <AllTransacSmart/>
+          </Route>
+          <Route path="/user-properties-list">
+            <AllPropertiesSmart />
           </Route>
           <Route path="/stable-coins">
             <StableCoins user={user} />
