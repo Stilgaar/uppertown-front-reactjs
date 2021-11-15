@@ -81,12 +81,12 @@ function AllAnnounces() {
   
   return (
     <div className="announces-page-container">
-        {/* <Selector
+        <Selector
           filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
           filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
           filterPrice={filterPrice} setFilterPrice={setFilterPrice}
           filterType={filterType} setFilterType={setFilterType}
-        /> */}
+        />
         <div className="announces-page">
           {filteredList &&
             filteredList.map((announce, index) => {
