@@ -29,7 +29,7 @@ function Infos({users, ann}) {
             </div>
 
             <div className="infos-container">
-                <div className="info-element">Prix des parts</div>
+                <div className="info-element">Tokens Disponible</div>
                 <div className="info-element">{freetokens}</div>
             </div>
 

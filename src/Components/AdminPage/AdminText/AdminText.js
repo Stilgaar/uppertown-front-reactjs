@@ -5,19 +5,25 @@ const axios = require('axios')
 function AdminText() {
 
 
-    const [title, setTitle] = useState()
-    const [content, setContent] = useState()
+    const [maintitle, setTitle] = useState()
+    const [maincontent, setContent] = useState()
     
 
     const handleInput = (e, setter) => {setter(e.target.value)}
 
     const adminTextChange = (e) => {
         e.preventDefault()
-        console.log(title, content)
+
+        let submit = {maintitle, maincontent} 
+
+        axios.post("http://localhost:1337/admin/maintext", submit)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+        
     }
 
     return (
-        <div className="infos-container-container">
+        <div className="admintext-container-container">
 
             <div className="admintext-container"><h3>Personalisation du site</h3>
                 <div className="admintext">

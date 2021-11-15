@@ -105,3 +105,35 @@ border: 0.2px solid darkblue;
 border-radius: 3px;
 background-color: rgb(37, 37, 107);
 }
+
+.userline-container-boxed {
+    border:1px solid darkblue;
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+.userline-text-awaiting {
+    color: darkblue;
+font-weight: bolder;
+margin-top: 0.5rem;
+}
+
+.elders-scroll {
+    margin:4px, 4px;
+    padding:4px;
+    background-color: white;
+    width: 100%;
+    height: 10rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+}
+
+.userline-line {
+    font-weight: bold;
+border: 0.1rem solid darkblue;
+border-radius: 3px;
+padding: 0.5rem;
+margin: 0.4rem; 
+}

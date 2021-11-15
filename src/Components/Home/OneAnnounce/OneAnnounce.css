@@ -1,0 +1,32 @@
+.oneannounce-container-container {
+    width: 80%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    margin: auto; 
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 0.1rem solid darkblue;
+}
+
+.oneannounce-image-container {
+    height: 30rem;
+    width: 50rem;
+    margin:auto;
+    display: flex;
+    border-radius: 3px 3px 0 0 ;
+}
+
+.onennounce-image-bottom-grey-bar{
+    margin: auto;
+    background-color: rgba(128, 128, 128, 0.774);
+    width: 50rem;
+    height: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 3px 3px;
+}
+.oneannounce-container-container {
+    text-align: center;
+}

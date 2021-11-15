@@ -2,11 +2,12 @@
      width: 80%;
      margin-bottom: 1rem;
      padding: 1rem;
-     border-radius: 3px;
-     margin: auto; 
+    margin: auto; 
      justify-content: center;
      display: flex;
      flex-direction: row;
+     margin-top: 5%;
+margin-bottom: 5%;
 }
 
 .infos-container {
