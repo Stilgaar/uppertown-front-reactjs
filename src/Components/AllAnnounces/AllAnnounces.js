@@ -10,6 +10,7 @@ function AllAnnounces() {
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
+  const [filterType, setFilterType] = useState("all");
   const [filterPrice, setFilterPrice] = useState(10000000)
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
@@ -31,11 +32,13 @@ function AllAnnounces() {
     const filteredByRegion = announcesList.filter((announce) =>  verifyRegion(announce))
     //2: prend l'array du dessus et le re filtre par rapport au filtre du nb de chambre et return un array
     const filteredByBedrooms = filteredByRegion.filter((announce) => verifyBedrooms(announce))
-    //3: prend l'array du dessus et le re filtre par rapport au filtre du prix
-    const filteredByPrice = filteredByBedrooms.filter((announce) => verifyPrice(announce))
+    //3: prend l'array du dessus et le re filtre par rapport au filtre du type
+    const filteredByType =  filteredByBedrooms.filter((announce) => verifyType(announce))
+    //4: prend l'array du dessus et le re filtre par rapport au filtre du prix
+    const filteredByPrice = filteredByType.filter((announce) => verifyPrice(announce))
     // le resultat est mis dans le setter
     setFilteredList(filteredByPrice);
-  }, [filterRegion, filterBedrooms, filterPrice] )
+  }, [filterRegion, filterBedrooms, filterPrice, filterType] )
 
   //fonction qui filtre par rapport a la region
   const verifyRegion = (announce) => {
@@ -67,6 +70,14 @@ function AllAnnounces() {
       return announce
     } 
   }
+  //fonction qui filtre par rapport au type
+  const verifyType = (announce) => {
+    if (filterType === "all") {
+      return announce
+    } else if (announce.type === filterType) {
+      return announce
+    } 
+  }
   
   return (
     <div className="announces-page-container">
@@ -74,6 +85,7 @@ function AllAnnounces() {
           filterRegion={filterRegion} setFilterRegion={setFilterRegion} 
           filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
           filterPrice={filterPrice} setFilterPrice={setFilterPrice}
+          filterType={filterType} setFilterType={setFilterType}
         />
         <div className="announces-page">
           {filteredList &&

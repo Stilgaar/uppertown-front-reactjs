@@ -1,4 +1,5 @@
 import './App.css';
+import './App.scss';
 import React, { useState, useEffect } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -11,15 +12,15 @@ import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import StableCoins from './Components/StableCoins/StableCoins';
-import Selector from './Components/Selector/Selector'
 import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
-//temporaire :
 //temporaire :
 import CreateAnn from './Components/PostForm/postform';
 import AllAnnouncesAdmin from './Components/AnnounceManager/AllAnnouncesAdmin';
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
-import SlideShow from './Components/SlideShow/SlideShow';
+import AllTransacSmart from './Components/UserPage/UserProperties/allTransacSmart';
+import AllPropertiesSmart from './Components/UserPage/UserProperties/propertiesSmart';
+
 const axios = require('axios');
 
 function App() {
@@ -83,20 +84,17 @@ function App() {
           <Route path="/announce-detail">
             <AnnounceDetail />
           </Route>
+          <Route path="/user-transac">
+            <AllTransacSmart/>
+          </Route>
+          <Route path="/user-properties-list">
+            <AllPropertiesSmart />
+          </Route>
           <Route path="/stable-coins">
             <StableCoins user={user} />
           </Route>
-          <Route path="/selector">
-            <Selector user={user} />
-          </Route>     
-          <Route path="/slideshow">
-            <SlideShow user={user} />
-          </Route>
           <Route path="/postAnnounce">
             <PostAnnounce/>
-          </Route>
-          <Route path="/slideshow">
-            <SlideShow user={user} />
           </Route>
         </Switch>
         </div>

@@ -14,10 +14,7 @@ function Announce({ announce }) {
       <div className="announce-container" href="/announce-detail-admin">
         <div className="announce-upper-container">
           <div className="announce-container-image">
-            <img src={announce?.image[0]} />
-            <img src={announce?.image[0].image1} />
-            <img src={announce?.image[0].image2} />
-            <img src={announce?.image[0].image3} />
+            <img src={announce?.image[0]} alt="decription alt (to be fixe)"/>
           </div>
 
           <div className="announce-container-title">
@@ -41,6 +38,9 @@ function Announce({ announce }) {
             <p>Prix de la part: {announce.share_price}€</p>
             <p>Nombre de parts: {announce.share_number}</p>
           </div>
+        </div>
+        <div><br/>
+        <b>Annonce publiée le : {(announce?.created_at instanceof Date) ? announce?.created_at.toLocaleDateString() : new Date(announce?.created_at).toLocaleDateString()}</b>
         </div>
       </div>
     </Link>

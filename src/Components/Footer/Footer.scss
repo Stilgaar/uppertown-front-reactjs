@@ -1,7 +1,9 @@
+@import '../../master.scss';
+
 .footer{
     position: fixed;
     bottom: 0;
-    background-color: lightskyblue;
+    background-color: $primary;
     width: 100%;
     display: flex;
     justify-content: center;

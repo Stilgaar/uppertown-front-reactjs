@@ -6,8 +6,8 @@ import React from 'react'
 
 function NavBar({formState, setFormState, isLog, user}) {
 
-    function showForm(){
-        setFormState("signin")
+    function showForm(value){
+        setFormState(value)
     }
     function logout(){
         localStorage.removeItem("@updownstreet-token");
@@ -30,7 +30,10 @@ function NavBar({formState, setFormState, isLog, user}) {
                     <p className="btn-connecter" onClick={() => logout()}>Logout</p>
                 </>
                 : 
-                    <p className="btn-connecter" onClick={() => showForm()}>Se Connecter</p>
+                <>
+                    <p className="btn-connecter" onClick={() => showForm("login")}>Se Connecter</p>
+                    <p className="btn-connecter" onClick={() => showForm("signin")}>Créer mon Compte</p>
+                </>
                 }
             </div>
         </div>
