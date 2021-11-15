@@ -29,6 +29,7 @@ function AnnounceDetail() {
   const [idProp, setIdProp]= useState();
   const [totalToken, setTotalToken]= useState()
   const [propExist, setPropExist]=useState("")
+  
 
   function handleInput(e) {
     setInvest(e.target.value);
@@ -274,7 +275,7 @@ useEffect(() => {
               {announce.image.map((item, index) => {
                 return(
                   <div key={index}>
-                    <img className="image-carousel" src={item} alt="photo" />
+                    <img className="image-carousel" src={item} alt={`apercu n°${index} du bien immo`} />
                   </div>
                 )
                 })}

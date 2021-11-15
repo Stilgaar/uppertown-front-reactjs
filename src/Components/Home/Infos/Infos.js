@@ -1,19 +1,8 @@
 import './Infos.css'
-import { useEffect, useState } from 'react';
-const axios = require('axios');
 
-function Infos() {
 
-    const [users, setUsers] = useState([]);
-    const [ann, setAnn] = useState([]);
-
-    useEffect(() => {
-        axios.get("http://localhost:1337/api/users/users")
-            .then((res) => setUsers(res.data))
-        axios.get("http://localhost:1337/api/announces/allAnnounces")
-            .then((res) => setAnn(res.data))
-    }, [])
-
+function Infos({users, ann}) {
+                  
 
     let clienttokens = 0;
     for (let i = 0; i < users.length; i++) { clienttokens += users[i].stableCoins }
@@ -25,28 +14,23 @@ function Infos() {
         <div className="infos-container-container">
 
             <div className="infos-container">
-                <div>Tokens Achetés</div>
-                <div>{clienttokens}</div>
+                <div className="info-element">Tokens Achetés</div>
+                <div className="info-element">{clienttokens}</div>
             </div>
 
             <div className="infos-container">
-
-                <div>Utilisateurs</div>
-                <div>{users.length}</div>
+                <div className="info-element">Utilisateurs</div>
+                <div className="info-element">{users.length}</div>
             </div>
 
             <div className="infos-container">
-
-
-                <div>Biens Immobiliers</div>
-                <div>{ann.length}</div>
+                <div className="info-element">Biens Immobiliers</div>
+                <div className="info-element">{ann.length}</div>
             </div>
 
             <div className="infos-container">
-
-                <div>Tokens Disponible</div>
-                <div>{freetokens}</div>
-
+                <div className="info-element">Prix des parts</div>
+                <div className="info-element">{freetokens}</div>
             </div>
 
         </div>

@@ -1,0 +1,30 @@
+.infos-container-container {
+    width: 80%;
+margin:auto;
+border: 0.2rem solid darkblue;
+padding: 1rem;
+border-radius: 3px;
+margin-bottom: 1rem;
+}
+
+.admintext {
+    margin: auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.admintext-container {
+    margin: auto;
+    width: 80%;
+}
+
+.admintext-button-validate {
+    color: white;
+    width: fit-content;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+}

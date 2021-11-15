@@ -1,7 +1,7 @@
 import './UserPage.css';
 import './UserPage.scss';
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
 import UserTransac from './UserTransac/UserTransac';
@@ -18,6 +18,10 @@ function UserPage({user, hardRefresh}) {
     //Et faire un bouton pour valider la modification
         //Requete update en bdd
 
+    useEffect(() => {
+        hardRefresh()
+    }, [])
+
     return (
         <div className="user-page">
             <UserTransac user={user} hardRefresh={hardRefresh} />
@@ -26,5 +30,4 @@ function UserPage({user, hardRefresh}) {
         </div>
     )
 }
-
 export default UserPage

@@ -30,9 +30,7 @@ function UserUpdate({user, hardRefresh}) {
     const [justifDom, setJustifDom] = useState();
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
-
-    console.log(pi)
-
+    
     const modifyContent = (email, e) => {
         e.preventDefault();
         let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, newRib }

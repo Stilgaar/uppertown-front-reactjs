@@ -33,9 +33,13 @@ function UserVirement({ user, hardRefresh }) {
         e.preventDefault()
         let submit = { change, theRib, id, currentStable }
         axios.post("http://localhost:1337/api/users/askMoney", submit)
-            .then((res) => console.log(res.data))
-            .then(() => setPending(true))
-            .then(() => hardRefresh())
+            .then((res) => {
+                if (res.data === 'error') { alert("Vous n'avez pas assez de Stable Coins") }
+                else {
+                    setPending(true);
+                    hardRefresh()
+                }
+            }).catch((err) => console.log(err))
     }
 
     const handleInput = (e, setter) => { setter(e.target.value) }
@@ -118,24 +122,24 @@ function UserVirement({ user, hardRefresh }) {
                     <div className="uservirement-singlecontainer">
 
 
-                        {user?.rib?.[0] !== undefined ?  <div> Vous disposez de {user.stableCoins} StableCoins
-                            
-                        <form onSubmit={(e) => virement(e, user._id)}>
-                            <label>Sur quel compte désirez vous réaliser votre virement ?</label>
-                            {user.rib.map((ribz, index) => <div>
-                                <input type="radio" value="rib" name="rib" key={index} onChange={() => setTheRib(ribz)} /> RIB #{index + 1} - {ribz} </div>
-                            )}
+                        {user?.rib?.[0] !== undefined ? <div> Vous disposez de {user.stableCoins} StableCoins
 
-                            <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
-                            <input type="number" onInput={(e) => handleInput(e, setChange)} />
-                            <button className="uservirement-button-vendre" type="submit">Valider</button>
-                        </form>
+                            <form onSubmit={(e) => virement(e, user._id)}>
+                                <label>Sur quel compte désirez vous réaliser votre virement ?</label>
+                                {user.rib.map((ribz, index) => <div>
+                                    <input type="radio" value="rib" name="rib" key={index} onChange={() => setTheRib(ribz)} /> RIB #{index + 1} - {ribz} </div>
+                                )}
 
-                        {pending &&
-                            <div>Votre demande à bien été prise en compte. <br />
-                                Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
-                                </div>
-                                :
+                                <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
+                                <input type="number" onInput={(e) => handleInput(e, setChange)} />
+                                <button className="uservirement-button-vendre" type="submit">Valider</button>
+                            </form>
+
+                            {pending &&
+                                <div>Votre demande à bien été prise en compte. <br />
+                                    Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
+                        </div>
+                            :
                             <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>}
                     </div>}
 
