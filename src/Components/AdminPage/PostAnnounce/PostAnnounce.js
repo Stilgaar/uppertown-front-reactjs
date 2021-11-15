@@ -107,6 +107,7 @@ function PostAnnounce() {
                         <select onChange={(e) => handleInput(setType, e)}>
                             <option value="Appartements anciens">Appartements anciens</option>
                             <option value="Appartements neufs">Appartements neufs (VEFA)</option>
+                            <option value="Immeuble">Immeuble</option>
                             <option value="Châlet de montagne">Châlet de montagne</option>
                             <option value="Maisons anciennes">Maisons anciennes</option>
                             <option value="Maisons neuves">Maisons neuves</option>
