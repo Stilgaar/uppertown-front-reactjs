@@ -22,7 +22,6 @@ function NavBar({formState, setFormState, isLog, user}) {
                     <Link to="/"><p>Accueil</p></Link>
                     <Link to="/announces"><p>Annonces</p></Link>
                     <Link to="/userpage"><p>UserPage</p></Link>
-                    <Link to="/stable-coins"><p>StableCoins</p></Link>
                     {user?.isAdmin && <Link to="/admin"><p>AdminPage</p></Link>}
                     <p className="btn-connecter" onClick={() => logout()}>Logout</p>
                 </>
