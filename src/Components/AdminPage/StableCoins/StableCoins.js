@@ -29,12 +29,11 @@ function StableCoins({userdata, adminRefresh}) {
 
     return(
         <div>
-            <h4>Changer des euros en StableCoins pour {userdata.firstname} {userdata.lastname}</h4>
+            
             <div className="stableC-container">
-                <label>Entez un montant en euro pour créditer votre compte en stable coins</label>
+                <label> Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé </label>
                 <div className="stableC-input">
                 <input type="text" name="stableCoins" placeholder="Nombre de Stable coins commandés" className="inputstable" value={coins} onInput={(e) => handleInput(e)} />
-                <br/>
                 <button className="userline-button-validate" onClick={handleClick}>Valider</button>
                 </div>
             </div>

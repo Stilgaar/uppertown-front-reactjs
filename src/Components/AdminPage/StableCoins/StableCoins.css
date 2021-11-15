@@ -1,5 +1,8 @@
 .stableC-container{
-   
+   border:1px solid darkblue;
+   padding: 0.5rem;
+   border-radius: 3px;
+   margin-top: 5px;
 }
 
 .inputstable {

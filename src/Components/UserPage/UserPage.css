@@ -1,0 +1,19 @@
+.userpage-button-validate{
+    color: white;
+    height: fit-content;
+    width: 70%;
+    padding: 0.5rem;
+    border: 0.2px solid darkblue;
+    border-radius: 3px;
+    background-color: rgb(37, 37, 107);
+    margin-bottom: 1px;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+.userpage-buttons-list {
+    display: flex;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+}

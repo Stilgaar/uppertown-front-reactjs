@@ -11,6 +11,7 @@ function UserTransac({ user, hardRefresh }) {
 
         <div className="usertransac-container-general">
 
+            <div><h3>Historique de vos transactions</h3></div>
             <div className="usertransac-button-container">
                 <button className="usertransac-button-validate" onClick={() => setModalAncien(current => !current)}><div> Historique de mes transactions en StableCoins
                 </div></button > {modalAcien && <div>{user.ancientMontants.map((argent, index) => <div className="usertransac-line">Transaction N#{index} {argent}</div>)}</div>}
