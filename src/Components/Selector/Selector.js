@@ -18,6 +18,8 @@ const region = [
   { value: "Occitanie", label: "Occitanie" },
   { value: "Pays de la Loire", label: "Pays de la Loire" },
   { value: "Provence-Alpes-Côte d'Azur", label: "Provence-Alpes-Côte d'Azur" },
+  { value: "Outre-Mer", label: "Outre-Mer" },
+  { value: "International", label: "International" },
 ];
 
 const bedrooms = [
@@ -33,9 +35,16 @@ const bedrooms = [
 
 const type = [
   {value: "all", label: "Tout les types" },
-  {value: "Appartement", label: "Appartement" },
-  {value: "Maison", label: "Maison" },
-  {value: "Immeuble", label: "Immeuble" },
+  {value: "Appartement ancien", label: "Appartements anciens" },
+  {value: "Appartement neuf", label: "Appartements neufs" },
+  {value: "Maison ancienne", label: "Maisons anciennes" },
+  {value: "Maison neuve", label: "Maisons neuves" },
+  {value: "Immeuble", label: "Immeubles" },
+  {value: "Résidence de service", label: "Résidences de service" },
+  {value: "Terrain constructible", label: "Terrains constructibles" },
+  {value: "Chalet de montagne", label: "Chalets de montagne" },
+
+
 ]
 
 function Selector({
