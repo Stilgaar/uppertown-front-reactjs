@@ -31,11 +31,7 @@ function AllTransacSmart() {
 
   return (
     <div>
-      <h3>
-        Bonjour {firstName} {lastName}, montant actuel de votre portefeuille :{" "}
-        {wallet}{" "}
-      </h3>
-      <AllTransacDumb />
+          <AllTransacDumb />
     </div>
   );
 }

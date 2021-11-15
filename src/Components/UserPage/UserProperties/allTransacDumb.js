@@ -1,6 +1,7 @@
 import UserTransac from "./userTransacDumb";
 import "./userTransac.css";
 import { useState, useEffect } from "react";
+import UserTransacImmo from "./userTransacDumb";
 
 function AllTransacDumb() {
   const [ann, setAnn] = useState([]);
@@ -41,12 +42,7 @@ function AllTransacDumb() {
           announceId.push(result[i].announceId);
           setObj({ ...obj, announce: result[i].announceId });
         }
-        //setObj(announce)
-        console.log("ANNONCE :" + announceId);
-        console.log("USER :" + userId);
-        console.log("USER SETTE :" + obj.user);
-        console.log("ANN SETTE :" + obj.announce);
-      })
+            })
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -77,7 +73,7 @@ function AllTransacDumb() {
         );
         return (
           <div>
-            <UserTransac />
+            <UserTransacImmo />
           </div>
         );
       }
