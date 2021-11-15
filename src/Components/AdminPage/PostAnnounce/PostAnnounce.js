@@ -135,19 +135,19 @@ function PostAnnounce() {
                         <div><input type="radio" value="100000" name="parts" onChange={((e) => handleInput(setShare_number, e))} /> 100.000</div>
 
                         <label>Options</label>
-                        {options.piscine == "" ?
+                        {options.piscine === "" ?
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, piscine: "piscine" })} /> Piscine</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, piscine: "" })} /> Piscine</div>}
-                        {options.tennis == "" ?
+                        {options.tennis === "" ?
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, tennis: "tennis" })} /> Tennis</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, tennis: "" })} /> Tennis</div>}
-                        {options.jardin == "" ?
+                        {options.jardin === "" ?
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jardin: "jardin" })} /> Jardin</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jardin: "" })} /> Jardin</div>}
-                        {options.parking == "" ?
+                        {options.parking === "" ?
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, parking: "parking" })} /> Parking</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, parking: "" })} /> Parking</div>}
-                        {options.jaccuzi == "" ?
+                        {options.jaccuzi === "" ?
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "jaccuzi" })} /> Jaccuzi</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "" })} /> Jaccuzi</div>}
 

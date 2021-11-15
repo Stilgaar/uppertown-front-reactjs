@@ -11,9 +11,9 @@ function UserLine({ userdata, adminRefresh }) {
     const [modalAcienEuro, setModalAncienEuro] = useState(false);
 
     // bouton pour la reverification en cas : l'user change un papier (TODO, later, very later genre)
-    const reverif = () => {
+    /* const reverif = () => {
         console.log("reverif")
-    }
+    } */
 
     // si l'identité est ok ?
     const verifPi = (data) => {

@@ -1,5 +1,7 @@
+@import '../../master.scss';
+
 .navbar{
-    background-color: lightskyblue;
+    background-color:$primary;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -18,7 +20,7 @@
             color: white;
             font-size: 20px;
             &:hover {
-                border-bottom: 2px solid navy;
+                border-bottom: 2px solid white;
                 margin-bottom: -2px;
             }
         }

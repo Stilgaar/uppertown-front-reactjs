@@ -13,9 +13,6 @@ function AnnounceDetail() {
 
   useEffect(() => {
     setImmo(announce);
-    announce.image.map((a) => {
-      console.log(a)
-    })
   }, [announce]);
 
   function handleInput(e) {
@@ -46,7 +43,7 @@ function AnnounceDetail() {
               {announce.image.map((item, index) => {
                 return(
                   <div key={index}>
-                    <img className="image-carousel" src={item} alt="photo" />
+                    <img className="image-carousel" src={item} alt={`apercu n°${index} du bien immo`} />
                   </div>
                 )
                 })}
