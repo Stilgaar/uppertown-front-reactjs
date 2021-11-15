@@ -109,6 +109,7 @@ function PostAnnounce() {
                         <select onChange={(e) => handleInput(setType, e)}>
                             <option value="Appartements anciens">Appartements anciens</option>
                             <option value="Appartements neufs">Appartements neufs (VEFA)</option>
+                            <option value="Immeuble">Immeuble</option>
                             <option value="Châlet de montagne">Châlet de montagne</option>
                             <option value="Maisons anciennes">Maisons anciennes</option>
                             <option value="Maisons neuves">Maisons neuves</option>
@@ -160,7 +161,6 @@ function PostAnnounce() {
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
                         <input type="file" name="image" multiple onChange={(e) => setImage(e.target.files)} />
-
 
                         <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
                 </form>

@@ -14,7 +14,9 @@
         "type": "Immeuble",
         "gross_rent_by_year": 120000,
         "monthly_cost": 3200,
-        "image": ["https://media.istockphoto.com/photos/paris-parisian-facade-picture-id1189568183?k=20&m=1189568183&s=612x612&w=0&h=w8vEeFIdTsy4lxLWdZvjJMl_A_XdN2DFQpL6ZIpXhho="
+        "image": ["https://media.istockphoto.com/photos/paris-parisian-facade-picture-id1189568183?k=20&m=1189568183&s=612x612&w=0&h=w8vEeFIdTsy4lxLWdZvjJMl_A_XdN2DFQpL6ZIpXhho=",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/P64k215R1Q3vIeCCJAw8fEmHfd2SaTr3EfANKYg2hKweJxFPc?viewBox=1406%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/H8jtkiZNRUOjNnvwOrdpvI5FuqAlErGBnmO5CZQOVTkeJxFPc?viewBox=1407%2C938&ownerId=A2B8XK67TYI3VZ"
         ]
     },
     {
@@ -32,7 +34,9 @@
         "type": "Appartement",
         "gross_rent_by_year": 10800,
         "monthly_cost": 150,
-        "image": ["https://media.istockphoto.com/photos/paris-parisian-facade-picture-id1189568183?k=20&m=1189568183&s=612x612&w=0&h=w8vEeFIdTsy4lxLWdZvjJMl_A_XdN2DFQpL6ZIpXhho="
+        "image": ["https://1.bp.blogspot.com/-oRMMHwAlvCU/YBM4kCALBSI/AAAAAAABTZA/jAcTODHbuGUVobxBECgqK_QglNIV29VNgCLcBGAsYHQ/s800/facades-faux-immeubles-factices-paris-1.JPG",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/msFsnSHCVoOcKgcqJ0DiHUqH8hMkcxQ3p52Cj1bffIMeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/7scu_slu7LEvQusU-KgeDMtH7nB9a3CFjtvZouNEDqQeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ"
         ]
     },
     {
@@ -50,8 +54,9 @@
         "type": "Immeuble",
         "gross_rent_by_year": 120000,
         "monthly_cost": 3200,
-        "image": [" https://content.r9cdn.net/himg/57/4e/9f/ice-101242278-62670946_3XL-520845.jpg"
-
+        "image": [" https://content.r9cdn.net/himg/57/4e/9f/ice-101242278-62670946_3XL-520845.jpg",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/L9KzUb-Z2NNtCo6efLSExdfDrDFMUxHjtRE84FPLcVseJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/KP3mjSrRXea_qbG0JyVQFpQ04PDgJChD9SCthXv7SEMeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ"
         ]
     },
     {
@@ -69,7 +74,9 @@
         "type": "Immeuble",
         "gross_rent_by_year": 120000,
         "monthly_cost": 3200,
-        "image": [ "https://hotelatoulouse.com/system/images/000/021/334/60206077-big.jpg?1491922078 "
+        "image": [ "https://hotelatoulouse.com/system/images/000/021/334/60206077-big.jpg?1491922078 ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/msFsnSHCVoOcKgcqJ0DiHUqH8hMkcxQ3p52Cj1bffIMeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/Yqbmu_xgI11X07jKwVjCdk4lOeR572YDo5KX2nBh2nEeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ"
         ]
     },
     {
@@ -87,13 +94,15 @@
         "type": "Maison",
         "gross_rent_by_year": 12000,
         "monthly_cost": 150,
-        "image": ["https://www.illico-travaux.com/wp-content/uploads/2019/11/extension-maison-strasbourg-15112019-1645-e1573832859462-768x443.jpg"
+        "image": ["https://www.illico-travaux.com/wp-content/uploads/2019/11/extension-maison-strasbourg-15112019-1645-e1573832859462-768x443.jpg",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/jWt2AoymesMe-v2nBEcdy72Lz2NFKgdgUK-by3L-nTYeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/cH82MvO1PC-Jb7AAO6ESpaoGkmE66uxteAVQTCre1SkeJxFPc?viewBox=1406%2C938&ownerId=A2B8XK67TYI3VZ"
 
         ]
     },
     {
         "title": "Beau duplex à Marseille",
-        "content": "Très beau duplex dans la cité de la Castelane. Très beau quartier, dans la plus pure tradition Française.",
+        "content": "Très beau duplex dans la cité de la Castelane.",
         "bedrooms": 3,
         "surface": 100,
         "options": ["parking"],
@@ -104,7 +113,9 @@
         "share_price": 100,
         "share_number": 10000,
         "type": "Appartement",
-        "image": [" https://photo.barnes-international.com/annonces/bms/56/min/16457754695d3724b0644482.02613766_04b6c667a9_1920.jpg"
+        "image": [" https://content-eu.drive.amazonaws.com/cdproxy/templink/-9FvKRP3txzSCWEcpXqKAO0RzZX_HnUgD9-OVkLsRYUeJxFPc?viewBox=1406%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/F18aKu7uLkGND4sN1UeD-n_IbZvvQjhE3glmKFHvJageJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/iGYVzI6C12iRLCO-kQ-FaLH8Yd0A932cbPWe_v95JDoeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ"
         ]
     },
     {
@@ -122,7 +133,9 @@
         "type": "Immeuble",
         "gross_rent_by_year": 120000,
         "monthly_cost": 3200,
-        "image": ["https://presse.realestate.bnpparibas.fr/wp-content/uploads/2019/12/856492.png"
+        "image": ["https://presse.realestate.bnpparibas.fr/wp-content/uploads/2019/12/856492.png",
+            "http://www.syndicexperts.com/wp-content/uploads/2014/11/parties-communes.jpg",
+            "http://blogs.cotemaison.fr/studiodarchi/files/2016/12/L-sejour-1.jpg"
         ]
     },
     {
@@ -140,7 +153,9 @@
         "type": "Appartement",
         "gross_rent_by_year": 12000,
         "monthly_cost": 150,
-        "image": ["https://www.lyon.fr/sites/lyonfr/files/hotel-de-ville.jpg"
+        "image": ["https://www.lyon.fr/sites/lyonfr/files/hotel-de-ville.jpg",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/Yqbmu_xgI11X07jKwVjCdk4lOeR572YDo5KX2nBh2nEeJxFPc?viewBox=1404%2C938&ownerId=A2B8XK67TYI3VZ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/80EPSMx7Klpvod0m-wlQmeTvRqeZ7_hpG-OVokZjnpIeJxFPc?viewBox=1406%2C938&ownerId=A2B8XK67TYI3VZ"
             
         ]
     },
@@ -159,7 +174,9 @@
         "type": "Maison",
         "gross_rent_by_year": 12000,
         "monthly_cost": 150,
-        "image": ["https://www.depreux-construction.com/wp-content/uploads/2018/11/depreux-construction.jpg"
+        "image": ["https://www.depreux-construction.com/wp-content/uploads/2018/11/depreux-construction.jpg",
+            "https://lh3.googleusercontent.com/proxy/QleUj86Gfn300FAbXliUfHH4UsquufBMHKKbtUMcoxsEicgRlJjcwjMaQZDZMrwvffquCVX8o7AbM2tUzoR0Tp5yjsebbkYr2tWVMdRhDKD-DaD2U3dtt_gdrmMvIP_od7ZdzzXjwEE5WMLUHFmyD38asQ",
+            "https://content-eu.drive.amazonaws.com/cdproxy/templink/jdlHa8KupAEV7iI-r7J6ubn5WZL_-KakZf-BlVY5qWseJxFPc?viewBox=1406%2C938&ownerId=A2B8XK67TYI3VZ"
 
         ]
     },
@@ -178,8 +195,9 @@
         "type": "Immeuble",
         "gross_rent_by_year": 120000,
         "monthly_cost": 3200,
-        "image": ["https://www.limmeuble.fr/z/webagency/A_ID3X/vergnes31_41382/images/appartement-toulouse.jpg"
-
+        "image": ["https://www.limmeuble.fr/z/webagency/A_ID3X/vergnes31_41382/images/appartement-toulouse.jpg",
+            "https://www.fnaim.fr/uploads/Image/81/4522_815_Copropriete.png",
+            "https://q-xx.bstatic.com/images/hotel/max1024x768/226/226814302.jpg"
         ]
     }
 ]
