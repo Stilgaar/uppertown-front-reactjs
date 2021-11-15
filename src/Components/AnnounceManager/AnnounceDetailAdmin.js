@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation,  useHistory  } from "react-router-dom";
 import Swal from "sweetalert2";
 import Axios from "axios";
-
 import "./AnnounceDetailAdmin.css";
 
 function AnnounceDetailAdmin() {
@@ -199,9 +198,9 @@ const history = useHistory();
               src={announce.image[0]}
               alt="Photos du bien"
             />
-            <img src={announce?.image[0].image1} />
-            <img src={announce?.image[0].image2} />
-            <img src={announce?.image[0].image3} />
+            <img src={announce?.image[0].image1} alt="decription alt to be fixe1"/>
+            <img src={announce?.image[0].image2} alt="decription alt to be fixe2"/>
+            <img src={announce?.image[0].image3} alt="decription alt to be fixe3"/>
           </div>
           <div className="detail-description-container">
           {titleBox ? <div></div> : <h3>{announce.title}</h3>}

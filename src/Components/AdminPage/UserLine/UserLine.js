@@ -11,9 +11,9 @@ function UserLine({ userdata, adminRefresh }) {
     const [modalAcienEuro, setModalAncienEuro] = useState(false);
 
     // bouton pour la reverification en cas : l'user change un papier (TODO, later, very later genre)
-    const reverif = () => {
+    /* const reverif = () => {
         console.log("reverif")
-    }
+    } */
 
     // si l'identité est ok ?
     const verifPi = (data) => {
@@ -130,9 +130,9 @@ function UserLine({ userdata, adminRefresh }) {
                         <div>
 
                             <div>
-                            <h3>Détails Utilistateur : {userdata.lastname} {userdata.firstname}</h3>
+                                <h3>Détails Utilistateur : {userdata.lastname} {userdata.firstname}</h3>
                                 <div className="userline-infodebase-buttons-admin">
-                                    
+
                                     <div className="userline-infodebase">
                                         <div> <span className="userline-span-usertext"> Nom : </span> {userdata.lastname}</div>
                                         <div> <span className="userline-span-usertext"> Prénom : </span> {userdata.firstname}</div>
@@ -153,27 +153,31 @@ function UserLine({ userdata, adminRefresh }) {
                                         <button className="userline-button-validate" onClick={() => nonoAdmin(userdata.email)}>Retirer Admin</button>
                                     </div>
                                 </div>
-                                <div>En attente de transfert d'Euros en StableCoins ? : {userdata.awaiting ? "oui" : "non"} <br />
-                                    {userdata.awaiting && <button className="userline-button-validate" onClick={() => transactionDone(userdata.email)}>Toutes les operations sont terminés</button>} </div>
-                                {userdata.awaiting && <div>Montants tranférés en attente de verifiactions : </div>}
-                                {userdata.montant.map((argent) =>
-                                    <div>{argent}<button className="userline-button-validate" onClick={() => transfertStacbleCoinDone(argent, userdata.email)}>Stable Coins Transférés</button>
-                                    </div>)}
 
-                                <div>En attente de transfert de Stable Coins en Euro ? : {userdata.awaitingEuro ? "oui" : "non"} <br />
+                                <div className="userline-container-boxed">
+                                    <div> <span className="userline-text-awaiting">En attente de transfert d'Euros en StableCoins ? : </span>{userdata.awaiting ? "oui" : "non"} <br />
+                                        {userdata.awaiting && <button className="userline-button-validate" onClick={() => transactionDone(userdata.email)}>Toutes les operations sont terminés</button>} </div>
+                                    {userdata.awaiting && <div> <span className="userline-text-awaiting"> Montants tranférés en attente de verifiactions : </span></div>}
+                                    {userdata.montant.map((argent) =>
+                                        <div>{argent}<button className="userline-button-validate" onClick={() => transfertStacbleCoinDone(argent, userdata.email)}>Stable Coins Transférés</button>
+                                        </div>)}
+                                </div>
+
+                                <StableCoins userdata={userdata} adminRefresh={adminRefresh} />
+
+                                <div className="userline-container-boxed">
+                                <div> <span className="userline-text-awaiting"> En attente de transfert de Stable Coins en Euro ? : </span>{userdata.awaitingEuro ? "oui" : "non"} <br />
                                     {userdata.awaitingEuro && <button className="userline-button-validate" onClick={() => transactionEdone(userdata._id)}>Toutes les operations sont terminés</button>}</div>
-                                {userdata.awaiting && <div>Montants en Euro demandant à être transférés sur leurs compte en banque : </div>}
-                                {userdata.montantEuro.map((argent) => <div> {argent}<button className="userline-button-validate" onClick={() => transfertEuroDone(argent, userdata._id)}> Euros Transférés </button></div>)}
+                                {userdata.awaiting && <div> <span className="userline-text-awaiting">Montants en Euro demandant à être transférés sur leurs compte en banque : </span></div>}
+                                {userdata.montantEuro.map((argent) => <div > {argent}<button className="userline-button-validate" onClick={() => transfertEuroDone(argent, userdata._id)}> Euros Transférés </button></div>)}
+                                        </div>
 
                                 <br /> <br />
 
-                                <button className="userline-button-validate" onClick={() => setModalAncien(current => !current)}><div> Historique Stable Coins :
-                                </div></button > {modalAcien && <div>{userdata.ancientMontants.map((argent) => <div>{argent}</div>)}</div>}
-
-                                <br />
-
-                                <button className="userline-button-validate" onClick={() => setModalAncienEuro(current => !current)}><div> Historique Euros :
-                                </div></button> {modalAcienEuro && <div>{userdata.ancientMontantsEuro.map((argent) => <div>{argent}</div>)}</div>}
+                                <button className="userline-button-validate" onClick={() => setModalAncien(current => !current)}><div> Historique Stable Coins : </div></button >
+                                {modalAcien && <div className="elders-scroll">{userdata.ancientMontants.map((argent, index) => <div className="userline-line">Transaction N#{index +1} {argent}</div>)}</div>}
+                                <button className="userline-button-validate" onClick={() => setModalAncienEuro(current => !current)}><div> Historique Euros : </div></button> 
+                                {modalAcienEuro && <div className="elders-scroll">{userdata.ancientMontantsEuro.map((argent ,index) => <div className="userline-line">Transaction N#{index +1} {argent}</div>)}</div>}
 
                                 <br /><br />
 
@@ -204,9 +208,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             < div ><a href={userdata.picRib}> <img className="userdetail-image-mignature" src={userdata.picRib} alt="" /></a> </div>
                                             : <div> "Pas encore envoyé"</div>}
                                     </div>
-                                    <br/>
+                                    <br />
 
-                                    <StableCoins userdata={userdata} adminRefresh={adminRefresh} />
+
                                 </div>
                             </div>
                         </div>

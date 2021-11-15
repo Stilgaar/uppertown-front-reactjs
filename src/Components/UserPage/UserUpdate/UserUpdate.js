@@ -30,9 +30,7 @@ function UserUpdate({user, hardRefresh}) {
     const [justifDom, setJustifDom] = useState();
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
-
-    console.log(pi)
-
+    
     const modifyContent = (email, e) => {
         e.preventDefault();
         let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, newRib }
@@ -99,7 +97,7 @@ function UserUpdate({user, hardRefresh}) {
     return (
         <div>
             <div className="userupdate-generalcontainer">
-                <div className="userupdate-container-params"><div>Paramètres généraux du compte</div></div>
+                <div className="userupdate-container-params"><div><h3> Paramètres généraux du compte</h3></div></div>
 
                 <div className="userupdate-singlecontainer">
 
