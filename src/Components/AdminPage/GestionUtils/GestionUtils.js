@@ -21,12 +21,14 @@ function GestionUtils({ users, adminRefresh }) {
     const transfertPending = users.filter(user => user.awaiting === true)
     const transfertEuroPending = users.filter(user => user.awaitingEuro === true)
 
+    console.log(transfertPending)
+
     return (
 
         <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
 
             <div className="gestionutilisateurs-container-section"> <button className="gestion-utilisateurs-buttons"
-                onClick={() => setAwaitingBox(current => !current)}><h3>Utilisateurs en attente de Stable Coins</h3> </button>
+                onClick={() => setAwaitingBox(current => !current)}><h3>Utilisateurs en attente de Stable Coins </h3><div className="gestionutil-notifs"> {transfertPending.length} </div>  </button> 
                 {awaitingBox &&
                     <div>
                         {transfertPending.map((userdata, key) =>
@@ -37,7 +39,7 @@ function GestionUtils({ users, adminRefresh }) {
             </div>
 
             <div className="gestionutilisateurs-container-section"> <button className="gestion-utilisateurs-buttons"
-                onClick={() => setAwaitingEuroBox(current => !current)}><h3>Utilisateurs en attente de transfert d'Euros</h3> </button>
+                onClick={() => setAwaitingEuroBox(current => !current)}><h3>Utilisateurs en attente de transfert d'Euros</h3> <div className="gestionutil-notifs"> {transfertEuroPending.length} </div> </button>
                 {awaitingEuroBox &&
                     <div>
                         {transfertEuroPending.map((userdata, key) =>
