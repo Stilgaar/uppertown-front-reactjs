@@ -5,6 +5,7 @@
     padding: 2rem;
     margin-bottom: 0.5rem;
     border-radius: 3px;
+    text-align: center;
 }
 
 .usertransac-button-validate {
@@ -28,5 +29,6 @@
 
 .usertransac-button-container {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }
