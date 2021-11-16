@@ -19,6 +19,7 @@ function PostAnnounce() {
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
     const [pics, setPics] = useState([])
+    const [previewPics, setPreviewPics] = useState([]);
 
     const onLoadFiles = (e) => {
         setImage(e.target.files)
@@ -26,7 +27,7 @@ function PostAnnounce() {
         const reader1 = new FileReader();
         const reader2 = new FileReader();
         const reader3 = new FileReader();
-        const reader4 = new FileReader()
+        const reader4 = new FileReader();
         if (e.target.files[0]) { reader0.readAsDataURL(e.target.files[0]) }
         if (e.target.files[1]) { reader1.readAsDataURL(e.target.files[1]) }
         if (e.target.files[2]) { reader2.readAsDataURL(e.target.files[2]) }
@@ -69,7 +70,7 @@ function PostAnnounce() {
         d.append('piscine', piscine)
         d.append('tennis', tennis)
         d.append('jardin', jardin)
-        d.append('parking', parking)
+        d.append('parking', parking) 
         d.append('jaccuzi', jaccuzi)
 
         axios.post("http://localhost:1337/api/announces/creatannouncewithpics", d, {
@@ -79,9 +80,8 @@ function PostAnnounce() {
             .catch((err) => console.log(err))
     }
 
-    useEffect(() => {
-}, [pics])
-
+    useEffect(() => { setPreviewPics(pics) }, [pics])
+ 
     return (
 
         <div>
@@ -181,23 +181,16 @@ function PostAnnounce() {
                         <input type="file" name="image" multiple onChange={(e) => onLoadFiles(e)} />
 
                         <div className="postannounce-image-container">
-                            <img className="postannounce-image-preview" src={pics?.[0]?.result} alt="" />
-                            <img className="postannounce-image-preview" src={pics?.[1]?.result} alt="" />
-                            <img className="postannounce-image-preview" src={pics?.[2]?.result} alt="" />
-                            <img className="postannounce-image-preview" src={pics?.[3]?.result} alt="" />
-                            <img className="postannounce-image-preview" src={pics?.[4]?.result} alt="" />
-                            {pics[0] !== undefined && <button className="postannounce-button-validate" onClick={() => setPics([])}>Vider</button>}
+                            <img className="postannounce-image-preview" src={previewPics?.[0]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[1]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[2]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[3]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[4]?.result} alt="" />
                         </div>
-
-                        { /* <div>{pics?.result?.map((pic) => { <img src={pic} alt=""/> })} </div> */}
 
                         <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
                 </form>
-            </div>
-        </div>
+            </div> </div>
     )
-
-
 }
-
 export default PostAnnounce;

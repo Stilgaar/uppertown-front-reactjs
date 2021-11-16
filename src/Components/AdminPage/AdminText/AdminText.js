@@ -30,10 +30,10 @@ function AdminText() {
 
                     <form onSubmit={(e) => adminTextChange(e)}>
                         <label>Modification du titre global du site(Titre sur la page d'acceuil) </label>
-                        <div><input type="text" placeholder="titre du site" onChange={(e) => handleInput(e, setTitle)} /></div>
+                        <div><input className="admintext-input" type="text" placeholder="Titre de la page d'acceuil" onChange={(e) => handleInput(e, setTitle)} /></div>
 
                         <label> Modification du texte de la page d'acceuil </label>
-                        <div><input type="text" placeholder="titre du site" onChange={(e) => handleInput(e, setContent)} /></div>
+                        <div><textarea cols="70" rows="15"type="texte" placeholder="Ce que vous verrez sur la page d'acceuil" onChange={(e) => handleInput(e, setContent)}></textarea></div>
                         <button type="sumbit" className="admintext-button-validate ">Valider !</button>
                     </form>
 
