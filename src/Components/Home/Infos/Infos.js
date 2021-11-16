@@ -14,6 +14,12 @@ function Infos({ users, ann }) {
   for (let i = 0; i < ann.length; i++) {
     freetokens += ann[i].share_number;
   }
+  //fonction trouver sur google pour espacer les chiffres des prix
+  function numberWithSpaces(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  }
 
   return (
     <div className="infos-container-general">
@@ -23,22 +29,22 @@ function Infos({ users, ann }) {
       <div className="infos-container-container">
         <div className="infos-container">
           <div className="info-element"><img src={coin} alt="coin" className="infos-svg-coin" /><h4 className="infos-coin">StableCoins échangés</h4></div>
-          <div className="info-element">{clienttokens}</div>
+          <div className="info-element">{numberWithSpaces(clienttokens)}</div>
         </div>
 
         <div className="infos-container">
           <div className="info-element"><img src={people} alt="people" className="infos-svg-people" /><h4 className="infos-people">Utilisateurs</h4></div>
-          <div className="info-element">{users.length}</div>
+          <div className="info-element">{numberWithSpaces(users.length)}</div>
         </div>
 
         <div className="infos-container">
           <div className="info-element"><img src={building} alt="building" className="infos-svg-building" /><h4 className="infos-building">Biens Immobiliers</h4></div>
-          <div className="info-element">{ann.length}</div>
+          <div className="info-element">{numberWithSpaces(ann.length)}</div>
         </div>
 
         <div className="infos-container">
           <div className="info-element"><img src={cart} alt="cart" className="infos-svg-cart" /><h4 className="infos-cart">Tokens disponibles</h4></div>
-          <div className="info-element">{freetokens}</div>
+          <div className="info-element">{numberWithSpaces(freetokens)}</div>
         </div>
       </div>
     </div>
