@@ -6,11 +6,13 @@
   justify-content: center;
   display: flex;
   flex-direction: row;
- 
+  background-color: lightgrey;
+  border-radius: 3px;
 }
 
 .infos-container {
   padding: 2rem;
+  
 }
 
 .infos-container div {
@@ -21,12 +23,13 @@
   height: 50%;
   width: 100%;
   border: 0.1rem solid rgba(128, 128, 128, 0.774);
- 
 }
 
 .info-element {
   font-size: 200%;
   font-weight: bolder;
+  background-color: white;
+  opacity: 75%;
 }
 
 .infos-container-general {
@@ -39,32 +42,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+}
+
+.infos-container-title h4 {
+  font-size: 35px;
 }
 
 .infos-svg-people {
-    width: 40px;
-    margin: 15px;
-    filter: invert(21%) sepia(95%) saturate(3189%) hue-rotate(349deg) brightness(101%) contrast(111%);
-
+  width: 40px;
+  margin: 15px;
+  filter: invert(21%) sepia(95%) saturate(3189%) hue-rotate(349deg)
+    brightness(101%) contrast(111%);
 }
-
 
 .infos-svg-coin {
-    width: 40px;
-    margin: 15px;
-    filter: invert(48%) sepia(93%) saturate(1327%) hue-rotate(23deg) brightness(107%) contrast(101%);
+  width: 40px;
+  margin: 15px;
+  filter: invert(48%) sepia(93%) saturate(1327%) hue-rotate(23deg)
+    brightness(107%) contrast(101%);
 }
-
 
 .infos-svg-building {
-    width: 40px;
-    margin: 15px;
-    filter: invert(17%) sepia(49%) saturate(6906%) hue-rotate(241deg) brightness(64%) contrast(144%);
+  width: 40px;
+  margin: 15px;
+  filter: invert(17%) sepia(49%) saturate(6906%) hue-rotate(241deg)
+    brightness(64%) contrast(144%);
 }
 
-
 .infos-svg-cart {
-    width: 40px;
-    margin: 15px;
-    filter: invert(68%) sepia(80%) saturate(876%) hue-rotate(64deg) brightness(87%) contrast(89%);
+  width: 40px;
+  margin: 15px;
+  filter: invert(68%) sepia(80%) saturate(876%) hue-rotate(64deg)
+    brightness(87%) contrast(89%);
 }
