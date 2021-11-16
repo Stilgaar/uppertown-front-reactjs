@@ -249,7 +249,6 @@ function AnnounceDetail() {
       <h2>Annonce en détail</h2>
       <div className="detail-container">
         <div className="detail-upper-container">
-
           <div className="detail-image-container">
             <Carousel
               className="carousel"

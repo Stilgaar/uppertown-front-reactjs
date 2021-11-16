@@ -4,7 +4,7 @@ import './userTransac.css'
 function UserProperties() {
   const [obj, setObj] = useState([]);
 
-  console.log("OBJ", obj)
+  
 
   const userOnline = localStorage.getItem("id");
 
