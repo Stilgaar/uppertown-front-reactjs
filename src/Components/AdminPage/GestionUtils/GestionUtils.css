@@ -20,4 +20,15 @@
 
 .gestion-utilisateurs-buttons {
     border: none; 
+    display: flex;
+}
+
+.gestionutil-notifs {
+    background-color: darkred;
+    color: white; 
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100px;
+    transform: translateY(6px);
+  
 }
