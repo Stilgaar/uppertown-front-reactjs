@@ -15,7 +15,6 @@ function AllPropertiesSmart() {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
         setWallet(result.stableCoins);
         setFirstName(result.firstname);
         setLastName(result.lastname);
@@ -31,11 +30,7 @@ function AllPropertiesSmart() {
 
   return (
     <div>
-      <h3>
-        Bonjour {firstName} {lastName}, montant actuel de votre portefeuille :{" "}
-        {wallet}{" "}
-      </h3>
-      <UserProperties />
+     <UserProperties />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 .admintext-container-container {
     width: 80%;
-margin:auto;
-padding: 1rem;
-border-radius: 3px;
-margin-bottom: 1rem;
-}
+    margin:auto;
+    border: 0.2rem solid #1b3563;;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;}
 
 .admintext {
     margin: auto;
@@ -23,7 +23,11 @@ margin-bottom: 1rem;
     width: fit-content;
     height: 2.5rem;
     padding: 0.5rem;
-    border: 0.2px solid darkblue;
+    border: 0.2px solid #1b3563;;
     border-radius: 3px;
-    background-color: rgb(37, 37, 107);
+    background-color: #1b3563;
+}
+
+.admintext-input {
+    width: 120%;
 }
