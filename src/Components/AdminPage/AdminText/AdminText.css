@@ -1,7 +1,7 @@
 .admintext-container-container {
     width: 80%;
     margin:auto;
-    border: 0.2rem solid #1b3563;;
+    border: 0.2rem solid #1b3563;
     padding: 1rem;
     border-radius: 3px;
     margin-bottom: 1rem;}
@@ -23,7 +23,7 @@
     width: fit-content;
     height: 2.5rem;
     padding: 0.5rem;
-    border: 0.2px solid #1b3563;;
+    border: 0.2px solid #1b3563;
     border-radius: 3px;
     background-color: #1b3563;
 }
