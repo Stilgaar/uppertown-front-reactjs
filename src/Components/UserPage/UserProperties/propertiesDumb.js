@@ -3,10 +3,8 @@ import './userTransac.css'
 
 function UserProperties() {
   const [obj, setObj] = useState([]);
-  const [sales, setSales] = useState({tokenForSale:"",tokenPrice:""})
-  const d = new Date();
 
-  console.log("OBJ", obj)
+  
 
   const userOnline = localStorage.getItem("id");
 
