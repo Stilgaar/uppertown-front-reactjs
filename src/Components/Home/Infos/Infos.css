@@ -1,30 +1,70 @@
 .infos-container-container {
-     width: 80%;
-     margin-bottom: 1rem;
-     padding: 1rem;
-    margin: auto; 
-     justify-content: center;
-     display: flex;
-     flex-direction: row;
-     margin-top: 5%;
-margin-bottom: 5%;
+  width: 80%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+ 
 }
 
 .infos-container {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .infos-container div {
-    padding: 2rem;
-    border-radius: 3px;
-    margin: 0.3rem;
-    text-align: center;
-    height: 50%;
-    width: 100%;
-    border: 0.1rem solid #1b3563;
+  padding: 2rem;
+  border-radius: 3px;
+  margin: 0.3rem;
+  text-align: center;
+  height: 50%;
+  width: 100%;
+  border: 0.1rem solid rgba(128, 128, 128, 0.774);
+ 
 }
 
 .info-element {
-    font-size: 200%;
-    font-weight: bolder;
+  font-size: 200%;
+  font-weight: bolder;
+}
+
+.infos-container-general {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.infos-container-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infos-svg-people {
+    width: 40px;
+    margin: 15px;
+    filter: invert(21%) sepia(95%) saturate(3189%) hue-rotate(349deg) brightness(101%) contrast(111%);
+
+}
+
+
+.infos-svg-coin {
+    width: 40px;
+    margin: 15px;
+    filter: invert(48%) sepia(93%) saturate(1327%) hue-rotate(23deg) brightness(107%) contrast(101%);
+}
+
+
+.infos-svg-building {
+    width: 40px;
+    margin: 15px;
+    filter: invert(17%) sepia(49%) saturate(6906%) hue-rotate(241deg) brightness(64%) contrast(144%);
+}
+
+
+.infos-svg-cart {
+    width: 40px;
+    margin: 15px;
+    filter: invert(68%) sepia(80%) saturate(876%) hue-rotate(64deg) brightness(87%) contrast(89%);
 }
