@@ -23,7 +23,7 @@ margin-bottom: 1rem;
     width: fit-content;
     height: 2.5rem;
     padding: 0.5rem;
-    border: 0.2px solid darkblue;
+    border: 0.2px solid #1b3563;;
     border-radius: 3px;
-    background-color: rgb(37, 37, 107);
+    background-color: #1b3563;
 }

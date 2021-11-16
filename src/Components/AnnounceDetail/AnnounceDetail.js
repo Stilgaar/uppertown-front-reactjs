@@ -326,11 +326,11 @@ function AnnounceDetail() {
             <p>Loyer par mois brut: {announce.gross_rent_by_year / 12} €</p>
             <p>Coûts mensuels: {announce.monthly_cost} €</p>
             <p>
-              Loyer net par mois:{" "}
+              Loyer net par mois :
               {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
             </p>
             <p>
-              Gain mensuel par jeton:{" "}
+              Gain mensuel par jeton : 
               {(
                 (announce.gross_rent_by_year / 12 - announce.monthly_cost) /
                 announce.share_number

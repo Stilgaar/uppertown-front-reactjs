@@ -11,7 +11,6 @@ import Footer from './Components/Footer/Footer';
 import NavBar from './Components/NavBar/NavBar';
 import UserPage from './Components/UserPage/UserPage';
 import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
-import StableCoins from './Components/StableCoins/StableCoins';
 import PostAnnounce from './Components/AdminPage/PostAnnounce/PostAnnounce';
 
 //temporaire :
@@ -89,9 +88,6 @@ function App() {
           </Route>
           <Route path="/user-properties-list">
             <AllPropertiesSmart />
-          </Route>
-          <Route path="/stable-coins">
-            <StableCoins user={user} />
           </Route>
           <Route path="/postAnnounce">
             <PostAnnounce/>
