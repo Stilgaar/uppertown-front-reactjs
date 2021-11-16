@@ -1,7 +1,7 @@
 .gestionutilisateurs-container {
     width: 80%;
     margin:auto;
-    border: 0.2rem solid darkblue;
+    border: 0.2rem solid #1b3563;;
     padding: 1rem;
     border-radius: 3px;
     margin-bottom: 1rem;
@@ -9,7 +9,7 @@
 
 .gestionutilisateurs-container-section{
     margin-top: 2rem;
-    border: 0.1rem solid darkblue;
+    border: 0.1rem solid #1b3563;;
     border-radius: 3px;
     padding: 0.5rem;
 }
