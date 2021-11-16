@@ -1,5 +1,5 @@
 .uservirement-container-general {
-    border:1px solid darkblue;
+    border:1px solid #1b3563;;
     width: 70%;
     margin: auto;
     padding: 2rem;
@@ -12,9 +12,9 @@
     width: 7rem;
     height: 2.5rem;
     padding: 0.5rem;
-    border: 0.2px solid darkblue;
+    border: 0.2px solid #1b3563;;
     border-radius: 3px;
-    background-color: rgb(37, 37, 107);
+    background-color: #1b3563;
 }
 
 .uservirement-singlecontainer {
@@ -23,7 +23,7 @@
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border:1px solid darkblue;
+    border:1px solid #1b3563;;
     border-radius: 3px;
     padding: 1rem;
 }
@@ -31,7 +31,7 @@
 .uservirement-span-id {
     font-weight: bolder;
     background-color: rgb(194, 194, 216);
-    border: 1px solid darkblue;
+    border: 1px solid #1b3563;;
     border-radius: 5px;
 }
 
@@ -84,7 +84,7 @@
     width: fit-content;
     height: 2.5rem;
     padding: 0.5rem;
-    border: 0.2px solid darkblue;
+    border: 0.2px solid #1b3563;;
     border-radius: 3px;
-    background-color: rgb(37, 37, 107);
+    background-color: #1b3563;
 }

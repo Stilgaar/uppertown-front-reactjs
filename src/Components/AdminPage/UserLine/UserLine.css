@@ -18,7 +18,7 @@
 }
 
 .gestionutilisateurs-container-container {
-    border: 0.1rem solid darkblue;
+    border: 0.1rem solid #1b3563;
     display: flex; 
     margin: 0.5rem;
     padding: 0.5rem;
@@ -43,7 +43,7 @@
     background-color: white;
     z-index: 100;
     padding: 50px;
-    border: 2px solid darkblue;
+    border: 2px solid #1b3563;;
     border-radius: 10px;
     box-shadow: 5px 5px 10px black;
     position: absolute;
@@ -74,7 +74,7 @@
 }
 
 .userline-infodebase {
-    border: 1px solid darkblue;
+    border: 1px solid #1b3563;;
     width: fit-content;
     padding:0.5rem;
     border-radius: 3px;
@@ -82,7 +82,7 @@
 
 .userline-span-usertext {
     font-weight: bolder;
-    color: darkblue;
+    color: #1b3563;;
 }
 
 .userline-buttons-admin {
@@ -101,20 +101,20 @@
 color: white;
 height: fit-content;
 padding: 0.5rem;
-border: 0.2px solid darkblue;
+border: 0.2px solid #1b3563;
 border-radius: 3px;
-background-color: rgb(37, 37, 107);
+background-color: #1b3563;
 }
 
 .userline-container-boxed {
-    border:1px solid darkblue;
+    border:1px solid #1b3563;
     padding: 0.5rem;
     border-radius: 3px;
     margin-top: 5px;
 }
 
 .userline-text-awaiting {
-    color: darkblue;
+    color: #1b3563;;
 font-weight: bolder;
 margin-top: 0.5rem;
 }
@@ -132,7 +132,7 @@ margin-top: 0.5rem;
 
 .userline-line {
     font-weight: bold;
-border: 0.1rem solid darkblue;
+border: 0.1rem solid #1b3563;
 border-radius: 3px;
 padding: 0.5rem;
 margin: 0.4rem; 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import './userTransac.css'
 
-function UserTransac() {
+function UserTransacImmo() {
   const [obj, setObj] = useState([]);
 
   const userOnline = localStorage.getItem("id");
@@ -12,7 +13,6 @@ function UserTransac() {
     })
       .then((response) => response.json())
       .then((result) => {
-        // console.log("Success TRANSAC :", result);
         setObj(result);
       })
       .catch((error) => {
@@ -23,29 +23,16 @@ function UserTransac() {
   const transacUser = (obj) => {
     return obj.map((transac) => {
       if (userOnline == transac.userId) {
-        //console.log("USER ID MAP from collec: "+transac.userId+" localstore :"+ userOnline)
         return (
-          <div>
-            <h6>Identifiant de la transaction : {transac._id}</h6>
-            <h6>Identifiant du bien : {transac.announceId}</h6>
-            <div>
-              <img src={transac.image}></img>
-            </div>
-            <p>{transac.title}</p>
-            <p>{transac.content}</p>
-            <p>{transac.type}</p>
-            <p>Jetons acquis dans la propriété: {transac.token} tokens</p>
-            <p>Montant de la transaction : {transac.sc} SC</p>
-            <p>Type de transaction : Achat</p>
-            <p>Prix du bien au moment de l'achat : {transac.price}</p>
-            <p>
-              Date de la transaction :{" "}
-              {transac?.created_at instanceof Date
-                ? transac?.created_at.toLocaleDateString()
-                : new Date(transac?.created_at).toLocaleDateString()}
-            </p>
-            <br/>
-            <br/>
+          <div className="userroprieties">
+            <div>Référence transaction : {transac._id}</div>
+            <div>Référence du bien : {transac.announceId}</div>
+            <div>Bien : {transac.title} // Type de bien : {transac.type}</div>
+            <div>Jetons acquis dans la propriété: {transac.token} tokens</div>
+            <div>Montant de la transaction : {transac.sc} SC</div>
+             <div>Prix du bien au moment de l'achat : {transac.price}</div>
+            <div>Date de la transaction : {transac?.created_at}</div>
+              <img className="transacuser" src={transac.image[0]}></img>
           </div>
         );
       }
@@ -56,7 +43,8 @@ function UserTransac() {
     getTransac();
   }, []);
 
-  return <>{transacUser(obj)}</>;
+  return <><h3>Parts de biens immobiliers dans lequel nous détennons des tokens</h3>
+    {transacUser(obj)}</>;
 }
 
-export default UserTransac;
+export default UserTransacImmo;

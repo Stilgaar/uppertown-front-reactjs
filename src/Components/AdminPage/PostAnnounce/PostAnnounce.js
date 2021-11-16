@@ -18,8 +18,29 @@ function PostAnnounce() {
     const [monthly_cost, setMonthly_cost] = useState()
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
+    const [pics, setPics] = useState([])
+    const [previewPics, setPreviewPics] = useState([]);
 
-    const handleInput = (setter, e) => { setter(e.target.value) }             
+    const onLoadFiles = (e) => {
+        setImage(e.target.files)
+        const reader0 = new FileReader();
+        const reader1 = new FileReader();
+        const reader2 = new FileReader();
+        const reader3 = new FileReader();
+        const reader4 = new FileReader();
+        if (e.target.files[0]) { reader0.readAsDataURL(e.target.files[0]) }
+        if (e.target.files[1]) { reader1.readAsDataURL(e.target.files[1]) }
+        if (e.target.files[2]) { reader2.readAsDataURL(e.target.files[2]) }
+        if (e.target.files[3]) { reader3.readAsDataURL(e.target.files[3]) }
+        if (e.target.files[4]) { reader4.readAsDataURL(e.target.files[4]) }
+        reader0.onload = () => { setPics([reader0, reader1, reader2, reader3, reader4]) }
+    }
+
+    const handleInput = (setter, e) => { setter(e.target.value) }
+
+    const handleClick = () => {
+        alert("Le bien a bien été ajouté.")
+    }             
 
     const handleSumbit = (e) => {
         e.preventDefault()
@@ -29,7 +50,7 @@ function PostAnnounce() {
         let jardin = options?.jardin
         let parking = options?.parking
         let jaccuzi = options?.jaccuzi
-        let share_price = price /share_number
+        let share_price = price / share_number
 
         const d = new FormData();
         d.append('image', image[0])
@@ -53,7 +74,7 @@ function PostAnnounce() {
         d.append('piscine', piscine)
         d.append('tennis', tennis)
         d.append('jardin', jardin)
-        d.append('parking', parking)
+        d.append('parking', parking) 
         d.append('jaccuzi', jaccuzi)
 
         axios.post("http://localhost:1337/api/announces/creatannouncewithpics", d, {
@@ -63,6 +84,8 @@ function PostAnnounce() {
             .catch((err) => console.log(err))
     }
 
+    useEffect(() => { setPreviewPics(pics) }, [pics])
+ 
     return (
 
         <div>
@@ -95,9 +118,9 @@ function PostAnnounce() {
                             <option value="Corse">Corse</option>
                             <option value="Grand Est">Grand Est</option>
                             <option value="Hauts-de-France">Hauts-de-France</option>
-                            <option value="Île-de-France">Île-de-France</option>
+                            <option value="Ile-de-France">Île-de-France</option>
                             <option value="Normandie">Normandie</option>
-                            <option value="Nouvelle Aquitaine">Nouvelle Aquitaine</option>
+                            <option value="Nouvelle-Aquitaine">Nouvelle Aquitaine</option>
                             <option value="Occitanie">Occitanie</option>
                             <option value="Pays de la Loire">Pays de la Loire</option>
                             <option value="Provence Alpes Côte d'Azur">Provence Alpes Côte d'Azur</option>
@@ -107,14 +130,14 @@ function PostAnnounce() {
 
                         <label> Type de bien : </label>
                         <select onChange={(e) => handleInput(setType, e)}>
-                            <option value="Appartements anciens">Appartements anciens</option>
-                            <option value="Appartements neufs">Appartements neufs (VEFA)</option>
+                            <option value="Appartement ancien">Appartement ancien</option>
+                            <option value="Appartement neuf">Appartement neuf</option>
                             <option value="Immeuble">Immeuble</option>
-                            <option value="Châlet de montagne">Châlet de montagne</option>
-                            <option value="Maisons anciennes">Maisons anciennes</option>
-                            <option value="Maisons neuves">Maisons neuves</option>
-                            <option value="Résidences de service">Résidences de service (Seniors, étudiantes, coliving)</option>
-                            <option value="terrains constructibles">Terrains constructibles</option>
+                            <option value="Chalet de montagne">Chalet de montagne</option>
+                            <option value="Maison ancienne">Maison ancienne</option>
+                            <option value="Maison neuve">Maison neuve</option>
+                            <option value="Résidence de service">Résidence de service (Seniors, étudiantes, coliving)</option>
+                            <option value="Terrain constructible">Terrain constructible</option>
                         </select>
 
                         <label>Nombre de Chambres</label>
@@ -127,9 +150,8 @@ function PostAnnounce() {
                         <input type="number" placeholder="Prix général" onChange={(e) => handleInput(setPrice, e)} />
 
                         <label>Prix de la part </label>
-                        {price !== undefined && share_number !== undefined ? 
-                        <div>{price / share_number}</div> : <div>0</div>}
-                       
+                        {price !== undefined && share_number !== undefined ?
+                            <div>{price / share_number}</div> : <div>0</div>}
 
                         <label> Nombre de parts </label>
                         <div><input type="radio" value="10000" name="parts" onChange={((e) => handleInput(setShare_number, e))} /> 10.000</div>
@@ -152,23 +174,27 @@ function PostAnnounce() {
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "jaccuzi" })} /> Jaccuzi</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "" })} /> Jaccuzi</div>}
 
-                        <label>Rentabilité Annuelle</label>
+                        <label>Loyer brut par an</label>
                         <input type="number" onChange={(e) => handleInput(setGross_rent_by_year, e)} />
 
-                        <label>Loyer</label>
+                        <label>Coûts mensuels</label>
                         <input type="number" onChange={(e) => handleInput(setMonthly_cost, e)} />
 
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
-                        <input type="file" name="image" multiple onChange={(e) => setImage(e.target.files)} />
+                        <input type="file" name="image" multiple onChange={(e) => onLoadFiles(e)} />
 
-                        <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
+                        <div className="postannounce-image-container">
+                            <img className="postannounce-image-preview" src={previewPics?.[0]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[1]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[2]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[3]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[4]?.result} alt="" />
+                        </div>
+
+                        <button className="postannounce-button-validate" type="submit" onClick={handleClick}>Envoyer l'annonce !</button></div>
                 </form>
-            </div>
-        </div>
+            </div> </div>
     )
-
-
 }
-
 export default PostAnnounce;
