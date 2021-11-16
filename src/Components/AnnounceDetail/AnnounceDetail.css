@@ -16,7 +16,6 @@
 .carousel {
   height: 100%;
   border: 2px solid black;
-
 }
 
 .image-carousel {
@@ -28,7 +27,7 @@
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  
+
   height: 100%;
   background-color: black;
 }
@@ -45,15 +44,12 @@
 }
 
 .detail-input input {
-margin: 2px;
-
+  margin: 2px;
 }
 
 .detail-input button {
-  margin: 2px
+  margin: 2px;
 }
-
-
 
 .detail-description-container {
   display: flex;
@@ -102,4 +98,11 @@ margin: 2px;
   align-items: center;
 }
 
-ul{list-style:none;}
+ul {
+  list-style: none;
+}
+
+.announce-detail-page{
+  width: 80%;
+  margin: auto;
+}

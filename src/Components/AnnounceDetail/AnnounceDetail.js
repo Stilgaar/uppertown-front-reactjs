@@ -244,7 +244,7 @@ function AnnounceDetail() {
   }, [announce]);
 
   return (
-    <div>
+    <div className="announce-detail-page">
       <h3>Bonjour Mr {firstName} {lastName}, montant actuel de votre portefeuille : {wallet ? (wallet - sc.stableCoin) : wallet} SC</h3>
       <div className="detail-container">
         <div className="detail-upper-container">
