@@ -156,7 +156,7 @@ function UserUpdate({user, hardRefresh}) {
                                         <label className="userupdate-label">Nouvel Téléphone</label>
                                         <input className="userupdate-input" type="number" placeholder="Nouvel Téléphone" onInput={(e) => handleInput(e, setNewTel)} />
                                     </div>
-                                    <div className="userupdate-container-warning"> Placeholder : est-ce qu'il faut qu'on mette en place une verification de numéro de téléphone ?
+                                    <div className="userupdate-container-warning"> Votre numéro de téléphone personnel
                                     </div>
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
                                 </form>
@@ -210,7 +210,7 @@ function UserUpdate({user, hardRefresh}) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setRibBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Vos / Votre Numéro de Relevé d'Identité Bancaire</label>
-                                        <input className="userupdate-input" type="text" placeholder="Relevé d'Identité Bancaire" onInput={(e) => handleInput(e, setNewRib)} />
+                                        <input className="userupdate-input" type="text" placeholder="IBAN FR00 1234 5123 4512 3456 7891 A12" onInput={(e) => handleInput(e, setNewRib)} />
                                     </div>
                                     <div className="userupdate-container-warning">Attention tout ajout ou modification de votre RIB vous obligera à nous faire parvenir
                                         au plus vite un nouveau RIB</div>

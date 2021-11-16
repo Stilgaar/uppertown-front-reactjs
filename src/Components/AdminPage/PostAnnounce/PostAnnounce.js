@@ -18,6 +18,23 @@ function PostAnnounce() {
     const [monthly_cost, setMonthly_cost] = useState()
     const [options, setOptions] = useState({ piscine: "", tennis: "", jardin: "", parking: "", jaccuzi: "" })
     const [image, setImage] = useState([])
+    const [pics, setPics] = useState([])
+    const [previewPics, setPreviewPics] = useState([]);
+
+    const onLoadFiles = (e) => {
+        setImage(e.target.files)
+        const reader0 = new FileReader();
+        const reader1 = new FileReader();
+        const reader2 = new FileReader();
+        const reader3 = new FileReader();
+        const reader4 = new FileReader();
+        if (e.target.files[0]) { reader0.readAsDataURL(e.target.files[0]) }
+        if (e.target.files[1]) { reader1.readAsDataURL(e.target.files[1]) }
+        if (e.target.files[2]) { reader2.readAsDataURL(e.target.files[2]) }
+        if (e.target.files[3]) { reader3.readAsDataURL(e.target.files[3]) }
+        if (e.target.files[4]) { reader4.readAsDataURL(e.target.files[4]) }
+        reader0.onload = () => { setPics([reader0, reader1, reader2, reader3, reader4]) }
+    }
 
     const handleInput = (setter, e) => { setter(e.target.value) }
 
@@ -33,7 +50,7 @@ function PostAnnounce() {
         let jardin = options?.jardin
         let parking = options?.parking
         let jaccuzi = options?.jaccuzi
-        let share_price = price /share_number
+        let share_price = price / share_number
 
         const d = new FormData();
         d.append('image', image[0])
@@ -57,7 +74,7 @@ function PostAnnounce() {
         d.append('piscine', piscine)
         d.append('tennis', tennis)
         d.append('jardin', jardin)
-        d.append('parking', parking)
+        d.append('parking', parking) 
         d.append('jaccuzi', jaccuzi)
 
         axios.post("http://localhost:1337/api/announces/creatannouncewithpics", d, {
@@ -67,6 +84,8 @@ function PostAnnounce() {
             .catch((err) => console.log(err))
     }
 
+    useEffect(() => { setPreviewPics(pics) }, [pics])
+ 
     return (
 
         <div>
@@ -131,9 +150,8 @@ function PostAnnounce() {
                         <input type="number" placeholder="Prix général" onChange={(e) => handleInput(setPrice, e)} />
 
                         <label>Prix de la part </label>
-                        {price !== undefined && share_number !== undefined ? 
-                        <div>{price / share_number}</div> : <div>0</div>}
-                       
+                        {price !== undefined && share_number !== undefined ?
+                            <div>{price / share_number}</div> : <div>0</div>}
 
                         <label> Nombre de parts </label>
                         <div><input type="radio" value="10000" name="parts" onChange={((e) => handleInput(setShare_number, e))} /> 10.000</div>
@@ -164,15 +182,19 @@ function PostAnnounce() {
 
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
-                        <input type="file" name="image" multiple onChange={(e) => setImage(e.target.files)} />
+                        <input type="file" name="image" multiple onChange={(e) => onLoadFiles(e)} />
+
+                        <div className="postannounce-image-container">
+                            <img className="postannounce-image-preview" src={previewPics?.[0]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[1]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[2]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[3]?.result} alt="" />
+                            <img className="postannounce-image-preview" src={previewPics?.[4]?.result} alt="" />
+                        </div>
 
                         <button className="postannounce-button-validate" type="submit" onClick={handleClick}>Envoyer l'annonce !</button></div>
                 </form>
-            </div>
-        </div>
+            </div> </div>
     )
-
-
 }
-
 export default PostAnnounce;

@@ -32,9 +32,9 @@ function AddRib() {
             <div>
                 <form className="addrib-container-form">
                     <label>Titulaire Compte</label>
-                    <input type="text" placeholder="UpperTown.com" onInput={(e) => handleInput(e, setTitulaire)} />
+                    <input type="text" placeholder="UpDownStreet" onInput={(e) => handleInput(e, setTitulaire)} />
                     <label>Domiciliation</label>
-                    <input type="text" placeholder="Banque d'Uppertown, 75001 Paris" onInput={(e) => handleInput(e, setDomiciliation)} />
+                    <input type="text" placeholder="Banque d'Updownstreet, 75001 Paris" onInput={(e) => handleInput(e, setDomiciliation)} />
                     <label>Code IBAN</label>
                     <input type="text" placeholder="FR76" onInput={(e) => handleInput(e, setIban)} />
                     <label>Code Banque</label>
@@ -46,7 +46,7 @@ function AddRib() {
                     <label>Clef RIB</label>
                     <input type="text" placeholder="42" onInput={(e) => handleInput(e, setClefRIB)} />
                     <label>B.I.C / SWIFT</label>
-                    <input type="text" placeholder="BMLMFR2M" onInput={(e) => handleInput(e, setBicSwift)} />
+                    <input type="text" placeholder="BLM182R2D2" onInput={(e) => handleInput(e, setBicSwift)} />
                     <button className="addrib-button-validate" onClick={handleSumbit}>Envoyer</button>
                 </form >
             </div>

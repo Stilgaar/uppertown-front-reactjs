@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import './userTransac.css'
 
 function UserProperties() {
   const [obj, setObj] = useState([]);
+
+  console.log("OBJ", obj)
 
   const userOnline = localStorage.getItem("id");
 
@@ -12,7 +15,7 @@ function UserProperties() {
     })
       .then((response) => response.json())
       .then((result) => {
-         console.log("Success Properties :", result);
+        console.log("Success Properties :", result);
         setObj(result);
       })
       .catch((error) => {
@@ -24,23 +27,18 @@ function UserProperties() {
     return obj.map((properties) => {
       if (userOnline == properties.idUser) {
         return (
-          <div>
-            
-            <h6>Identifiant du bien : {properties.announceId}</h6>
-            <div>
-              <img src={properties.image}/>
-            </div>
-            <p>{properties.title}</p>
-            <p>{properties.content}</p>
-            <p>{properties.type}</p>
-            <p>Superficie : {properties.surface} </p>
-            <p>Total des Jetons acquis dans la propriété: {properties.totalToken} tokens</p>
-            <p>Ville : {properties.city}</p>
-            <p>Region : {properties.region}</p>
-            <p>Loyer annuel : {properties.gross_rent_by_year}</p>
-            <p>Différentes options : {properties.options}</p>
-            <br/>
-            <br/>
+          <div className="userroprieties">
+            <div>Référence du bien : {properties.announceId}</div>
+            <div>{properties.title}</div>
+            <div>{properties.content}</div>
+            <div>{properties.type}</div>
+            <div>Superficie : {properties.surface} </div>
+            <div>Total des Jetons acquis dans la propriété: {properties.totalToken} tokens</div>
+            <div>Ville : {properties.city}</div>
+            <div>Region : {properties.region}</div>
+            <div>Loyer annuel : {properties.gross_rent_by_year}</div>
+            <div>Différentes options : {properties.options}</div>
+            <img className="transacuser" src={properties.image[0]} />
           </div>
         );
       }
@@ -51,7 +49,8 @@ function UserProperties() {
     getProp();
   }, []);
 
-  return <>{propList(obj)}</>;
+  return (<><h3>Toutes les transactions</h3>
+    {propList(obj)}</>)
 }
 
 export default UserProperties;
