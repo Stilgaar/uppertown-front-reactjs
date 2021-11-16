@@ -100,7 +100,7 @@ function AnnounceDetail() {
       )
         .then((response) => response.json()) 
         .then((result) => {
-        console.log("Success PROP datas:", result.idUser+" tokens :"+ result.totalToken);
+        console.log("Success PROP datas:", result.idUser+" tokens :"+ result.totalToken+"Success global : "+result);
           
         setIdProp(result.idUser)
         setTotalToken(result.totalToken)
