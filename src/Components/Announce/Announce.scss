@@ -61,3 +61,14 @@
         
     }
 }
+
+@media (max-width: 1250px) {
+    .announce-container{
+        width: 40%;
+    }
+}
+@media (max-width: 700px) {
+    .announce-container{
+        width: 90%;
+    }
+}

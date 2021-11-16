@@ -38,6 +38,10 @@ function PostAnnounce() {
 
     const handleInput = (setter, e) => { setter(e.target.value) }
 
+    const handleClick = () => {
+        alert("Le bien a bien été ajouté.")
+    }             
+
     const handleSumbit = (e) => {
         e.preventDefault()
 
@@ -114,9 +118,9 @@ function PostAnnounce() {
                             <option value="Corse">Corse</option>
                             <option value="Grand Est">Grand Est</option>
                             <option value="Hauts-de-France">Hauts-de-France</option>
-                            <option value="Île-de-France">Île-de-France</option>
+                            <option value="Ile-de-France">Île-de-France</option>
                             <option value="Normandie">Normandie</option>
-                            <option value="Nouvelle Aquitaine">Nouvelle Aquitaine</option>
+                            <option value="Nouvelle-Aquitaine">Nouvelle Aquitaine</option>
                             <option value="Occitanie">Occitanie</option>
                             <option value="Pays de la Loire">Pays de la Loire</option>
                             <option value="Provence Alpes Côte d'Azur">Provence Alpes Côte d'Azur</option>
@@ -126,14 +130,14 @@ function PostAnnounce() {
 
                         <label> Type de bien : </label>
                         <select onChange={(e) => handleInput(setType, e)}>
-                            <option value="Appartements anciens">Appartements anciens</option>
-                            <option value="Appartements neufs">Appartements neufs (VEFA)</option>
+                            <option value="Appartement ancien">Appartement ancien</option>
+                            <option value="Appartement neuf">Appartement neuf</option>
                             <option value="Immeuble">Immeuble</option>
-                            <option value="Châlet de montagne">Châlet de montagne</option>
-                            <option value="Maisons anciennes">Maisons anciennes</option>
-                            <option value="Maisons neuves">Maisons neuves</option>
-                            <option value="Résidences de service">Résidences de service (Seniors, étudiantes, coliving)</option>
-                            <option value="terrains constructibles">Terrains constructibles</option>
+                            <option value="Chalet de montagne">Chalet de montagne</option>
+                            <option value="Maison ancienne">Maison ancienne</option>
+                            <option value="Maison neuve">Maison neuve</option>
+                            <option value="Résidence de service">Résidence de service (Seniors, étudiantes, coliving)</option>
+                            <option value="Terrain constructible">Terrain constructible</option>
                         </select>
 
                         <label>Nombre de Chambres</label>
@@ -170,10 +174,10 @@ function PostAnnounce() {
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "jaccuzi" })} /> Jaccuzi</div> :
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "" })} /> Jaccuzi</div>}
 
-                        <label>Rentabilité Annuelle</label>
+                        <label>Loyer brut par an</label>
                         <input type="number" onChange={(e) => handleInput(setGross_rent_by_year, e)} />
 
-                        <label>Loyer</label>
+                        <label>Coûts mensuels</label>
                         <input type="number" onChange={(e) => handleInput(setMonthly_cost, e)} />
 
                         <label>Photos</label>
@@ -188,7 +192,7 @@ function PostAnnounce() {
                             <img className="postannounce-image-preview" src={previewPics?.[4]?.result} alt="" />
                         </div>
 
-                        <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
+                        <button className="postannounce-button-validate" type="submit" onClick={handleClick}>Envoyer l'annonce !</button></div>
                 </form>
             </div> </div>
     )
