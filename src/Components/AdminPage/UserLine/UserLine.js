@@ -27,7 +27,7 @@ function UserLine({ userdata, adminRefresh }) {
     // si le justificatif de domicile est ok
     const verfJDD = (data) => {
         let email = { data }
-        axios.post(`${url}admin/verifJDD`, email)
+        axios.post(`${url}/admin/verifJDD`, email)
             .then((res) => console.log(res.data))
     }
 

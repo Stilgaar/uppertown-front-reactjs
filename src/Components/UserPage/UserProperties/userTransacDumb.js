@@ -3,12 +3,13 @@ import './userTransac.css'
 
 function UserTransacImmo() {
   const [obj, setObj] = useState([]);
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
   const userOnline = localStorage.getItem("id");
 
   function getTransac() {
-    const url = "http://localhost:1337/api/transactions/history";
-    fetch(url, {
+  
+    fetch(`${url}api/transactions/history`, {
       method: "GET",
     })
       .then((response) => response.json())

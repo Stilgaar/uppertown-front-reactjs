@@ -15,7 +15,7 @@ function AllAnnounces() {
   let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
-    Axios.get(`${url}api/announces/allAnnounces`).then(
+    Axios.get(`${url}/api/announces/allAnnounces`).then(
       (response) => {
         //Place la reponse dans les states
           //State des annonces global
