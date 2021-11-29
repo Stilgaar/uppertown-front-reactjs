@@ -31,3 +31,12 @@
 .admintext-input {
     width: 120%;
 }
+
+.couleurs {
+    display: flex;
+    flex-direction: column;
+}
+.admin-texterea {
+    height:15rem;
+    width: 150%;
+}

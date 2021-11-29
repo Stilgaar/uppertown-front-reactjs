@@ -13,13 +13,16 @@ function AddRib() {
     const [bicSwift, setBicSwift] = useState();
     const [titulaire, setTitulaire] = useState();
     const [domiciliation, setDomiciliation] = useState();
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     const handleSumbit = (e) => {
+        e.preventDefault();
 
     let sumbit = { titulaire, domiciliation, iban, codeBanque, codeGuichet, numeroCompte, clefRib, bicSwift }
 
-    axios.post("http://localhost:1337/admin/newRib", sumbit)
+    axios.post(`${url}/admin/newRib`, sumbit)
     .then((res) => console.log(res.data))
+    .catch((err) => console.log(err))
 
     }
 

@@ -14,16 +14,13 @@ function Signup({formState, setFormState}) {
     const [verifpassword, setVerifPassword] = useState();
 
     const [responceMessage , setResponceMessage] = useState();
-
-    // 400 = element manquant
-    // 401 = passwords correspondent pas
-    // 403 = email existe déjà
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     function handleSumbit(e) {
         e.preventDefault();
         let submit = { lastname, firstname, email, tel, brandname, password, verifpassword }
 
-        axios.post("http://localhost:1337/api/users/signup",  
+        axios.post(`${url}/api/users/signup`,  
         submit )
         .then((res) => {
             console.log(res.data)

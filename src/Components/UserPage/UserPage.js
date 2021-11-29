@@ -5,26 +5,23 @@ import React, { useEffect, useState } from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
 import UserTransac from './UserTransac/UserTransac';
+import UserSplash from './UserSplash/UserSplash';
 
 function UserPage({ user, hardRefresh }) {
 
+    const [showSplash, setShowSplash] = useState(true)
     const [showTransac, setShowTransac] = useState(false)
     const [showSell, setShowSell] = useState(false)
     const [showParam, setShowParam] = useState(false)
 
-    //recupere l'ID venant des props de App
-    //fais une requete avec l'id et recupere toutes les infos 
-    //pour apres les afficher
-    //peut etre placeholder
-
-    //voir pour faire un systeme de modif (button)
-
-    //Et faire un bouton pour valider la modification
-    //Requete update en bdd
-
     useEffect(() => {
         hardRefresh()
     }, [])
+
+    useEffect(() => {
+        if (showTransac == true || showSell == true || showParam == true) { setShowSplash(false) }
+        else { setShowSplash(true) }
+    }, [showTransac, showSell, showParam])
 
 
     const transac = () => {
@@ -34,15 +31,15 @@ function UserPage({ user, hardRefresh }) {
     }
 
     const virement = () => {
-        setShowTransac(false)
         setShowSell(current => !current)
+        setShowTransac(false)
         setShowParam(false)
     }
 
     const param = () => {
+        setShowParam(current => !current)
         setShowTransac(false)
         setShowSell(false)
-        setShowParam(current => !current)
     }
 
 
@@ -55,11 +52,38 @@ function UserPage({ user, hardRefresh }) {
                 <button onClick={() => param()} className="userpage-button-validate">Gèrer son compte</button>
             </div>
 
+            {showSplash &&
+                <UserSplash user={user} param={param} />}
+
             {showTransac &&
-                <UserTransac user={user} hardRefresh={hardRefresh} />}
+                <div>
+                    {user?.userType === "userType4" ?
+                        <div>
+                            <UserTransac user={user} hardRefresh={hardRefresh} />
+                        </div>
+                        :
+                        <div className="userpage-warning">Pour avoir accès aux Transactions : <br /> Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                            <br /> <br />
+                            <button onClick={() => param()} className="userpage-button-validate-gestion">Gèrer son compte</button>
+                        </div>}
+                </div>}
+
+
 
             {showSell &&
-                <UserVirement user={user} hardRefresh={hardRefresh} />}
+                <div>
+                    {user?.userType === "userType4" ?
+                        <div>
+                            <UserVirement user={user} hardRefresh={hardRefresh} />
+                        </div> :
+                        <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />  Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                            <br /> <br />
+                            <button onClick={() => param()} className="userpage-button-validate-gestion">Gèrer son compte</button>
+                        </div>}
+                </div>}
+
+
+
 
             {showParam &&
                 <UserUpdate user={user} hardRefresh={hardRefresh} />}

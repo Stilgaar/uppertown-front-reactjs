@@ -24,6 +24,7 @@ const history = useHistory();
     const [districtBox, setDistrictBox] = useState(false);
     const [zipBox, setZipBox] = useState(false);
     const [optionsBox, setOptionsBox] = useState(false);
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
   
     const [status, setStatus] = useState({
@@ -128,9 +129,9 @@ const history = useHistory();
     
     function deleteAnnounces () {
 
-            const url = "http://localhost:1337/api/announces/"+announce._id
+           
   
-            fetch(url, {
+            fetch(`${url}/api/announces/${announce._id}`, {
               method: "DELETE",
               headers: {
                 Accept: "application/json",
@@ -171,9 +172,7 @@ const history = useHistory();
 
             }
 
-            const url = "http://localhost:1337/api/announces/"+announce._id
-  
-            Axios.put(url,data)
+            Axios.put(`${url}/api/announces/${announce._id}`,data)
             .then(res=>console.log(res))
             .then(Swal.fire({
             title: "Modifications enregistrées !",

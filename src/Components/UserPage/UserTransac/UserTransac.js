@@ -21,9 +21,9 @@ function UserTransac({ user, hardRefresh }) {
         setModalAncienEuro(false) }
 
     const ancienEuro = () => {
-        setModalAncien(current => !current)
+        setModalAncien(false)
         setModalImmo(false)
-        setModalAncienEuro(false)
+        setModalAncienEuro(current => !current)
         setModalTransac(false) }
 
     const transac = () => {

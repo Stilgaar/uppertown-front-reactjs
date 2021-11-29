@@ -99,15 +99,11 @@
   align-items: center;
 }
 
-ul {
+.detail-description-container ul {
   list-style: none;
 }
 
 .announce-detail-page{
   width: 80%;
   margin: auto;
-}
-
-.announce-detail-page h3{
-  text-align: center;
 }

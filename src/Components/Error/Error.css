@@ -1,0 +1,15 @@
+.erreur {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #1b3563;
+    padding: 3rem;
+    text-align: center;
+}
+
+.erreur-false-link {
+    color: grey;
+}
+
+.erreur-false-link:hover {
+    color: black;
+}

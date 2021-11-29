@@ -15,45 +15,47 @@ function UserLine({ userdata, adminRefresh }) {
         console.log("reverif")
     } */
 
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+
     // si l'identité est ok ?
     const verifPi = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/admin/verifPi", email)
+        axios.post(`${url}/admin/verifPi`, email)
             .then((res) => console.log(res.data))
     }
 
     // si le justificatif de domicile est ok
     const verfJDD = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/admin/verifJDD", email)
+        axios.post(`${url}admin/verifJDD`, email)
             .then((res) => console.log(res.data))
     }
 
     // si l'avis d'imposition est ok
     const verifAVIS = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/admin/verifAVIS", email)
+        axios.post(`${url}/admin/verifAVIS`, email)
             .then((res) => console.log(res.data))
     }
 
     // passer un user admin
     const gogoAdmin = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/admin/goAdmin", email)
+        axios.post(`${url}/admin/goAdmin`, email)
             .then((res) => console.log(res.data))
     }
 
     // retirer l'admin d'un user
     const nonoAdmin = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/admin/noAdmin", email)
+        axios.post(`${url}/admin/noAdmin`, email)
             .then((res) => console.log(res.data))
     }
 
     // le transfert de stablecoin est terminé et le montant est glissé dans l'historique
     const transfertStacbleCoinDone = (argent, email) => {
         let submit = { argent, email }
-        axios.post("http://localhost:1337/api/users/archiveMoney", submit)
+        axios.post(`${url}/api/users/archiveMoney`, submit)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -61,7 +63,7 @@ function UserLine({ userdata, adminRefresh }) {
     // toutes les operations concernant le stable coins ont été réalisés et son compte sont crédités
     const transactionDone = (data) => {
         let email = { data }
-        axios.post("http://localhost:1337/api/users/transactionDone", email)
+        axios.post(`${url}/api/users/transactionDone`, email)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -69,7 +71,7 @@ function UserLine({ userdata, adminRefresh }) {
     // toutes les operations concernant les euros sont terminés et le compte est recrédité
     const transactionEdone = (data) => {
         let id = { data }
-        axios.post("http://localhost:1337/api/users/transtactionEuroDone", id)
+        axios.post(`${url}/api/users/transtactionEuroDone`, id)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -79,7 +81,7 @@ function UserLine({ userdata, adminRefresh }) {
         console.log("ARGENT", argent)
         console.log("ID", id)
         let click = { id, argent }
-        axios.post("http://localhost:1337/api/users/archiveEuros", click)
+        axios.post(`${url}/api/users/archiveEuros`, click)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }

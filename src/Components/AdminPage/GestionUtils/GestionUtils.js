@@ -20,9 +20,7 @@ function GestionUtils({ users, adminRefresh }) {
     const allUserAdmin = users.filter(user => user.isAdmin === true)
     const transfertPending = users.filter(user => user.awaiting === true)
     const transfertEuroPending = users.filter(user => user.awaitingEuro === true)
-
-    console.log(transfertPending.length)
-
+    
     return (
 
         <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>

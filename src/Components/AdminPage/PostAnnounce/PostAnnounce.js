@@ -20,6 +20,7 @@ function PostAnnounce() {
     const [image, setImage] = useState([])
     const [pics, setPics] = useState([])
     const [previewPics, setPreviewPics] = useState([]);
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
     
     const onLoadFiles = (e) => {
         setImage(e.target.files)
@@ -38,12 +39,9 @@ function PostAnnounce() {
 
     const handleInput = (setter, e) => { setter(e.target.value) }
 
-    const handleClick = () => {
-        alert("Le bien a bien été ajouté.")
-    }
-
     const handleSumbit = (e) => {
         e.preventDefault()
+        e.target.reset()
 
         let piscine = options?.piscine
         let tennis = options?.tennis
@@ -77,7 +75,7 @@ function PostAnnounce() {
         d.append('parking', parking)
         d.append('jaccuzi', jaccuzi)
 
-        axios.post("http://localhost:1337/api/announces/creatannouncewithpics", d, {
+        axios.post(`${url}/api/announces/creatannouncewithpics`, d, {
             headers: { 'Content-Type': 'multipart/form-data' }
         })
             .then((res) => console.log(res.data))
@@ -192,8 +190,7 @@ function PostAnnounce() {
                             {previewPics[4].result !== null && <img className="postannounce-image-preview" src={previewPics?.[4]?.result} alt="" />}
                         </div> <button className="postannounce-button-validate" onClick={() => setPics([])}>Proposer d'autres photos</button> </div>}
 
-
-                        <button className="postannounce-button-validate" type="submit" onClick={handleClick}>Envoyer l'annonce !</button></div>
+                        <button className="postannounce-button-validate" type="submit">Envoyer l'annonce !</button></div>
                 </form>
             </div> </div>
     )

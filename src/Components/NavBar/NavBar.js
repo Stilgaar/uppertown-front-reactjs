@@ -27,14 +27,15 @@ function NavBar({formState, setFormState, isLog, user}) {
     return (
         <>
         <div className="navbar">
-            <Link to="/"style={{textDecoration: "none", color: "white"}}><h1 className="logo"> <img className="logo-image" src="UpperLogo.png" alt="" /> UpDownStreet</h1></Link>
+            <Link to="/"style={{textDecoration: "none", color: "white"}}> 
+            <div className="logoh1"> <img className="logo-image" src="uppertown.png" alt="logo uppertown"/><h1 className="logo">UpperTown</h1></div></Link> 
             <div className="menu">
                 {isLog ?
                 <>
                     <Link to="/"><p>Accueil</p></Link>
                     <Link to="/announces"><p>Annonces</p></Link>
-                    <Link to="/userpage"><p>UserPage</p></Link>
-                    {user?.isAdmin && <Link to="/admin"><p>AdminPage</p></Link>}
+                    <Link to="/userpage"><p className="perso">Coin perso {user?.firstname}</p></Link>
+                    {user?.isAdmin && <Link to="/admin"><p>Administratif</p></Link>}
                     <p className="btn-connecter" onClick={() => logout()}>Logout</p>
                 </>
                 : 
@@ -54,8 +55,8 @@ function NavBar({formState, setFormState, isLog, user}) {
                 <>
                     <Link to="/" onClick={closeMenu}><p>Accueil</p></Link>
                     <Link to="/announces" onClick={closeMenu}><p>Annonces</p></Link>
-                    <Link to="/userpage" onClick={closeMenu}><p>UserPage</p></Link>
-                    {user?.isAdmin && <Link to="/admin" onClick={closeMenu}><p>AdminPage</p></Link>}
+                    <Link to="/userpage" onClick={closeMenu}><p className="perso">Coin Perso {user?.firstname}</p></Link>
+                    {user?.isAdmin && <Link to="/admin" onClick={closeMenu}><p>Administratif</p></Link>}
                     <p className="btn-connecter" onClick={() => {
                         logout();
                         closeMenu();

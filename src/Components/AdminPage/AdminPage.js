@@ -7,6 +7,7 @@ import SearchUser from './SearchUser/SearchUser';
 import AddRib from './Addrib/AddRib';
 import PostAnnounce from './PostAnnounce/PostAnnounce';
 import AdminText from './AdminText/AdminText';
+import AdminSplash from './AdminSplash/AdminSplash';
 const axios = require('axios');
 
 
@@ -18,17 +19,27 @@ function AdminPage() {
     const [showAddRib, setShowAddRib] = useState(false)
     const [showPostAnn, setShowPostAnn] = useState(false)
     const [showAdminText, setShowAdminText] = useState(false)
+    const [splash, setSplash] = useState(true)
 
     const [users, setUsers] = useState([]);
 
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || "http://localhost:1337"
+
+
     const adminRefresh = () => {
-        axios.get("http://localhost:1337/api/users/users")
+        axios.get(`${url}/api/users/users`)
             .then((res) => setUsers(res.data))
     }
 
     useEffect(() => {
         adminRefresh();
     }, [])
+
+    useEffect(() => {
+        if (showSearch == true || showGestion == true || showAddRib == true || showPostAnn == true || showAdminText == true) { setSplash(false) }
+        else { setSplash(true) }
+
+    }, [showSearch, showGestion, showAddRib, showPostAnn, showAdminText])
     //a l'affichage requete qui recupere tous les users
     //a l'affichage requete qui recupere tous les biens
 
@@ -78,15 +89,13 @@ function AdminPage() {
 
     return (
         <div className="admin-page">
-
             <div className="admin-page-container">
-    
                 <div className="adminpage-boutons-admin">
                     <button className="adminpage-button-validate" onClick={() => search()}>Recherche</button>
                     <button className="adminpage-button-validate" onClick={() => gestion()}>Gestion utilisteur</button>
                     <button className="adminpage-button-validate" onClick={() => rib()}>Ajouter/Modifier le Rib</button>
                     <button className="adminpage-button-validate" onClick={() => ann()}>Poster une nouvelle annonce</button>
-                    <button className="adminpage-button-validate" onClick={() => text()}>Modification texte sur le site</button>
+                    <button className="adminpage-button-validate" onClick={() => text()}>Personalisation du site</button>
                 </div>
 
                 <div className="adminpage-components">
@@ -103,9 +112,11 @@ function AdminPage() {
                         <PostAnnounce />}
 
                     {showAdminText &&
-                     <AdminText />}
+                        <AdminText />}
+
+                    {splash &&
+                        <AdminSplash />}
                 </div>
- 
             </div>
         </div>
     )

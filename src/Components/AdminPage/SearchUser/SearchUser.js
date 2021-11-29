@@ -9,10 +9,10 @@ function SearchUser() {
     // filtres pour une personne
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
-
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     const adminRefresh = () => {
-        axios.get("http://localhost:1337/api/users/users")
+        axios.get(`${url}api/users/users`)
             .then((res) => {
                 setUsers(res.data);
                 setFiltrerdListOne(res.data)

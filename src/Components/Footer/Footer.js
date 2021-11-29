@@ -6,7 +6,7 @@ import React from 'react'
 function Footer() {
     return (
         <div className="footer">
-            <p>Les truc a mettre dans le footer</p>
+            <p>UpperTown réalisé par Jeff, Jérémy, Loïs et Marc-Aurèle pour le Bocal Academy. </p>
         </div>
     )
 }

@@ -6,12 +6,12 @@ import UserTransacImmo from "./userTransacDumb";
 function AllTransacDumb() {
   const [ann, setAnn] = useState([]);
   const [obj, setObj] = useState({ user: "", announce: "" });
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
+  
   function getTransac() {
-    //on prend toutes les annonces :
-
-    const todb = "http://localhost:1337/api/announces/allannounces";
-    fetch(todb, {
+    
+    fetch(`${url}/api/announces/allannounces`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -22,11 +22,8 @@ function AllTransacDumb() {
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    // on essaie de filtrer :
-
-    const url = "http://localhost:1337/api/transactions/history";
-    fetch(url, {
+   
+    fetch(`${url}/api/transactions/history`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -49,10 +46,8 @@ function AllTransacDumb() {
   }
 
   function getAnnDatas() {
-    //on prend toutes les annonces :
 
-    const todb = "http://localhost:1337/api/announces/allannounces";
-    fetch(todb, {
+    fetch(`${url}/api/announces/allannounces`, {
       method: "GET",
     })
       .then((response) => response.json())

@@ -7,9 +7,10 @@ function AllAnnouncesAdmin() {
   const [announcesList, setAnnouncesList] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
   useEffect(() => {
-    Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
+    Axios.get(`${url}/api/announces/allAnnounces`).then(
       (response) => {
         setAnnouncesList(response.data);
         setFilteredList(response.data);

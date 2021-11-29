@@ -1,0 +1,12 @@
+.adminsplash-container { 
+    width: 80%;
+    margin:auto;
+    margin-bottom: 1rem;
+    border: 0.2rem solid #1b3563;;
+    padding: 3rem;
+    border-radius: 3px;
+}
+
+.adminsplash-container ul {
+    margin-top: 2%;
+}

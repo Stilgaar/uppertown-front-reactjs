@@ -4,10 +4,10 @@ function UserSalesListDumb() {
   const [obj, setObj] = useState([]);
 
   const userOnline = localStorage.getItem("id");
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
   function getAllUpToSale() {
-    const url = "http://localhost:1337/api/sales/history";
-    fetch(url, {
+    fetch(`${url}/sales/history`, {
       method: "GET",
     })
       .then((response) => response.json())

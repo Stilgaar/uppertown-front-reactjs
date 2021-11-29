@@ -8,7 +8,6 @@
     padding: 5px;
     margin: 5px;
     border-radius: 3px;
-
 }
 
 .announces-search input {
@@ -18,5 +17,8 @@
 .announces-page {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
 }
 

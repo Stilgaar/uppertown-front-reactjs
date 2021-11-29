@@ -13,18 +13,19 @@ function UserVirement({ user, hardRefresh }) {
     const [montant, setMontant] = useState();
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     let currentStable = user.stableCoins
-
+    
     useEffect(() => {
-        axios.get("http://localhost:1337/admin/getRib")
+        axios.get(`${url}/admin/getRib`)
             .then((res) => setRIB(res.data))
     }, [])
 
     const payement = (e, email) => {
         e.preventDefault();
         let sumbit = { email, montant }
-        axios.post("http://localhost:1337/api/users/addMoney", sumbit)
+        axios.post(`${url}/api/users/addMoney`, sumbit)
             .then((res) => console.log(res.data))
             .then(() => setValidation(true))
     }
@@ -32,7 +33,7 @@ function UserVirement({ user, hardRefresh }) {
     const virement = (e, id) => {
         e.preventDefault()
         let submit = { change, theRib, id, currentStable }
-        axios.post("http://localhost:1337/api/users/askMoney", submit)
+        axios.post(`${url}/api/users/askMoney`, submit)
             .then((res) => {
                 if (res.data === 'error') { alert("Vous n'avez pas assez de Stable Coins") }
                 else {

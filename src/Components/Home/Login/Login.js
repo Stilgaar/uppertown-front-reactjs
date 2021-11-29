@@ -7,13 +7,13 @@ function Login({formState, setFormState, hardRefresh}) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [responceMessage, setresponceMessage ] = useState();
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     function handleSumbit(e) {
         e.preventDefault();
         let submit = { email, password }
 
-        axios.post("http://localhost:1337/api/users/login", 
-                    submit, )
+        axios.post(`${url}api/users/login`, submit, )
 
             .then((res) => {
                 console.log(res.status);

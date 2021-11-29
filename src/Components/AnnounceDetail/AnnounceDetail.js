@@ -29,6 +29,7 @@ function AnnounceDetail() {
   const [idProp, setIdProp] = useState();
   const [totalToken, setTotalToken] = useState()
   const [propExist, setPropExist] = useState("")
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
 
   function handleInput(e) {
@@ -50,7 +51,7 @@ function AnnounceDetail() {
 
   function getUserDatas() {
 
-    const url = "http://localhost:1337/api/users/" + userOnline
+    const url = `${url}/api/users/${userOnline}`
     fetch(url,
       {
         method: "GET",
@@ -71,8 +72,8 @@ function AnnounceDetail() {
 
   const ifExists = () => {
 
-    const url = "http://localhost:1337/api/properties/" + userOnline + "/" + announce._id
-    fetch(url,
+    
+    fetch(`${url}/api/properties/${userOnline}/${announce._id}`,
       {
         method: "GET",
       }
@@ -92,8 +93,7 @@ function AnnounceDetail() {
 
   const getDatasProperty = () => {
 
-    const url2 = "http://localhost:1337/api/properties/datas/" + userOnline + "/" + announce._id
-    fetch(url2,
+    fetch(`${url}/api/properties/datas/${userOnline}/${announce._id}`,
       {
         method: "GET",
       }
@@ -129,9 +129,9 @@ function AnnounceDetail() {
         created_at: d
       }
 
-      const url = "http://localhost:1337/api/transactions/buy"
+      
 
-      Axios.post(url, data)
+      Axios.post(`${url}/api/transactions/buy`, data)
         .then(res => console.log(res))
         .then(Swal.fire({
           title: "Transaction effectuée !",
@@ -145,8 +145,8 @@ function AnnounceDetail() {
       return false;
     }
 
-    const updateWallet = "http://localhost:1337/api/users/" + userOnline; //chemin vers le backend
-    fetch(updateWallet, {
+    
+    fetch(`${url}/api/users/${userOnline}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -160,8 +160,7 @@ function AnnounceDetail() {
     });
 
     let newsharenumber = Number(announce.share_number) - Number(invest)
-    const updateToken = "http://localhost:1337/api/announces/" + announce._id; //chemin vers le backend
-    fetch(updateToken, {
+    fetch(`${url}/api/announces/${announce._id}` , {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -171,12 +170,12 @@ function AnnounceDetail() {
         share_number: newsharenumber,
         //share_price: announce.price/(announce.share_number - invest)
       }),
-    }).then(() => {setSc({ ...sc, validated: true })
+    }).then(() => {
+      setSc({ ...sc, validated: true })
     });
 
     if (idProp != userOnline) {
-      const addProperties = "http://localhost:1337/api/properties/allProperties"; //chemin vers le backend
-      fetch(addProperties, {
+      fetch(`${url}/api/properties/allProperties`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -200,12 +199,11 @@ function AnnounceDetail() {
           option: announce.options,
           image: announce.image
         }),
-      }).then(() => { console.log("New share number : " + invest);});
-      
+      }).then(() => { console.log("New share number : " + invest); });
+
     } else {
       let newtotaltoken = (Number(totalToken) + Number(invest))
-      const updateProperties = "http://localhost:1337/api/properties/" + userOnline + "/" + announce._id;
-      fetch(updateProperties, {
+      fetch(`${url}/api/properties/${userOnline}/${announce._id}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -214,7 +212,7 @@ function AnnounceDetail() {
         body: JSON.stringify({
           totalToken: newtotaltoken,
         }),
-      }).then(() => {console.log("New share number : " + newtotaltoken)});
+      }).then(() => { console.log("New share number : " + newtotaltoken) });
     }
   };
 
@@ -328,7 +326,7 @@ function AnnounceDetail() {
               {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
             </p>
             <p>
-              Gain mensuel par jeton : 
+              Gain mensuel par jeton :
               {(
                 (announce.gross_rent_by_year / 12 - announce.monthly_cost) /
                 announce.share_number

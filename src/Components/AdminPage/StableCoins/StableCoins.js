@@ -6,13 +6,14 @@ import "./StableCoins.css";
 function StableCoins({ userdata, adminRefresh }) {
 
     const [coins, setCoins] = useState();
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
     function handleInput(e) {
         setCoins(e.target.value);
     }
     function handleClick() {
 
-        axios.post("http://localhost:1337/api/users/addCoins", {
+        axios.post(`${url}/api/users/addCoins`, {
             "stableCoins": coins,
             "id": userdata._id
         })

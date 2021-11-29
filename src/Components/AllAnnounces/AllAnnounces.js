@@ -12,9 +12,10 @@ function AllAnnounces() {
   const [filterBedrooms, setFilterBedrooms] = useState("all");
   const [filterType, setFilterType] = useState("all");
   const [filterPrice, setFilterPrice] = useState(10000000)
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
-    Axios.get("http://localhost:1337/api/announces/allAnnounces").then(
+    Axios.get(`${url}api/announces/allAnnounces`).then(
       (response) => {
         //Place la reponse dans les states
           //State des annonces global

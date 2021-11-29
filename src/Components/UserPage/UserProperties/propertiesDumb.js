@@ -3,14 +3,12 @@ import './userTransac.css'
 
 function UserProperties() {
   const [obj, setObj] = useState([]);
-
-  
-
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
   const userOnline = localStorage.getItem("id");
 
   function getProp() {
-    const url = "http://localhost:1337/api/properties/allProperties";
-    fetch(url, {
+   
+    fetch(`${url}/api/properties/allProperties`, {
       method: "GET",
     })
       .then((response) => response.json())

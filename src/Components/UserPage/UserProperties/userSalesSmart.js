@@ -7,10 +7,11 @@ function AllUpToSales() {
   const [lastName, setLastName] = useState();
   const [wallet, setWallet] = useState();
   const userOnline = localStorage.getItem("id");
+  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
   function getUserDatas() {
-    const url = "http://localhost:1337/api/users/" + userOnline;
-    fetch(url, {
+    
+    fetch(`${url}/api/users/${userOnline}`, {
       method: "GET",
     })
       .then((response) => response.json())

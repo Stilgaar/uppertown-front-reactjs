@@ -30,11 +30,13 @@ function UserUpdate({user, hardRefresh}) {
     const [justifDom, setJustifDom] = useState();
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
+
+    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
     
     const modifyContent = (email, e) => {
         e.preventDefault();
         let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, newRib }
-        axios.patch("http://localhost:1337/api/users/modifyUser",
+        axios.patch(`${url}/api/users/modifyUser`,
             submit)
             .then((res) => console.log(res.data))
             .then(() => hardRefresh())
@@ -45,7 +47,7 @@ function UserUpdate({user, hardRefresh}) {
         const formData = new FormData();
         formData.append('pieceidentite', pi)
         formData.append('email', email)
-        axios.post("http://localhost:1337/up/id", formData, {
+        axios.post(`${url}/up/id`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
         .then(() => hardRefresh())
@@ -56,7 +58,7 @@ function UserUpdate({user, hardRefresh}) {
         const formData = new FormData();
         formData.append('justificatifdomicile', justifDom)
         formData.append('email', email)
-        axios.post("http://localhost:1337/up/jdd", formData, {
+        axios.post(`${url}/up/jdd`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
         .then(() => hardRefresh())
@@ -67,7 +69,7 @@ function UserUpdate({user, hardRefresh}) {
         const formData = new FormData();
         formData.append('avisfiscal', avisFisc)
         formData.append('email', email)
-        axios.post("http://localhost:1337/up/avis", formData, {
+        axios.post(`${url}/up/avis`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
         .then(() => hardRefresh())
@@ -78,7 +80,7 @@ function UserUpdate({user, hardRefresh}) {
         const formData = new FormData();
         formData.append('rib', picRib)
         formData.append('email', email)
-        axios.post("http://localhost:1337/up/rib", formData, {
+        axios.post(`${url}/up/rib`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
         .then(() => hardRefresh())
@@ -86,7 +88,7 @@ function UserUpdate({user, hardRefresh}) {
 
     const handleDelete = (email, data) => {              
         let sumbit = {email, data}
-        axios.post("http://localhost:1337/up/delete", sumbit)
+        axios.post(`${url}/up/delete`, sumbit)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err))
         .then(() => hardRefresh())       

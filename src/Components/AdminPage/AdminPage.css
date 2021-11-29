@@ -13,12 +13,13 @@
 .adminpage-button-validate {
     color: white;
     height: fit-content;
-    width: 110%;
+    width: 15rem;
     padding: 0.5rem;
     border: 0.2px solid #1b3563;;
     border-radius: 3px;
     background-color: #1b3563;
     margin-bottom: 1px;
+    display: block;
     }
 
 .adminpage-components {
