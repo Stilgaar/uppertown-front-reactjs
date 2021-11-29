@@ -13,7 +13,7 @@ function Login({formState, setFormState, hardRefresh}) {
         e.preventDefault();
         let submit = { email, password }
 
-        axios.post(`${url}api/users/login`, submit )
+        axios.post(`${url}/api/users/login`, submit )
 
             .then((res) => {
                 console.log(res.status);
