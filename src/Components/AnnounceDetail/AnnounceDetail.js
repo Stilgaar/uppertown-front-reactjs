@@ -51,8 +51,7 @@ function AnnounceDetail() {
 
   function getUserDatas() {
 
-    const url = `${url}/api/users/${userOnline}`
-    fetch(url,
+    fetch(`${url}/api/users/${userOnline}`,
       {
         method: "GET",
       }
