@@ -21,9 +21,9 @@ function Home({ formState, setFormState, hardRefresh }) {
 
 
     useEffect(() => {
-        axios.get(`${url}7/api/users/users`)
+        axios.get(`${url}/api/users/users`)
             .then((res) => setUsers(res.data))
-        axios.get(`${url}api/announces/allAnnounces`)
+        axios.get(`${url}/api/announces/allAnnounces`)
             .then((res) => setAnn(res.data))
             axios.get(`${url}/admin/getRib`)
             .then((res) => setInfo(res.data))
