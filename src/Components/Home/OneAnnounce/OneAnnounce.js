@@ -5,15 +5,14 @@ function OneAnnounce({ ann }) {
 
   return (
     <div className="oneannounce-container-container">
-      <div className="oneannounce-title-container">
-        <h4>UpperTown vous propose</h4>
-      </div>
+      <div className="oneannounce-title-container"><h4>UpperTown vous propose</h4> </div>
+      
       <div className="oneannounce-image-text-container">
         <div className="oneannounce-container">
           <img
             className="oneannounce-image-container"
             src={announceRandom?.image[0]}
-            alt=""
+            alt="announce random image"
           />
           <p className="onennounce-image-bottom-grey-bar">
             {announceRandom?.region} / {announceRandom?.city}
@@ -31,6 +30,7 @@ function OneAnnounce({ ann }) {
           </p>
         </div>
       </div>
+      
     </div>
   );
 }

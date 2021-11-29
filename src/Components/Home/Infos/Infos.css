@@ -8,6 +8,7 @@
   flex-direction: row;
   background-color: lightgrey;
   border-radius: 3px;
+  border:3px solid black;
 }
 
 .infos-container {
@@ -75,4 +76,10 @@
   margin: 15px;
   filter: invert(68%) sepia(80%) saturate(876%) hue-rotate(64deg)
     brightness(87%) contrast(89%);
+}
+
+@media (max-width:1310px) {
+  .infos-container-container {
+    flex-direction: column;
+  }
 }
