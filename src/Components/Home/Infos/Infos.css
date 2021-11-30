@@ -33,6 +33,10 @@
   opacity: 75%;
 }
 
+.infos-container-title {
+  text-align: center;
+}
+
 .infos-container-general {
   display: flex;
   justify-content: center;
