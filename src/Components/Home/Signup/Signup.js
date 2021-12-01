@@ -69,7 +69,7 @@ function Signup({formState, setFormState}) {
     }
 
     return (
-        <div className="signup-form" onClick={closeModal}>
+        <div className="signup-form" onClick={() => closeModal()}>
             <div className="signup" onClick={(e) => e.stopPropagation()}>
                 <form className="signup-container">
                 <h4 className="signup-title"> Créer mon compte</h4>

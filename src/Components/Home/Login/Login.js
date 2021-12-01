@@ -48,7 +48,7 @@ function Login({formState, setFormState, hardRefresh}) {
 
 
     return (
-        <div className="login-form" onClick={closeModal}>
+        <div className="login-form" onClick={() => closeModal()}>
 
         <div className="login" onClick={(e) => e.stopPropagation()}>
 
