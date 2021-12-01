@@ -35,9 +35,9 @@ function AddRib() {
             <div>
                 <form className="addrib-container-form">
                     <label>Titulaire Compte</label>
-                    <input type="text" placeholder="UpDownStreet" onInput={(e) => handleInput(e, setTitulaire)} />
+                    <input type="text" placeholder="UpperTown" onInput={(e) => handleInput(e, setTitulaire)} />
                     <label>Domiciliation</label>
-                    <input type="text" placeholder="Banque d'Updownstreet, 75001 Paris" onInput={(e) => handleInput(e, setDomiciliation)} />
+                    <input type="text" placeholder="Banque d'UpperTown, 0600 Nice" onInput={(e) => handleInput(e, setDomiciliation)} />
                     <label>Code IBAN</label>
                     <input type="text" placeholder="FR76" onInput={(e) => handleInput(e, setIban)} />
                     <label>Code Banque</label>
