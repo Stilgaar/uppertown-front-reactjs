@@ -1,6 +1,6 @@
 .oneannounce-container-container {
     width: 100%;
-    padding:3rem;
+    padding:5rem;
     margin: auto; 
     display: flex;
     flex-direction: column;
@@ -13,9 +13,9 @@
 .oneannounce-container{
     width: 80%;
     border-radius: 3px;
-    top: 65%;
     margin: auto;
     z-index: 3;
+    padding:5rem;
     
 }
 
