@@ -34,9 +34,7 @@ function Login({formState, setFormState, hardRefresh}) {
             
 
     function handleInput(e, setter) {
-
-        setter(e.target.value)
-        
+      setter(e.target.value) 
     }
 
     function goSigninForm(){

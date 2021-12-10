@@ -1,18 +1,22 @@
 .oneannounce-container-container {
-    width: 80%;
-    margin-bottom: 1rem;
-    padding: 1rem;
+    width: 100%;
+    padding:3rem;
     margin: auto; 
-    margin-top: 5%;
-    margin-bottom: 5%;
     display: flex;
     flex-direction: column;
     text-align: center;
-}
-
+    position: relative;
+    background-color: white;
+    z-index: 3;
+ }
+  
 .oneannounce-container{
     width: 80%;
     border-radius: 3px;
+    top: 65%;
+    margin: auto;
+    z-index: 3;
+    
 }
 
 .oneannounce-image-container {
@@ -20,18 +24,19 @@
     margin:auto;
     display: flex;
     border-radius: 3px 3px 0 0 ;  
+    z-index: 3;
 }
 
 .onennounce-image-bottom-grey-bar{
     margin: auto;
-    background-color: rgba(128, 128, 128, 0.774);
     width: 95%;
     height: 30px;
-    color: white;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0 0 3px 3px;
+    z-index: 3;
 }
 
 
@@ -39,6 +44,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 3;
 }
 
 .oneannounce-image-text-container {
@@ -46,18 +52,23 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    background-color: lightgrey;
     border-radius: 3px;
     padding: 15px;
+    margin: auto; 
+    z-index: 3;
+
 }
 
 .oneannounce-title-container {
-    margin-bottom: 20px;
+    margin-bottom: 2%;
+    z-index: 10;
+    color: black;
     
 }
 
 .oneannounce-title-container h4 {
     font-size: 35px;
+    z-index: 3;
 }
 
 @media (max-width :1000px) {

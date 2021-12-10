@@ -25,23 +25,24 @@ function Home({ formState, setFormState, hardRefresh }) {
             .then((res) => setUsers(res.data))
         axios.get(`${url}/api/announces/allAnnounces`)
             .then((res) => setAnn(res.data))
-            axios.get(`${url}/admin/getRib`)
+        axios.get(`${url}/admin/getRib`)
             .then((res) => setInfo(res.data))
     }, [])
 
     return (
-
-
         <div>
             <div className="home">
                 {formState === "signin" && <Signup formState={formState} setFormState={setFormState} />}
                 {formState === "login" && <Login formState={formState} setFormState={setFormState} hardRefresh={hardRefresh} />}
-
-                <About info={info}/>
+                <img
+                    src="https://www.icietlabas.fr/wp-content/uploads/2021/05/Photographie-Architecturale-Barlelone-que-faire-a-Barcelone-Que-faire-en-espagne-Tutoriel-Photo-Tuto-Photo-blog-voyage-32-scaled.jpg"
+                    alt="Photo accueil"
+                />
+                <About info={info} />
             </div>
             <OneAnnounce ann={ann} />
             <Infos users={users} ann={ann} />
-            </div>
+        </div>
     )
 }
 

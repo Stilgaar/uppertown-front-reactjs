@@ -1,18 +1,29 @@
+.infos-container-general {
+  width: 100%;
+  padding:3rem;
+  margin: auto; 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  background-color: white;
+  z-index: 3;
+  margin-top: 5%;
+}
+
 .infos-container-container {
-  width: 80%;
   margin-bottom: 1rem;
-  padding: 1rem;
+  padding: 5rem;
   margin: auto;
   justify-content: center;
   display: flex;
   flex-direction: row;
-  background-color: lightgrey;
   border-radius: 3px;
+
 }
 
 .infos-container {
   padding: 2rem;
-  
 }
 
 .infos-container div {
@@ -34,7 +45,7 @@
 
 .infos-container-title {
   text-align: center;
-}
+ }
 
 .infos-container-general {
   display: flex;

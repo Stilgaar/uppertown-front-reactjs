@@ -28,7 +28,7 @@ function NavBar({formState, setFormState, isLog, user}) {
         <>
         <div className="navbar">
             <Link to="/"style={{textDecoration: "none", color: "white"}}> 
-            <div className="logoh1"> <img className="logo-image" src="uppertown.png" alt="logo uppertown"/><h1 className="logo">UpperTown</h1></div></Link> 
+            <div className="logoh1"><h1 className="logo">UpperTown</h1></div></Link> 
             <div className="menu">
                 {isLog ?
                 <>

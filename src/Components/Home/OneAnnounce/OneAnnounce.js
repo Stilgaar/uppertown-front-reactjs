@@ -4,6 +4,7 @@ function OneAnnounce({ ann }) {
   let announceRandom = ann[Math.floor(Math.random() * ann.length)];
 
   return (
+
     <div className="oneannounce-container-container">
       <div className="oneannounce-title-container"><h4>UpperTown vous propose</h4> </div>
       
@@ -30,8 +31,8 @@ function OneAnnounce({ ann }) {
           </p>
         </div>
       </div>
-      
     </div>
+
   );
 }
 

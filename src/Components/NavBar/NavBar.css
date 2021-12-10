@@ -1,8 +1,8 @@
 .navbar {
     margin-bottom: 0;
-    border-bottom: 0.5rem solid darkred;
     padding: 0;
     margin:0;
+    z-index: 2;
 }
 
 .logoh1 {

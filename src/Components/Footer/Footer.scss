@@ -1,13 +1,15 @@
 @import '../../master.scss';
 
 .footer {
-    background-color: $primary;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    background-color: rgba(54, 54, 54, 0.322);
+    z-index: 5;
     p{
         margin: 0;
+        z-index: 5;
     }
 }
