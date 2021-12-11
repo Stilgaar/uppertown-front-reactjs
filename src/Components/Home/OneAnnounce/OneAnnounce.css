@@ -50,6 +50,8 @@
     flex-direction: column;
     justify-content: center;
     font-size: 80%;
+    background-color: rgba(117, 117, 117, 0.164);
+    padding: 2em;
     z-index: 3;
 }
 
