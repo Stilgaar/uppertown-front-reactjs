@@ -28,23 +28,23 @@ function Infos({ users, ann }) {
       </div>
       <div className="infos-container-container">
         <div className="infos-container">
-          <div className="info-element"><img src={coin} alt="coin" className="infos-svg-coin" /><h4 className="infos-coin">StableCoins échangés</h4></div>
-          <div className="info-element">{numberWithSpaces(clienttokens)}</div>
+          <div><img src={coin} alt="coin" className="infos-svg-coin" /><p className="infos-coin">StableCoins échangés</p></div>
+          <div>{numberWithSpaces(clienttokens)}</div>
         </div>
 
         <div className="infos-container">
-          <div className="info-element"><img src={people} alt="people" className="infos-svg-people" /><h4 className="infos-people">Utilisateurs</h4></div>
-          <div className="info-element">{numberWithSpaces(users.length)}</div>
+          <div><img src={people} alt="people" className="infos-svg-people" /><p className="infos-people">Utilisateurs</p></div>
+          <div>{numberWithSpaces(users.length)}</div>
         </div>
 
         <div className="infos-container">
-          <div className="info-element"><img src={building} alt="building" className="infos-svg-building" /><h4 className="infos-building">Biens Immobiliers</h4></div>
-          <div className="info-element">{numberWithSpaces(ann.length)}</div>
+          <div><img src={building} alt="building" className="infos-svg-building" /><p className="infos-building">Biens Immobiliers</p></div>
+          <div>{numberWithSpaces(ann.length)}</div>
         </div>
 
         <div className="infos-container">
-          <div className="info-element"><img src={cart} alt="cart" className="infos-svg-cart" /><h4 className="infos-cart">Tokens disponibles</h4></div>
-          <div className="info-element">{numberWithSpaces(freetokens)}</div>
+          <div><img src={cart} alt="cart" className="infos-svg-cart" /><p className="infos-cart">Tokens disponibles</p></div>
+          <div>{numberWithSpaces(freetokens)}</div>
         </div>
       </div>
     </div>

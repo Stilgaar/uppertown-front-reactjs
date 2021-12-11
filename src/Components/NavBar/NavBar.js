@@ -34,14 +34,14 @@ function NavBar({formState, setFormState, isLog, user}) {
                 <>
                     <Link to="/"><p>Accueil</p></Link>
                     <Link to="/announces"><p>Annonces</p></Link>
-                    <Link to="/userpage"><p className="perso">Coin perso {user?.firstname}</p></Link>
+                    <Link to="/userpage"><p className="perso">Chez {user?.firstname}</p></Link>
                     {user?.isAdmin && <Link to="/admin"><p>Administratif</p></Link>}
                     <p className="btn-connecter" onClick={() => logout()}>Logout</p>
                 </>
                 : 
                 <>
-                    <p className="btn-connecter" onClick={() => showForm("login")}>Se Connecter</p>
-                    <p className="btn-connecter" onClick={() => showForm("signin")}>Créer mon Compte</p>
+                    <p className="btn-connecter" onClick={() => showForm("login")}>Log In</p>
+                    <p className="btn-connecter" onClick={() => showForm("signin")}>Sign Up</p>
                 </>
                 }
             </div>
@@ -66,12 +66,12 @@ function NavBar({formState, setFormState, isLog, user}) {
                 <>
                     <p className="btn-connecter" onClick={() => {
                         showForm("login");
-                        closeMenu()}}>Se Connecter</p>
+                        closeMenu()}}>Log In</p>
                     <p className="btn-connecter" onClick={() => {
                         showForm("signin")
                         closeMenu();
                     }
-                    }>Créer mon Compte</p>
+                    }>Sign Up</p>
                 </>
                 }
         </div>

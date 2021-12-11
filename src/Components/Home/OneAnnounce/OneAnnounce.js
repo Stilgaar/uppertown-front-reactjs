@@ -11,7 +11,6 @@ function OneAnnounce({ ann }) {
       <div className="oneannounce-image-text-container">
         <div className="oneannounce-container">
           <img
-            className="oneannounce-image-container"
             src={announceRandom?.image[0]}
             alt="announce random image"
           />

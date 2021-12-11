@@ -1,6 +1,6 @@
 .infos-container-general {
   width: 100%;
-  padding:3rem;
+  padding:3em;
   margin: auto; 
   display: flex;
   flex-direction: column;
@@ -12,35 +12,32 @@
 }
 
 .infos-container-container {
-  margin-bottom: 1rem;
-  padding: 5rem;
+  width: fit-content;
+  padding: 5em;
   margin: auto;
-  justify-content: center;
+  margin-bottom: 1em;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   border-radius: 3px;
-
 }
 
 .infos-container {
-  padding: 2rem;
+  padding: 2em;
 }
 
 .infos-container div {
-  padding: 2rem;
+  padding: 1em;
   border-radius: 3px;
-  margin: 0.3rem;
+  margin: 0.3em;
   text-align: center;
-  height: 50%;
-  width: 100%;
-  border: 0.1rem solid rgba(128, 128, 128, 0.774);
-}
-
-.info-element {
+  height: 5em;
+  width: 7em;
+  background-color: rgba(117, 117, 117, 0.39);
   font-size: 200%;
   font-weight: bolder;
-  background-color: white;
   opacity: 75%;
+  white-space: nowrap;
 }
 
 .infos-container-title {
@@ -55,45 +52,96 @@
 
 .infos-container-title {
   display: flex;
+  text-align: center;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .infos-container-title h4 {
-  font-size: 35px;
+  font-size: 200%;
+  font-weight: bolder;
+}
+.infos-container p {
+  font-size: 0.5em;
+}
+.infos-container img {
+  margin-bottom: 0.2em;
 }
 
 .infos-svg-people {
-  width: 40px;
-  margin: 15px;
+  width: 2em;
   filter: invert(21%) sepia(95%) saturate(3189%) hue-rotate(349deg)
     brightness(101%) contrast(111%);
 }
 
 .infos-svg-coin {
-  width: 40px;
-  margin: 15px;
+  width: 2em;
   filter: invert(48%) sepia(93%) saturate(1327%) hue-rotate(23deg)
     brightness(107%) contrast(101%);
 }
 
 .infos-svg-building {
-  width: 40px;
-  margin: 15px;
+  width: 2em;
   filter: invert(17%) sepia(49%) saturate(6906%) hue-rotate(241deg)
     brightness(64%) contrast(144%);
 }
 
 .infos-svg-cart {
-  width: 40px;
-  margin: 15px;
+  width: 2em;
   filter: invert(68%) sepia(80%) saturate(876%) hue-rotate(64deg)
     brightness(87%) contrast(89%);
 }
 
 @media (max-width:1310px) {
+  .infos-container-general{
+    width: min-content;
+  }
   .infos-container-container {
     flex-direction: column;
+    align-self: center;
+    align-content: center;
+    justify-self: center;
+    justify-content: center;
+    text-align: center;
+    width: min-content;
+    margin:auto;
+    padding: 0;
+  }
+  .infos-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    width: min-content;
+    margin:auto; 
+    padding: 3em;
+    
+  }
+  .infos-container div {
+    height: 6em;
+    width: 6em;
+    margin:auto; 
+    margin-top:0.3em;
+    white-space:normal;
+  }
+}
+
+@media (max-width:1000px) {
+  .infos-container-general{
+    width: min-content;
+    padding: 2em;
+  }
+  .infos-container {
+    margin:auto; 
+    display: flex;
+    align-self: center;
+    width: min-content;
+    padding: 3em;
+  }
+  .infos-container div {
+    height: 5em;
+    width: 5em;
+    margin-top:0.1em;
   }
 }
