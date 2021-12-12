@@ -143,6 +143,8 @@
   .infos-container-general{
     width: min-content;
     padding: 2em;
+    margin:auto;
+    margin-top: 0.2em;
   }
   .infos-container {
     margin:auto; 
