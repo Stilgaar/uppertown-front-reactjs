@@ -53,6 +53,7 @@
     background-color: rgba(117, 117, 117, 0.164);
     padding: 2em;
     z-index: 3;
+    border-radius: 3px;
 }
 
 .oneannounce-container-text p { 
@@ -99,6 +100,9 @@
     .oneannounce-container {
         width: 100%;
     }  
+    .oneannounce-container-text {
+        width: 400px;
+    }
 }
 
 @media (max-width :600px) {
@@ -109,4 +113,8 @@
  }     
  .oneannounce-container img{
      width: 100%;
- }}
+ }
+ .oneannounce-container-text {
+     width: 300px;
+ }
+}

@@ -38,7 +38,15 @@
   font-weight: bolder;
   opacity: 75%;
   white-space: nowrap;
+
 }
+
+.infos-container div:nth-child(2) {
+  display: inline-block;
+  line-height: 3em;
+
+}
+
 
 .infos-container-title {
   text-align: center;
@@ -125,6 +133,10 @@
     margin-top:0.3em;
     white-space:normal;
   }
+  .infos-container div:nth-child(2) {
+    line-height: 4em;
+  }
+
 }
 
 @media (max-width:1000px) {
@@ -143,5 +155,8 @@
     height: 5em;
     width: 5em;
     margin-top:0.1em;
+  }
+  .infos-container div:nth-child(2) {
+    line-height: 3em;
   }
 }

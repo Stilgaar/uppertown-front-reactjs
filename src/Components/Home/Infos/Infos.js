@@ -24,7 +24,7 @@ function Infos({ users, ann }) {
   return (
     <div className="infos-container-general">
       <div className="infos-container-title">
-        <h4>UpperTown en quelques chiffres</h4>
+        <h4>UpperTown en chiffres</h4>
       </div>
       <div className="infos-container-container">
         <div className="infos-container">

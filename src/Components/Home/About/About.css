@@ -21,6 +21,7 @@
     flex-direction: column;
     overflow: hidden;
     font-size: 80%;
+    border-radius: 3px;
     
 }
 
