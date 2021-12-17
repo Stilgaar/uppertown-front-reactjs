@@ -10,6 +10,8 @@ function AdminText() {
     const [color, setColor] = useState()
     let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
+    console.log(maincontent)
+
     const handleInput = (e, setter) => { setter(e.target.value) }
 
     const adminTextChange = (e) => {
@@ -35,10 +37,10 @@ function AdminText() {
 
                         <label> Modification du texte de la page d'acceuil </label>
                         <div><textarea className="admin-texterea" type="texte" placeholder="Ce que vous verrez sur la page d'acceuil" onChange={(e) => handleInput(e, setContent)}></textarea></div>
-                       
+
                         <div className="couleurs">
-                        <label>Couleur principale du site</label>
-                        <input type="color" onChange={((e) => handleInput(e, setColor))} />
+                            <label>Couleur principale du site</label>
+                            <input type="color" onChange={((e) => handleInput(e, setColor))} />
                         </div>
 
                         <button type="sumbit" className="admintext-button-validate ">Valider !</button>
