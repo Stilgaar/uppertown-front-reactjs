@@ -25,11 +25,12 @@ function App() {
   const [user, setUser] = useState({});
   let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
 
- let isLog = user !== null;
+  let isLog = user !== null;
 
   function hardRefresh() {
     let localToken = localStorage.getItem("@updownstreet-token");
     if (localToken === null) {
+      localStorage.removeItem("@updownstreet-token");
       return setUser(null)
     }
     axios.get(`${url}/api/users/token`, { headers: { authorization: `Bearer ${localToken}` } })
