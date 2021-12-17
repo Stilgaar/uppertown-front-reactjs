@@ -30,12 +30,17 @@ function App() {
   function hardRefresh() {
     let localToken = localStorage.getItem("@updownstreet-token");
     if (localToken === null) {
-      localStorage.removeItem("@updownstreet-token");
       return setUser(null)
     }
     axios.get(`${url}/api/users/token`, { headers: { authorization: `Bearer ${localToken}` } })
       .then((res) => {
-        setUser(res.data);
+        if (res.data == 'token expire') {
+          localStorage.removeItem("@updownstreet-token");
+          document.location.replace('/');
+        }
+        else {
+          setUser(res.data)
+        }
       })
       .catch(err => console.log(err))
   }
