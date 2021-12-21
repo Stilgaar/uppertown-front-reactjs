@@ -1,13 +1,34 @@
 import './Login.css'
-import { useState } from "react";
-const axios = require('axios');
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import env from "react-dotenv";
 
 function Login({ formState, setFormState, hardRefresh }) {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [responceMessage, setresponceMessage] = useState();
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+    const [url, setURL] = useState(env.URLLOCAL)
+
+    console.log("URL 1", url)
+    console.log(env.URLLOCAL)
+
+    const urlPicker = () => {
+        console.log("doublepouet")
+        axios.get(`${env.URLLOCAL}/api/users/login`)
+            .then((res) => { console.log("RES.DATA", res.data) })
+            .catch(err => console.log("ERROR", err))
+    }
+
+    console.log("URL 2", url)
+
+    useEffect(() => {
+        urlPicker()
+        console.log('pouet')
+    }, [])
+
+    console.log("URL 3", url)
+
     function handleSumbit(e) {
         e.preventDefault();
         let submit = { email, password }

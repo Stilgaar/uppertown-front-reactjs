@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import './userTransac.css'
+import env from "react-dotenv";
 
 function UserProperties() {
   const [obj, setObj] = useState([]);
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
   const userOnline = localStorage.getItem("id");
 
   function getProp() {
-   
+
     fetch(`${url}/api/properties/allProperties`, {
       method: "GET",
     })

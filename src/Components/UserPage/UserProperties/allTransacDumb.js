@@ -2,15 +2,16 @@ import UserTransac from "./userTransacDumb";
 import "./userTransac.css";
 import { useState, useEffect } from "react";
 import UserTransacImmo from "./userTransacDumb";
+import env from "react-dotenv";
 
 function AllTransacDumb() {
   const [ann, setAnn] = useState([]);
   const [obj, setObj] = useState({ user: "", announce: "" });
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
 
-  
+
   function getTransac() {
-    
+
     fetch(`${url}/api/announces/allannounces`, {
       method: "GET",
     })
@@ -22,7 +23,7 @@ function AllTransacDumb() {
       .catch((error) => {
         console.error("Error:", error);
       });
-   
+
     fetch(`${url}/api/transactions/history`, {
       method: "GET",
     })
@@ -39,7 +40,7 @@ function AllTransacDumb() {
           announceId.push(result[i].announceId);
           setObj({ ...obj, announce: result[i].announceId });
         }
-            })
+      })
       .catch((error) => {
         console.error("Error:", error);
       });

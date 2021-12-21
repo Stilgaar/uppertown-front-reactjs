@@ -1,6 +1,7 @@
 import "./PostAnnounce.css";
 import { useEffect, useState } from "react";
-const axios = require('axios');
+import axios from 'axios';
+import env from "react-dotenv";
 
 function PostAnnounce() {
 
@@ -20,8 +21,8 @@ function PostAnnounce() {
     const [image, setImage] = useState([])
     const [pics, setPics] = useState([])
     const [previewPics, setPreviewPics] = useState([]);
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
-    
+    let url = env.URLLOCAL || env.URL
+
     const onLoadFiles = (e) => {
         setImage(e.target.files)
         const reader0 = new FileReader();

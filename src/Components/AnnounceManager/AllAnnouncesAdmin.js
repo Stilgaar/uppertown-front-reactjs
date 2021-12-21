@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "./AnnounceAdmin";
 import "./AllAnnounces.css";
+import env from "react-dotenv";
 
 function AllAnnouncesAdmin() {
   const [announcesList, setAnnouncesList] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+
+  let url = env.URLLOCAL || env.URL
 
   useEffect(() => {
     Axios.get(`${url}/api/announces/allAnnounces`).then(
@@ -22,27 +24,28 @@ function AllAnnouncesAdmin() {
   useEffect(() => {
     const filteredList = announcesList.filter(announce => verifyCorrespondance(announce));
     setFilteredList(filteredList);
-    console.log( "liste filtrée", filteredList);
-}, [filter])
+    console.log("liste filtrée", filteredList);
+  }, [filter])
 
-function handleInput(e) {
-    setFilter(e.target.value);    
-}
+  function handleInput(e) {
+    setFilter(e.target.value);
+  }
 
 
-function verifyCorrespondance(announce) {        
-let regex = new RegExp(filter.toLowerCase());     
-let result = regex.test(announce.city.toLowerCase());     
-    if (result) {         
-    return announce;     
-} }
+  function verifyCorrespondance(announce) {
+    let regex = new RegExp(filter.toLowerCase());
+    let result = regex.test(announce.city.toLowerCase());
+    if (result) {
+      return announce;
+    }
+  }
 
   return (
     <>
       <h2>Pages Annonces</h2>
       <div className="announces-search">
         <input type="text" placeholder="rechercher par ville"
-        onChange={(e) => handleInput(e)} />
+          onChange={(e) => handleInput(e)} />
         <button>rechercher</button>
       </div>
       <div className="announces-page">

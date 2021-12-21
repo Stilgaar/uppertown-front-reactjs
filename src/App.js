@@ -14,16 +14,15 @@ import AnnounceDetail from './Components/AnnounceDetail/AnnounceDetail';
 import Error from './Components/Error/Error';
 //temporaire :
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
-
-
-
-const axios = require('axios');
+import axios from 'axios'
+import env from "react-dotenv";
 
 function App() {
 
   const [formState, setFormState] = useState("none");
   const [user, setUser] = useState({});
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+
+  let url = env.URLLOCAL || env.URL
 
   let isLog = user !== null;
 

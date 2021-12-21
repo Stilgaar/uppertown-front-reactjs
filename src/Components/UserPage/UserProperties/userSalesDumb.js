@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import env from "react-dotenv";
 
 function UserSalesListDumb() {
   const [obj, setObj] = useState([]);
 
   const userOnline = localStorage.getItem("id");
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
 
   function getAllUpToSale() {
     fetch(`${url}/sales/history`, {
@@ -38,8 +39,8 @@ function UserSalesListDumb() {
                 ? sales?.created_at.toLocaleDateString()
                 : new Date(sales?.created_at).toLocaleDateString()}
             </p>
-            <br/>
-            <br/>
+            <br />
+            <br />
           </div>
         );
       }

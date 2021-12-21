@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./StableCoins.css";
+import env from "react-dotenv";
+
 
 
 function StableCoins({ userdata, adminRefresh }) {
 
     const [coins, setCoins] = useState();
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+    let url = env.URLLOCAL || env.URL
 
     function handleInput(e) {
         setCoins(e.target.value);

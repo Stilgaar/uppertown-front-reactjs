@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import './userTransac.css'
+import env from "react-dotenv";
 
 function UserTransacImmo() {
   const [obj, setObj] = useState([]);
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
 
   const userOnline = localStorage.getItem("id");
 
   function getTransac() {
-  
+
     fetch(`${url}api/transactions/history`, {
       method: "GET",
     })
@@ -31,9 +32,9 @@ function UserTransacImmo() {
             <div>Bien : {transac.title} // Type de bien : {transac.type}</div>
             <div>Jetons acquis dans la propriété: {transac.token} tokens</div>
             <div>Montant de la transaction : {transac.sc} SC</div>
-             <div>Prix du bien au moment de l'achat : {transac.price}</div>
+            <div>Prix du bien au moment de l'achat : {transac.price}</div>
             <div>Date de la transaction : {transac?.created_at}</div>
-              <img className="transacuser" src={transac.image[0]}></img>
+            <img className="transacuser" src={transac.image[0]}></img>
           </div>
         );
       }

@@ -8,7 +8,8 @@ import Infos from './Infos/Infos';
 import About from './About/About';
 import OneAnnounce from './OneAnnounce/OneAnnounce';
 import { useEffect, useState } from 'react';
-const axios = require('axios');
+import axios from 'axios';
+import env from "react-dotenv";
 
 
 
@@ -17,7 +18,7 @@ function Home({ formState, setFormState, hardRefresh }) {
     const [users, setUsers] = useState([]);
     const [ann, setAnn] = useState([]);
     const [info, setInfo] = useState([])
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+    let url = env.URLLOCAL || env.URL
 
 
     useEffect(() => {

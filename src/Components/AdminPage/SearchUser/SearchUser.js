@@ -2,6 +2,8 @@ import './SearchUser.css'
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import UserLine from '../UserLine/UserLine';
+import env from "react-dotenv";
+
 
 function SearchUser() {
     // tous les Users
@@ -9,14 +11,15 @@ function SearchUser() {
     // filtres pour une personne
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+    let url = env.URLLOCAL || env.URL
 
     const adminRefresh = () => {
         axios.get(`${url}/api/users/users`)
             .then((res) => {
                 setUsers(res.data);
                 setFiltrerdListOne(res.data)
-            })}
+            })
+    }
 
     useEffect(() => {
         adminRefresh()

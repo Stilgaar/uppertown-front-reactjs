@@ -1,8 +1,9 @@
 import './UserUpdate.css';
 import { useState } from "react";
-const axios = require('axios');
+import axios from 'axios';
+import env from "react-dotenv";
 
-function UserUpdate({user, hardRefresh}) {
+function UserUpdate({ user, hardRefresh }) {
 
     // USESTATE POUR MODIFIER LETAT DES DIFFERENTES BOITES
     const [nameBox, setNameBox] = useState(false);
@@ -31,8 +32,8 @@ function UserUpdate({user, hardRefresh}) {
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
 
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
-    
+    let url = env.URLLOCAL || env.URL
+
     const modifyContent = (email, e) => {
         e.preventDefault();
         let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, newRib }
@@ -40,7 +41,8 @@ function UserUpdate({user, hardRefresh}) {
             submit)
             .then((res) => console.log(res.data))
             .then(() => hardRefresh())
-            .catch((err) => console.log("console.log modify content", err))}
+            .catch((err) => console.log("console.log modify content", err))
+    }
 
     const uploadPI = (email, e) => {
         e.preventDefault();
@@ -50,7 +52,7 @@ function UserUpdate({user, hardRefresh}) {
         axios.post(`${url}/up/id`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
-        .then(() => hardRefresh())
+            .then(() => hardRefresh())
     }
 
     const uploadJustifDomicile = (email, e) => {
@@ -61,7 +63,7 @@ function UserUpdate({user, hardRefresh}) {
         axios.post(`${url}/up/jdd`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
-        .then(() => hardRefresh())
+            .then(() => hardRefresh())
     }
 
     const uploadAvisFiscal = (email, e) => {
@@ -72,7 +74,7 @@ function UserUpdate({user, hardRefresh}) {
         axios.post(`${url}/up/avis`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
-        .then(() => hardRefresh())
+            .then(() => hardRefresh())
     }
 
     const uploadRib = (email, e) => {
@@ -83,17 +85,17 @@ function UserUpdate({user, hardRefresh}) {
         axios.post(`${url}/up/rib`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((res) => console.log(res.data))
-        .then(() => hardRefresh())
+            .then(() => hardRefresh())
     }
 
-    const handleDelete = (email, data) => {              
-        let sumbit = {email, data}
+    const handleDelete = (email, data) => {
+        let sumbit = { email, data }
         axios.post(`${url}/up/delete`, sumbit)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
-        .then(() => hardRefresh())       
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err))
+            .then(() => hardRefresh())
     }
-    
+
     const handleInput = (e, setter) => { setter(e.target.value) }
 
     return (
@@ -107,7 +109,7 @@ function UserUpdate({user, hardRefresh}) {
                         {nameBox &&
 
                             <div >
-                                <form onSubmit={(e) => { modifyContent(user.email, e);  setNameBox(current => !current) }}>
+                                <form onSubmit={(e) => { modifyContent(user.email, e); setNameBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Nouveau Nom</label>
                                         <input className="userupdate-input" type="text" placeholder="Nouveau Nom" onInput={(e) => handleInput(e, setNewLastName)} />
@@ -133,7 +135,7 @@ function UserUpdate({user, hardRefresh}) {
                     <div className="userupdate-container-modify">{emailBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Adresse Mail</div> <div>{user?.email}</div></div>}
                         {emailBox &&
                             <div >
-                                <form onSubmit={(e) => { modifyContent(user.email, e);  setEmailBox(current => !current) }}>
+                                <form onSubmit={(e) => { modifyContent(user.email, e); setEmailBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Nouvel email</label>
                                         <input className="userupdate-input" type="email" placeholder="Nouvel Email" onInput={(e) => handleInput(e, setNewEmail)} />
@@ -153,7 +155,7 @@ function UserUpdate({user, hardRefresh}) {
                     <div className="userupdate-container-modify">{telBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Téléphone</div> <div>{user?.tel}</div></div>}
                         {telBox &&
                             <div >
-                               <form onSubmit={(e) => { modifyContent(user.email, e);  setTelBox(current => !current) }}>
+                                <form onSubmit={(e) => { modifyContent(user.email, e); setTelBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Nouvel Téléphone</label>
                                         <input className="userupdate-input" type="number" placeholder="Nouvel Téléphone" onInput={(e) => handleInput(e, setNewTel)} />
@@ -191,7 +193,7 @@ function UserUpdate({user, hardRefresh}) {
                     <div className="userupdate-container-modify">{adressBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Adresse</div> <div>{user?.adress}</div></div>}
                         {adressBox &&
                             <div >
-                               <form onSubmit={(e) => { modifyContent(user.email, e); setAdressBox(current => !current) }}>
+                                <form onSubmit={(e) => { modifyContent(user.email, e); setAdressBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre Adresse</label>
                                         <input className="userupdate-input" type="text" placeholder="Adresse" onInput={(e) => handleInput(e, setNewAdress)} />
@@ -203,7 +205,7 @@ function UserUpdate({user, hardRefresh}) {
                             </div>
                         }
                     </div>
-                <button className="userupdate-button-modify" onClick={() => setAdressBox(current => !current)}>{ribBox ? "Annuler" : "Modifier"}</button></div>
+                    <button className="userupdate-button-modify" onClick={() => setAdressBox(current => !current)}>{ribBox ? "Annuler" : "Modifier"}</button></div>
 
                 <div className="userupdate-singlecontainer">
                     <div className="userupdate-container-modify">{ribBox ? <div></div> : <div className="userupdate-container-container-ternaire"><div>Relevé d'identité Bancaire</div> {user?.rib?.map((data) => <div>RIB {data} <button className="userupdate-button-validate" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>)}</div>}
@@ -228,8 +230,8 @@ function UserUpdate({user, hardRefresh}) {
                         {piBox &&
                             <div >
 
-                                <form onSubmit={(e) => { uploadPI(user.email, e); setPiBox(current => !current) } }>
-                                         <div className="userupdate-container-label">
+                                <form onSubmit={(e) => { uploadPI(user.email, e); setPiBox(current => !current) }}>
+                                    <div className="userupdate-container-label">
 
 
                                         <label className="userupdate-label">Pièce d'identité</label>
@@ -259,7 +261,7 @@ function UserUpdate({user, hardRefresh}) {
                         {JDDbox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Justificatif de domicile</div> </div>}
                         {JDDbox &&
                             <div >
-                                <form onSubmit={(e) => { uploadJustifDomicile(user.email, e); setJDDbox(current => !current)}} >
+                                <form onSubmit={(e) => { uploadJustifDomicile(user.email, e); setJDDbox(current => !current) }} >
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Justificatif de domicile</label>
                                         <input type="file" name="justificatifdomicile" placeholder="De moins de trois mois" onChange={(e) => setJustifDom(e.target.files[0])} />
@@ -286,7 +288,7 @@ function UserUpdate({user, hardRefresh}) {
                     <div className="userupdate-container-modify">{avisFiscbox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Avis d'imposition</div></div>}
                         {avisFiscbox &&
                             <div >
-                                <form onSubmit={(e) => { uploadAvisFiscal(user.email, e); setAvisFiscbox(current => !current)} }>
+                                <form onSubmit={(e) => { uploadAvisFiscal(user.email, e); setAvisFiscbox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre avis Fiscal</label>
                                         <input type="file" name="avisfiscal" placeholder="Envoyez votre pièce d'identité" onChange={(e) => setAvisFisc(e.target.files[0])} />
@@ -322,10 +324,10 @@ function UserUpdate({user, hardRefresh}) {
                                     <button className="userupdate-button-validate" type="submit">Valider</button>
                                 </form>
                                 {user?.picrib[0] && <div> <p>Votre RIB</p>
-                                    <div className="userupdate-imagecontainer">   
-                                    {user.picrib.map((data) =>                                 
+                                    <div className="userupdate-imagecontainer">
+                                        {user.picrib.map((data) =>
                                             <div> <img className="userupdate-imageuser" src={data} alt="" /> <button className="userupdate-button-delete" onClick={() => handleDelete(user.email, data)}>Supprimer</button></div>
-                                   )}</div>
+                                        )}</div>
                                 </div>}
                             </div>
                         }

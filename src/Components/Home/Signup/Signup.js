@@ -1,6 +1,7 @@
 import "./Signup.css";
 import { useState } from "react";
-const axios = require('axios');
+import axios from 'axios';
+import env from "react-dotenv";
 
 
 function Signup({ formState, setFormState }) {
@@ -12,9 +13,9 @@ function Signup({ formState, setFormState }) {
     const [brandname, setBrandname] = useState();
     const [password, setPassword] = useState();
     const [verifpassword, setVerifPassword] = useState();
-
     const [responceMessage, setResponceMessage] = useState();
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+
+    let url = env.URLLOCAL || env.URL
 
     function handleSumbit(e) {
         e.preventDefault();

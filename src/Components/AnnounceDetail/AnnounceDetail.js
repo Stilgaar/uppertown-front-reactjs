@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
 import Swal from "sweetalert2";
 import Axios from "axios";
+import env from "react-dotenv";
 
 function AnnounceDetail() {
   const [invest, setInvest] = useState();
@@ -29,7 +30,7 @@ function AnnounceDetail() {
   const [idProp, setIdProp] = useState();
   const [totalToken, setTotalToken] = useState()
   const [propExist, setPropExist] = useState("")
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
 
 
   function handleInput(e) {
@@ -71,7 +72,7 @@ function AnnounceDetail() {
 
   const ifExists = () => {
 
-    
+
     fetch(`${url}/api/properties/${userOnline}/${announce._id}`,
       {
         method: "GET",
@@ -128,7 +129,7 @@ function AnnounceDetail() {
         created_at: d
       }
 
-      
+
 
       Axios.post(`${url}/api/transactions/buy`, data)
         .then(res => console.log(res))
@@ -144,7 +145,7 @@ function AnnounceDetail() {
       return false;
     }
 
-    
+
     fetch(`${url}/api/users/${userOnline}`, {
       method: "PUT",
       headers: {
@@ -159,7 +160,7 @@ function AnnounceDetail() {
     });
 
     let newsharenumber = Number(announce.share_number) - Number(invest)
-    fetch(`${url}/api/announces/${announce._id}` , {
+    fetch(`${url}/api/announces/${announce._id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

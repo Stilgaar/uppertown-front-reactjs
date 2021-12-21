@@ -8,7 +8,7 @@ import AddRib from './Addrib/AddRib';
 import PostAnnounce from './PostAnnounce/PostAnnounce';
 import AdminText from './AdminText/AdminText';
 import AdminSplash from './AdminSplash/AdminSplash';
-const axios = require('axios');
+import axios from 'axios';
 
 
 function AdminPage() {

@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import UserSalesListDumb from "./userSalesDumb";
 import "./userTransac.css"
+import env from "react-dotenv";
 
 function AllUpToSales() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [wallet, setWallet] = useState();
   const userOnline = localStorage.getItem("id");
-  let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+  let url = env.URLLOCAL || env.URL
 
   function getUserDatas() {
-    
+
     fetch(`${url}/api/users/${userOnline}`, {
       method: "GET",
     })
@@ -36,7 +37,7 @@ function AllUpToSales() {
         Bonjour {firstName} {lastName}, montant actuel de votre portefeuille :{" "}
         {wallet}{" "}
       </h3>
-      <UserSalesListDumb/>
+      <UserSalesListDumb />
     </div>
   );
 }

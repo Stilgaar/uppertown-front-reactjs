@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './UserVirement.css'
-const axios = require('axios');
+import axios from 'axios';
+import env from "react-dotenv";
 
 function UserVirement({ user, hardRefresh }) {
 
@@ -13,10 +14,10 @@ function UserVirement({ user, hardRefresh }) {
     const [montant, setMontant] = useState();
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || `http://localhost:1337`
+    let url = env.URLLOCAL || env.URL
 
     let currentStable = user.stableCoins
-    
+
     useEffect(() => {
         axios.get(`${url}/admin/getRib`)
             .then((res) => setRIB(res.data))
