@@ -1,33 +1,14 @@
 import './Login.css'
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function Login({ formState, setFormState, hardRefresh }) {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [responceMessage, setresponceMessage] = useState();
-    const [url, setURL] = useState(env.URLLOCAL)
-
-    console.log("URL 1", url)
-    console.log(env.URLLOCAL)
-
-    const urlPicker = () => {
-        console.log("doublepouet")
-        axios.get(`${env.URLLOCAL}/api/users/login`)
-            .then((res) => { console.log("RES.DATA", res.data) })
-            .catch(err => console.log("ERROR", err))
-    }
-
-    console.log("URL 2", url)
-
-    useEffect(() => {
-        urlPicker()
-        console.log('pouet')
-    }, [])
-
-    console.log("URL 3", url)
+    const [url] = useURL()
 
     function handleSumbit(e) {
         e.preventDefault();
@@ -36,7 +17,6 @@ function Login({ formState, setFormState, hardRefresh }) {
         axios.post(`${url}/api/users/login`, submit)
 
             .then((res) => {
-                console.log(res.status);
                 localStorage.setItem("@updownstreet-token", res.data.token)
                 localStorage.setItem("id", res.data.userId)
                 setFormState(null)

@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
 import Swal from "sweetalert2";
 import Axios from "axios";
-import env from "react-dotenv";
+import useURL from '../../Hooks/useURL';
 
 function AnnounceDetail() {
   const [invest, setInvest] = useState();
@@ -30,7 +30,7 @@ function AnnounceDetail() {
   const [idProp, setIdProp] = useState();
   const [totalToken, setTotalToken] = useState()
   const [propExist, setPropExist] = useState("")
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
 
   function handleInput(e) {

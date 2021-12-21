@@ -2,12 +2,12 @@ import UserTransac from "./userTransacDumb";
 import "./userTransac.css";
 import { useState, useEffect } from "react";
 import UserTransacImmo from "./userTransacDumb";
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function AllTransacDumb() {
   const [ann, setAnn] = useState([]);
   const [obj, setObj] = useState({ user: "", announce: "" });
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
 
   function getTransac() {

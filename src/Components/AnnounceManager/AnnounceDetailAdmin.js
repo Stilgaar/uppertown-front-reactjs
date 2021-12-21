@@ -3,7 +3,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import "./AnnounceDetailAdmin.css";
-import env from "react-dotenv";
+import useURL from '../../Hooks/useURL';
 
 function AnnounceDetailAdmin() {
 
@@ -25,7 +25,7 @@ function AnnounceDetailAdmin() {
   const [districtBox, setDistrictBox] = useState(false);
   const [zipBox, setZipBox] = useState(false);
   const [optionsBox, setOptionsBox] = useState(false);
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
 
   const [status, setStatus] = useState({

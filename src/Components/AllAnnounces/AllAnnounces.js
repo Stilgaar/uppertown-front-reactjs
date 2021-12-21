@@ -4,7 +4,7 @@ import Announce from "../Announce/Announce";
 import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import "./AllAnnounces.scss";
-import env from "react-dotenv";
+import useURL from '../../Hooks/useURL'
 
 function AllAnnounces() {
   const [announcesList, setAnnouncesList] = useState([]);
@@ -13,7 +13,8 @@ function AllAnnounces() {
   const [filterBedrooms, setFilterBedrooms] = useState("all");
   const [filterType, setFilterType] = useState("all");
   const [filterPrice, setFilterPrice] = useState(10000000)
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
+
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
     Axios.get(`${url}/api/announces/allAnnounces`).then(

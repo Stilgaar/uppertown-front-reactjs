@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import UserProperties from "./propertiesDumb";
 import "./userTransac.css"
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function AllPropertiesSmart() {
   const userOnline = localStorage.getItem("id");
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
   function getUserDatas() {
     fetch(`${url}/api/users/${userOnline}`, {

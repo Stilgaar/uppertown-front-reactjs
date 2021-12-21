@@ -1,7 +1,7 @@
 import './AddRib.css';
 import { useState } from 'react';
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 
 function AddRib() {
@@ -14,7 +14,7 @@ function AddRib() {
     const [bicSwift, setBicSwift] = useState();
     const [titulaire, setTitulaire] = useState();
     const [domiciliation, setDomiciliation] = useState();
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     const handleSumbit = (e) => {
         e.preventDefault();

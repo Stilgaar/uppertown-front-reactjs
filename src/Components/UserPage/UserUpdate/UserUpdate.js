@@ -1,7 +1,7 @@
 import './UserUpdate.css';
 import { useState } from "react";
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function UserUpdate({ user, hardRefresh }) {
 
@@ -32,7 +32,7 @@ function UserUpdate({ user, hardRefresh }) {
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
 
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     const modifyContent = (email, e) => {
         e.preventDefault();

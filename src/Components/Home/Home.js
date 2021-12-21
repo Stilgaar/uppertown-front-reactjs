@@ -9,26 +9,23 @@ import About from './About/About';
 import OneAnnounce from './OneAnnounce/OneAnnounce';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import env from "react-dotenv";
-
-
+import useURL from '../../Hooks/useURL';
 
 function Home({ formState, setFormState, hardRefresh }) {
 
     const [users, setUsers] = useState([]);
     const [ann, setAnn] = useState([]);
     const [info, setInfo] = useState([])
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
-
-    useEffect(() => {
-        axios.get(`${url}/api/users/users`)
+    useEffect( async () => {
+         await axios.get(`${url}/api/users/users`)
             .then((res) => setUsers(res.data))
-        axios.get(`${url}/api/announces/allAnnounces`)
+         await  axios.get(`${url}/api/announces/allAnnounces`)
             .then((res) => setAnn(res.data))
-        axios.get(`${url}/admin/getRib`)
+         await  axios.get(`${url}/admin/getRib`)
             .then((res) => setInfo(res.data))
-    }, [])
+    }, [url])
 
     return (
         <div>

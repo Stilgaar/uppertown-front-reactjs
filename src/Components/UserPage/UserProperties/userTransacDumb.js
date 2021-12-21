@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './userTransac.css'
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function UserTransacImmo() {
   const [obj, setObj] = useState([]);
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
   const userOnline = localStorage.getItem("id");
 

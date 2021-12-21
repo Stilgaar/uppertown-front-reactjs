@@ -2,7 +2,7 @@ import './SearchUser.css'
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import UserLine from '../UserLine/UserLine';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 
 function SearchUser() {
@@ -11,7 +11,7 @@ function SearchUser() {
     // filtres pour une personne
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     const adminRefresh = () => {
         axios.get(`${url}/api/users/users`)

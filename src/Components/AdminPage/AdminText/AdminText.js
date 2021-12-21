@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './AdminText.css'
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function AdminText() {
 
@@ -9,7 +9,7 @@ function AdminText() {
     const [maintitle, setTitle] = useState()
     const [maincontent, setContent] = useState()
     const [color, setColor] = useState()
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     console.log(maincontent)
 

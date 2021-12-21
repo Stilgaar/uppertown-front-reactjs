@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import UserSalesListDumb from "./userSalesDumb";
 import "./userTransac.css"
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function AllUpToSales() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [wallet, setWallet] = useState();
   const userOnline = localStorage.getItem("id");
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
   function getUserDatas() {
 

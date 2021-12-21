@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './UserVirement.css'
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function UserVirement({ user, hardRefresh }) {
 
@@ -14,7 +14,7 @@ function UserVirement({ user, hardRefresh }) {
     const [montant, setMontant] = useState();
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     let currentStable = user.stableCoins
 

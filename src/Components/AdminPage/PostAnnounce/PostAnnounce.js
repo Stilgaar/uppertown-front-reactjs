@@ -1,7 +1,7 @@
 import "./PostAnnounce.css";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function PostAnnounce() {
 
@@ -21,7 +21,7 @@ function PostAnnounce() {
     const [image, setImage] = useState([])
     const [pics, setPics] = useState([])
     const [previewPics, setPreviewPics] = useState([]);
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     const onLoadFiles = (e) => {
         setImage(e.target.files)

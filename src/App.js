@@ -15,15 +15,14 @@ import Error from './Components/Error/Error';
 //temporaire :
 import AnnounceDetailAdmin from './Components/AnnounceManager/AnnounceDetailAdmin';
 import axios from 'axios'
-import env from "react-dotenv";
+import useURL from './Hooks/useURL';
 
 function App() {
 
   const [formState, setFormState] = useState("none");
   const [user, setUser] = useState({});
-
-  let url = env.URLLOCAL || env.URL
-
+  const [url] = useURL()
+  
   let isLog = user !== null;
 
   function hardRefresh() {

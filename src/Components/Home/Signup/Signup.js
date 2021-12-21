@@ -1,8 +1,7 @@
 import "./Signup.css";
 import { useState } from "react";
 import axios from 'axios';
-import env from "react-dotenv";
-
+import useURL from '../../../Hooks/useURL';
 
 function Signup({ formState, setFormState }) {
 
@@ -14,8 +13,7 @@ function Signup({ formState, setFormState }) {
     const [password, setPassword] = useState();
     const [verifpassword, setVerifPassword] = useState();
     const [responceMessage, setResponceMessage] = useState();
-
-    let url = env.URLLOCAL || env.URL
+    const [url] = useURL()
 
     function handleSumbit(e) {
         e.preventDefault();

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Announce from "./AnnounceAdmin";
 import "./AllAnnounces.css";
-import env from "react-dotenv";
+import useURL from '../../Hooks/useURL'
 
 function AllAnnouncesAdmin() {
   const [announcesList, setAnnouncesList] = useState([]);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState();
 
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
   useEffect(() => {
     Axios.get(`${url}/api/announces/allAnnounces`).then(

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import env from "react-dotenv";
+import useURL from '../../../Hooks/useURL';
 
 function UserSalesListDumb() {
   const [obj, setObj] = useState([]);
 
   const userOnline = localStorage.getItem("id");
-  let url = env.URLLOCAL || env.URL
+  const [url] = useURL()
 
   function getAllUpToSale() {
     fetch(`${url}/sales/history`, {
