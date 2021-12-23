@@ -25,7 +25,7 @@ function Home({ formState, setFormState, hardRefresh }) {
             .then((res) => setAnn(res.data))
          await  axios.get(`${url}/admin/getRib`)
             .then((res) => setInfo(res.data))
-    }, [url])
+    }, [])
 
     return (
         <div>

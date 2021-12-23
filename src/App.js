@@ -34,6 +34,7 @@ function App() {
       .then((res) => {
         if (res.data == 'token expire') {
           localStorage.removeItem("@updownstreet-token");
+          localStorage.removeItem("@uppertown-url");
           document.location.replace('/');
         }
         else {

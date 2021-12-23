@@ -15,6 +15,8 @@ function Signup({ formState, setFormState }) {
     const [responceMessage, setResponceMessage] = useState();
     const [url] = useURL()
 
+    console.log(url)
+
     function handleSumbit(e) {
         e.preventDefault();
         let submit = { lastname, firstname, email, tel, brandname, password, verifpassword }

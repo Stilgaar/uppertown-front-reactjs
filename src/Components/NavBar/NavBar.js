@@ -14,6 +14,7 @@ function NavBar({formState, setFormState, isLog, user}) {
     }
     function logout(){
         localStorage.removeItem("@updownstreet-token");
+        localStorage.removeItem("@uppertown-url");
         document.location.replace('/');
     }
 

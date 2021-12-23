@@ -10,6 +10,8 @@ function Login({ formState, setFormState, hardRefresh }) {
     const [responceMessage, setresponceMessage] = useState();
     const [url] = useURL()
 
+    console.log("URL IN LOGIN", url)
+
     function handleSumbit(e) {
         e.preventDefault();
         let submit = { email, password }
