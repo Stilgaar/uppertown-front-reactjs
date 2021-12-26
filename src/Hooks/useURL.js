@@ -1,6 +1,6 @@
 import axios from "axios";
 import env from "react-dotenv";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function useURL() {
   let hurles = [

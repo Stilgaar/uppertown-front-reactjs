@@ -3,15 +3,14 @@ import './NavBar.scss';
 
 import { Link } from "react-router-dom";
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import FormContext from "../../Context/FormContext";
 
-function NavBar({formState, setFormState, isLog, user}) {
-
+function NavBar( props ) {
+ 
     const [showMenu, setShowMenu] = useState(false)
+    const FormContextValue = useContext(FormContext);
 
-    function showForm(value){
-        setFormState(value)
-    }
     function logout(){
         localStorage.removeItem("@updownstreet-token");
         localStorage.removeItem("@uppertown-url");
@@ -25,24 +24,26 @@ function NavBar({formState, setFormState, isLog, user}) {
     function closeMenu() {
         setShowMenu(false)
     }
+
     return (
         <>
         <div className="navbar">
+      
             <Link to="/"style={{textDecoration: "none", color: "white"}}> 
             <div className="logoh1"><h1 className="logo">UpperTown</h1></div></Link> 
             <div className="menu">
-                {isLog ?
+                {props.isLog ?
                 <>
                     <Link to="/"><p>Accueil</p></Link>
                     <Link to="/announces"><p>Annonces</p></Link>
-                    <Link to="/userpage"><p className="perso">Chez {user?.firstname}</p></Link>
-                    {user?.isAdmin && <Link to="/admin"><p>Administratif</p></Link>}
+                    <Link to="/userpage"><p className="perso">Chez {props?.user?.firstname}</p></Link>
+                    {props?.user?.isAdmin && <Link to="/admin"><p>Administratif</p></Link>}
                     <p className="btn-connecter" onClick={() => logout()}>Logout</p>
                 </>
                 : 
                 <>
-                    <p className="btn-connecter" onClick={() => showForm("login")}>Log In</p>
-                    <p className="btn-connecter" onClick={() => showForm("signin")}>Sign Up</p>
+                    <p className="btn-connecter" onClick={FormContextValue.handleLogin}>Log In</p>
+                    <p className="btn-connecter" onClick={FormContextValue.handleSigin}>Sign Up</p>
                 </>
                 }
             </div>
@@ -52,12 +53,12 @@ function NavBar({formState, setFormState, isLog, user}) {
         </div>
         {showMenu && 
         <div className="hide-menu">
-        {isLog ?
+        {props.isLog ?
                 <>
                     <Link to="/" onClick={closeMenu}><p>Accueil</p></Link>
                     <Link to="/announces" onClick={closeMenu}><p>Annonces</p></Link>
-                    <Link to="/userpage" onClick={closeMenu}><p className="perso">Coin Perso {user?.firstname}</p></Link>
-                    {user?.isAdmin && <Link to="/admin" onClick={closeMenu}><p>Administratif</p></Link>}
+                    <Link to="/userpage" onClick={closeMenu}><p className="perso">Coin Perso {props?.user?.firstname}</p></Link>
+                    {props?.user?.isAdmin && <Link to="/admin" onClick={closeMenu}><p>Administratif</p></Link>}
                     <p className="btn-connecter" onClick={() => {
                         logout();
                         closeMenu();
@@ -66,10 +67,8 @@ function NavBar({formState, setFormState, isLog, user}) {
                 : 
                 <>
                     <p className="btn-connecter" onClick={() => {
-                        showForm("login");
                         closeMenu()}}>Log In</p>
                     <p className="btn-connecter" onClick={() => {
-                        showForm("signin")
                         closeMenu();
                     }
                     }>Sign Up</p>
