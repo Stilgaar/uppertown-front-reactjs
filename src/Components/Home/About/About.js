@@ -1,6 +1,12 @@
 import "./About.css";
+import useURL from "../../../Hooks/useURL";
+import useAxios from "../../../Hooks/useAxios";
 
-function About({ info }) {
+function About() {
+
+  const [url] = useURL();
+  const [info] = useAxios(`${url}/admin/getRib`)
+
   return (
     <div className="about-container-container">
       <div className="about-container-image">

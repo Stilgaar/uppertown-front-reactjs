@@ -1,13 +1,19 @@
 import "./OneAnnounce.css";
+import useURL from "../../../Hooks/useURL";
+import useAxios from "../../../Hooks/useAxios";
 
-function OneAnnounce({ ann }) {
+function OneAnnounce() {
+
+  const [url] = useURL();
+  const [ann] = useAxios(`${url}/api/announces/allAnnounces`)
+
   let announceRandom = ann[Math.floor(Math.random() * ann.length)];
 
   return (
 
     <div className="oneannounce-container-container">
       <div className="oneannounce-title-container"><h4>UpperTown vous propose</h4> </div>
-      
+
       <div className="oneannounce-image-text-container">
         <div className="oneannounce-container">
           <img

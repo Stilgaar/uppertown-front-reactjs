@@ -1,47 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function useSubmit(url) {
   const [data, setData] = useState({});
   const [resMsg, setResMsg] = useState();
-  const [formSigin, setFormSignin] = useState()
-  const [formLogin, setFormLogin] = useState()
-  
-  console.log("usesubmit signin", formSigin)
-  console.log("usesumbit login", formLogin)
+  const [form, setForm] = useState()
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     e.persist()
     e.target.reset()
     axios.post(url, data)
-    .then((res) => 
-     { if (res.data === "Compte crée avec Succéss !")
-       { setResMsg(res.data);
-        setTimeout(function () {
-          setFormLogin(true)
-          setFormSignin(false)
-          setResMsg('');
-      }, 1000);
-      } 
-        else { setResMsg(res.data) }
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        console.log(res.data)
+        if (res.data === "Compte crée avec Succéss !") {
+          setResMsg(res.data)
+          setTimeout(function () {
+            setResMsg('');
+            handleLogin();
+          }, 1500);
+        }
+        else if (res.data.token) {
+          localStorage.setItem("@updownstreet-token", res.data.token);
+          localStorage.setItem("id", res.data.userId);
+          handleClick()
+          document.location.replace('/');
+        }
+        else {
+          setResMsg(res.data)
+          setTimeout(function () {
+            setResMsg('');
+          }, 2500);
+        }
+      })
+      .then(() => { })
+      .catch((err) => console.log(err))
   };
 
   const handleClick = () => {
-    setFormLogin("")
-    setFormSignin("")
+    setForm()
   }
 
   const handleLogin = () => {
-   setFormLogin(true)
-   setFormSignin("")
+    setForm("login")
   }
-  
+
   const handleSigin = () => {
-    setFormSignin(true)
-    setFormLogin("")
+    setForm("signin")
   }
 
   const handleChange = (e) => {
@@ -51,20 +56,14 @@ function useSubmit(url) {
   };
 
   const FormContextValue = {
-    formLogin: formLogin,
-    formSigin: formSigin,
+    form: form,
     handleLogin: handleLogin,
     handleSigin: handleSigin,
     handleClick: handleClick,
-    
+
   };
 
-  return [data, handleChange, handleSubmit, resMsg, handleClick, handleLogin, handleSigin, formSigin, formLogin, FormContextValue];
+  return [data, handleChange, handleSubmit, resMsg, handleClick, handleLogin, handleSigin, form, FormContextValue];
 }
 
 export default useSubmit;
-
-//setTimeout(function () {
-//   setResMsg();
-//    setFormState("login");
-//  }, 2000);

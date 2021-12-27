@@ -1,0 +1,11 @@
+POST http://localhost:1337/api/users/signup
+Content-Type: application/json
+
+{
+    "firstname": "trse",
+    "lastname": "74544",
+    "email": "email",
+    "tel": 06,
+    "password": "0",
+    "verifpassword" : "0"
+} 
