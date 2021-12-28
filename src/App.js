@@ -18,11 +18,13 @@ import axios from "axios";
 import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
 import FormContext from "./Context/FormContext";
+import URLContext from "./Context/FormContext";
 
 function App() {
   const [user, setUser] = useState({});
-  const [url] = useURL();
+  const [URLContextValue] = useURL();
   const [FormContextValue] = useSubmit();
+  console.log(URLContextValue.url)
 
   let isLog = user !== null;
 
@@ -32,7 +34,7 @@ function App() {
       return setUser(null);
     }
     axios
-      .get(`${url}/api/users/token`, {
+      .get(`${URLContextValue.url}/api/users/token`, {
         headers: { authorization: `Bearer ${localToken}` },
       })
       .then((res) => {
@@ -49,7 +51,11 @@ function App() {
 
   useEffect(() => {
     hardRefresh();
-  }, []);
+    let url = localStorage.getItem("@uppertown-url")
+    if (!url){
+    URLContextValue.getURL()
+  }
+  }, [URLContextValue.url]);
 
   return (
     <div className="app">

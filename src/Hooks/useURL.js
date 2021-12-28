@@ -35,6 +35,11 @@ export default function useURL() {
     }
   }, [])
 
+  const URLContextValue = {
+    url: url,
+    getURL: getURL
+  };
 
-  return [url];
+
+  return [URLContextValue];
 }

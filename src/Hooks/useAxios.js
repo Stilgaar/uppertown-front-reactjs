@@ -10,6 +10,7 @@ const useAxios = (url) => {
             .then((res) => setData(res.data))
             .catch((err) => console.log(err))
     }, [url])
+    
     return [data];
 
 }
