@@ -180,7 +180,7 @@ window.env = {
   "npm_package_description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "npm_package_eslintConfig_extends_0": "react-app",
   "npm_package_eslintConfig_extends_1": "react-app/jest",
-  "npm_package_gitHead": "2276064b2f26e1dd8300f1728093ff882402a352",
+  "npm_package_gitHead": "252ca17b9ad36e995a402839c47c47180c7b50f2",
   "npm_package_name": "frontend",
   "npm_package_private": "true",
   "npm_package_readmeFilename": "README.md",
