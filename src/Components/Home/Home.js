@@ -9,9 +9,7 @@ import FormContext from "../../Context/FormContext";
 
 function Home() {
 
-  const FormContextValue = useContext(FormContext);
-
-  console.log(FormContextValue)
+  const FormContextValue = useContext(FormContext)
 
   return (
     <div>

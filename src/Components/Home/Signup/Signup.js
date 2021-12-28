@@ -3,7 +3,7 @@ import useURL from "../../../Hooks/useURL";
 import FormContext from "../../../Context/FormContext";
 import { useContext, useEffect } from 'react';
 
-function Signup(props) {
+function Signup() {
 
   const [url] = useURL();
   const FormContextValue = useContext(FormContext);
@@ -109,7 +109,7 @@ function Signup(props) {
           </button>
         </form>
 
-        <p className="signup-fasle-link" onClick={props.handleLogin}>
+        <p className="signup-fasle-link" onClick={FormContextValue.handleLogin}>
           J'ai deja un compte
         </p>
       </div>
