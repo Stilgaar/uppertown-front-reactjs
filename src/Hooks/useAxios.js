@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-const useAxios = (url, headers) => {
+const useAxios = (url) => {
 
     const [data, setData] = useState([])
 
@@ -10,7 +10,6 @@ const useAxios = (url, headers) => {
             .then((res) => setData(res.data))
             .catch((err) => console.log(err))
     }, [url])
-
     return [data];
 
 }

@@ -60,6 +60,12 @@ function useSubmit(info) {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("@updownstreet-token");
+    localStorage.removeItem("@uppertown-url");
+    document.location.replace('/');
+  }
+
   const FormContextValue = {
     form: form,
     data: data,
@@ -69,7 +75,8 @@ function useSubmit(info) {
     handleSigin: handleSigin,
     handleClick: handleClick,
     handleSubmit: handleSubmit,
-    handleURL: handleURL
+    handleURL: handleURL,
+    logout: logout,
   };
 
   return [FormContextValue];
