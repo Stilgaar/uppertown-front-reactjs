@@ -1,6 +1,4 @@
 import "./Home.css";
-import "./Home.scss";
-
 import Signup from "../Home/Signup/Signup";
 import Login from "../Home/Login/Login";
 import Infos from "./Infos/Infos";
@@ -13,31 +11,27 @@ function Home() {
 
   const FormContextValue = useContext(FormContext);
 
+  console.log(FormContextValue)
+
   return (
     <div>
-      <div className="home">
-        {FormContextValue.form === "signin" && (
-          <Signup
-            handleLogin={FormContextValue.handleLogin}
-            handleSigin={FormContextValue.handleSigin}
-            handleClick={FormContextValue.handleClick}
+      <FormContext.Provider value={FormContextValue}>
+        <div className="home">
+          {FormContextValue.form === "signin" && (
+            <Signup />
+          )}
+          {FormContextValue.form === "login" && (
+            <Login />
+          )}
+          <img
+            src="https://www.icietlabas.fr/wp-content/uploads/2021/05/Photographie-Architecturale-Barlelone-que-faire-a-Barcelone-Que-faire-en-espagne-Tutoriel-Photo-Tuto-Photo-blog-voyage-32-scaled.jpg"
+            alt="Photo accueil"
           />
-        )}
-        {FormContextValue.form === "login" && (
-          <Login
-            handleLogin={FormContextValue.handleLogin}
-            handleSigin={FormContextValue.handleSigin}
-            handleClick={FormContextValue.handleClick}
-          />
-        )}
-        <img
-          src="https://www.icietlabas.fr/wp-content/uploads/2021/05/Photographie-Architecturale-Barlelone-que-faire-a-Barcelone-Que-faire-en-espagne-Tutoriel-Photo-Tuto-Photo-blog-voyage-32-scaled.jpg"
-          alt="Photo accueil"
-        />
-        <About />
-      </div>
-      <OneAnnounce />
-      <Infos />
+          <About />
+        </div>
+        <OneAnnounce />
+        <Infos />
+      </FormContext.Provider>
     </div>
   );
 }

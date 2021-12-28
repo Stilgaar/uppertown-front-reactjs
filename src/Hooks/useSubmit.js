@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-function useSubmit(url) {
+function useSubmit(info) {
   const [data, setData] = useState({});
   const [resMsg, setResMsg] = useState();
-  const [form, setForm] = useState()
+  const [form, setForm] = useState();
+  const [url, setUrl] = useState()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,58 +13,66 @@ function useSubmit(url) {
     e.target.reset()
     axios.post(url, data)
       .then((res) => {
-        console.log(res.data)
         if (res.data === "Compte crée avec Succéss !") {
           setResMsg(res.data)
-          setTimeout(function () {
+          setTimeout(() => {
             setResMsg('');
-            handleLogin();
+            setForm('login')
           }, 1500);
         }
         else if (res.data.token) {
           localStorage.setItem("@updownstreet-token", res.data.token);
           localStorage.setItem("id", res.data.userId);
-          handleClick()
           document.location.replace('/');
         }
         else {
           setResMsg(res.data)
-          setTimeout(function () {
+          setTimeout(() => {
             setResMsg('');
           }, 2500);
         }
       })
-      .then(() => { })
       .catch((err) => console.log(err))
   };
 
   const handleClick = () => {
-    setForm()
+    setForm('')
   }
 
   const handleLogin = () => {
-    setForm("login")
+    setForm('login')
   }
 
   const handleSigin = () => {
-    setForm("signin")
+    setForm('signin')
+  }
+
+  const handleURL = (data) => {
+    setUrl(data)
   }
 
   const handleChange = (e) => {
     e.preventDefault()
     e.persist()
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
+    if (info) {
+      setData((data) => ({ ...data, ['email']: info }));
+    }
   };
 
   const FormContextValue = {
     form: form,
+    data: data,
+    resMsg: resMsg,
+    handleChange: handleChange,
     handleLogin: handleLogin,
     handleSigin: handleSigin,
     handleClick: handleClick,
-
+    handleSubmit: handleSubmit,
+    handleURL: handleURL
   };
 
-  return [data, handleChange, handleSubmit, resMsg, handleClick, handleLogin, handleSigin, form, FormContextValue];
+  return [FormContextValue];
 }
 
 export default useSubmit;

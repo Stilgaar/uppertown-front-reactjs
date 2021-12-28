@@ -1,9 +1,13 @@
 import './UserUpdate.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import useURL from '../../../Hooks/useURL';
+import useSubmit from '../../../Hooks/useSubmit';
 
 function UserUpdate({ user, hardRefresh }) {
+
+    const [url] = useURL()
+    const [data, handleChange, handleSubmit] = useSubmit(`${url}/api/users/modifyUser`, user.email, hardRefresh)
 
     // USESTATE POUR MODIFIER LETAT DES DIFFERENTES BOITES
     const [nameBox, setNameBox] = useState(false);
@@ -32,12 +36,10 @@ function UserUpdate({ user, hardRefresh }) {
     const [avisFisc, setAvisFisc] = useState();
     const [picRib, setPicRib] = useState();
 
-    const [url] = useURL()
-
     const modifyContent = (email, e) => {
         e.preventDefault();
         let submit = { email, newfirstname, newlastname, newemail, newtel, newbrandname, newadress, newRib }
-        axios.patch(`${url}/api/users/modifyUser`,
+        axios.post(`${url}/api/users/modifyUser`,
             submit)
             .then((res) => console.log(res.data))
             .then(() => hardRefresh())
@@ -109,19 +111,29 @@ function UserUpdate({ user, hardRefresh }) {
                         {nameBox &&
 
                             <div >
-                                <form onSubmit={(e) => { modifyContent(user.email, e); setNameBox(current => !current) }}>
-                                    <div className="userupdate-container-label">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="userupdate-container-label" onClick={(e) => e.stopPropagation()}>
                                         <label className="userupdate-label">Nouveau Nom</label>
-                                        <input className="userupdate-input" type="text" placeholder="Nouveau Nom" onInput={(e) => handleInput(e, setNewLastName)} />
+                                        <input
+                                            values={data.newlastname || ""}
+                                            className="userupdate-input"
+                                            type="text"
+                                            placeholder="Nouveau Nom"
+                                            name="newlastname"
+                                            onChange={handleChange} />
                                     </div>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label"> Nouveau Prénom</label>
-                                        <input className="userupdate-input" type="text" placeholder="Nouveau Prènom" onInput={(e) => handleInput(e, setNewFirstName)} />
+                                        <input
+                                            values={data.newfirstname || ""}
+                                            className="userupdate-input"
+                                            type="text"
+                                            placeholder="Nouveau Prènom"
+                                            name="newfirstname"
+                                            onInput={handleChange} />
                                     </div>
-
                                     <div className="userupdate-container-warning">Attention toute modification de votre Nom ou Prénom vous obligera à nous faire parvenir
                                         au plus vite une nouvelle pièce d'idendité</div>
-
                                     <button className="userupdate-button-validate" type="submit" >Valider</button>
                                 </form>
 
@@ -138,7 +150,11 @@ function UserUpdate({ user, hardRefresh }) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setEmailBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Nouvel email</label>
-                                        <input className="userupdate-input" type="email" placeholder="Nouvel Email" onInput={(e) => handleInput(e, setNewEmail)} />
+                                        <input
+                                            className="userupdate-input"
+                                            type="email"
+                                            placeholder="Nouvel Email"
+                                            onInput={(e) => handleInput(e, setNewEmail)} />
                                     </div>
                                     <div className="userupdate-container-warning"> Placeholder : est-ce qu'il faut qu'on mette en place une verification d'email ?
                                     </div>
@@ -158,7 +174,11 @@ function UserUpdate({ user, hardRefresh }) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setTelBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Nouvel Téléphone</label>
-                                        <input className="userupdate-input" type="number" placeholder="Nouvel Téléphone" onInput={(e) => handleInput(e, setNewTel)} />
+                                        <input
+                                            className="userupdate-input"
+                                            type="number"
+                                            placeholder="Nouvel Téléphone"
+                                            onInput={(e) => handleInput(e, setNewTel)} />
                                     </div>
                                     <div className="userupdate-container-warning"> Votre numéro de téléphone personnel
                                     </div>
@@ -177,7 +197,11 @@ function UserUpdate({ user, hardRefresh }) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setBrandNameBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Changement d'entreprise</label>
-                                        <input className="userupdate-input" type="text" placeholder="Entreprise" onInput={(e) => handleInput(e, setNewBranName)} />
+                                        <input
+                                            className="userupdate-input"
+                                            type="text"
+                                            placeholder="Entreprise"
+                                            onInput={(e) => handleInput(e, setNewBranName)} />
                                     </div>
                                     <div className="userupdate-container-warning"> Placeholder {`null`}
                                     </div>
@@ -196,7 +220,11 @@ function UserUpdate({ user, hardRefresh }) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setAdressBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Votre Adresse</label>
-                                        <input className="userupdate-input" type="text" placeholder="Adresse" onInput={(e) => handleInput(e, setNewAdress)} />
+                                        <input
+                                            className="userupdate-input"
+                                            type="text"
+                                            placeholder="Adresse"
+                                            onInput={(e) => handleInput(e, setNewAdress)} />
                                     </div>
                                     <div className="userupdate-container-warning">Attention toute modification de votre adresse vous obligera à nous faire parvenir
                                         au plus vite un nouveau justificatif de domicile</div>
@@ -214,7 +242,11 @@ function UserUpdate({ user, hardRefresh }) {
                                 <form onSubmit={(e) => { modifyContent(user.email, e); setRibBox(current => !current) }}>
                                     <div className="userupdate-container-label">
                                         <label className="userupdate-label">Vos / Votre Numéro de Relevé d'Identité Bancaire</label>
-                                        <input className="userupdate-input" type="text" placeholder="IBAN FR00 1234 5123 4512 3456 7891 A12" onInput={(e) => handleInput(e, setNewRib)} />
+                                        <input
+                                            className="userupdate-input"
+                                            type="text"
+                                            placeholder="IBAN FR00 1234 5123 4512 3456 7891 A12"
+                                            onInput={(e) => handleInput(e, setNewRib)} />
                                     </div>
                                     <div className="userupdate-container-warning">Attention tout ajout ou modification de votre RIB vous obligera à nous faire parvenir
                                         au plus vite un nouveau RIB</div>
@@ -334,7 +366,7 @@ function UserUpdate({ user, hardRefresh }) {
                     </div>
                     <button className="userupdate-button-modify" onClick={() => setSendRibBox(current => !current)}>{sendRibBox ? "Annuler" : "Envoyer"}</button></div>
             </div>
-        </div>
+        </div >
 
     )
 }

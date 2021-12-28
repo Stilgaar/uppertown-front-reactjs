@@ -7,3 +7,8 @@
   height: 100%;
   z-index: 0;
 }
+
+.home{
+  display: flex;
+  margin: 20px;
+}

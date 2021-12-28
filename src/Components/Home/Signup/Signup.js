@@ -1,76 +1,81 @@
 import "./Signup.css";
 import useURL from "../../../Hooks/useURL";
-import useSubmit from "../../../Hooks/useSubmit";
+import FormContext from "../../../Context/FormContext";
+import { useContext, useEffect } from 'react';
 
 function Signup(props) {
 
   const [url] = useURL();
-  const [data, handleChange, handleSubmit, resMsg] = useSubmit(`${url}/api/users/signup`)
+  const FormContextValue = useContext(FormContext);
+
+  useEffect(() => {
+    FormContextValue.handleURL(`${url}/api/users/signup`)
+  }, [])
 
   return (
-    <div className="signup-form" onClick={props.handleClick}>
+    <div className="signup-form" onClick={FormContextValue.handleClick}>
       <div className="signup" onClick={(e) => e.stopPropagation()}>
         <form className="signup-container"
-          onSubmit={handleSubmit}>
+          onSubmit={FormContextValue.handleSubmit}>
           <h4 className="signup-title">Créer mon compte</h4>
           <div className="signup-container-nomprenom">
             <div className="signup-container-nom">
               <label>Nom</label>
               <input
-                values={data.lastname || ""}
+                values={FormContextValue.data.lastname || ""}
                 className="singup-input nom"
                 type="text"
                 name="lastname"
                 placeholder="Dupuy"
-                onChange={handleChange}
+                onChange={FormContextValue.handleChange}
               />
             </div>
 
             <div className="signup-container-prenom">
               <label>Prènom</label>
               <input
-                values={data.firstname || ""}
+                values={FormContextValue.data.firstname || ""}
                 className="singup-input prenom"
                 type="text"
                 placeholder="Julien"
                 name="firstname"
-                onChange={handleChange}
+                onChange={FormContextValue.handleChange}
               />
             </div>
           </div>
           <div className="signup-container-email">
             <label>Email</label>
             <input
-              values={data.email || ""}
+              values={FormContextValue.data.email || ""}
               className="singup-input email"
               type="mail"
               placeholder="Julien.Dupuy@updown.street"
               name="email"
-              onChange={handleChange}
+              onChange={FormContextValue.handleChange}
             />
           </div>
 
           <div className="signup-container-tel">
             <label>Téléphone</label>
             <input
-              values={data.tel || ""}
+              values={FormContextValue.data.tel || ""}
               className="singup-input tel"
               type="number"
               placeholder="0606060606"
               name="tel"
-              onChange={handleChange}
+              onChange={FormContextValue.handleChange}
             />
           </div>
 
           <div className="signup-container-societe">
             <label>Socièté</label>
             <input
-              values={data.brandname || ""}
+              values={FormContextValue.data.brandname || ""}
               className="singup-input societe"
               type="text"
               name="brandname"
               placeholder="Up Down Street"
-              onChange={handleChange}
+              onChange={FormContextValue.handleChange}
             />
           </div>
 
@@ -78,24 +83,24 @@ function Signup(props) {
             <div className="signup-container-mdp">
               <label>Mot de Passe</label>
               <input
-                values={data.password || ""}
+                values={FormContextValue.data.password || ""}
                 className="singup-input mdp"
                 type="password"
                 placeholder="**********"
                 name="password"
-                onChange={handleChange}
+                onChange={FormContextValue.handleChange}
               />
             </div>
 
             <div className="signup-container-verifmdp">
               <label>Vérification</label>
               <input
-                values={data.verifpassword || ""}
+                values={FormContextValue.data.verifpassword || ""}
                 className="singup-input verifmdp"
                 type="password"
                 placeholder="**********"
                 name="verifpassword"
-                onChange={handleChange}
+                onChange={FormContextValue.handleChange}
               />
             </div>
           </div>
@@ -108,7 +113,7 @@ function Signup(props) {
           J'ai deja un compte
         </p>
       </div>
-      {resMsg && <div className="message-box">{resMsg}</div>}
+      {FormContextValue.resMsg && <div className="message-box">{FormContextValue.resMsg}</div>}
     </div>
   );
 }

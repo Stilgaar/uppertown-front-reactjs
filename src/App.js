@@ -1,7 +1,9 @@
 import "./App.css";
 import "./App.scss";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Home from "./Components/Home/Home";
 import AdminPage from "./Components/AdminPage/AdminPage";
 import AllAnnounces from "./Components/AllAnnounces/AllAnnounces";
@@ -12,16 +14,38 @@ import AnnounceDetail from "./Components/AnnounceDetail/AnnounceDetail";
 import Error from "./Components/Error/Error";
 //temporaire :
 import AnnounceDetailAdmin from "./Components/AnnounceManager/AnnounceDetailAdmin";
+import axios from "axios";
 import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
 import FormContext from "./Context/FormContext";
-import useToken from "./Hooks/useToken";
 
 function App() {
-  //  const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   const [url] = useURL();
-  const [, , , , , , , , FormContextValue] = useSubmit();
-  const [user, isLog, hardRefresh] = useToken(`${url}/api/users/token`)
+  const [FormContextValue] = useSubmit();
+
+  let isLog = user !== null;
+
+  function hardRefresh() {
+    let localToken = localStorage.getItem("@updownstreet-token");
+    if (localToken === null) {
+      return setUser(null);
+    }
+    axios
+      .get(`${url}/api/users/token`, {
+        headers: { authorization: `Bearer ${localToken}` },
+      })
+      .then((res) => {
+        if (res.data == "token expire") {
+          localStorage.removeItem("@updownstreet-token");
+          localStorage.removeItem("@uppertown-url");
+          document.location.replace("/");
+        } else {
+          setUser(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     hardRefresh();
@@ -29,7 +53,7 @@ function App() {
 
   return (
     <div className="app">
-      <FormContext.Provider value={FormContextValue}>
+      <FormContext.Provider value={FormContextValue} >
         <Router>
           <div className="main">
             <NavBar
@@ -38,8 +62,7 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <Home
-                  hardRefresh={hardRefresh}
-                />
+                  hardRefresh={hardRefresh} />
               </Route>
               <Route path="/announces">
                 {isLog ? <AllAnnounces /> : <Error />}
