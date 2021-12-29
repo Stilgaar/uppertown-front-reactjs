@@ -1,15 +1,15 @@
 import "./Signup.css";
-import useURL from "../../../Hooks/useURL";
 import FormContext from "../../../Context/FormContext";
 import { useContext, useEffect } from 'react';
+import URLcontext from "../../../Context/URLcontext";
 
 function Signup() {
 
-  const [url] = useURL();
+  const URLContextValue = useContext(URLcontext)
   const FormContextValue = useContext(FormContext);
 
   useEffect(() => {
-    FormContextValue.handleURL(`${url}/api/users/signup`)
+    FormContextValue.handleURL(`${URLContextValue.url}/api/users/signup`)
   }, [])
 
   return (

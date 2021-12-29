@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import './UserVirement.css'
 import axios from 'axios';
-import useURL from '../../../Hooks/useURL';
+import URLcontext from '../../../Context/URLcontext';
 
 function UserVirement({ user, hardRefresh }) {
+
 
     const [acheter, setAcheter] = useState(false);
     const [vendre, setVendre] = useState(false);
@@ -14,19 +15,20 @@ function UserVirement({ user, hardRefresh }) {
     const [montant, setMontant] = useState();
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
-    const [url] = useURL()
+    const URLContextValue = useContext(URLcontext)
 
     let currentStable = user.stableCoins
+    console.log('RIB', rib)
 
     useEffect(() => {
-        axios.get(`${url}/admin/getRib`)
+        axios.get(`${URLContextValue.url}/admin/getRib`)
             .then((res) => setRIB(res.data))
     }, [])
 
     const payement = (e, email) => {
         e.preventDefault();
         let sumbit = { email, montant }
-        axios.post(`${url}/api/users/addMoney`, sumbit)
+        axios.post(`${URLContextValue.url}/api/users/addMoney`, sumbit)
             .then((res) => console.log(res.data))
             .then(() => setValidation(true))
     }
@@ -34,7 +36,7 @@ function UserVirement({ user, hardRefresh }) {
     const virement = (e, id) => {
         e.preventDefault()
         let submit = { change, theRib, id, currentStable }
-        axios.post(`${url}/api/users/askMoney`, submit)
+        axios.post(`${URLContextValue.url}/api/users/askMoney`, submit)
             .then((res) => {
                 if (res.data === 'error') { alert("Vous n'avez pas assez de Stable Coins") }
                 else {

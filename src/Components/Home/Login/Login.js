@@ -1,15 +1,15 @@
 import './Login.css'
-import useURL from '../../../Hooks/useURL';
 import { useContext, useEffect } from 'react';
 import FormContext from "../../../Context/FormContext";
+import URLcontext from '../../../Context/URLcontext';
 
 function Login() {
 
-    const [url] = useURL()
     const FormContextValue = useContext(FormContext);
+    const URLContextValue = useContext(URLcontext)
 
     useEffect(() => {
-        FormContextValue.handleURL(`${url}/api/users/login`)
+        FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
     }, [])
 
     return (

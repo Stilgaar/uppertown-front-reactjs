@@ -1,11 +1,12 @@
 import "./About.css";
-import useURL from "../../../Hooks/useURL";
+import { useContext } from "react";
+import URLContext from "../../../Context/URLcontext";
 import useAxios from "../../../Hooks/useAxios";
 
 function About() {
 
-  const [url] = useURL();
-  const [info] = useAxios(`${url}/admin/getRib`)
+  const URLContextValue = useContext(URLContext)
+  const [info] = useAxios(`${URLContextValue.url}/admin/getRib`)
 
   return (
     <div className="about-container-container">

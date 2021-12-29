@@ -3,14 +3,16 @@ import people from './people.svg';
 import coin from './coin.svg';
 import building from './building.svg';
 import cart from './cart-plus.svg';
-import useURL from "../../../Hooks/useURL";
 import useAxios from "../../../Hooks/useAxios";
+import { useContext } from "react";
+import URLContext from "../../../Context/URLcontext";
+
 
 function Infos() {
 
-  const [url] = useURL();
-  const [users] = useAxios(`${url}/api/users/users`)
-  const [ann] = useAxios(`${url}/api/announces/allAnnounces`)
+  const URLContextValue = useContext(URLContext)
+  const [users] = useAxios(`${URLContextValue.url}/api/users/users`)
+  const [ann] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
 
   let clienttokens = 0;
   for (let i = 0; i < users.length; i++) {

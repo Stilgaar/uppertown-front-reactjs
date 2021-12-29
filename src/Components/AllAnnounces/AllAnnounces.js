@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import Announce from "../Announce/Announce";
 import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import "./AllAnnounces.scss";
-import useURL from '../../Hooks/useURL'
+import URLContext from "../../Context/URLcontext";
 
 function AllAnnounces() {
+  const URLContextValue = useContext(URLContext)
   const [announcesList, setAnnouncesList] = useState([]);
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
   const [filterType, setFilterType] = useState("all");
   const [filterPrice, setFilterPrice] = useState(10000000)
-  const [url] = useURL()
 
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
-    Axios.get(`${url}/api/announces/allAnnounces`).then(
+    Axios.get(`${URLContextValue.url}/api/announces/allAnnounces`).then(
       (response) => {
         //Place la reponse dans les states
         //State des annonces global

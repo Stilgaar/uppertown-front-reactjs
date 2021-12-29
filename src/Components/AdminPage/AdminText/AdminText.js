@@ -1,30 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useContext } from 'react';
 import './AdminText.css'
-import axios from 'axios';
-import useURL from '../../../Hooks/useURL';
+import URLcontext from '../../../Context/URLcontext';
+import FormContext from '../../../Context/FormContext';
 
 function AdminText() {
 
+    const URLContextValue = useContext(URLcontext)
+    const FormContextValue = useContext(FormContext);
 
-    const [maintitle, setTitle] = useState()
-    const [maincontent, setContent] = useState()
-    const [color, setColor] = useState()
-    const [url] = useURL()
-
-    console.log(maincontent)
-
-    const handleInput = (e, setter) => { setter(e.target.value) }
-
-    const adminTextChange = (e) => {
-        e.preventDefault()
-
-        let submit = { maintitle, maincontent, color }
-
-        axios.post(`${url}/admin/maintext`, submit)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
-
-    }
+    useEffect(() => {
+        FormContextValue.handleURL(`${URLContextValue.url}/admin/maintext`)
+    }, [])
 
     return (
         <div className="admintext-container-container">
@@ -32,19 +18,44 @@ function AdminText() {
             <div className="admintext-container"><h3>Personalisation du site</h3>
                 <div className="admintext">
 
-                    <form onSubmit={(e) => adminTextChange(e)}>
+                    <form onSubmit={FormContextValue.handleSubmit}>
                         <label>Modification du titre global du site(Titre sur la page d'acceuil) </label>
-                        <div><input className="admintext-input" type="text" placeholder="Titre de la page d'acceuil" onChange={(e) => handleInput(e, setTitle)} /></div>
+                        <div>
+                            <input
+                                values={FormContextValue.data.maintitle || ""}
+                                name="maintitle"
+                                className="admintext-input"
+                                type="text"
+                                placeholder="Titre de la page d'acceuil"
+                                onChange={FormContextValue.handleChange}
+                            /></div>
 
                         <label> Modification du texte de la page d'acceuil </label>
-                        <div><textarea className="admin-texterea" type="texte" placeholder="Ce que vous verrez sur la page d'acceuil" onChange={(e) => handleInput(e, setContent)}></textarea></div>
-
-                        <div className="couleurs">
-                            <label>Couleur principale du site</label>
-                            <input type="color" onChange={((e) => handleInput(e, setColor))} />
+                        <div>
+                            <textarea
+                                values={FormContextValue.data.maincontent || ""}
+                                name="maincontent"
+                                className="admin-texterea"
+                                type="texte"
+                                placeholder="Ce que vous verrez sur la page d'acceuil"
+                                onChange={FormContextValue.handleChange}>
+                            </textarea>
                         </div>
 
-                        <button type="sumbit" className="admintext-button-validate ">Valider !</button>
+                        <div className="couleurs">
+                            <label>Couleur principale du site (fonction non implentée WIP)</label>
+                            <input
+                                values={FormContextValue.data.color}
+                                name="color"
+                                type="color"
+                                onChange={FormContextValue.handleChange} />
+                        </div>
+                        <br />
+                        <button
+                            type="sumbit"
+                            className="admintext-button-validate ">
+                            Valider !
+                        </button>
                     </form>
 
 

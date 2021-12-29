@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
 import Swal from "sweetalert2";
 import Axios from "axios";
-import useURL from '../../Hooks/useURL';
+import URLcontext from "../../Context/URLcontext";
 
 function AnnounceDetail() {
   const [invest, setInvest] = useState();
@@ -13,6 +13,8 @@ function AnnounceDetail() {
   const [firstName, setFirstName] = useState()
   const [lastName, setLastName] = useState()
   const d = new Date();
+
+  const URLContextValue = useContext(URLcontext)
 
   const [immo, setImmo] = useState();
 
@@ -30,8 +32,6 @@ function AnnounceDetail() {
   const [idProp, setIdProp] = useState();
   const [totalToken, setTotalToken] = useState()
   const [propExist, setPropExist] = useState("")
-  const [url] = useURL()
-
 
   function handleInput(e) {
     setInvest(e.target.value);
@@ -52,7 +52,7 @@ function AnnounceDetail() {
 
   function getUserDatas() {
 
-    fetch(`${url}/api/users/${userOnline}`,
+    fetch(`${URLContextValue.url}/api/users/${userOnline}`,
       {
         method: "GET",
       }
@@ -73,7 +73,7 @@ function AnnounceDetail() {
   const ifExists = () => {
 
 
-    fetch(`${url}/api/properties/${userOnline}/${announce._id}`,
+    fetch(`${URLContextValue.url}/api/properties/${userOnline}/${announce._id}`,
       {
         method: "GET",
       }
@@ -93,7 +93,7 @@ function AnnounceDetail() {
 
   const getDatasProperty = () => {
 
-    fetch(`${url}/api/properties/datas/${userOnline}/${announce._id}`,
+    fetch(`${URLContextValue.url}/api/properties/datas/${userOnline}/${announce._id}`,
       {
         method: "GET",
       }
@@ -131,7 +131,7 @@ function AnnounceDetail() {
 
 
 
-      Axios.post(`${url}/api/transactions/buy`, data)
+      Axios.post(`${URLContextValue.url}/api/transactions/buy`, data)
         .then(res => console.log(res))
         .then(Swal.fire({
           title: "Transaction effectuée !",
@@ -146,7 +146,7 @@ function AnnounceDetail() {
     }
 
 
-    fetch(`${url}/api/users/${userOnline}`, {
+    fetch(`${URLContextValue.url}/api/users/${userOnline}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -160,7 +160,7 @@ function AnnounceDetail() {
     });
 
     let newsharenumber = Number(announce.share_number) - Number(invest)
-    fetch(`${url}/api/announces/${announce._id}`, {
+    fetch(`${URLContextValue.url}/api/announces/${announce._id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -175,7 +175,7 @@ function AnnounceDetail() {
     });
 
     if (idProp != userOnline) {
-      fetch(`${url}/api/properties/allProperties`, {
+      fetch(`${URLContextValue.url}/api/properties/allProperties`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -203,7 +203,7 @@ function AnnounceDetail() {
 
     } else {
       let newtotaltoken = (Number(totalToken) + Number(invest))
-      fetch(`${url}/api/properties/${userOnline}/${announce._id}`, {
+      fetch(`${URLContextValue.url}/api/properties/${userOnline}/${announce._id}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -215,7 +215,6 @@ function AnnounceDetail() {
       }).then(() => { console.log("New share number : " + newtotaltoken) });
     }
   };
-
 
 
   const cancelTransac = () => {

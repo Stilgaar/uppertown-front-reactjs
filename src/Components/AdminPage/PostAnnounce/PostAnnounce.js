@@ -1,7 +1,8 @@
 import "./PostAnnounce.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import useURL from '../../../Hooks/useURL';
+import URLcontext from "../../../Context/URLcontext";
+
 
 function PostAnnounce() {
 
@@ -21,7 +22,7 @@ function PostAnnounce() {
     const [image, setImage] = useState([])
     const [pics, setPics] = useState([])
     const [previewPics, setPreviewPics] = useState([]);
-    const [url] = useURL()
+    const URLContextValue = useContext(URLcontext)
 
     const onLoadFiles = (e) => {
         setImage(e.target.files)
@@ -76,7 +77,7 @@ function PostAnnounce() {
         d.append('parking', parking)
         d.append('jaccuzi', jaccuzi)
 
-        axios.post(`${url}/api/announces/creatannouncewithpics`, d, {
+        axios.post(`${URLContextValue.url}/api/announces/creatannouncewithpics`, d, {
             headers: { 'Content-Type': 'multipart/form-data' }
         })
             .then((res) => console.log(res.data))

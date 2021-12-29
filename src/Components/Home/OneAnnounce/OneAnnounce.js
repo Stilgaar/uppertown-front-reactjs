@@ -1,11 +1,12 @@
 import "./OneAnnounce.css";
-import useURL from "../../../Hooks/useURL";
+import { useContext } from "react";
+import URLContext from "../../../Context/URLcontext";
 import useAxios from "../../../Hooks/useAxios";
 
 function OneAnnounce() {
 
-  const [url] = useURL();
-  const [ann] = useAxios(`${url}/api/announces/allAnnounces`)
+  const URLContextValue = useContext(URLContext)
+  const [ann] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
 
   let announceRandom = ann[Math.floor(Math.random() * ann.length)];
 

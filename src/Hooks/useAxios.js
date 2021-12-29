@@ -5,13 +5,17 @@ const useAxios = (url) => {
 
     const [data, setData] = useState([])
 
-    useEffect(() => {
+    const adminRefresh = () => {
         axios.get(url)
             .then((res) => setData(res.data))
             .catch((err) => console.log(err))
+    }
+
+    useEffect(() => {
+        adminRefresh()
     }, [url])
-    
-    return [data];
+
+    return [data, adminRefresh];
 
 }
 

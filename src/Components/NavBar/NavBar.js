@@ -27,8 +27,8 @@ function NavBar(props) {
                         </>
                         :
                         <>
-                            <p className="btn-connecter" onClick={() => FormContextValue.handleLogin()}>Log In</p>
-                            <p className="btn-connecter" onClick={() => FormContextValue.handleSigin()}>Sign Up</p>
+                            <p className="btn-connecter" onClick={FormContextValue.handleLogin}>Log In</p>
+                            <p className="btn-connecter" onClick={FormContextValue.handleSigin}>Sign Up</p>
                         </>
                     }
                 </div>

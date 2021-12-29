@@ -1,62 +1,56 @@
 import './UserLine.css';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import StableCoins from '../StableCoins/StableCoins';
-import useURL from '../../../Hooks/useURL';
-
+import URLcontext from '../../../Context/URLcontext';
+import FormContext from '../../../Context/FormContext';
 
 function UserLine({ userdata, adminRefresh }) {
 
     const [modal, setModal] = useState(false);
     const [modalAcien, setModalAncien] = useState(false);
     const [modalAcienEuro, setModalAncienEuro] = useState(false);
+    const URLContextValue = useContext(URLcontext)
+    const FormContextValue = useContext(FormContext)
 
     // bouton pour la reverification en cas : l'user change un papier (TODO, later, very later genre)
     /* const reverif = () => {
         console.log("reverif")
     } */
-
-    const [url] = useURL()
-
     // si l'identité est ok ?
-    const verifPi = (data) => {
-        let email = { data }
-        axios.post(`${url}/admin/verifPi`, email)
-            .then((res) => console.log(res.data))
-    }
 
     // si le justificatif de domicile est ok
     const verfJDD = (data) => {
         let email = { data }
-        axios.post(`${url}/admin/verifJDD`, email)
+        axios.post(`${URLContextValue.url}/admin/verifJDD`, email)
             .then((res) => console.log(res.data))
     }
 
     // si l'avis d'imposition est ok
     const verifAVIS = (data) => {
         let email = { data }
-        axios.post(`${url}/admin/verifAVIS`, email)
+        axios.post(`${URLContextValue.url}/admin/verifAVIS`, email)
             .then((res) => console.log(res.data))
     }
 
     // passer un user admin
     const gogoAdmin = (data) => {
         let email = { data }
-        axios.post(`${url}/admin/goAdmin`, email)
+        axios.post(`${URLContextValue.url}/admin/goAdmin`, email)
             .then((res) => console.log(res.data))
     }
 
     // retirer l'admin d'un user
     const nonoAdmin = (data) => {
         let email = { data }
-        axios.post(`${url}/admin/noAdmin`, email)
+        axios.post(`${URLContextValue.url}/admin/noAdmin`, email)
             .then((res) => console.log(res.data))
     }
 
     // le transfert de stablecoin est terminé et le montant est glissé dans l'historique
     const transfertStacbleCoinDone = (argent, email) => {
         let submit = { argent, email }
-        axios.post(`${url}/api/users/archiveMoney`, submit)
+        axios.post(`${URLContextValue.url}/api/users/archiveMoney`, submit)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -64,7 +58,7 @@ function UserLine({ userdata, adminRefresh }) {
     // toutes les operations concernant le stable coins ont été réalisés et son compte sont crédités
     const transactionDone = (data) => {
         let email = { data }
-        axios.post(`${url}/api/users/transactionDone`, email)
+        axios.post(`${URLContextValue.url}/api/users/transactionDone`, email)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -72,7 +66,7 @@ function UserLine({ userdata, adminRefresh }) {
     // toutes les operations concernant les euros sont terminés et le compte est recrédité
     const transactionEdone = (data) => {
         let id = { data }
-        axios.post(`${url}/api/users/transtactionEuroDone`, id)
+        axios.post(`${URLContextValue.url}/api/users/transtactionEuroDone`, id)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -82,7 +76,7 @@ function UserLine({ userdata, adminRefresh }) {
         console.log("ARGENT", argent)
         console.log("ID", id)
         let click = { id, argent }
-        axios.post(`${url}/api/users/archiveEuros`, click)
+        axios.post(`${URLContextValue.url}/api/users/archiveEuros`, click)
             .then((res) => console.log(res.data))
             .then(() => adminRefresh())
     }
@@ -95,30 +89,58 @@ function UserLine({ userdata, adminRefresh }) {
                 <div className="gestionutilisateurs-container-container">
 
                     <div className="gestionutilistatuers-container-lastname">
-                        <span className="gestionutilisateurs-element-texte">Nom de famille :
-                        </span> {userdata.lastname}</div>
+                        <span
+                            className="gestionutilisateurs-element-texte">
+                            Nom de famille :
+                        </span>
+                        {userdata.lastname}
+                    </div>
 
                     <div className="gestionutilistatuers-container-firstname">
-                        <span className="gestionutilisateurs-element-texte">Prénom :
-                        </span> {userdata.firstname}</div>
+                        <span
+                            className="gestionutilisateurs-element-texte">
+                            Prénom :
+                        </span>
+                        {userdata.firstname}
+                    </div>
 
                     <div className="gestionutilistatuers-container-email">
-                        <span className="gestionutilisateurs-element-texte">Email :
-                        </span> {userdata.email}</div>
+                        <span className="gestionutilisateurs-element-texte">
+                            Email :
+                        </span>
+                        {userdata.email}
+                    </div>
 
-                    {userdata.pi[0] && <div className="userupdate-mapped"> Pieces d'ID :
+                    {userdata.pi[0] && <div className="userupdate-mapped">
+                        Pieces d'ID :
                         {userdata.pi.map((data) =>
-                            <div> <img className="userupdate-image" src={data} alt="" /></div>
+                            <div>
+                                <img
+                                    className="userupdate-image"
+                                    src={data} alt="" />
+                            </div>
                         )}
                     </div>}
-                    {userdata.JDD[0] && <div className="userupdate-mapped"> Justificatif Domicile :
+
+                    {userdata.JDD[0] && <div className="userupdate-mapped">
+                        Justificatif Domicile :
                         {userdata.JDD.map((data) =>
-                            <div> <img className="userupdate-image" src={data} alt="" /></div>
+                            <div>
+                                <img
+                                    className="userupdate-image"
+                                    src={data} alt="" />
+                            </div>
                         )}
                     </div>}
-                    {userdata.avisFiscal[0] && <div div className="userupdate-mapped"> Avis Fiscaux :
+
+                    {userdata.avisFiscal[0] && <div div className="userupdate-mapped">
+                        Avis Fiscaux :
                         {userdata.avisFiscal.map((data) =>
-                            <div> <img className="userupdate-image" src={data} alt="" /></div>
+                            <div>
+                                <img
+                                    className="userupdate-image"
+                                    src={data} alt="" />
+                            </div>
                         )}
 
                     </div>}
@@ -137,23 +159,89 @@ function UserLine({ userdata, adminRefresh }) {
                                 <div className="userline-infodebase-buttons-admin">
 
                                     <div className="userline-infodebase">
-                                        <div> <span className="userline-span-usertext"> Nom : </span> {userdata.lastname}</div>
-                                        <div> <span className="userline-span-usertext"> Prénom : </span> {userdata.firstname}</div>
-                                        <div> <span className="userline-span-usertext"> Email : </span> <a href={`mailto:${userdata.email}`}>{userdata.email}</a></div>
-                                        <div> <span className="userline-span-usertext"> Téléphone : </span> {userdata.tel}</div>
-                                        <div> <span className="userline-span-usertext"> ID : </span> {userdata._id}</div>
-                                        {userdata.brandname && <div> <span className="userline-span-usertext"> Entreprise : </span> {userdata.brandname}</div>}
-                                        <div> <span className="userline-span-usertext"> Nombre de Tokens : </span> {userdata.stableCoins}</div>
-                                        <div> <span className="userline-span-usertext"> RIB : </span> {userdata.rib}</div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                Nom :
+                                            </span>
+                                            {userdata.lastname}
+                                        </div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                Prénom :
+                                            </span>
+                                            {userdata.firstname}
+                                        </div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                Email :
+                                            </span>
+                                            <a href={`mailto:${userdata.email}`}>{userdata.email}</a></div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                Téléphone :
+                                            </span>
+                                            {userdata.tel}
+                                        </div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                ID :
+                                            </span>
+                                            {userdata._id}
+                                        </div>
+                                        {userdata.brandname && <div>
+                                            <span className="userline-span-usertext">
+                                                Entreprise :
+                                            </span>
+                                            {userdata.brandname}
+                                        </div>}
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                Nombre de Tokens :
+                                            </span>
+                                            {userdata.stableCoins}
+                                        </div>
+                                        <div>
+                                            <span className="userline-span-usertext">
+                                                RIB :
+                                            </span>
+                                            {userdata.rib}
+                                        </div>
                                     </div>
 
                                     <div className="userline-buttons-admin">
                                         {/* <button onClick={() => reverif(userdata.email)}>En attente de reverification</button> en attente */}
-                                        <button className="userline-button-validate" onClick={() => verifPi(userdata.email)}>Identité Verifiée</button>
-                                        <button className="userline-button-validate" onClick={() => verfJDD(userdata.email)}>Justificatif de Domcile Verifié</button>
-                                        <button className="userline-button-validate" onClick={() => verifAVIS(userdata.email)}>Avis d'imposition verifié</button>
-                                        <button className="userline-button-validate" onClick={() => gogoAdmin(userdata.email)}>Passer Admin</button>
-                                        <button className="userline-button-validate" onClick={() => nonoAdmin(userdata.email)}>Retirer Admin</button>
+                                        <button
+                                            className="userline-button-validate"
+                                            onClick={
+                                                () => {
+                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/verifPi`)
+                                                    FormContextValue.handleData(userdata.email)
+                                                    FormContextValue.handleEnvoi()
+                                                }}>
+                                            Identité Verifiée
+                                        </button>
+                                        <button
+                                            className="userline-button-validate"
+                                            onClick={() => verfJDD(userdata.email)}
+                                            onClick={() => FormContextValue.handleURL(`${URLContextValue.url}/admin/verifJDD`)}
+                                        >
+                                            Justificatif de Domcile Verifié
+                                        </button>
+                                        <button
+                                            className="userline-button-validate"
+                                            onClick={() => verifAVIS(userdata.email)}>
+                                            Avis d'imposition verifié
+                                        </button>
+                                        <button
+                                            className="userline-button-validate"
+                                            onClick={() => gogoAdmin(userdata.email)}>
+                                            Passer Admin
+                                        </button>
+                                        <button
+                                            className="userline-button-validate"
+                                            onClick={() => nonoAdmin(userdata.email)}>
+                                            Retirer Admin
+                                        </button>
                                     </div>
                                 </div>
 
@@ -224,7 +312,7 @@ function UserLine({ userdata, adminRefresh }) {
 
 
 
-        </div>
+        </div >
 
 
 

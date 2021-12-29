@@ -18,15 +18,21 @@ import axios from "axios";
 import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
 import FormContext from "./Context/FormContext";
-import URLContext from "./Context/FormContext";
+import URLContext from "./Context/URLcontext";
 
 function App() {
   const [user, setUser] = useState({});
   const [URLContextValue] = useURL();
   const [FormContextValue] = useSubmit();
-  console.log(URLContextValue.url)
 
   let isLog = user !== null;
+
+  useEffect(() => {
+    if (!URLContextValue.url) {
+      URLContextValue.getURL();
+    }
+    hardRefresh();
+  }, [URLContextValue.url]);
 
   function hardRefresh() {
     let localToken = localStorage.getItem("@updownstreet-token");
@@ -49,50 +55,45 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  useEffect(() => {
-    hardRefresh();
-    let url = localStorage.getItem("@uppertown-url")
-    if (!url){
-    URLContextValue.getURL()
-  }
-  }, [URLContextValue.url]);
-
   return (
     <div className="app">
-      <FormContext.Provider value={FormContextValue} >
-        <Router>
-          <div className="main">
-            <NavBar
-              isLog={isLog}
-              user={user} />
-            <Switch>
-              <Route exact path="/">
-                <Home
-                  hardRefresh={hardRefresh} />
-              </Route>
-              <Route path="/announces">
-                {isLog ? <AllAnnounces /> : <Error />}
-              </Route>
-              <Route path="/admin">{isLog ? <AdminPage /> : <Error />}</Route>
-              <Route path="/userpage">
-                {isLog ? (
-                  <UserPage user={user} hardRefresh={hardRefresh} />
-                ) : (
-                  <Error />
-                )}
-              </Route>
-              <Route path="/announce-detail-admin">
-                {isLog ? <AnnounceDetailAdmin /> : <Error />}
-              </Route>
-              <Route path="/announce-detail">
-                {isLog ? <AnnounceDetail /> : <Error />}
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </FormContext.Provider>
+      <URLContext.Provider value={URLContextValue}>
+        <FormContext.Provider value={FormContextValue} >
+          <Router>
+            <div className="main">
+              <NavBar
+                isLog={isLog}
+                user={user} />
+              <Switch>
+                <Route exact path="/">
+                  <Home
+                    hardRefresh={hardRefresh} />
+                </Route>
+                <Route path="/announces">
+                  {isLog ? <AllAnnounces /> : <Error />}
+                </Route>
+                <Route path="/admin">{isLog ? <AdminPage /> : <Error />}</Route>
+                <Route path="/userpage">
+                  {isLog ? (
+                    <UserPage user={user} hardRefresh={hardRefresh} />
+                  ) : (
+                    <Error />
+                  )}
+                </Route>
+                <Route path="/announce-detail-admin">
+                  {isLog ? <AnnounceDetailAdmin /> : <Error />}
+                </Route>
+                <Route path="/announce-detail">
+                  {isLog ? <AnnounceDetail /> : <Error />}
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        </FormContext.Provider>
+      </URLContext.Provider >
       <Footer />
     </div>
+
   );
 }
 

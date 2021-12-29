@@ -4,14 +4,13 @@ import './GestionUtils.css'
 
 function GestionUtils({ users, adminRefresh }) {
 
-
     const [usersType1Box, setUsersType1Box] = useState(false);
     const [usersType2Box, setUsersType2Box] = useState(false);
     const [usersType3Box, setUsersType3Box] = useState(false);
     const [usersType4Box, setUsersType4Box] = useState(false);
     const [adminBox, setAdminBox] = useState(false);
     const [awaitingBox, setAwaitingBox] = useState(false);
-    const [awaitingEuroBox,setAwaitingEuroBox] = useState(false)
+    const [awaitingEuroBox, setAwaitingEuroBox] = useState(false)
 
     const allUser1 = users.filter(user => user.userType === "userType1")
     const allUser2 = users.filter(user => user.userType === "userType2")
@@ -20,32 +19,32 @@ function GestionUtils({ users, adminRefresh }) {
     const allUserAdmin = users.filter(user => user.isAdmin === true)
     const transfertPending = users.filter(user => user.awaiting === true)
     const transfertEuroPending = users.filter(user => user.awaitingEuro === true)
-    
+
     return (
 
         <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
 
-            <div className="gestionutilisateurs-container-section"> 
+            <div className="gestionutilisateurs-container-section">
                 <button className="gestion-utilisateurs-buttons"
-                onClick={() => setAwaitingBox(current => !current)}>
+                    onClick={() => setAwaitingBox(current => !current)}>
                     <h3>Utilisateurs en attente de Stable Coins </h3>
                     {transfertPending.length !== 0 ? <div className="gestionutil-notifs"> {transfertPending.length} </div> : null}
-                </button> 
+                </button>
                 {awaitingBox &&
-                <div>
-                    {transfertPending.map((userdata, key) =>
-                        <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh} />
-                    )}
-                </div>
+                    <div>
+                        {transfertPending.map((userdata, key) =>
+                            <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh} />
+                        )}
+                    </div>
                 }
             </div>
 
-            <div className="gestionutilisateurs-container-section"> 
-            <button className="gestion-utilisateurs-buttons"
-                onClick={() => setAwaitingEuroBox(current => !current)}>
-                    <h3>Utilisateurs en attente de transfert d'Euros</h3> 
+            <div className="gestionutilisateurs-container-section">
+                <button className="gestion-utilisateurs-buttons"
+                    onClick={() => setAwaitingEuroBox(current => !current)}>
+                    <h3>Utilisateurs en attente de transfert d'Euros</h3>
                     {transfertEuroPending.length !== 0 ? <div className="gestionutil-notifs"> {transfertEuroPending.length} </div> : null}
-            </button>
+                </button>
                 {awaitingEuroBox &&
                     <div>
                         {transfertEuroPending.map((userdata, key) =>

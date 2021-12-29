@@ -1,18 +1,17 @@
-import React from 'react'
 import './AdminPage.css';
 import './AdminPage.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';
 import AddRib from './Addrib/AddRib';
 import PostAnnounce from './PostAnnounce/PostAnnounce';
 import AdminText from './AdminText/AdminText';
 import AdminSplash from './AdminSplash/AdminSplash';
-import axios from 'axios';
+import URLcontext from '../../Context/URLcontext';
+import useAxios from '../../Hooks/useAxios';
 
 
 function AdminPage() {
-
 
     const [showSearch, setShowSearch] = useState(false)
     const [showGestion, setShowGestion] = useState(false)
@@ -20,16 +19,9 @@ function AdminPage() {
     const [showPostAnn, setShowPostAnn] = useState(false)
     const [showAdminText, setShowAdminText] = useState(false)
     const [splash, setSplash] = useState(true)
+    const URLContextValue = useContext(URLcontext)
 
-    const [users, setUsers] = useState([]);
-
-    let url = `https://uppertown-back.osc-fr1.scalingo.io` || "http://localhost:1337"
-
-
-    const adminRefresh = () => {
-        axios.get(`${url}/api/users/users`)
-            .then((res) => setUsers(res.data))
-    }
+    const [users, adminRefresh] = useAxios(`${URLContextValue.url}/api/users/users`)
 
     useEffect(() => {
         adminRefresh();
@@ -91,16 +83,31 @@ function AdminPage() {
         <div className="admin-page">
             <div className="admin-page-container">
                 <div className="adminpage-boutons-admin">
-                    <button className="adminpage-button-validate" onClick={() => search()}>Recherche</button>
-                    <button className="adminpage-button-validate" onClick={() => gestion()}>Gestion utilisteur</button>
-                    <button className="adminpage-button-validate" onClick={() => rib()}>Ajouter/Modifier le Rib</button>
-                    <button className="adminpage-button-validate" onClick={() => ann()}>Poster une nouvelle annonce</button>
-                    <button className="adminpage-button-validate" onClick={() => text()}>Personalisation du site</button>
+                    <button
+                        className="adminpage-button-validate"
+                        onClick={() => search()}>Recherche
+                    </button>
+                    <button
+                        className="adminpage-button-validate"
+                        onClick={() => gestion()}>Gestion utilisteur
+                    </button>
+                    <button
+                        className="adminpage-button-validate"
+                        onClick={() => rib()}>Ajouter/Modifier le Rib
+                    </button>
+                    <button
+                        className="adminpage-button-validate"
+                        onClick={() => ann()}>Poster une nouvelle annonce
+                    </button>
+                    <button
+                        className="adminpage-button-validate"
+                        onClick={() => text()}>Personalisation du site
+                    </button>
                 </div>
 
                 <div className="adminpage-components">
                     {showSearch &&
-                        <SearchUser users={users} adminRefresh={adminRefresh} />}
+                        <SearchUser />}
 
                     {showGestion &&
                         <GestionUtils users={users} adminRefresh={adminRefresh} />}
