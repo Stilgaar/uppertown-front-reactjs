@@ -19,6 +19,7 @@ import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
 import FormContext from "./Context/FormContext";
 import URLContext from "./Context/URLcontext";
+import env from "react-dotenv";
 
 function App() {
   const [user, setUser] = useState({});
@@ -28,8 +29,8 @@ function App() {
   let isLog = user !== null;
 
   useEffect(() => {
-    if (!URLContextValue.url) {
-      URLContextValue.getURL();
+    if (!URLContextValue.url !== env.URLLOCAL) {
+      URLContextValue.getURL()
     }
     hardRefresh();
   }, [URLContextValue.url]);

@@ -1,14 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 
+// FONCTION POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
+
 function useSubmit(info) {
   const [data, setData] = useState({});
+  const [clickData, setClickData] = useState({})
   const [resMsg, setResMsg] = useState();
   const [form, setForm] = useState();
   const [url, setUrl] = useState()
 
-  console.log("data", data)
-  console.log(url)
+  // console.log("URL", url)
+  // console.log("DATA", data)
 
   const handleSubmit = (e) => {
     console.log("click")
@@ -35,12 +38,13 @@ function useSubmit(info) {
             setResMsg('');
           }, 2500);
         }
+
       })
       .catch((err) => console.log(err))
   };
 
   const handleEnvoi = () => {
-    axios.post(url, data)
+    axios.post(url, clickData)
       .then((res) => { console.log(res.data) })
       .catch(err => console.log(err))
   }
@@ -62,7 +66,7 @@ function useSubmit(info) {
   }
 
   const handleData = (email) => {
-    setData((data) => ({ ...data, ['email']: email }))
+    setClickData((clickData) => ({ ...clickData, ['email']: email }))
   }
 
   const handleChange = (e) => {

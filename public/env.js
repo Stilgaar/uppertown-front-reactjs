@@ -1,7 +1,7 @@
 window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "APPDATA": "C:\\Users\\stilg\\AppData\\Roaming",
-  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_13896_NGWRGFZQTNMXCOII",
+  "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_2872_MBQCBKHILQTSWIJY",
   "COLORTERM": "truecolor",
   "CommonProgramFiles": "C:\\Program Files\\Common Files",
   "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
@@ -180,7 +180,7 @@ window.env = {
   "npm_package_description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "npm_package_eslintConfig_extends_0": "react-app",
   "npm_package_eslintConfig_extends_1": "react-app/jest",
-  "npm_package_gitHead": "539f744f6478be29afa84c32d9e7d411c619f027",
+  "npm_package_gitHead": "4f0447de1fa737bef558b6624d6670f76fea9498",
   "npm_package_name": "frontend",
   "npm_package_private": "true",
   "npm_package_readmeFilename": "README.md",

@@ -13,8 +13,12 @@ function Login() {
     }, [])
 
     return (
-        <div className="login-form" onClick={FormContextValue.handleClick}>
-            <div className="login" onClick={(e) => e.stopPropagation()}>
+        <div
+            className="login-form"
+            onClick={FormContextValue.handleClick}>
+            <div
+                className="login"
+                onClick={(e) => e.stopPropagation()}>
                 <form
                     className="login-container"
                     onSubmit={FormContextValue.handleSubmit}>
@@ -43,11 +47,23 @@ function Login() {
                                 onChange={FormContextValue.handleChange} />
                         </div>
                     </div>
-                    <button className="login-button" type="submit">Valider</button>
+                    <button
+                        className="login-button"
+                        type="submit">
+                        Valider
+                    </button>
                 </form>
-                <p className="login-fasle-link" onClick={FormContextValue.handleSigin}>Créer un compte</p>
+                <p
+                    className="login-fasle-link"
+                    onClick={FormContextValue.handleSigin}>
+                    Créer un compte
+                </p>
             </div>
-            {FormContextValue.resMsg && <div className="message-box-login">{FormContextValue.resMsg}</div>}
+            {FormContextValue.resMsg &&
+                <div
+                    className="message-box-login">
+                    {FormContextValue.resMsg}
+                </div>}
         </div>
 
     )

@@ -28,16 +28,30 @@ function StableCoins({ userdata, adminRefresh }) {
             });
 
         setCoins("");
-
     }
 
     return (
         <div>
-            <div className="stableC-container">
-                <label> Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé </label>
-                <div className="stableC-input">
-                    <input type="text" name="stableCoins" placeholder="Nombre de Stable coins commandés" className="inputstable" value={coins} onInput={(e) => handleInput(e)} />
-                    <button className="userline-button-validate" onClick={handleClick}>Valider</button>
+            <div
+                className="stableC-container">
+                <label>
+                    Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
+                </label>
+                <div
+                    className="stableC-input">
+                    <input
+                        type="text"
+                        name="stableCoins"
+                        placeholder="Nombre de Stable coins commandés"
+                        className="inputstable"
+                        value={coins}
+                        onInput={(e) => handleInput(e)}
+                    />
+                    <button
+                        className="userline-button-validate"
+                        onClick={handleClick}>
+                        Valider
+                    </button>
                 </div>
             </div>
         </div>
