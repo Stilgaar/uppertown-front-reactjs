@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./StableCoins.css";
-import useURL from '../../../Hooks/useURL';
-
-
+import URLcontext from '../../../Context/URLcontext';
+import FormContext from '../../../Context/FormContext';
 
 function StableCoins({ userdata, adminRefresh }) {
 
+    const URLContextValue = useContext(URLcontext)
+    const FormContextValue = useContext(FormContext)
     const [coins, setCoins] = useState();
-    const [url] = useURL()
 
     function handleInput(e) {
         setCoins(e.target.value);
     }
     function handleClick() {
 
-        axios.post(`${url}/api/users/addCoins`, {
+        axios.post(`${URLContextValue.url}/api/users/addCoins`, {
             "stableCoins": coins,
             "id": userdata._id
         })
@@ -37,22 +37,23 @@ function StableCoins({ userdata, adminRefresh }) {
                 <label>
                     Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
                 </label>
-                <div
-                    className="stableC-input">
+               
+                <form className="stableC-input" onSubmit={FormContextValue.handleSumbit}>
                     <input
                         type="text"
                         name="stableCoins"
                         placeholder="Nombre de Stable coins commandés"
                         className="inputstable"
-                        value={coins}
-                        onInput={(e) => handleInput(e)}
-                    />
+                        value={FormContextValue.data.coin || ""}
+                        name="coin"
+                        onChange={FormContextValue.handleChange} />
                     <button
                         className="userline-button-validate"
-                        onClick={handleClick}>
+                        type="submit"
+                        onClick={FormContextValue.handleData}>
                         Valider
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     )

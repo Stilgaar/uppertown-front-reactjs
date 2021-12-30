@@ -1,6 +1,5 @@
 import './UserLine.css';
-import { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useContext } from 'react';
 import StableCoins from '../StableCoins/StableCoins';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
@@ -19,8 +18,7 @@ function UserLine({ userdata, adminRefresh }) {
         FormContextValue.handleEnvoi()
         adminRefresh()
     }
-
-
+    
     return (
         <div>
             <div className="userline-button-search" onClick={() => setModal(current => !current)}>
@@ -56,9 +54,7 @@ function UserLine({ userdata, adminRefresh }) {
                         {userdata.avisFiscal.map((data) =>
                             <div><img className="userupdate-image" src={data} alt="avis fiscal" />
                             </div>
-                        )}</div>}
-                </div>
-            </div>
+                        )}</div>}</div></div>
 
             {modal &&
                 <div className="modal-externe" onClick={() => setModal(current => !current)}>
@@ -68,38 +64,29 @@ function UserLine({ userdata, adminRefresh }) {
                                 <h3>Détails Utilistateur : {userdata.lastname} {userdata.firstname}</h3>
                                 <div className="userline-infodebase-buttons-admin">
                                     <div className="userline-infodebase">
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 Nom :</span> {userdata.lastname}
                                         </div>
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 Prénom :</span> {userdata.firstname}
                                         </div>
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 Email : </span> <a href={`mailto:${userdata.email}`}>{userdata.email}</a></div>
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 Téléphone : </span>{userdata.tel}
                                         </div>
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 ID :</span> {userdata._id}
                                         </div>
-                                        {userdata.brandname && <div>
-                                            <span className="userline-span-usertext">
+                                        {userdata.brandname && <div><span className="userline-span-usertext">
                                                 Entreprise : </span>{userdata.brandname}
                                         </div>}
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 Nombre de Tokens :</span>
                                             {userdata.stableCoins}</div>
-                                        <div>
-                                            <span className="userline-span-usertext">
+                                        <div><span className="userline-span-usertext">
                                                 RIB :</span>{userdata.rib}
-                                        </div>
-                                    </div>
+                                        </div></div>
 
                                     <div className="userline-buttons-admin">
                                         {/* <button onClick={() => reverif(userdata.email)}>En attente de reverification</button> en attente */}
@@ -132,8 +119,7 @@ function UserLine({ userdata, adminRefresh }) {
                                 </div>
 
                                 <div className="userline-container-boxed">
-                                    <div>
-                                        <span className="userline-text-awaiting">
+                                    <div><span className="userline-text-awaiting">
                                             En attente de transfert d'Euros en StableCoins ? :
                                         </span>
                                         {userdata.awaiting ? "oui" : "non"}
@@ -145,8 +131,7 @@ function UserLine({ userdata, adminRefresh }) {
                                             </button>}
                                     </div>
                                     {userdata.awaiting &&
-                                        <div>
-                                            <span className="userline-text-awaiting">
+                                        <div><span className="userline-text-awaiting">
                                                 Montants tranférés en attente de verifiactions :
                                             </span>
                                         </div>}
@@ -163,8 +148,7 @@ function UserLine({ userdata, adminRefresh }) {
                                 <StableCoins userdata={userdata} adminRefresh={adminRefresh} />
 
                                 <div className="userline-container-boxed">
-                                    <div>
-                                        <span className="userline-text-awaiting">
+                                    <div> <span className="userline-text-awaiting">
                                             En attente de transfert de Stable Coins en Euro ? :
                                         </span>
                                         {userdata.awaitingEuro ? "oui" : "non"}
@@ -178,21 +162,17 @@ function UserLine({ userdata, adminRefresh }) {
                                         }
                                     </div>
                                     {userdata.awaiting &&
-                                        <div>
-                                            <span className="userline-text-awaiting">
+                                        <div><span className="userline-text-awaiting">
                                                 Montants en Euro demandant à être transférés sur leurs compte en banque :
-                                            </span>
-                                        </div>
+                                            </span> </div>
                                     }
                                     {userdata.montantEuro.map((argent) =>
-                                        <div >
-                                            {argent}
-                                            <button
+                                        <div >{argent} <button
                                                 className="userline-button-validate"
                                                 onClick={() => click("/api/users/archiveEuros", argent)}>
                                                 Euros Transférés
                                             </button>
-                                        </div> )}</div>
+                                        </div>)}</div>
 
                                 <br /> <br />
 
@@ -220,54 +200,33 @@ function UserLine({ userdata, adminRefresh }) {
                                             </div> )}</div> }
 
 
-                                <div>
-                                    <span className="userline-span-usertext">
-                                        Pieces d'identité :
-                                    </span>
-                                    <div>
-                                        {userdata.pi[0] ?
-                                            < div >
-                                                {userdata.pi.map((image) =><a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a>)}
+                                <div><span className="userline-span-usertext"> Pieces d'identité :</span>
+                                    <div> {userdata.pi[0] ?
+                                            < div > {userdata.pi.map((image) =><a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a>)}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
-                                        }
-                                    </div>
-                                </div>
-                                <div>
-                                    <span className="userline-span-usertext">
+                                        }</div></div>
+                                <div><span className="userline-span-usertext">
                                         Justificatif de Domicile:</span>
-                                    <div>
-                                        {userdata.JDD[0] ?
-                                            < div >
-                                                {userdata.JDD.map((image) =>
+                                    <div>{userdata.JDD[0] ?
+                                            < div >{userdata.JDD.map((image) =>
                                                     <a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a> )}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
                                         }
                                     </div>
                                 </div>
-                                <div>
-                                    <span className="userline-span-usertext">
-                                        Avis d'imposition :
-                                    </span>
-                                    <div>
-                                        {userdata.pi[0] ?
-                                            <div>
-                                                {userdata.avisFiscal.map((image) =>
+                                <div><span className="userline-span-usertext">Avis d'imposition :</span>
+                                    <div> {userdata.pi[0] ?
+                                            <div> {userdata.avisFiscal.map((image) =>
                                                     <a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a>
                                                 )}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
-                                        }
-                                    </div>
-                                </div>
-                                <div>
-                                    <span className="userline-span-usertext">
-                                        RIB :
-                                    </span>
-                                    <div>
-                                        {userdata.picRib ?
-                                            < div >
+                                        } </div></div>
+                                <div><span className="userline-span-usertext">RIB :</span>
+                                    <div> {userdata.picRib ?
+                                            <div>
                                                 <a href={userdata.picRib}><img className="userdetail-image-mignature" src={userdata.picRib} alt="" /></a>
                                             </div>
                                             : <div>"Pas encore envoyé"</div>

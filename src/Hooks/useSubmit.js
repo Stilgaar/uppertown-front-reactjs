@@ -11,8 +11,8 @@ function useSubmit(info) {
   const [url, setUrl] = useState()
 
    console.log("URL", url)
-console.log("DATA", data)
-console.log("clickData", clickData)
+   console.log("DATA", data)
+  console.log("clickData", clickData)
 
   const handleSubmit = (e) => {
     console.log("click")
@@ -44,10 +44,15 @@ console.log("clickData", clickData)
       .catch((err) => console.log(err))
   };
 
-  const handleData = (email, argent) => {
+  const handleData = (email, argent, _id) => {
+    if(email){
     setClickData((clickData) => ({ ...clickData, ['email']: email }))
+    }
     if(argent) {
       setClickData((clickData => ({...clickData, ['argent']: argent})))
+    }
+    if(_id) {
+      setClickData((clickData => ({...clickData, ['id']: _id})))
     }
   }
 
@@ -83,6 +88,7 @@ console.log("clickData", clickData)
     if (info) {
       setData((data) => ({ ...data, ['email']: info }));
     }
+    
   };
 
   const logout = () => {
