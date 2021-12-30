@@ -13,145 +13,100 @@ function UserLine({ userdata, adminRefresh }) {
     const URLContextValue = useContext(URLcontext)
     const FormContextValue = useContext(FormContext)
 
-    // le transfert de stablecoin est terminé et le montant est glissé dans l'historique
-    const transfertStacbleCoinDone = (argent, email) => {
-        let submit = { argent, email }
-        axios.post(`${URLContextValue.url}/api/users/archiveMoney`, submit)
-            .then((res) => console.log(res.data))
-            .then(() => adminRefresh())
+    const click = (url, argent) => {
+        FormContextValue.handleURL(`${URLContextValue.url}${url}`)
+        FormContextValue.handleData(userdata.email, argent)
+        FormContextValue.handleEnvoi()
+        adminRefresh()
     }
 
-    // glisse un montant dans un tableau montant et l'insere dans le tableau d'historique
-    const transfertEuroDone = (argent, id) => {
-        let click = { id, argent }
-        axios.post(`${URLContextValue.url}/api/users/archiveEuros`, click)
-            .then((res) => console.log(res.data))
-            .then(() => adminRefresh())
-    }
 
     return (
         <div>
             <div className="userline-button-search" onClick={() => setModal(current => !current)}>
-
                 <div className="gestionutilisateurs-container-container">
-
                     <div className="gestionutilistatuers-container-lastname">
                         <span
                             className="gestionutilisateurs-element-texte">
-                            Nom de famille :
-                        </span>
-                        {userdata.lastname}
-                    </div>
+                            Nom de famille : </span> {userdata.lastname} </div>
 
                     <div className="gestionutilistatuers-container-firstname">
                         <span
                             className="gestionutilisateurs-element-texte">
-                            Prénom :
-                        </span>
-                        {userdata.firstname}
-                    </div>
+                            Prénom : </span> {userdata.firstname}</div>
 
                     <div className="gestionutilistatuers-container-email">
                         <span className="gestionutilisateurs-element-texte">
-                            Email :
-                        </span>
-                        {userdata.email}
-                    </div>
+                            Email :</span> {userdata.email} </div>
 
                     {userdata.pi[0] && <div className="userupdate-mapped">
                         Pieces d'ID :
                         {userdata.pi.map((data) =>
-                            <div>
-                                <img
+                            <div><img
                                     className="userupdate-image"
                                     src={data} alt="" />
                             </div>
-                        )}
-                    </div>}
+                        )}</div>}
 
                     {userdata.JDD[0] && <div className="userupdate-mapped">
                         Justificatif Domicile :
                         {userdata.JDD.map((data) =>
-                            <div>
-                                <img
+                            <div><img
                                     className="userupdate-image"
                                     src={data} alt="" />
                             </div>
-                        )}
-                    </div>}
+                        )}</div>}
 
                     {userdata.avisFiscal[0] && <div div className="userupdate-mapped">
                         Avis Fiscaux :
                         {userdata.avisFiscal.map((data) =>
-                            <div>
-                                <img
+                            <div><img
                                     className="userupdate-image"
                                     src={data} alt="" />
                             </div>
-                        )}
-
-                    </div>}
+                        )}</div>}
                 </div>
             </div>
 
             {modal &&
                 <div className="modal-externe" onClick={() => setModal(current => !current)}>
-
                     <div className="userline-modal-container" onClick={(e) => e.stopPropagation()}>
                         <button className="close-btn" onClick={() => setModal(current => !current)}>X</button>
                         <div>
-
                             <div>
                                 <h3>Détails Utilistateur : {userdata.lastname} {userdata.firstname}</h3>
                                 <div className="userline-infodebase-buttons-admin">
-
                                     <div className="userline-infodebase">
                                         <div>
                                             <span className="userline-span-usertext">
-                                                Nom :
-                                            </span>
-                                            {userdata.lastname}
+                                                Nom :</span> {userdata.lastname}
                                         </div>
                                         <div>
                                             <span className="userline-span-usertext">
-                                                Prénom :
-                                            </span>
-                                            {userdata.firstname}
+                                                Prénom :</span> {userdata.firstname}
                                         </div>
                                         <div>
                                             <span className="userline-span-usertext">
-                                                Email :
-                                            </span>
-                                            <a href={`mailto:${userdata.email}`}>{userdata.email}</a></div>
+                                                Email : </span> <a href={`mailto:${userdata.email}`}>{userdata.email}</a></div>
                                         <div>
                                             <span className="userline-span-usertext">
-                                                Téléphone :
-                                            </span>
-                                            {userdata.tel}
+                                                Téléphone : </span>{userdata.tel}
                                         </div>
                                         <div>
                                             <span className="userline-span-usertext">
-                                                ID :
-                                            </span>
-                                            {userdata._id}
+                                                ID :</span> {userdata._id}
                                         </div>
                                         {userdata.brandname && <div>
                                             <span className="userline-span-usertext">
-                                                Entreprise :
-                                            </span>
-                                            {userdata.brandname}
+                                                Entreprise : </span>{userdata.brandname}
                                         </div>}
                                         <div>
                                             <span className="userline-span-usertext">
-                                                Nombre de Tokens :
-                                            </span>
-                                            {userdata.stableCoins}
-                                        </div>
+                                                Nombre de Tokens :</span>
+                                            {userdata.stableCoins}</div>
                                         <div>
                                             <span className="userline-span-usertext">
-                                                RIB :
-                                            </span>
-                                            {userdata.rib}
+                                                RIB :</span>{userdata.rib}
                                         </div>
                                     </div>
 
@@ -159,57 +114,27 @@ function UserLine({ userdata, adminRefresh }) {
                                         {/* <button onClick={() => reverif(userdata.email)}>En attente de reverification</button> en attente */}
                                         <button
                                             className="userline-button-validate"
-                                            onClick={
-                                                () => {
-                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/verifPi`)
-                                                    FormContextValue.handleData(userdata.email)
-                                                    FormContextValue.handleEnvoi()
-                                                    adminRefresh()
-                                                }}>
+                                            onClick={() => click("/admin/verifPi")}>
                                             Identité Verifiée
                                         </button>
                                         <button
                                             className="userline-button-validate"
-                                            onClick={
-                                                () => {
-                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/verifJDD`)
-                                                    FormContextValue.handleData(userdata.email)
-                                                    FormContextValue.handleEnvoi()
-                                                    adminRefresh()
-                                                }}>
+                                            onClick={() => click("/admin/verifJDD")}>
                                             Justificatif de Domcile Verifié
                                         </button>
                                         <button
                                             className="userline-button-validate"
-                                            onClick={
-                                                () => {
-                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/verifAVIS`)
-                                                    FormContextValue.handleData(userdata.email)
-                                                    FormContextValue.handleEnvoi()
-                                                    adminRefresh()
-                                                }}>
+                                            onClick={() => click("/admin/verifAVIS")}>
                                             Avis d'imposition verifié
                                         </button>
                                         <button
                                             className="userline-button-validate"
-                                            onClick={
-                                                () => {
-                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/goAdmin`)
-                                                    FormContextValue.handleData(userdata.email)
-                                                    FormContextValue.handleEnvoi()
-                                                    adminRefresh()
-                                                }}>
+                                            onClick={() => click("/admin/goAdmin")}>
                                             Passer Admin
                                         </button>
                                         <button
                                             className="userline-button-validate"
-                                            onClick={
-                                                () => {
-                                                    FormContextValue.handleURL(`${URLContextValue.url}/admin/noAdmin`)
-                                                    FormContextValue.handleData(userdata.email)
-                                                    FormContextValue.handleEnvoi()
-                                                    adminRefresh()
-                                                }}>
+                                            onClick={() => click("/admin/noAdmin")}>
                                             Retirer Admin
                                         </button>
                                     </div>
@@ -225,13 +150,7 @@ function UserLine({ userdata, adminRefresh }) {
                                         <br />
                                         {userdata.awaiting &&
                                             <button className="userline-button-validate"
-                                                onClick={
-                                                    () => {
-                                                        FormContextValue.handleURL(`${URLContextValue.url}/api/users/transactionDone`)
-                                                        FormContextValue.handleData(userdata.email)
-                                                        FormContextValue.handleEnvoi()
-                                                        adminRefresh()
-                                                    }}>
+                                            onClick={() => click("/api/users/transactionDone")}>
                                                 Toutes les operations sont terminés
                                             </button>}
                                     </div>
@@ -245,8 +164,8 @@ function UserLine({ userdata, adminRefresh }) {
                                         <div>
                                             {argent}
                                             <button className="userline-button-validate"
-                                                onClick={() => transfertStacbleCoinDone(argent, userdata.email)}>
-                                                Stable Coins Transférés
+                                            onClick={() => click("/api/users/archiveMoney", argent)}>
+                                                 Stable Coins Transférés
                                             </button>
                                         </div>)}
                                 </div>
@@ -263,14 +182,8 @@ function UserLine({ userdata, adminRefresh }) {
                                         {userdata.awaitingEuro &&
                                             <button
                                                 className="userline-button-validate"
-                                                onClick={
-                                                    () => {
-                                                        FormContextValue.handleURL(`${URLContextValue.url}/api/users/transtactionEuroDone`)
-                                                        FormContextValue.handleData(userdata.email)
-                                                        FormContextValue.handleEnvoi()
-                                                        adminRefresh()
-                                                    }}>
-                                                Toutes les operations sont terminés
+                                                onClick={() => click("/api/users/transtactionEuroDone")}>
+                                                 Toutes les operations sont terminés
                                             </button>
                                         }
                                     </div>
@@ -286,7 +199,7 @@ function UserLine({ userdata, adminRefresh }) {
                                             {argent}
                                             <button
                                                 className="userline-button-validate"
-                                                onClick={() => transfertEuroDone(argent, userdata._id)}>
+                                                onClick={() => click("/api/users/archiveEuros", argent)}>
                                                 Euros Transférés
                                             </button>
                                         </div>
@@ -321,12 +234,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             <div
                                                 className="userline-line">
                                                 Transaction N#{index + 1} {argent}
-                                            </div>
-                                        )}
-                                    </div>
-                                }
+                                            </div> )}
+                                    </div> }
 
-                                <br /><br />
 
                                 <div>
                                     <span
@@ -396,24 +306,13 @@ function UserLine({ userdata, adminRefresh }) {
                                         }
                                     </div>
                                     <br />
-
-
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
                 </div>}
-
-
-
         </div >
-
-
-
-
-
 
     )
 }

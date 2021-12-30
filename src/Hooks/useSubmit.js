@@ -10,8 +10,9 @@ function useSubmit(info) {
   const [form, setForm] = useState();
   const [url, setUrl] = useState()
 
-  // console.log("URL", url)
-  // console.log("DATA", data)
+   console.log("URL", url)
+console.log("DATA", data)
+console.log("clickData", clickData)
 
   const handleSubmit = (e) => {
     console.log("click")
@@ -43,9 +44,19 @@ function useSubmit(info) {
       .catch((err) => console.log(err))
   };
 
+  const handleData = (email, argent) => {
+    setClickData((clickData) => ({ ...clickData, ['email']: email }))
+    if(argent) {
+      setClickData((clickData => ({...clickData, ['argent']: argent})))
+    }
+  }
+
   const handleEnvoi = () => {
     axios.post(url, clickData)
       .then((res) => { console.log(res.data) })
+      .then(() => {
+        setClickData(null) 
+      })
       .catch(err => console.log(err))
   }
 
@@ -63,10 +74,6 @@ function useSubmit(info) {
 
   const handleURL = (data) => {
     setUrl(data)
-  }
-
-  const handleData = (email) => {
-    setClickData((clickData) => ({ ...clickData, ['email']: email }))
   }
 
   const handleChange = (e) => {

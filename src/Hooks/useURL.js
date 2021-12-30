@@ -9,13 +9,13 @@ export default function useURL() {
   const [url, setURL] = useState(env.URL)
 
   const getURL = () => {
-    axios.get(`${env.URLLOCAL}/admin/hostnamelocal`)
-      .then((res) => {
+    axios.get(`${env.URLLOCAL}/admin/hostnamelocal`).catch(err => null)
+      .then(res => {
         if (res?.data === "local") {
           setURL(env.URLLOCAL);
         }
       })
-      .catch((err) => { if (err) { return null } })
+      .catch(err => { if (err) { return null } })
   };
 
   const URLContextValue = {
