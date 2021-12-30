@@ -26,13 +26,11 @@ function UserLine({ userdata, adminRefresh }) {
             <div className="userline-button-search" onClick={() => setModal(current => !current)}>
                 <div className="gestionutilisateurs-container-container">
                     <div className="gestionutilistatuers-container-lastname">
-                        <span
-                            className="gestionutilisateurs-element-texte">
+                        <span className="gestionutilisateurs-element-texte">
                             Nom de famille : </span> {userdata.lastname} </div>
 
                     <div className="gestionutilistatuers-container-firstname">
-                        <span
-                            className="gestionutilisateurs-element-texte">
+                        <span className="gestionutilisateurs-element-texte">
                             Prénom : </span> {userdata.firstname}</div>
 
                     <div className="gestionutilistatuers-container-email">
@@ -42,27 +40,21 @@ function UserLine({ userdata, adminRefresh }) {
                     {userdata.pi[0] && <div className="userupdate-mapped">
                         Pieces d'ID :
                         {userdata.pi.map((data) =>
-                            <div><img
-                                    className="userupdate-image"
-                                    src={data} alt="" />
+                            <div><img className="userupdate-image" src={data} alt="piece identité" />
                             </div>
                         )}</div>}
 
                     {userdata.JDD[0] && <div className="userupdate-mapped">
                         Justificatif Domicile :
                         {userdata.JDD.map((data) =>
-                            <div><img
-                                    className="userupdate-image"
-                                    src={data} alt="" />
+                            <div><img className="userupdate-image" src={data} alt="justif" />
                             </div>
                         )}</div>}
 
                     {userdata.avisFiscal[0] && <div div className="userupdate-mapped">
                         Avis Fiscaux :
                         {userdata.avisFiscal.map((data) =>
-                            <div><img
-                                    className="userupdate-image"
-                                    src={data} alt="" />
+                            <div><img className="userupdate-image" src={data} alt="avis fiscal" />
                             </div>
                         )}</div>}
                 </div>
@@ -72,8 +64,7 @@ function UserLine({ userdata, adminRefresh }) {
                 <div className="modal-externe" onClick={() => setModal(current => !current)}>
                     <div className="userline-modal-container" onClick={(e) => e.stopPropagation()}>
                         <button className="close-btn" onClick={() => setModal(current => !current)}>X</button>
-                        <div>
-                            <div>
+                        <div><div>
                                 <h3>Détails Utilistateur : {userdata.lastname} {userdata.firstname}</h3>
                                 <div className="userline-infodebase-buttons-admin">
                                     <div className="userline-infodebase">
@@ -142,8 +133,7 @@ function UserLine({ userdata, adminRefresh }) {
 
                                 <div className="userline-container-boxed">
                                     <div>
-                                        <span
-                                            className="userline-text-awaiting">
+                                        <span className="userline-text-awaiting">
                                             En attente de transfert d'Euros en StableCoins ? :
                                         </span>
                                         {userdata.awaiting ? "oui" : "non"}
@@ -202,72 +192,55 @@ function UserLine({ userdata, adminRefresh }) {
                                                 onClick={() => click("/api/users/archiveEuros", argent)}>
                                                 Euros Transférés
                                             </button>
-                                        </div>
-                                    )}
-                                </div>
+                                        </div> )}</div>
 
                                 <br /> <br />
 
-                                <button
-                                    className="userline-button-validate"
+                                <button className="userline-button-validate"
                                     onClick={() => setModalAncien(current => !current)}>
                                     <div> Historique Stable Coins : </div>
-                                </button >
+                                </button>
                                 {modalAcien &&
                                     <div className="elders-scroll">
                                         {userdata.ancientMontants.map((argent, index) =>
                                             <div className="userline-line">
                                                 Transaction N#{index + 1} {argent}
                                             </div>
-                                        )}
-                                    </div>
-                                }
-                                <button
-                                    className="userline-button-validate"
+                                        )} </div> }
+                                <button className="userline-button-validate"
                                     onClick={() => setModalAncienEuro(current => !current)}>
                                     <div> Historique Euros : </div>
                                 </button>
                                 {modalAcienEuro &&
-                                    <div
-                                        className="elders-scroll">
+                                    <div className="elders-scroll">
                                         {userdata.ancientMontantsEuro.map((argent, index) =>
                                             <div
                                                 className="userline-line">
                                                 Transaction N#{index + 1} {argent}
-                                            </div> )}
-                                    </div> }
+                                            </div> )}</div> }
 
 
                                 <div>
-                                    <span
-                                        className="userline-span-usertext">
+                                    <span className="userline-span-usertext">
                                         Pieces d'identité :
                                     </span>
                                     <div>
                                         {userdata.pi[0] ?
                                             < div >
-                                                {userdata.pi.map((image) =>
-                                                    <a href={image}>
-                                                        <img className="userdetail-image-mignature" src={image} alt="" />
-                                                    </a>)}
+                                                {userdata.pi.map((image) =><a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a>)}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
                                         }
                                     </div>
                                 </div>
                                 <div>
-                                    <span
-                                        className="userline-span-usertext">
-                                        Justificatif de Domicile:
-                                    </span>
+                                    <span className="userline-span-usertext">
+                                        Justificatif de Domicile:</span>
                                     <div>
                                         {userdata.JDD[0] ?
                                             < div >
                                                 {userdata.JDD.map((image) =>
-                                                    <a href={image}>
-                                                        <img className="userdetail-image-mignature" src={image} alt="" />
-                                                    </a>
-                                                )}
+                                                    <a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a> )}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
                                         }
@@ -279,11 +252,9 @@ function UserLine({ userdata, adminRefresh }) {
                                     </span>
                                     <div>
                                         {userdata.pi[0] ?
-                                            < div >
+                                            <div>
                                                 {userdata.avisFiscal.map((image) =>
-                                                    <a href={image}>
-                                                        <img className="userdetail-image-mignature" src={image} alt="" />
-                                                    </a>
+                                                    <a href={image}><img className="userdetail-image-mignature" src={image} alt="" /></a>
                                                 )}
                                             </div>
                                             : <div> "Pas encore envoyé"</div>
@@ -291,16 +262,13 @@ function UserLine({ userdata, adminRefresh }) {
                                     </div>
                                 </div>
                                 <div>
-                                    <span
-                                        className="userline-span-usertext">
+                                    <span className="userline-span-usertext">
                                         RIB :
                                     </span>
                                     <div>
                                         {userdata.picRib ?
                                             < div >
-                                                <a href={userdata.picRib}>
-                                                    <img className="userdetail-image-mignature" src={userdata.picRib} alt="" />
-                                                </a>
+                                                <a href={userdata.picRib}><img className="userdetail-image-mignature" src={userdata.picRib} alt="" /></a>
                                             </div>
                                             : <div>"Pas encore envoyé"</div>
                                         }
@@ -309,7 +277,6 @@ function UserLine({ userdata, adminRefresh }) {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>}
         </div >
