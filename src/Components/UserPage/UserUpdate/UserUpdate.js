@@ -1,32 +1,20 @@
 import './UserUpdate.css';
 import { userUpate } from '../../../JSON/Arrays';
-import OneLine from './OneLine';
+import OneLineUpdate from './OneLine';
 
 function UserUpdate({ user, hardRefresh }) {
 
     return (
-        <div>
-            <div
-                className="userupdate-generalcontainer">
-                <div
-                    className="userupdate-container-params">
-                    <div>
-                        <h3>
-                            Paramètres généraux du compte
-                        </h3>
-                    </div>
-                </div>
 
-                {userUpate.map((entry, index) => (
-                    <OneLine
-                        user={user}
-                        key={index}
-                        entry={entry}
-                        hardRefresh={hardRefresh} />
-                ))}
+        <div className="userupdate-generalcontainer">
+            <div className="userupdate-container-params">
+                <div><h3> Paramètres généraux du compte </h3> </div>
             </div>
-        </div >
 
+            {userUpate.map((entry, index) => (
+                <OneLineUpdate user={user} key={index} entry={entry} hardRefresh={hardRefresh} />
+            ))}
+        </div>
     )
 }
 

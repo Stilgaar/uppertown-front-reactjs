@@ -6,7 +6,7 @@ import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
 import UserTransac from './UserTransac/UserTransac';
 import UserSplash from './UserSplash/UserSplash';
-import Uploads from './UserUpdate/Uploads';
+import UserUploads from './UserUpdate/UserUploads';
 
 function UserPage({ user, hardRefresh }) {
 
@@ -129,7 +129,7 @@ function UserPage({ user, hardRefresh }) {
                     hardRefresh={hardRefresh} />}
 
             {showUp &&
-                <Uploads
+                <UserUploads
                     user={user}
                     hardRefresh={hardRefresh} />}
         </div>

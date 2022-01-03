@@ -3,11 +3,11 @@ import { useState, useContext, useEffect } from 'react'
 import URLContext from '../../../Context/URLcontext'
 import FormContext from '../../../Context/FormContext'
 import { userUpload } from '../../../JSON/Arrays';
+import OneLineUpload from './OneLineUpload';
+
 
 
 function Uploads({ user, hardRefresh }) {
-
-    console.log(userUpload)
 
     const UrlContextvalue = useContext(URLContext)
     const FormContextValue = useContext(FormContext)
@@ -79,6 +79,14 @@ function Uploads({ user, hardRefresh }) {
     return (
 
         <div className="userupdate-generalcontainer">
+            <div className="userupdate-container-params">
+                <div><h3> Uploads de vos documents </h3> </div>
+            </div>
+
+            {userUpload.map((entry, index) => (
+                <OneLineUpload entry={entry} key={index} user={user} />
+            ))}
+
             <div className="userupdate-singlecontainer">
                 <div className="userupdate-container-modify">{piBox ? <div></div> : <div className="userupdate-container-container-ternaire-avec-image"><div>Pièce d'identité</div></div>}
                     {piBox &&
