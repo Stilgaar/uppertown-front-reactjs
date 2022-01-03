@@ -28,7 +28,7 @@ function AdminPage() {
     }, [])
 
     useEffect(() => {
-        if (showSearch == true || showGestion == true || showAddRib == true || showPostAnn == true || showAdminText == true) { setSplash(false) }
+        if (showSearch === true || showGestion === true || showAddRib === true || showPostAnn === true || showAdminText === true) { setSplash(false) }
         else { setSplash(true) }
 
     }, [showSearch, showGestion, showAddRib, showPostAnn, showAdminText])

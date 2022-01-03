@@ -3,19 +3,21 @@ import axios from "axios";
 
 // FONCTION POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
-function useSubmit(info) {
+function useSubmit() {
   const [data, setData] = useState({});
   const [clickData, setClickData] = useState({})
   const [resMsg, setResMsg] = useState();
   const [form, setForm] = useState();
   const [url, setUrl] = useState()
 
-   console.log("URL", url)
-   console.log("DATA", data)
-  console.log("clickData", clickData)
+  console.log('data', data.pieceidentite)
+  console.log("URL", url)
+  console.log("DATA", data)
+  console.log("clickData", clickData.x)
+  //   console.log(resMsg)
 
+  // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
-    console.log("click")
     e.preventDefault();
     e.persist()
     e.target.reset()
@@ -39,64 +41,91 @@ function useSubmit(info) {
             setResMsg('');
           }, 2500);
         }
-
       })
       .catch((err) => console.log(err))
   };
 
-  const handleData = (email, argent, _id) => {
-    if(email){
-    setClickData((clickData) => ({ ...clickData, ['email']: email }))
+
+  // fonction de récuperation pour les images
+  const handleForm = () => {
+    console.log("click")
+    const form = new FormData()
+    form.append('email', data.email.email)
+    if (data.pieceidentite) {
+      form.append('pieceidentite', data.pieceidentite)
     }
-    if(argent) {
-      setClickData((clickData => ({...clickData, ['argent']: argent})))
+    else { console.log("non") }
+    console.log("HANDLEFORM", url, form)
+    axios.post(url, form, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
+      .then((res) => console.log(res.data))
+      .catch(err => console.log(err))
+
+  }
+
+  // fonction récuperant sur un click, sans forumaire
+  const handleData = (x, y) => {
+    if (x) {
+      setClickData((clickData) => ({ ...clickData, x }))
     }
-    if(_id) {
-      setClickData((clickData => ({...clickData, ['id']: _id})))
+    if (y) {
+      setClickData((clickData => ({ ...clickData, y })))
     }
   }
 
+  // fonction envoyant les datas sur les clicks de boutons simple
   const handleEnvoi = () => {
     axios.post(url, clickData)
-      .then((res) => { console.log(res.data) })
-      .then(() => {
-        setClickData(null) 
+      .then((res) => {
+        console.log(res.data)
       })
       .catch(err => console.log(err))
   }
 
-  const handleClick = () => {
-    setForm('')
-  }
-
-  const handleLogin = () => {
-    setForm('login')
-  }
-
-  const handleSigin = () => {
-    setForm('signin')
-  }
-
-  const handleURL = (data) => {
-    setUrl(data)
-  }
-
+  // fonction récuperant sur les inputs de formulaire
   const handleChange = (e) => {
     e.preventDefault()
     e.persist()
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
-    if (info) {
-      setData((data) => ({ ...data, ['email']: info }));
+    if (clickData?.x?._id) {
+      setData((data) => ({ ...data, ["_id"]: clickData.x }));
     }
-    
+    if (clickData?.x?.email) {
+      setData((data) => ({ ...data, ["email"]: clickData.x }));
+    }
   };
 
+  const handleFile = (e) => {
+    e.persist()
+    setData((data) => (({ ...data, [e.target.name]: e.target.files[0] })))
+    if (clickData?.x?.email) {
+      setData((data) => ({ ...data, ["email"]: clickData.x }));
+    }
+  }
+
+  // Gestion de la Navbar
   const logout = () => {
     localStorage.removeItem("@updownstreet-token");
     localStorage.removeItem("@uppertown-url");
     document.location.replace('/');
   }
+  const handleClick = () => {
+    setForm('')
+  }
+  const handleLogin = () => {
+    setForm('login')
+  }
+  const handleSigin = () => {
+    setForm('signin')
+  }
 
+  // récupére les URL avant l'envoi dans le back
+  const handleURL = (data) => {
+    setUrl(data)
+  }
+
+  // utilisation du useContext
   const FormContextValue = {
     form: form,
     data: data,
@@ -109,6 +138,8 @@ function useSubmit(info) {
     handleURL: handleURL,
     handleData: handleData,
     handleEnvoi: handleEnvoi,
+    handleForm: handleForm,
+    handleFile: handleFile,
     logout: logout,
   };
 

@@ -1,6 +1,5 @@
 import './AddRib.css';
 import { useEffect, useContext } from 'react';
-import axios from 'axios';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from "../../../Context/FormContext";
 

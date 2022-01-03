@@ -28,13 +28,6 @@ function App() {
 
   let isLog = user !== null;
 
-  useEffect(() => {
-    if (!URLContextValue.url !== env.URLLOCAL) {
-      URLContextValue.getURL()
-    }
-    hardRefresh();
-  }, [URLContextValue.url]);
-
   function hardRefresh() {
     let localToken = localStorage.getItem("@updownstreet-token");
     if (localToken === null) {
@@ -45,7 +38,7 @@ function App() {
         headers: { authorization: `Bearer ${localToken}` },
       })
       .then((res) => {
-        if (res.data == "token expire") {
+        if (res.data === "token expire") {
           localStorage.removeItem("@updownstreet-token");
           localStorage.removeItem("@uppertown-url");
           document.location.replace("/");
@@ -55,6 +48,13 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+
+  useEffect(() => {
+    if (!URLContextValue.url !== env.URLLOCAL) {
+      URLContextValue.getURL()
+    }
+    hardRefresh();
+  }, [URLContextValue.url]);
 
   return (
     <div className="app">

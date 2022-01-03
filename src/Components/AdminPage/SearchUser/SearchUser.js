@@ -1,5 +1,4 @@
 import './SearchUser.css'
-import axios from "axios";
 import { useContext, useEffect, useState } from 'react';
 import UserLine from '../UserLine/UserLine';
 import useAxios from '../../../Hooks/useAxios';

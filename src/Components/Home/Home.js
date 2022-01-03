@@ -6,12 +6,10 @@ import About from "./About/About";
 import OneAnnounce from "./OneAnnounce/OneAnnounce";
 import { useContext } from "react";
 import FormContext from "../../Context/FormContext";
-import URLContext from "../../Context/URLcontext";
 
 function Home() {
 
   const FormContextValue = useContext(FormContext)
-  const URLContextValue = useContext(URLContext)
 
   return (
     <div>

@@ -6,7 +6,7 @@ export default function useURL() {
 
 
   // UNE URL POUR LES GOUVERNER TOUS !
-  const [url, setURL] = useState(env.URL)
+  const [url, setURL] = useState(env.URLLOCAL)
 
   const getURL = () => {
     axios.get(`${env.URLLOCAL}/admin/hostnamelocal`).catch(err => null)

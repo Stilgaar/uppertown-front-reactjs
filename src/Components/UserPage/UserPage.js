@@ -6,6 +6,7 @@ import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
 import UserTransac from './UserTransac/UserTransac';
 import UserSplash from './UserSplash/UserSplash';
+import Uploads from './UserUpdate/Uploads';
 
 function UserPage({ user, hardRefresh }) {
 
@@ -13,33 +14,44 @@ function UserPage({ user, hardRefresh }) {
     const [showTransac, setShowTransac] = useState(false)
     const [showSell, setShowSell] = useState(false)
     const [showParam, setShowParam] = useState(false)
+    const [showUp, setShowUp] = useState(false)
 
     useEffect(() => {
         hardRefresh()
     }, [])
 
     useEffect(() => {
-        if (showTransac == true || showSell == true || showParam == true) { setShowSplash(false) }
+        if (showTransac === true || showSell === true || showParam === true || showUp === true) { setShowSplash(false) }
         else { setShowSplash(true) }
-    }, [showTransac, showSell, showParam])
+    }, [showTransac, showSell, showParam, showUp])
 
 
     const transac = () => {
         setShowTransac(current => !current)
         setShowSell(false)
         setShowParam(false)
+        setShowUp(false)
     }
 
     const virement = () => {
         setShowSell(current => !current)
         setShowTransac(false)
         setShowParam(false)
+        setShowUp(false)
     }
 
     const param = () => {
         setShowParam(current => !current)
         setShowTransac(false)
         setShowSell(false)
+        setShowUp(false)
+    }
+
+    const up = () => {
+        setShowTransac(false)
+        setShowSell(false)
+        setShowParam(false)
+        setShowUp(current => !current)
     }
 
     return (
@@ -59,6 +71,11 @@ function UserPage({ user, hardRefresh }) {
                     onClick={() => param()}
                     className="userpage-button-validate">
                     Gèrer son compte
+                </button>
+                <button
+                    onClick={() => up()}
+                    className="userpage-button-validate">
+                    Upload Fichiers
                 </button>
             </div>
 
@@ -108,6 +125,11 @@ function UserPage({ user, hardRefresh }) {
 
             {showParam &&
                 <UserUpdate
+                    user={user}
+                    hardRefresh={hardRefresh} />}
+
+            {showUp &&
+                <Uploads
                     user={user}
                     hardRefresh={hardRefresh} />}
         </div>

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import React, { useContext, useEffect } from "react";
 import "./StableCoins.css";
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
@@ -8,27 +7,15 @@ function StableCoins({ userdata, adminRefresh }) {
 
     const URLContextValue = useContext(URLcontext)
     const FormContextValue = useContext(FormContext)
-    const [coins, setCoins] = useState();
 
-    function handleInput(e) {
-        setCoins(e.target.value);
-    }
-    function handleClick() {
+    useEffect(() => {
+        FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins`)
+        FormContextValue.handleData({ _id: userdata._id })
+    }, [])
 
-        axios.post(`${URLContextValue.url}/api/users/addCoins`, {
-            "stableCoins": coins,
-            "id": userdata._id
-        })
-            .then(function (response) {
-                console.log(response);
-
-            }).then(() => adminRefresh())
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        setCoins("");
-    }
+    useEffect(() => {
+        adminRefresh()
+    }, [])
 
     return (
         <div>
@@ -37,26 +24,28 @@ function StableCoins({ userdata, adminRefresh }) {
                 <label>
                     Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
                 </label>
-               
-                <form className="stableC-input" onSubmit={FormContextValue.handleSumbit}>
+
+                <form
+                    className="stableC-input"
+                    onSubmit={FormContextValue.handleSubmit}>
                     <input
+                        values={FormContextValue.data.stableCoins || ""}
                         type="text"
                         name="stableCoins"
                         placeholder="Nombre de Stable coins commandés"
                         className="inputstable"
-                        value={FormContextValue.data.coin || ""}
-                        name="coin"
-                        onChange={FormContextValue.handleChange} />
+                        onChange={FormContextValue.handleChange}
+                    />
                     <button
                         className="userline-button-validate"
-                        type="submit"
-                        onClick={FormContextValue.handleData}>
+                        type="submit">
                         Valider
                     </button>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 
 export default StableCoins
+
