@@ -1,6 +1,6 @@
 import './UserUpdate.css';
 import { userUpate } from '../../../JSON/Arrays';
-import OneLineUpdate from './OneLine';
+import OneLineUpdate from './OneLineUpdate';
 
 function UserUpdate({ user, hardRefresh }) {
 

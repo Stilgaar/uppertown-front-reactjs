@@ -47,12 +47,21 @@ function useSubmit() {
 
 
   // fonction de récuperation pour les images
-  const handleForm = () => {
-    console.log("click")
+  const handleForm = (e) => {
+    e.preventDefault()
     const form = new FormData()
     form.append('email', data.email.email)
     if (data.pieceidentite) {
       form.append('pieceidentite', data.pieceidentite)
+    }
+    else if (data.justificatifdomicile) {
+      form.append('justificatifdomicile', data.justificatifdomicile)
+    }
+    else if (data.avisfiscal) {
+      form.append('avisfiscal', data.avisfiscal)
+    }
+    else if (data.rib) {
+      form.append('rib', data.rib)
     }
     else { console.log("non") }
     console.log("HANDLEFORM", url, form)

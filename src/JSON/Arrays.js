@@ -62,11 +62,36 @@ export const userUpate = [
 export const userUpload = [
     {
         "name": "pieceidentite",
-        "label": "Ajoutez un pièce d'identité",
-        "update": "Pour obtenir plus d'options nous vous invitos à ajouter vos justificatifs",
+        "label": "Ajoutez un Pièce d'Identité",
+        "title": "Pièce d'identité",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
         "type": "file",
+        "url" : "/up/id"
     },
-
+    {
+        "name": "justificatifdomicile",
+        "label": "Ajoutez un Justificatif de Domicile",
+        "title": "Justificatif de Domicile",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
+        "type": "file",
+        "url" : "/up/jdd"
+    },
+    {
+        "name": "avisfiscal",
+        "label": "Ajoutez votre Avis Fiscal",
+        "title": "Avis Fiscaux",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
+        "type": "file",
+        "url" : "/up/avis"
+    },
+    {
+        "name": "rib",
+        "label": "Ajoutez un RIB",
+        "title": "Relevé d'Identité Bancaire",
+        "update": "Veuillez joidndre un RIB pour chaque RIB renseigné",
+        "type": "file",
+        "url" : "/up/rib"
+    }
 ]
 
 export const region = [
