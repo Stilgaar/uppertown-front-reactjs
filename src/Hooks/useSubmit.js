@@ -4,16 +4,17 @@ import axios from "axios";
 // FONCTION POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
 function useSubmit() {
+
+  // states utiles
   const [data, setData] = useState({});
   const [clickData, setClickData] = useState({})
   const [resMsg, setResMsg] = useState();
   const [form, setForm] = useState();
   const [url, setUrl] = useState()
 
-  console.log('data', data.pieceidentite)
   console.log("URL", url)
-  console.log("DATA", data)
-  console.log("clickData", clickData.x)
+  //  console.log("DATA", data)
+  console.log("clickData", clickData)
   //   console.log(resMsg)
 
   // fonction submit destiné aux inputs
@@ -57,11 +58,13 @@ function useSubmit() {
     else if (data.justificatifdomicile) {
       form.append('justificatifdomicile', data.justificatifdomicile)
     }
-    else if (data.avisfiscal) {
-      form.append('avisfiscal', data.avisfiscal)
+    else if (data.avisFiscal) {
+      console.log('avis')
+      form.append('avisFiscal', data.avisFiscal)
     }
-    else if (data.rib) {
-      form.append('rib', data.rib)
+    else if (data.picrib) {
+      console.log('rib')
+      form.append('picrib', data.picrib)
     }
     else { console.log("non") }
     console.log("HANDLEFORM", url, form)
@@ -85,12 +88,15 @@ function useSubmit() {
 
   // fonction envoyant les datas sur les clicks de boutons simple
   const handleEnvoi = () => {
+    console.log("HANDLE URL", url)
+    console.log('HANDLE CLICK', clickData)
     axios.post(url, clickData)
       .then((res) => {
         console.log(res.data)
       })
       .catch(err => console.log(err))
   }
+
 
   // fonction récuperant sur les inputs de formulaire
   const handleChange = (e) => {
@@ -134,7 +140,7 @@ function useSubmit() {
     setUrl(data)
   }
 
-  // utilisation du useContext
+  // useContext
   const FormContextValue = {
     form: form,
     data: data,

@@ -7,16 +7,7 @@ import OneLineUpload from './OneLineUpload';
 
 function Uploads({ user, hardRefresh }) {
 
-    const UrlContextvalue = useContext(URLContext)
     const FormContextValue = useContext(FormContext)
-
-    const handleDelete = (email, data) => {
-        let sumbit = { email, data }
-        axios.post(`${UrlContextvalue.url}/up/delete`, sumbit)
-            .then((res) => console.log(res.data))
-            .catch((err) => console.log(err))
-            .then(() => hardRefresh())
-    }
 
     useEffect(() => {
         FormContextValue.handleData({ email: user.email });
@@ -30,9 +21,9 @@ function Uploads({ user, hardRefresh }) {
             </div>
 
             {userUpload.map((entry, index) => (
-                <OneLineUpload entry={entry} key={index} user={user} hardRefresh={hardRefresh}/>
+                <OneLineUpload entry={entry} key={index} user={user} hardRefresh={hardRefresh} />
             ))}
-         </div>
+        </div>
     )
 }
 

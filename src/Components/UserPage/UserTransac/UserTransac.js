@@ -3,40 +3,40 @@ import { useState } from 'react';
 import AllPropertiesSmart from '../UserProperties/propertiesSmart';
 import AllTransacSmart from '../UserProperties/allTransacSmart';
 
-
-
 function UserTransac({ user, hardRefresh }) {
-
 
     const [modalAcien, setModalAncien] = useState(false);
     const [modalAcienEuro, setModalAncienEuro] = useState(false);
     const [modalTransac, setModalTransac] = useState(false)
     const [modalImmo, setModalImmo] = useState(false)
 
-
     const ancien = () => {
         setModalAncien(current => !current)
         setModalImmo(false)
         setModalTransac(false)
-        setModalAncienEuro(false) }
+        setModalAncienEuro(false)
+    }
 
     const ancienEuro = () => {
         setModalAncien(false)
         setModalImmo(false)
         setModalAncienEuro(current => !current)
-        setModalTransac(false) }
+        setModalTransac(false)
+    }
 
     const transac = () => {
         setModalTransac(current => !current)
         setModalImmo(false)
         setModalAncienEuro(false)
-        setModalAncien(false) }
+        setModalAncien(false)
+    }
 
     const immo = () => {
         setModalImmo(current => !current)
         setModalAncienEuro(false)
         setModalAncien(false)
-        setModalTransac(false) }
+        setModalTransac(false)
+    }
 
     return (
 

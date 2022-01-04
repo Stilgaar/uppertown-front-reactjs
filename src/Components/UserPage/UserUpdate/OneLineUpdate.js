@@ -8,7 +8,6 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
     const FormContextValue = useContext(FormContext)
 
     useEffect(() => {
-
         FormContextValue.handleData({ email: user.email })
     }, [])
 

@@ -3,9 +3,9 @@ import people from './people.svg';
 import coin from './coin.svg';
 import building from './building.svg';
 import cart from './cart-plus.svg';
-import useAxios from "../../../Hooks/useAxios";
 import { useContext } from "react";
 import URLContext from "../../../Context/URLcontext";
+import useAxios from "../../../Hooks/useAxios";
 
 
 function Infos() {

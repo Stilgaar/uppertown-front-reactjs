@@ -1,7 +1,8 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import './UserVirement.css'
 import axios from 'axios';
 import URLcontext from '../../../Context/URLcontext';
+import useAxios from '../../../Hooks/useAxios'
 
 function UserVirement({ user, hardRefresh }) {
 
@@ -11,19 +12,14 @@ function UserVirement({ user, hardRefresh }) {
     const [validation, setValidation] = useState(false);
     const [pending, setPending] = useState(false)
 
-    const [rib, setRIB] = useState()
     const [montant, setMontant] = useState();
     const [change, setChange] = useState()
     const [theRib, setTheRib] = useState();
     const URLContextValue = useContext(URLcontext)
 
     let currentStable = user.stableCoins
-    console.log('RIB', rib)
 
-    useEffect(() => {
-        axios.get(`${URLContextValue.url}/admin/getRib`)
-            .then((res) => setRIB(res.data))
-    }, [])
+    const [rib] = useAxios(`${URLContextValue.url}/admin/getRib`)
 
     const payement = (e, email) => {
         e.preventDefault();
@@ -79,49 +75,41 @@ function UserVirement({ user, hardRefresh }) {
                         <div
                             className="uservirement-container-totalRIB">
 
-                            <div
-                                className="uservirement-container-rib-iban-bic">
-                                <div
-                                    className="uservirement-container-rib">RIB
+                            <div className="uservirement-container-rib-iban-bic">
+                                <div className="uservirement-container-rib">
+                                    RIB
 
-
-                                    <div
-                                        className="uservirement-container-value">
+                                    <div className="uservirement-container-value">
                                         <div>Code Banque</div>
                                         <div>{rib?.[0]?.codeBanque}</div>
                                     </div>
 
-                                    <div
-                                        className="uservirement-container-value">
+                                    <div className="uservirement-container-value">
                                         <div>Code Guichet</div>
                                         <div>{rib?.[0]?.codeGuichet}</div>
                                     </div>
 
-                                    <div
-                                        className="uservirement-container-value">
+                                    <div className="uservirement-container-value">
                                         <div>Numero de Compte</div>
                                         <div>{rib?.[0]?.numeroCompte}</div>
                                     </div>
 
-                                    <div
-                                        className="uservirement-container-value">
+                                    <div className="uservirement-container-value">
                                         <div>Clefs RIB</div>
                                         <div>{rib?.[0]?.clefRib}</div>
                                     </div>
                                 </div>
-                                <div
-                                    className="uservirement-container-iban">I.B.A.N
-                                    <div
-                                        className="uservirement-container-value-iban-bic">
+                                <div className="uservirement-container-iban">
+                                    I.B.A.N
+                                    <div className="uservirement-container-value-iban-bic">
                                         <div>
                                             {rib?.[0]?.iban} {rib?.[0]?.codeBanque} {rib?.[0]?.codeGuichet} {rib?.[0]?.clefRib}</div>
                                     </div>
 
                                 </div>
-                                <div
-                                    className="uservirement-container-bic">B.I.C / SWIFT
-                                    <div
-                                        className="uservirement-container-value-iban-bic">
+                                <div className="uservirement-container-bic">
+                                    B.I.C / SWIFT
+                                    <div className="uservirement-container-value-iban-bic">
                                         <div>{rib?.[0]?.bicSwift}</div>
                                     </div>
                                 </div>
@@ -175,12 +163,11 @@ function UserVirement({ user, hardRefresh }) {
                                 onSubmit={(e) => virement(e, user._id)}>
                                 <label>Sur quel compte désirez vous réaliser votre virement ?</label>
                                 {user.rib.map((ribz, index) =>
-                                    <div>
+                                    <div key={index} >
                                         <input
                                             type="radio"
                                             value="rib"
                                             name="rib"
-                                            key={index}
                                             onChange={() => setTheRib(ribz)} />
                                         RIB #{index + 1} - {ribz}
                                     </div>
@@ -204,10 +191,10 @@ function UserVirement({ user, hardRefresh }) {
                     </div>}
 
 
-            </div>
+            </div >
 
 
-        </div>
+        </div >
     )
 
 }

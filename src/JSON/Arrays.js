@@ -63,34 +63,34 @@ export const userUpload = [
     {
         "name": "pieceidentite",
         "label": "Ajoutez un Pièce d'Identité",
-        "title": "Pièce d'identité",
-        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
+        "title": "Vos Pièces d'identité",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter une pièce d'identité",
         "type": "file",
-        "url" : "/up/id"
+        "url": "/up/id"
     },
     {
         "name": "justificatifdomicile",
         "label": "Ajoutez un Justificatif de Domicile",
-        "title": "Justificatif de Domicile",
-        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
+        "title": "Vos Justificatifs de Domiciles",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter un justiticatif de domicile de moins de trois mois",
         "type": "file",
-        "url" : "/up/jdd"
+        "url": "/up/jdd"
     },
     {
-        "name": "avisfiscal",
+        "name": "avisFiscal",
         "label": "Ajoutez votre Avis Fiscal",
-        "title": "Avis Fiscaux",
-        "update": "Pour obtenir plus d'options nous vous invitons à ajouter vos justificatifs",
+        "title": "Vos Avis Fiscaux",
+        "update": "Pour obtenir plus d'options nous vous invitons à ajouter votre avis fiscal de l'année en cours",
         "type": "file",
-        "url" : "/up/avis"
+        "url": "/up/avis"
     },
     {
-        "name": "rib",
+        "name": "picrib",
         "label": "Ajoutez un RIB",
-        "title": "Relevé d'Identité Bancaire",
+        "title": "Vos Relevé d'Identité Bancaire",
         "update": "Veuillez joidndre un RIB pour chaque RIB renseigné",
         "type": "file",
-        "url" : "/up/rib"
+        "url": "/up/rib"
     }
 ]
 

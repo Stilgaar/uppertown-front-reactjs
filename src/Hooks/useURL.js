@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export default function useURL() {
 
-
   // UNE URL POUR LES GOUVERNER TOUS !
   const [url, setURL] = useState(env.URLLOCAL)
 
@@ -25,28 +24,3 @@ export default function useURL() {
 
   return [URLContextValue];
 }
-
-
-
-// AXIOS MAP
-//
-// const hurles = [
-//   url1 annonces
-//   url2 users
-//   url3
-// ]
-//
-// const getURL = async () => {
-//   await axios
-//     .all(hurles.map((hurle) => axios.get(hurle).catch(err => null)))
-//     .then((res) => {
-//       if (res?.[0]?.data === "url" && res?.[1]?.data === "local") {
-//         setURL(env.URLLOCAL);
-//       }
-//       setURL(env.URL)
-//     })
-//     .catch(err => {
-//       if (err) { return null }
-//     });
-// };
-// 
