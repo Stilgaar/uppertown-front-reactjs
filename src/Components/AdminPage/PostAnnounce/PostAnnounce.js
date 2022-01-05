@@ -8,7 +8,6 @@ import AnnounceLine from "./AnnounceLine";
 
 
 function PostAnnounce() {
-
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
     const [city, setCity] = useState()

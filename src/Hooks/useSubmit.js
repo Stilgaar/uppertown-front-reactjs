@@ -96,10 +96,16 @@ function useSubmit() {
 
 
   // fonction récuperant sur les inputs de formulaire
-  const handleChange = (e) => {
+  const handleChange = (e, info) => {
     e.preventDefault()
     e.persist()
-    setData((data) => ({ ...data, [e.target.name]: e.target.value }));
+    console.log(info)
+    if (info) {
+      setData((data) => ({ ...data, [info]: e.target.value }));
+    }
+    else {
+      setData((data) => ({ ...data, [e.target.name]: e.target.value }))
+    }
     if (clickData?.x?._id) {
       setData((data) => ({ ...data, ["_id"]: clickData.x }));
     }
