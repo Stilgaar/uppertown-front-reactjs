@@ -1,3 +1,59 @@
+export const rib = [
+    {
+        "name": "titulaire",
+        "label": "Titulaire du Compte",
+        "type": "text",
+        "placeholder": "Uppertown"
+    },
+    {
+        "name": "domiciliation",
+        "label": "Domiciliation du Compte (Adresse)",
+        "type": "text",
+        "placeholder": "Banque d'UpperTown, 0600 Nice"
+    },
+    {
+        "name": "iban",
+        "label": "Code IBAN",
+        "type": "text",
+        "placeholder": "FR76"
+    },
+
+    {
+        "name": "codeBanque",
+        "label": "Code Banque",
+        "type": "number",
+        "placeholder": "14707"
+    },
+
+    {
+        "name": "codeGuichet",
+        "label": "Code Guichet",
+        "type": "number",
+        "placeholder": "0807"
+    },
+
+    {
+        "name": "numeroCompte",
+        "label": "Numero de Compte",
+        "type": "number",
+        "placeholder": "012345678901"
+    },
+
+    {
+        "name": "clefRib",
+        "label": "Clef RIB",
+        "type": "number",
+        "placeholder": "42"
+    },
+
+    {
+        "name": "bicSwift",
+        "label": "B.I.C / SWIFT",
+        "type": "text",
+        "placeholder": "BLM182R2D2"
+    },
+];
+
 export const userUpate = [
 
     {
@@ -57,7 +113,7 @@ export const userUpate = [
         "newinput": "newRib",
     },
 
-]
+];
 
 export const userUpload = [
     {
@@ -92,7 +148,8 @@ export const userUpload = [
         "type": "file",
         "url": "/up/rib"
     }
-]
+];
+
 
 export const region = [
     { value: "all", label: "Toutes les régions" },
@@ -135,5 +192,100 @@ export const type = [
     { value: "Terrain constructible", label: "Terrains constructibles" },
     { value: "Chalet de montagne", label: "Chalets de montagne" },
 
-]
+];
 
+export const annonce = [
+    {
+        "label": "Nom de l'Annonce",
+        "placeholder": "Un petit nom sympa ?",
+        "name": "title",
+        "type": "text",
+        "select": false
+    }, {
+        "label": "Description",
+        "placeholder": "La meilleure déscription pour votre annonce ?",
+        "name": "content",
+        "type": "text",
+        "select": false
+    }, {
+        "label": "Ville",
+        "placeholder": "ville",
+        "name": "city",
+        "type": "text",
+        "select": false
+    }, {
+        "label": "Code Postal",
+        "placeholder": "Zip Code",
+        "name": "zip_code",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Region",
+        "placeholder": "",
+        "name": "region",
+        "type": "text",
+        "select": true,
+        "list": region
+    }, {
+        "label": "Type de bien",
+        "placeholder": "",
+        "name": "type",
+        "type": "text",
+        "select": true,
+        "list": type
+    }, {
+        "label": "Nombre de chambres",
+        "placeholder": "Chambres",
+        "name": "bedrooms",
+        "type": "numbers",
+        "select": false
+    }, {
+        "label": "Superficie",
+        "placeholder": "en m²",
+        "name": "surface",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Prix du Bien",
+        "placeholder": "Prix Global",
+        "name": "price",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Prix de la part",
+        "placeholder": "Un petit nom sympa ?",
+        "name": "",
+        "type": "",
+        "select": false
+    }, {
+        "label": "Nombre de Parts",
+        "placeholder": "",
+        "name": "share_number",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Options",
+        "placeholder": "",
+        "name": "options",
+        "type": "checkbox",
+        "select": false
+    }, {
+        "label": "Loyer Brut Par An",
+        "placeholder": "",
+        "name": "gross_rent_by_year",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Coûts mensuels",
+        "placeholder": "",
+        "name": "monthly_cost",
+        "type": "number",
+        "select": false
+    }, {
+        "label": "Photos",
+        "placeholder": "",
+        "name": "files",
+        "type": "files",
+        "select": false
+    },
+];

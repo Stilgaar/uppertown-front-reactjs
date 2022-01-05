@@ -2,6 +2,9 @@ import "./PostAnnounce.css";
 import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import URLcontext from "../../../Context/URLcontext";
+import FormContext from "../../../Context/FormContext";
+import { annonce } from "../../../JSON/Arrays";
+import AnnounceLine from "./AnnounceLine";
 
 
 function PostAnnounce() {
@@ -23,6 +26,7 @@ function PostAnnounce() {
     const [pics, setPics] = useState([])
     const [previewPics, setPreviewPics] = useState([]);
     const URLContextValue = useContext(URLcontext)
+    const FormContextValue = useContext(FormContext)
 
     const onLoadFiles = (e) => {
         setImage(e.target.files)
@@ -93,21 +97,34 @@ function PostAnnounce() {
 
                 <div className="postannounce-container"><h3>Publier une nouvelle Annonce</h3></div>
 
-                <form onSubmit={(e) => handleSumbit(e)}>
+                <form onSubmit={FormContextValue.handleSumbit}>
 
-                    <div className="postannounce">
+                    <div>
+
+                        {annonce.map((entry, index) => (
+                            <AnnounceLine key={index} entry={entry} />))}
 
                         <label>Nom de l'annonce</label>
-                        <input type="text" placeholder="Trouvez un nom sympa" onChange={(e) => handleInput(setTitle, e)} />
+                        <input type="text"
+                            placeholder="Trouvez un nom sympa"
+                            name="title"
+                            onChange={FormContextValue.handleChange} />
 
                         <label>Description</label>
-                        <input type="text" placeholder="Meilleure déscritpion pour l'annonce" onChange={(e) => handleInput(setContent, e)} />
+                        <input
+                            type="text"
+                            placeholder="Meilleure déscritpion pour l'annonce"
+                            onChange={(e) => handleInput(setContent, e)} />
 
                         <label>Ville</label>
-                        <input type="text" placeholder="Ville" onChange={(e) => handleInput(setCity, e)} />
+                        <input type="text"
+                            placeholder="Ville"
+                            onChange={(e) => handleInput(setCity, e)} />
 
                         <label>Code Postal</label>
-                        <input type="number" placeholder="Zip Code" onChange={(e) => handleInput(setZip_Code, e)} />
+                        <input type="number"
+                            placeholder="Zip Code"
+                            onChange={(e) => handleInput(setZip_Code, e)} />
 
                         <label> Région :  </label>
                         <select onChange={(e) => handleInput(setRegion, e)}>
@@ -141,13 +158,21 @@ function PostAnnounce() {
                         </select>
 
                         <label>Nombre de Chambres</label>
-                        <input type="number" placeholder="Chambres" onChange={(e) => handleInput(setBedrooms, e)} />
+                        <input type="number"
+                            placeholder="Chambres"
+                            onChange={(e) => handleInput(setBedrooms, e)} />
 
                         <label>Superficie</label>
-                        <input type="number" placeholder="en m²" onChange={(e) => handleInput(setSurface, e)} />
+                        <input
+                            type="number"
+                            placeholder="en m²"
+                            onChange={(e) => handleInput(setSurface, e)} />
 
                         <label>Prix du bien</label>
-                        <input type="number" placeholder="Prix général" onChange={(e) => handleInput(setPrice, e)} />
+                        <input
+                            type="number"
+                            placeholder="Prix général"
+                            onChange={(e) => handleInput(setPrice, e)} />
 
                         <label>Prix de la part </label>
                         {price !== undefined && share_number !== undefined ?
@@ -175,14 +200,19 @@ function PostAnnounce() {
                             <div><input type="checkbox" onChange={() => setOptions({ ...options, jaccuzi: "" })} /> Jaccuzi</div>}
 
                         <label>Loyer brut par an</label>
-                        <input type="number" onChange={(e) => handleInput(setGross_rent_by_year, e)} />
+                        <input type="number"
+                            onChange={(e) => handleInput(setGross_rent_by_year, e)} />
 
                         <label>Coûts mensuels</label>
-                        <input type="number" onChange={(e) => handleInput(setMonthly_cost, e)} />
+                        <input type="number"
+                            onChange={(e) => handleInput(setMonthly_cost, e)} />
 
                         <label>Photos</label>
                         <div>Selectionnez jusqu'à cinq photos à fois !</div>
-                        <input type="file" name="image" multiple onChange={(e) => onLoadFiles(e)} />
+                        <input type="file"
+                            name="image"
+                            multiple
+                            onChange={(e) => onLoadFiles(e)} />
 
                         {previewPics[0] !== undefined && <div><div className="postannounce-image-container">
                             {previewPics[0] !== undefined && <img className="postannounce-image-preview" src={previewPics?.[0]?.result} alt="" />}

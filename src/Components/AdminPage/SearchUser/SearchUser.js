@@ -39,9 +39,7 @@ function SearchUser() {
                 {filtrerdListOne &&
                     filtrerdListOne.map((userdata, key) => {
                         return (
-
                             <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh} />
-
                         )
                     })}
 

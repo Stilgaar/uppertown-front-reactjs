@@ -38,22 +38,22 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                         </button>
                     </form>
 
-                    {entry.name === "pieceidentite" && user?.pi[0] && <div>
+                    {entry.name === "pieceidentite" && user?.pi?.[0] && <div>
                         {user.pi.map((data, index) =>
                             <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
                     </div>}
 
-                    {entry.name === "justificatifdomicile" && user?.JDD[0] && <div>
+                    {entry.name === "justificatifdomicile" && user?.JDD?.[0] && <div>
                         {user.JDD.map((data, index) =>
                             <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
                     </div>}
 
-                    {entry.name === "avisFiscal" && user?.avisFiscal[0] && <div>
+                    {entry.name === "avisFiscal" && user?.avisFiscal?.[0] && <div>
                         {user.avisFiscal.map((data, index) =>
                             <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
                     </div>}
 
-                    {entry.name === "picrib" && user?.picrib[0] && <div>
+                    {entry.name === "picrib" && user?.picrib?.[0] && <div>
                         {user.picrib.map((data, index) =>
                             <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
                     </div>}

@@ -1,20 +1,25 @@
 import { useState } from "react";
 import axios from "axios";
 
-// FONCTION POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
+// HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
 function useSubmit() {
 
-  // states utiles
+  // data est pour les données des inputs
   const [data, setData] = useState({});
+  // clickdata récupére des données aux clicks
   const [clickData, setClickData] = useState({})
+  // resmsg sont les messages récupérés par res.send
   const [resMsg, setResMsg] = useState();
+  // form est l'état de la barre de navigation
   const [form, setForm] = useState();
+  // url est l'url d'envoi pour axios
   const [url, setUrl] = useState()
 
-  console.log("URL", url)
-  //  console.log("DATA", data)
-  console.log("clickData", clickData)
+  // A laisser : pour la verification des données qui arrvivent
+  // console.log("URL", url)
+  console.log("DATA", data)
+  //  console.log("clickData", clickData)
   //   console.log(resMsg)
 
   // fonction submit destiné aux inputs
@@ -44,39 +49,31 @@ function useSubmit() {
         }
       })
       .catch((err) => console.log(err))
+      .then(() => setData({}))
   };
 
-
   // fonction de récuperation pour les images
+  // ou quelconque formulaire qui a des images
   const handleForm = (e) => {
     e.preventDefault()
     const form = new FormData()
-    form.append('email', data.email.email)
-    if (data.pieceidentite) {
-      form.append('pieceidentite', data.pieceidentite)
+    let key = Object.keys(data)
+    let value = Object.values(data)
+
+    for (let i = 0; i < key.length; i++) {
+      form.append(key[i], value[i])
     }
-    else if (data.justificatifdomicile) {
-      form.append('justificatifdomicile', data.justificatifdomicile)
-    }
-    else if (data.avisFiscal) {
-      console.log('avis')
-      form.append('avisFiscal', data.avisFiscal)
-    }
-    else if (data.picrib) {
-      console.log('rib')
-      form.append('picrib', data.picrib)
-    }
-    else { console.log("non") }
-    console.log("HANDLEFORM", url, form)
+
     axios.post(url, form, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
       .then((res) => console.log(res.data))
       .catch(err => console.log(err))
-
+      .then(() => setData({}))
   }
 
   // fonction récuperant sur un click, sans forumaire
+  // penser à envoyer les x et y de la façon suivante {key : value}
   const handleData = (x, y) => {
     if (x) {
       setClickData((clickData) => ({ ...clickData, x }))
@@ -107,7 +104,7 @@ function useSubmit() {
       setData((data) => ({ ...data, ["_id"]: clickData.x }));
     }
     if (clickData?.x?.email) {
-      setData((data) => ({ ...data, ["email"]: clickData.x }));
+      setData((data) => ({ ...data, ["email"]: clickData.x.email }));
     }
   };
 
@@ -115,7 +112,7 @@ function useSubmit() {
     e.persist()
     setData((data) => (({ ...data, [e.target.name]: e.target.files[0] })))
     if (clickData?.x?.email) {
-      setData((data) => ({ ...data, ["email"]: clickData.x }));
+      setData((data) => ({ ...data, ["email"]: clickData.x.email }));
     }
   }
 

@@ -23,10 +23,12 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
                     hardRefresh()
                 }}>
                 Supprimer
+                {box && <div>Êtes vous bien sur de vouloir supprimer votre justificatif ?
+                    <br /> Veuillez confirmer en cliquant à nouveau sur Supprimer</div>}
             </button>
             <br /> <br />
-            {box && <div>Êtes vous bien sur de vouloir supprimer votre justificatif ?
-                <br /> Veuillez confirmer en cliquant à nouveau sur Supprimer</div>}
+
+
         </div>
     )
 }

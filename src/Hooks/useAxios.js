@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
+// HOOK POUR FETCH PARTOUT EN UNE LIGNE
+
 const useAxios = (url) => {
 
     const [data, setData] = useState([])

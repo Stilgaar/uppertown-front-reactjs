@@ -18,14 +18,12 @@ function StableCoins({ userdata, adminRefresh }) {
 
     return (
         <div>
-            <div
-                className="stableC-container">
+            <div className="stableC-container">
                 <label>
                     Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
                 </label>
 
-                <form
-                    className="stableC-input"
+                <form className="stableC-input"
                     onSubmit={FormContextValue.handleSubmit}>
                     <input
                         values={FormContextValue.data.stableCoins || ""}
@@ -38,8 +36,7 @@ function StableCoins({ userdata, adminRefresh }) {
                             FormContextValue.handleChange()
                         }
                         } />
-                    <button
-                        className="userline-button-validate"
+                    <button className="userline-button-validate"
                         type="submit">
                         Valider
                     </button>

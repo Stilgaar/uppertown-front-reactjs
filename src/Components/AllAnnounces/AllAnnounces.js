@@ -17,15 +17,16 @@ function AllAnnounces() {
 
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
   useEffect(() => {
-    Axios.get(`${URLContextValue.url}/api/announces/allAnnounces`).then(
-      (response) => {
-        //Place la reponse dans les states
-        //State des annonces global
-        setAnnouncesList(response.data);
-        //State des annonces filtrées, initialisé avec toutes les annonces
-        setFilteredList(response.data);
-      }
-    );
+    Axios.get(`${URLContextValue.url}/api/announces/allAnnounces`)
+      .then(
+        (response) => {
+          //Place la reponse dans les states
+          //State des annonces global
+          setAnnouncesList(response.data);
+          //State des annonces filtrées, initialisé avec toutes les annonces
+          setFilteredList(response.data);
+        }
+      );
   }, []);
 
   //A chaque changement dans les filtres

@@ -2,9 +2,10 @@ import axios from "axios";
 import env from "react-dotenv";
 import { useState } from "react";
 
+// UNE URL POUR LES GOUVERNER TOUS !
 export default function useURL() {
-
-  // UNE URL POUR LES GOUVERNER TOUS !
+  // s'il est en ligne, mettre env.URL à la place de env.URLLOCAL dans le state
+  // le hook choisira l'url qu'il faut en fonction si le back est online en local
   const [url, setURL] = useState(env.URLLOCAL)
 
   const getURL = () => {

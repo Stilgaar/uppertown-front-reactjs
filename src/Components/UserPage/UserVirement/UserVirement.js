@@ -46,39 +46,29 @@ function UserVirement({ user, hardRefresh }) {
 
     return (
 
-        <div
-            className="uservirement-container-general">
-            <div
-                className="uservirement-container-params">
-                <div>
-                    <h3> Acheter ou Vendre des Stable Coins </h3>
-                </div>
-                <div>
-                    Vous disposez actuellement de {user.stableCoins} Stable Coins
-                </div>
+        <div className="uservirement-container-general">
+            <div className="uservirement-container-params">
+                <div> <h3> Acheter ou Vendre des Stable Coins </h3> </div>
+                <div> Vous disposez actuellement de {user.stableCoins} Stable Coins</div>
             </div>
             <div>
 
-                <button
-                    className="uservirement-button-validate"
+                <button className="uservirement-button-validate"
                     onClick={() => setAcheter(current => !current)}>
                     Acheter
                 </button>
 
                 {acheter &&
-                    <div
-                        className="uservirement-singlecontainer" >
+                    <div className="uservirement-singlecontainer" >
                         <div>Pour acheter des Stable Coins, veuillez faire un virement sur le compte en banque suivant</div>
                         <div>Virement SEPA</div>
                         <div>Titulaire : {rib?.[0]?.titulaire}</div>
                         <div>Domiciliation : {rib?.[0]?.domiciliation}</div>
-                        <div
-                            className="uservirement-container-totalRIB">
+                        <div className="uservirement-container-totalRIB">
 
                             <div className="uservirement-container-rib-iban-bic">
                                 <div className="uservirement-container-rib">
                                     RIB
-
                                     <div className="uservirement-container-value">
                                         <div>Code Banque</div>
                                         <div>{rib?.[0]?.codeBanque}</div>
@@ -116,15 +106,12 @@ function UserVirement({ user, hardRefresh }) {
                             </div>
                         </div>
 
-                        <form
-                            onSubmit={(e) => payement(e, user.email)}>
+                        <form onSubmit={(e) => payement(e, user.email)}>
                             <label>Combien désirez vous transferer ?</label>
-                            <input
-                                type="number"
+                            <input type="number"
                                 placeholder="Montant"
                                 onInput={(e) => handleInput(e, setMontant)} />
-                            <button
-                                className="uservirement-button-validate"
+                            <button className="uservirement-button-validate"
                                 type="submit">
                                 Valider
                             </button>
@@ -140,32 +127,24 @@ function UserVirement({ user, hardRefresh }) {
                                 <div>
                                     Ce code permet d'associer votre dépôt à votre compte.
                                     <br /> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
-                            </div>
-                        }
+                            </div>}
                     </div>}
-
             </div>
 
             <div>
-                <button
-                    className="uservirement-button-validate"
+                <button className="uservirement-button-validate"
                     onClick={() => setVendre(current => !current)}>
                     Vendre
                 </button>
 
                 {vendre &&
-                    <div
-                        className="uservirement-singlecontainer">
-
+                    <div className="uservirement-singlecontainer">
                         {user?.rib?.[0] !== undefined ? <div> Vous disposez de {user.stableCoins} StableCoins
-
-                            <form
-                                onSubmit={(e) => virement(e, user._id)}>
+                            <form onSubmit={(e) => virement(e, user._id)}>
                                 <label>Sur quel compte désirez vous réaliser votre virement ?</label>
                                 {user.rib.map((ribz, index) =>
                                     <div key={index} >
-                                        <input
-                                            type="radio"
+                                        <input type="radio"
                                             value="rib"
                                             name="rib"
                                             onChange={() => setTheRib(ribz)} />
@@ -174,26 +153,22 @@ function UserVirement({ user, hardRefresh }) {
                                 )}
 
                                 <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
-                                <input
-                                    type="number"
+                                <input type="number"
                                     onInput={(e) => handleInput(e, setChange)} />
-                                <button
-                                    className="uservirement-button-vendre"
+                                <button className="uservirement-button-vendre"
                                     type="submit">Valider</button>
                             </form>
 
                             {pending &&
                                 <div>Votre demande à bien été prise en compte. <br />
-                                    Nos équipes s'occupent de votre virement le plus rapidemende possible</div>}
+                                    Nos équipes s'occupent de votre virement le plus rapidemende possible
+                                </div>}
                         </div>
                             :
-                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire</div>}
+                            <div>Avant transférer de l'argent, veuillez indiquer un Relevé d'idendité bancaire
+                            </div>}
                     </div>}
-
-
             </div >
-
-
         </div >
     )
 

@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { useState, useContext, useEffect } from 'react'
-import URLContext from '../../../Context/URLcontext'
+import { useContext, useEffect } from 'react'
 import FormContext from '../../../Context/FormContext'
 import { userUpload } from '../../../JSON/Arrays';
 import OneLineUpload from './OneLineUpload';

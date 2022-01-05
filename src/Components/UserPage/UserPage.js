@@ -57,23 +57,19 @@ function UserPage({ user, hardRefresh }) {
     return (
         <div className="user-page">
             <div className="userpage-buttons-list">
-                <button
-                    onClick={() => transac()}
+                <button onClick={() => transac()}
                     className="userpage-button-validate">
                     Historique de vos Transactions
                 </button>
-                <button
-                    onClick={() => virement()}
+                <button onClick={() => virement()}
                     className="userpage-button-validate">
                     Acheter ou Vendre Stable Coins
                 </button>
-                <button
-                    onClick={() => param()}
+                <button onClick={() => param()}
                     className="userpage-button-validate">
                     Gèrer son compte
                 </button>
-                <button
-                    onClick={() => up()}
+                <button onClick={() => up()}
                     className="userpage-button-validate">
                     Upload Fichiers
                 </button>
@@ -93,13 +89,12 @@ function UserPage({ user, hardRefresh }) {
                                 hardRefresh={hardRefresh} />
                         </div>
                         :
-                        <div
-                            className="userpage-warning">Pour avoir accès aux Transactions : <br />
+                        <div className="userpage-warning">
+                            Pour avoir accès aux Transactions : <br />
                             Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
                             <br />
                             <br />
-                            <button
-                                onClick={() => param()}
+                            <button onClick={() => param()}
                                 className="userpage-button-validate-gestion">
                                 Gèrer son compte
                             </button>
@@ -112,11 +107,10 @@ function UserPage({ user, hardRefresh }) {
                         <div>
                             <UserVirement user={user} hardRefresh={hardRefresh} />
                         </div> :
-                        <div
-                            className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />  Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                        <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />
+                            Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
                             <br /> <br />
-                            <button
-                                onClick={() => param()}
+                            <button onClick={() => param()}
                                 className="userpage-button-validate-gestion">
                                 Gèrer son compte
                             </button>
