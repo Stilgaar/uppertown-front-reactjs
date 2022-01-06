@@ -118,13 +118,8 @@ function UserVirement({ user, hardRefresh }) {
                         </form>
 
                         {validation &&
-                            <div>
-                                <div>Code : "
-                                    <span
-                                        className="uservirement-span-id">
-                                        {user._id} Uppertown
-                                    </span>" </div>
-                                <div>
+                            <div> <div>Code : " <span className="uservirement-span-id"> {user._id} Uppertown
+                            </span>" </div> <div>
                                     Ce code permet d'associer votre dépôt à votre compte.
                                     <br /> Veuillez renseigner ce code en incluant "UpperTown" lors de l'envoi du virement bancaire.</div>
                             </div>}

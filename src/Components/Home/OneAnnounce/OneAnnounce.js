@@ -26,7 +26,7 @@ function OneAnnounce() {
           </p>
         </div>
         <div className="oneannounce-container-text">
-          <h4>Vous voulez en voir plus?</h4>
+          <h4>Vous desirez en voir plus ?</h4>
           <p>
             De nombreux biens sont disponible dans notre catalogue. Autant
             d'opportunités d'investissement en Crowd Funding vous attendent.

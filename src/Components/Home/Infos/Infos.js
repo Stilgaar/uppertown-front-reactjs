@@ -6,6 +6,7 @@ import cart from './cart-plus.svg';
 import { useContext } from "react";
 import URLContext from "../../../Context/URLcontext";
 import useAxios from "../../../Hooks/useAxios";
+import { numberSpaces } from "../../../Func/numberSpace"
 
 
 function Infos() {
@@ -25,11 +26,6 @@ function Infos() {
   }
 
   //fonction trouver sur google pour espacer les chiffres des prix
-  const numberWithSpaces = (value) => {
-    let parts = value.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    return parts.join(".");
-  }
 
   return (
     <div className="infos-container-general">
@@ -39,22 +35,22 @@ function Infos() {
       <div className="infos-container-container">
         <div className="infos-container">
           <div><img src={coin} alt="coin" className="infos-svg-coin" /><p className="infos-coin">StableCoins échangés</p></div>
-          <div>{numberWithSpaces(clienttokens)}</div>
+          <div>{numberSpaces(clienttokens)}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={people} alt="people" className="infos-svg-people" /><p className="infos-people">Utilisateurs</p></div>
-          <div>{numberWithSpaces(users?.length)}</div>
+          <div>{numberSpaces(users?.length)}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={building} alt="building" className="infos-svg-building" /><p className="infos-building">Biens Immobiliers</p></div>
-          <div>{numberWithSpaces(ann.length)}</div>
+          <div>{numberSpaces(ann.length)}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={cart} alt="cart" className="infos-svg-cart" /><p className="infos-cart">Tokens disponibles</p></div>
-          <div>{numberWithSpaces(freetokens)}</div>
+          <div>{numberSpaces(freetokens)}</div>
         </div>
       </div>
     </div>

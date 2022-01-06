@@ -33,7 +33,8 @@ function AnnounceLine({ entry }) {
             {entry.part &&
                 <><label>{entry.label}</label>
                     {FormContextValue?.data?.price !== undefined && FormContextValue?.data?.share_number !== undefined ?
-                        <div>{FormContextValue?.data?.price / FormContextValue?.data?.share_number}</div> : <div>0</div>}
+                        <div>{FormContextValue?.data?.price / FormContextValue?.data?.share_number}</div>
+                        : <div>0</div>}
                 </>
             }
             {

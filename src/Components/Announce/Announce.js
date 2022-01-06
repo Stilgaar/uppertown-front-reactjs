@@ -1,16 +1,9 @@
 import React from "react";
 import "./Announce.scss"
 import { Link } from "react-router-dom";
+import { numberSpaces } from "../../Func/numberSpace";
 
 function Announce({ announce }) {
-
-  //fonction trouver sur google pour espacer les chiffres des prix
-  //  function numberWithSpaces(x) {
-  //    var parts = x.toString().split(".");
-  //    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  //    return parts.join(".");
-  //  }
-  // 
 
   return (
     <Link to={{
@@ -29,7 +22,7 @@ function Announce({ announce }) {
       <div className="bottom-container">
         <div className="price-block">
           <p className="title-block">Prix</p>
-          <p className="data-block">{announce.price} €</p>
+          <p className="data-block">{numberSpaces(announce.price)} €</p>
         </div>
         <div className="surface-block">
           <p className="title-block">m²</p>

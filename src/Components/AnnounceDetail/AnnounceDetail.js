@@ -6,6 +6,7 @@ import "./AnnounceDetail.css";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import URLcontext from "../../Context/URLcontext";
+import { numberSpaces } from "../../Func/numberSpace";
 
 function AnnounceDetail() {
   const [invest, setInvest] = useState();
@@ -311,18 +312,18 @@ function AnnounceDetail() {
         </div>
         <div className="detail-lower-container">
           <div className="detail-economic-container">
-            <p>Prix: {announce.price} €</p>
+            <p>Prix: {numberSpaces(announce.price)} €</p>
             {/*<p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>*/}
             <p>Prix du jeton: {(announce?.share_price).toFixed(2)} SC</p>
             <p>Nombre de jetons: {announce.share_number && invest ? announce.share_number - invest : announce.share_number} </p>
           </div>
           <div className="detail-rent-container">
-            <p>Loyer par an brut: {announce.gross_rent_by_year} €</p>
-            <p>Loyer par mois brut: {announce.gross_rent_by_year / 12} €</p>
-            <p>Coûts mensuels: {announce.monthly_cost} €</p>
+            <p>Loyer par an brut: {numberSpaces(announce.gross_rent_by_year)} €</p>
+            <p>Loyer par mois brut: {numberSpaces(announce.gross_rent_by_year / 12)} €</p>
+            <p>Coûts mensuels: {numberSpaces(announce.monthly_cost)} €</p>
             <p>
               Loyer net par mois :
-              {announce.gross_rent_by_year / 12 - announce.monthly_cost} €
+              {numberSpaces(announce.gross_rent_by_year / 12 - announce.monthly_cost)} €
             </p>
             <p>
               Gain mensuel par jeton :

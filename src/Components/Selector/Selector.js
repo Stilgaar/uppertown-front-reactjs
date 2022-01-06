@@ -3,6 +3,7 @@ import Select from "react-select";
 import "./Selector.css";
 import "./Selector.scss"
 import { region, bedrooms, type } from '../../JSON/Arrays'
+import { numberSpaces } from "../../Func/numberSpace";
 
 function Selector({
   filterRegion,
@@ -28,11 +29,6 @@ function Selector({
     setFilterPrice(e.target.value);
   };
   //fonction trouver sur google pour espacer les chiffres des prix
-  function numberWithSpaces(x) {
-    var parts = x.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    return parts.join(".");
-  }
 
   return (
     <div className="selector-line">
@@ -82,7 +78,7 @@ function Selector({
             value={filterPrice}
           />
           <label className="selected-price" for="price">
-            {numberWithSpaces(filterPrice)} €
+            {numberSpaces(filterPrice)} €
           </label>
         </div>
       </div>

@@ -56,6 +56,7 @@ function useSubmit() {
 
   // fonction de récuperation pour les images
   // ou quelconque formulaire qui a des images
+  // s'occupe aussi d'envoyer de la data au besoin
   const handleForm = (e) => {
     e.preventDefault()
 
@@ -78,7 +79,6 @@ function useSubmit() {
       let val = Object.values(images)
       for (let i = 0; i < val[0].length; i++) {
         form.append(key, val[0][i])
-        console.log("KEY VAL", key, val[0][i])
       }
     }
 
