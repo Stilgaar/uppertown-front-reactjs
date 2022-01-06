@@ -5,22 +5,22 @@ import { Link } from "react-router-dom";
 function Announce({ announce }) {
 
   //fonction trouver sur google pour espacer les chiffres des prix
-  function numberWithSpaces(x) {
-    var parts = x.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    return parts.join(".");
-  }
- 
+  //  function numberWithSpaces(x) {
+  //    var parts = x.toString().split(".");
+  //    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  //    return parts.join(".");
+  //  }
+  // 
 
   return (
-    <Link to={{ 
+    <Link to={{
       pathname: '/announce-detail',
-      state:{
+      state: {
         data: announce
       },
-    }}  
-    style={{textDecoration: "none", color: "black"}}
-    className="announce-container">
+    }}
+      style={{ textDecoration: "none", color: "black" }}
+      className="announce-container">
       <div className="top-container">
         <img src={announce?.image[0]} alt="" />
       </div>
@@ -29,7 +29,7 @@ function Announce({ announce }) {
       <div className="bottom-container">
         <div className="price-block">
           <p className="title-block">Prix</p>
-          <p className="data-block">{numberWithSpaces(announce.price)} €</p>
+          <p className="data-block">{announce.price} €</p>
         </div>
         <div className="surface-block">
           <p className="title-block">m²</p>

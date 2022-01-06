@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
@@ -7,6 +7,7 @@ function useSubmit() {
 
   // data est pour les données des inputs
   const [data, setData] = useState({});
+  const [images, setImages] = useState([])
   // clickdata récupére des données aux clicks
   const [clickData, setClickData] = useState({})
   // resmsg sont les messages récupérés par res.send
@@ -17,10 +18,11 @@ function useSubmit() {
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données qui arrvivent
-  // console.log("URL", url)
-  console.log("DATA", data)
-  //  console.log("clickData", clickData)
-  //   console.log(resMsg)
+  //  console.log("URL", url)
+  //  console.log("DATA", data)
+  //  console.log("IMAGES", images)
+  //  console.log("CLICKDATA", clickData)
+  //  console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
@@ -56,12 +58,28 @@ function useSubmit() {
   // ou quelconque formulaire qui a des images
   const handleForm = (e) => {
     e.preventDefault()
+
     const form = new FormData()
+
     let key = Object.keys(data)
     let value = Object.values(data)
 
     for (let i = 0; i < key.length; i++) {
       form.append(key[i], value[i])
+    }
+
+    if (FormContextValue?.data?.price && FormContextValue?.data?.share_number) {
+      let share_price = FormContextValue?.data?.price / FormContextValue?.data?.share_number
+      form.append('share_price', share_price)
+    }
+
+    if (images) {
+      let key = Object.keys(images)
+      let val = Object.values(images)
+      for (let i = 0; i < val[0].length; i++) {
+        form.append(key, val[0][i])
+        console.log("KEY VAL", key, val[0][i])
+      }
     }
 
     axios.post(url, form, {
@@ -70,6 +88,7 @@ function useSubmit() {
       .then((res) => console.log(res.data))
       .catch(err => console.log(err))
       .then(() => setData({}))
+      .then(() => setImages([]))
   }
 
   // fonction récuperant sur un click, sans forumaire
@@ -85,8 +104,6 @@ function useSubmit() {
 
   // fonction envoyant les datas sur les clicks de boutons simple
   const handleEnvoi = () => {
-    console.log("HANDLE URL", url)
-    console.log('HANDLE CLICK', clickData)
     axios.post(url, clickData)
       .then((res) => {
         console.log(res.data)
@@ -96,10 +113,9 @@ function useSubmit() {
 
 
   // fonction récuperant sur les inputs de formulaire
-  const handleChange = (e, info) => {
-    e.preventDefault()
+  const handleChange = (e, info, val) => {
+    if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
     e.persist()
-    console.log(info)
     if (info) {
       setData((data) => ({ ...data, [info]: e.target.value }));
     }
@@ -112,11 +128,11 @@ function useSubmit() {
     if (clickData?.x?.email) {
       setData((data) => ({ ...data, ["email"]: clickData.x.email }));
     }
+
   };
 
   const handleFile = (e) => {
-    e.persist()
-    setData((data) => (({ ...data, [e.target.name]: e.target.files[0] })))
+    setImages((images) => (({ ...images, [e.target.name]: e.target.files })))
     if (clickData?.x?.email) {
       setData((data) => ({ ...data, ["email"]: clickData.x.email }));
     }

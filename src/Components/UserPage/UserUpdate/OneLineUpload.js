@@ -25,6 +25,7 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                             <input
                                 type={entry.type}
                                 name={entry.name}
+                                multiple
                                 onChange={(e) => {
                                     FormContextValue.handleFile(e)
                                     FormContextValue.handleURL(`${UrlContextvalue.url}${entry.url}`);

@@ -194,98 +194,153 @@ export const type = [
 
 ];
 
+export const option = [
+    { value: "piscine", label: "Piscine" },
+    { value: "tennis", label: "Tennis" },
+    { value: "jardin", label: "Jardin" },
+    { value: "parking", label: "Parking" },
+    { value: "jaccuzi", label: "Jaccuzi" },
+]
+
 export const annonce = [
     {
         "label": "Nom de l'Annonce",
         "placeholder": "Un petit nom sympa ?",
         "name": "title",
         "type": "text",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Description",
         "placeholder": "La meilleure déscription pour votre annonce ?",
         "name": "content",
         "type": "text",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Ville",
         "placeholder": "ville",
         "name": "city",
         "type": "text",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Code Postal",
         "placeholder": "Zip Code",
         "name": "zip_code",
         "type": "number",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Region",
         "placeholder": "",
         "name": "region",
         "type": "text",
         "select": true,
-        "list": region
+        "list": region,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Type de bien",
         "placeholder": "",
         "name": "type",
         "type": "text",
         "select": true,
-        "list": type
+        "list": type,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Nombre de chambres",
         "placeholder": "Chambres",
         "name": "bedrooms",
         "type": "numbers",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Superficie",
         "placeholder": "en m²",
         "name": "surface",
         "type": "number",
-        "select": false
+        "select": false,
+        "option": false,
+        "part": false,
+        "photos": false,
     }, {
         "label": "Prix du Bien",
         "placeholder": "Prix Global",
         "name": "price",
         "type": "number",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Prix de la part",
-        "placeholder": "Un petit nom sympa ?",
+        "placeholder": "",
         "name": "",
-        "type": "",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": true,
     }, {
         "label": "Nombre de Parts",
         "placeholder": "",
+        "values": [1000, 10000,],
         "name": "share_number",
-        "type": "number",
-        "select": false
+        "type": "radio",
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
+
     }, {
         "label": "Options",
         "placeholder": "",
         "name": "options",
         "type": "checkbox",
-        "select": false
+        "select": false,
+        "option": true,
+        "list": option,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Loyer Brut Par An",
         "placeholder": "",
         "name": "gross_rent_by_year",
         "type": "number",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Coûts mensuels",
         "placeholder": "",
         "name": "monthly_cost",
         "type": "number",
-        "select": false
+        "select": false,
+        "option": false,
+        "photos": false,
+        "part": false,
     }, {
         "label": "Photos",
         "placeholder": "",
-        "name": "files",
-        "type": "files",
-        "select": false
+        "name": "image",
+        "type": "file",
+        "select": false,
+        "option": false,
+        "photos": true,
+        "part": false,
     },
 ];

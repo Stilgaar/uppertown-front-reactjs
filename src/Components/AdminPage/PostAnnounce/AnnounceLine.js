@@ -6,15 +6,14 @@ function AnnounceLine({ entry }) {
 
     return (
         <div className="postannounce">
-
-            {!entry.select && <>
-                <label>{entry.label}</label>
-                <input
-                    type={entry.type}
-                    placeholder={entry.placeholder}
-                    name={entry.name}
-                    onChange={FormContextValue.handleChange} />
-            </>}
+            {!entry.select && !entry.option && !entry.photos && !entry.values && !entry.part &&
+                <> <label>{entry.label}</label>
+                    <input
+                        type={entry.type}
+                        placeholder={entry.placeholder}
+                        name={entry.name}
+                        onChange={FormContextValue.handleChange} />
+                </>}
 
             {entry.select &&
                 <> <label>{entry.label}</label>
@@ -30,6 +29,52 @@ function AnnounceLine({ entry }) {
                             </option>
                         ))}
                     </select></>}
+
+            {entry.part &&
+                <><label>{entry.label}</label>
+                    {FormContextValue?.data?.price !== undefined && FormContextValue?.data?.share_number !== undefined ?
+                        <div>{FormContextValue?.data?.price / FormContextValue?.data?.share_number}</div> : <div>0</div>}
+                </>
+            }
+            {
+                entry.option &&
+                <> <label>{entry.label}</label>
+                    {entry.list.map((option, index) => (
+                        <div key={index}>
+                            <input
+                                values={option.value}
+                                type={entry.type}
+                                name={entry.name}
+                                onChange={(e) => FormContextValue.handleChange(e, option.value, entry.type)} />
+                            {option.label}
+                        </div>
+                    ))}
+                </>
+            }
+
+            {entry.photos &&
+                <><label>{entry.label}</label>
+                    <input
+                        multiple
+                        type={entry.type}
+                        name={entry.name}
+                        onChange={(e) => {
+                            FormContextValue.handleFile(e)
+                        }} />
+                </>}
+
+            {entry.values && <>
+                <label>{entry.label}</label>
+                {entry?.values?.map((elem) => (
+                    <div><input
+                        type={entry.type}
+                        placeholder={entry.placeholder}
+                        name={entry.name}
+                        value={elem}
+                        onChange={(e) => FormContextValue.handleChange(e, entry.name, entry.type)} />
+                        {elem}
+                    </div>))}
+            </>}
         </div>
     )
 }
