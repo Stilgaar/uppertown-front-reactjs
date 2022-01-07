@@ -22,6 +22,8 @@ function AdminPage() {
 
     const [users, adminRefresh] = useAxios(`${URLContextValue.url}/api/users/users`)
 
+
+    console.log(users)
     useEffect(() => {
         adminRefresh();
     }, [])

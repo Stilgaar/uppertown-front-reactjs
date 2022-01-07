@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation } from "react-router-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
-import Axios from "axios";
-import URLcontext from "../../Context/URLcontext";
+import { useLocation } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import { numberSpaces } from "../../Func/numberSpace";
-import useAxios from "../../Hooks/useAxios";
+import Invest from "./Invest";
+
 
 function AnnounceDetail({ user }) {
 
@@ -15,142 +13,12 @@ function AnnounceDetail({ user }) {
   const location = useLocation();
   const announce = location.state?.data;
 
-  const URLContextValue = useContext(URLcontext)
-
-  const [hasPropriety] = useAxios(`${URLContextValue.url}/api/properties/${user._id}/${announce._id}`)
-  console.log("has propriety ?", hasPropriety)
   // il faut encore déterminer pourquoi il avait cette variable et pourquoi je la garde ? 
-  const [userHasShare] = useAxios(`${URLContextValue.url}/api/properties/datas/${user._id}/${announce._id}`)
-  console.log("userhasshare", userHasShare)
-
-  const [invest, setInvest] = useState();
-  const [immo, setImmo] = useState();
-  const [sc, setSc] = useState({ stableCoin: "", validated: false })
-  const [showInvest, setShowinvest] = useState("");
-  const [message1, setMessage1] = useState("");
-  const [emptyVal, setEmptyVal] = useState("")
-
-
-  function handleInput(e) {
-    setInvest(e.target.value);
-  }
-
-  function handleClick() {
-    if (!invest) {
-      setEmptyVal("Veuillez définir le montant à investir")
-    } else {
-      setShowinvest(`Vous souhaitez investir ${invest} jeton(s)`)
-      console.log(invest)
-    }
-  }
-
-  function convertInSc() {
-    setSc({ ...sc, stableCoin: invest * announce.share_price })
-  }
-
-  const sendTransac = () => {
-    if (user.stableCoins > sc.stableCoin) {
-      const data = {
-        announceId: announce._id, userId: user._id, token: invest,
-        sc: sc.stableCoin, title: announce.title, content: announce.content,
-        type: announce.type, price: announce.price, image: announce.image, created_at: d
-      }
-
-      Axios.post(`${URLContextValue.url}/api/transactions/buy`, data)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-
-    } else {
-      setMessage1("transaction impossible : solde insuffisant")
-      return false;
-    }
-
-    fetch(`${URLContextValue.url}/api/users/${user._id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        stableCoins: user.stableCoins - sc.stableCoin,
-      }),
-    }).then(() => { console.log("put done") });
-
-    let newsharenumber = Number(announce.share_number) - Number(invest)
-
-    fetch(`${URLContextValue.url}/api/announces/${announce._id}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        share_number: newsharenumber,
-        //share_price: announce.price/(announce.share_number - invest)
-      }),
-    }).then(() => {
-      setSc({ ...sc, validated: true })
-    });
-
-    if (userHasShare.idUser != user._id) {
-      fetch(`${URLContextValue.url}/api/properties/allProperties`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          idUser: user._id,
-          announceId: announce._id,
-          title: announce.title,
-          content: announce.content,
-          price: announce.price,
-          share_price: announce.share_price,
-          totalToken: invest,
-          type: announce.type,
-          gross_rent_by_year: announce.gross_rent_by_year,
-          city: announce.city,
-          region: announce.region,
-          zip_code: announce.zip_code,
-          bedrooms: announce.bedrooms,
-          surface: announce.surface,
-          option: announce.options,
-          image: announce.image
-        }),
-      }).then(() => { console.log("New share number : " + invest); });
-
-    } else {
-      let newtotaltoken = (Number(userHasShare.totalToken) + Number(invest))
-      fetch(`${URLContextValue.url}/api/properties/${user._id}/${announce._id}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          totalToken: newtotaltoken,
-        }),
-      }).then(() => { console.log("New share number : " + newtotaltoken) });
-    }
-  };
-
-  const cancelTransac = () => {
-    setInvest("");
-    setSc({ stableCoin: "" })
-    setMessage1('')
-    setShowinvest('')
-  }
-
-  useEffect(() => {
-    setImmo(announce);
-    announce.image.map((a) => {
-      console.log(a)
-    })
-  }, [announce]);
-
+  // renvoie juste un BOOL si la personne à des tokens sur le bien. Mais ne sert à rien par la suite.... 
   return (
     <div className="announce-detail-page">
-      <h4>Bonjour Mr {user.firstname} {user.lastname}, montant actuel de votre portefeuille : {user.stableCoins ? (user.stableCoins - sc.stableCoin) : user.stableCoins} SC</h4>
+      <h4>Bonjour Mr {user.firstname} {user.lastname}, montant actuel de votre portefeuille : "PLACEHOLDER"
+      </h4>
       <div className="detail-container">
         <div className="detail-upper-container">
           <div className="detail-image-container">
@@ -163,78 +31,56 @@ function AnnounceDetail({ user }) {
               dynamicHeight={false}
               centerMode={true}
               centerSlidePercentage={100} >
-              {announce.image.map((item, index) => (
+              {announce?.image.map((item, index) => (
                 <div key={index}>
-                  <img className="image-carousel" src={item} alt={`apercu n°${index} du bien immo`} />
+                  <img className="image-carousel"
+                    src={item}
+                    alt={`apercu n°${index} du bien immo`} />
                 </div>
               ))}
             </Carousel>
 
           </div>
           <div className="detail-description-container">
-            {userHasShare?.idUser === user._id && <p>Vous possédez déjà {userHasShare.totalToken} token sur ce bien</p>}
-            <div className="detail-input">
-              {/* SI LE NOMBRE DE TOKEN EST STRICTEMENT SUPERIEUR A ZERO : */}
-              <label>Investissement désiré en jetons:</label>
-              {announce.share_number <= 0 && <p>Cette propriété n'est plus à vendre</p>}
-              {announce.share_number != 0 && announce.share_number > 0 && <input
-                type="number"
-                placeholder="Investissement désiré"
-                value={!sc.validated && invest}
-                onInput={(e) => handleInput(e)}
-              />}
-              {announce.share_number != 0 && <button onClick={handleClick}>Valider</button>}
-              <p>{emptyVal}</p>
-              <p>{!sc.validated && showInvest}</p>
-              {showInvest && !sc.validated ? <button onClick={convertInSc}>Veuiller confirmer le montant de l'investissement</button> : <div></div>}
-              {sc.stableCoin && !sc.validated ? <p>Montant de l'achat : {sc.stableCoin} SC</p> : <div></div>}
-              {/*J'ai mis ça en <h6> mais bien sûr il faudra améliorer ce style !! */}
-              {sc.stableCoin && !sc.validated ? <h6>En cliquant sur le bouton ci-dessous, vous confirmez vous porter acquéreur du nombre de parts précédemment
-                choisies et la transaction sera alors effective :</h6> : <div></div>}
-              {sc.stableCoin && !sc.validated ? <button onClick={sendTransac}>Finaliser la transaction</button> : <div></div>}
-              {sc.stableCoin && !sc.validated ? <button onClick={cancelTransac}>Annuler la transaction</button> : <div></div>}
-              {sc.stableCoin && <p style={{ color: "red" }}>{message1}</p>}
-              {message1 && <p>Veuillez alimenter votre portefeuille en cliquant ici : <a href="/stable-coins">Portefeuille</a></p>}
-            </div>
-            <h3>{announce.title}</h3>
-            <p>{announce.type}</p>
-            <p>{announce.content}</p>
-            <p>
-              Non dolore fugiat et tempor velit consectetur cupidatat eu ea...
-            </p>
-            <p>Nombre de chambres: {announce.bedrooms}</p>
-            <p>Surface habitable: {announce.surface}m²</p>
+
+            <Invest />
+
+            <h4>{announce?.title}</h4>
+            <p>{announce?.type}</p>
+            <p>{announce?.content}</p>
+            <p>Nombre de chambres: {announce?.bedrooms}</p>
+            <p>Surface habitable: {announce?.surface}m²</p>
             <p>Options:</p>
             <ul>
-              {immo?.options?.map((options, index) => {
-                return <li key={index}>{announce?.options?.[index]}</li>;
+              {announce?.options?.map((options, index) => {
+                return <li key={index}>{options}</li>;
               })}
             </ul>
           </div>
         </div>
+
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {numberSpaces(announce.price)} €</p>
             {/*<p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>*/}
             <p>Prix du jeton: {(announce?.share_price).toFixed(2)} SC</p>
-            <p>Nombre de jetons: {announce.share_number && invest ? announce.share_number - invest : announce.share_number} </p>
+            <p>Nombre de jetons: PLACEHOLDER </p>
           </div>
+
           <div className="detail-rent-container">
             <p>Loyer par an brut: {numberSpaces(announce.gross_rent_by_year)} €</p>
             <p>Loyer par mois brut: {numberSpaces(announce.gross_rent_by_year / 12)} €</p>
             <p>Coûts mensuels: {numberSpaces(announce.monthly_cost)} €</p>
-            <p>
-              Loyer net par mois :
+            <p> Loyer net par mois :
               {numberSpaces(announce.gross_rent_by_year / 12 - announce.monthly_cost)} €
             </p>
-            <p>
-              Gain mensuel par jeton :
-              {(
-                (announce.gross_rent_by_year / 12 - announce.monthly_cost) /
-                announce.share_number
-              ).toFixed(2)}{" "}
+
+            <p> Gain mensuel par jeton :
+              {((announce.gross_rent_by_year / 12 - announce.monthly_cost) /
+                announce.share_number).toFixed(2)}{" "}
               €
             </p>
+
           </div>
           <div className="detail-geographical-container">
             <p>Ville: {announce.city}</p>
