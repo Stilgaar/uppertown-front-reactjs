@@ -3,7 +3,6 @@ import Axios from "axios";
 import Announce from "../Announce/Announce";
 import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
-import "./AllAnnounces.scss";
 import URLContext from "../../Context/URLcontext";
 
 function AllAnnounces() {

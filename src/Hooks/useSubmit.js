@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
@@ -17,8 +17,9 @@ function useSubmit() {
   // url est l'url d'envoi pour axios
   const [url, setUrl] = useState()
 
+
   // A laisser : pour la verification des données qui arrvivent
-  //  console.log("URL", url)
+  console.log("URL", url)
   //  console.log("DATA", data)
   //  console.log("IMAGES", images)
   //  console.log("CLICKDATA", clickData)
@@ -110,7 +111,6 @@ function useSubmit() {
       })
       .catch(err => console.log(err))
   }
-
 
   // fonction récuperant sur les inputs de formulaire
   const handleChange = (e, info, val) => {

@@ -9,10 +9,6 @@ function StableCoins({ userdata, adminRefresh }) {
     const FormContextValue = useContext(FormContext)
 
     useEffect(() => {
-        FormContextValue.handleData({ _id: userdata._id })
-    }, [])
-
-    useEffect(() => {
         adminRefresh()
     }, [])
 
@@ -24,19 +20,24 @@ function StableCoins({ userdata, adminRefresh }) {
                 </label>
 
                 <form className="stableC-input"
-                    onSubmit={FormContextValue.handleSubmit}>
+                    onSubmit={(e) => {
+                        FormContextValue.handleSubmit(e)
+                        adminRefresh()
+                    }}>
                     <input
                         values={FormContextValue.data.stableCoins || ""}
                         type="text"
                         name="stableCoins"
                         placeholder="Nombre de Stable coins commandés"
                         className="inputstable"
-                        onChange={() => {
+                        onChange={(e) => {
                             FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins`)
-                            FormContextValue.handleChange()
+                            FormContextValue.handleChange(e)
+                            FormContextValue.handleData({ _id: userdata._id })
                         }
                         } />
-                    <button className="userline-button-validate"
+                    <button
+                        className="userline-button-validate"
                         type="submit">
                         Valider
                     </button>

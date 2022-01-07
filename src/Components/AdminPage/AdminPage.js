@@ -1,5 +1,4 @@
 import './AdminPage.css';
-import './AdminPage.scss';
 import { useEffect, useState, useContext } from 'react';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';

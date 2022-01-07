@@ -85,7 +85,7 @@ function App() {
                   {isLog ? <AnnounceDetailAdmin /> : <Error />}
                 </Route>
                 <Route path="/announce-detail">
-                  {isLog ? <AnnounceDetail /> : <Error />}
+                  {isLog ? <AnnounceDetail user={user} /> : <Error />}
                 </Route>
               </Switch>
             </div>

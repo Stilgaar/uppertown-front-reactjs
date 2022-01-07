@@ -3,36 +3,33 @@ import { useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import "./AnnounceDetail.css";
-import Swal from "sweetalert2";
 import Axios from "axios";
 import URLcontext from "../../Context/URLcontext";
 import { numberSpaces } from "../../Func/numberSpace";
+import useAxios from "../../Hooks/useAxios";
 
-function AnnounceDetail() {
-  const [invest, setInvest] = useState();
-  const [wallet, setWallet] = useState();
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
+function AnnounceDetail({ user }) {
+
   const d = new Date();
-
-  const URLContextValue = useContext(URLcontext)
-
-  const [immo, setImmo] = useState();
-
-  const userOnline = localStorage.getItem("id")
-  //console.log("USERID : "+userOnline);
 
   const location = useLocation();
   const announce = location.state?.data;
-  //console.log("annonce: ", announce);
 
+  const URLContextValue = useContext(URLcontext)
+
+  const [hasPropriety] = useAxios(`${URLContextValue.url}/api/properties/${user._id}/${announce._id}`)
+  console.log("has propriety ?", hasPropriety)
+  // il faut encore déterminer pourquoi il avait cette variable et pourquoi je la garde ? 
+  const [userHasShare] = useAxios(`${URLContextValue.url}/api/properties/datas/${user._id}/${announce._id}`)
+  console.log("userhasshare", userHasShare)
+
+  const [invest, setInvest] = useState();
+  const [immo, setImmo] = useState();
   const [sc, setSc] = useState({ stableCoin: "", validated: false })
   const [showInvest, setShowinvest] = useState("");
   const [message1, setMessage1] = useState("");
-  const [emptyVal, setEmptyVal] = useState("");
-  const [idProp, setIdProp] = useState();
-  const [totalToken, setTotalToken] = useState()
-  const [propExist, setPropExist] = useState("")
+  const [emptyVal, setEmptyVal] = useState("")
+
 
   function handleInput(e) {
     setInvest(e.target.value);
@@ -51,94 +48,16 @@ function AnnounceDetail() {
     setSc({ ...sc, stableCoin: invest * announce.share_price })
   }
 
-  function getUserDatas() {
-
-    fetch(`${URLContextValue.url}/api/users/${userOnline}`,
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Success:", result);
-        setWallet(result.stableCoins)
-        setFirstName(result.firstname)
-        setLastName(result.lastname)
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-  }
-
-  const ifExists = () => {
-
-
-    fetch(`${URLContextValue.url}/api/properties/${userOnline}/${announce._id}`,
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Success EXISTS:", result);
-        setPropExist(result)
-
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-  }
-
-
-  const getDatasProperty = () => {
-
-    fetch(`${URLContextValue.url}/api/properties/datas/${userOnline}/${announce._id}`,
-      {
-        method: "GET",
-      }
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("Success PROP datas:", result.idUser + " tokens :" + result.totalToken);
-
-        setIdProp(result.idUser)
-        setTotalToken(result.totalToken)
-
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-
-  }
-
   const sendTransac = () => {
-
-    if (wallet > sc.stableCoin) {
-
+    if (user.stableCoins > sc.stableCoin) {
       const data = {
-        announceId: announce._id,
-        userId: userOnline,
-        token: invest,
-        sc: sc.stableCoin,
-        title: announce.title,
-        content: announce.content,
-        type: announce.type,
-        price: announce.price,
-        image: announce.image,
-        created_at: d
+        announceId: announce._id, userId: user._id, token: invest,
+        sc: sc.stableCoin, title: announce.title, content: announce.content,
+        type: announce.type, price: announce.price, image: announce.image, created_at: d
       }
-
-
 
       Axios.post(`${URLContextValue.url}/api/transactions/buy`, data)
         .then(res => console.log(res))
-        .then(Swal.fire({
-          title: "Transaction effectuée !",
-          //text: "Thanks",
-          type: "success",
-        }))
         .catch(err => console.log(err))
 
     } else {
@@ -146,21 +65,19 @@ function AnnounceDetail() {
       return false;
     }
 
-
-    fetch(`${URLContextValue.url}/api/users/${userOnline}`, {
+    fetch(`${URLContextValue.url}/api/users/${user._id}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        stableCoins: wallet - sc.stableCoin,
+        stableCoins: user.stableCoins - sc.stableCoin,
       }),
-    }).then(() => {
-
-    });
+    }).then(() => { console.log("put done") });
 
     let newsharenumber = Number(announce.share_number) - Number(invest)
+
     fetch(`${URLContextValue.url}/api/announces/${announce._id}`, {
       method: "PUT",
       headers: {
@@ -175,7 +92,7 @@ function AnnounceDetail() {
       setSc({ ...sc, validated: true })
     });
 
-    if (idProp != userOnline) {
+    if (userHasShare.idUser != user._id) {
       fetch(`${URLContextValue.url}/api/properties/allProperties`, {
         method: "POST",
         headers: {
@@ -183,7 +100,7 @@ function AnnounceDetail() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUser: userOnline,
+          idUser: user._id,
           announceId: announce._id,
           title: announce.title,
           content: announce.content,
@@ -203,8 +120,8 @@ function AnnounceDetail() {
       }).then(() => { console.log("New share number : " + invest); });
 
     } else {
-      let newtotaltoken = (Number(totalToken) + Number(invest))
-      fetch(`${URLContextValue.url}/api/properties/${userOnline}/${announce._id}`, {
+      let newtotaltoken = (Number(userHasShare.totalToken) + Number(invest))
+      fetch(`${URLContextValue.url}/api/properties/${user._id}/${announce._id}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
@@ -217,22 +134,12 @@ function AnnounceDetail() {
     }
   };
 
-
   const cancelTransac = () => {
-
     setInvest("");
     setSc({ stableCoin: "" })
     setMessage1('')
     setShowinvest('')
-
   }
-
-  useEffect(() => {
-    getUserDatas()
-    ifExists()
-    getDatasProperty()
-
-  }, [])
 
   useEffect(() => {
     setImmo(announce);
@@ -243,12 +150,11 @@ function AnnounceDetail() {
 
   return (
     <div className="announce-detail-page">
-      <h3>Bonjour Mr {firstName} {lastName}, montant actuel de votre portefeuille : {wallet ? (wallet - sc.stableCoin) : wallet} SC</h3>
+      <h4>Bonjour Mr {user.firstname} {user.lastname}, montant actuel de votre portefeuille : {user.stableCoins ? (user.stableCoins - sc.stableCoin) : user.stableCoins} SC</h4>
       <div className="detail-container">
         <div className="detail-upper-container">
           <div className="detail-image-container">
-            <Carousel
-              className="carousel"
+            <Carousel className="carousel"
               infiniteLoop={true}
               autoPlay={true}
               interval="5000"
@@ -256,21 +162,17 @@ function AnnounceDetail() {
               showStatus={false}
               dynamicHeight={false}
               centerMode={true}
-              centerSlidePercentage={100}
-
-            >
-              {announce.image.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <img className="image-carousel" src={item} alt={`apercu n°${index} du bien immo`} />
-                  </div>
-                )
-              })}
-
+              centerSlidePercentage={100} >
+              {announce.image.map((item, index) => (
+                <div key={index}>
+                  <img className="image-carousel" src={item} alt={`apercu n°${index} du bien immo`} />
+                </div>
+              ))}
             </Carousel>
+
           </div>
           <div className="detail-description-container">
-            {idProp === userOnline && <p>Vous possédez déjà {totalToken} token sur ce bien</p>}
+            {userHasShare?.idUser === user._id && <p>Vous possédez déjà {userHasShare.totalToken} token sur ce bien</p>}
             <div className="detail-input">
               {/* SI LE NOMBRE DE TOKEN EST STRICTEMENT SUPERIEUR A ZERO : */}
               <label>Investissement désiré en jetons:</label>
@@ -304,7 +206,7 @@ function AnnounceDetail() {
             <p>Surface habitable: {announce.surface}m²</p>
             <p>Options:</p>
             <ul>
-              {immo?.options?.map((option, index) => {
+              {immo?.options?.map((options, index) => {
                 return <li key={index}>{announce?.options?.[index]}</li>;
               })}
             </ul>
