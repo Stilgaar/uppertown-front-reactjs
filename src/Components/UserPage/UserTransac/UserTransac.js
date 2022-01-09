@@ -1,5 +1,6 @@
 import './UserTransac.css'
 import { useState } from 'react';
+import GetALlTransacs from './GetAllTransacs';
 
 function UserTransac({ user, hardRefresh }) {
 
@@ -56,10 +57,8 @@ function UserTransac({ user, hardRefresh }) {
 
             <div>
 
-                WIP REFAIRE LE TRUC DU IEUV ...
-                <br />
-                Pouet
-
+                <GetALlTransacs id={user._id}/>
+            
             </div>
         </div>
 

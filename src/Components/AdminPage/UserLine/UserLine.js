@@ -17,7 +17,6 @@ function UserLine({ userdata, adminRefresh }) {
         adminRefresh()
     }
 
-
     return (
         <div>
             <div className="userline-button-search" onClick={() => setModal(current => !current)}>

@@ -19,11 +19,11 @@ function useSubmit() {
 
 
   // A laisser : pour la verification des données qui arrvivent
-  console.log("URL", url)
+  // console.log("URL", url)
   console.log("DATA", data)
   //  console.log("IMAGES", images)
-  console.log("CLICKDATA", clickData)
-  //  console.log("RESMSG", resMsg)
+  //console.log("CLICKDATA", clickData)
+  console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
@@ -78,7 +78,7 @@ function useSubmit() {
     if (images) {
       let key = Object.keys(images)
       let val = Object.values(images)
-      for (let i = 0; i < val[0].length; i++) {
+      for (let i = 0; i < val.length; i++) {
         form.append(key, val[0][i])
       }
     }
@@ -103,8 +103,7 @@ function useSubmit() {
   }
 
   // fonction envoyant les datas sur les clicks de boutons simple
-  const handleEnvoi = (e) => {
-    e.preventDefault()
+  const handleEnvoi = () => {
     axios.post(url, clickData)
       .then((res) => {
         console.log(res.data)
