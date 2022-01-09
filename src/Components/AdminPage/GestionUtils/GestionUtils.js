@@ -24,7 +24,7 @@ function GestionUtils({ users, adminRefresh }) {
     return (
         <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
             {userType.map((element, index) => (
-                <UtilLine element={element} key={index} adminRefresh={adminRefresh} />
+                <UtilLine key={index} element={element} adminRefresh={adminRefresh} />
             ))}
         </div>
     )

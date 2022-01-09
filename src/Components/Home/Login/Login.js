@@ -1,5 +1,5 @@
 import './Login.css'
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import FormContext from "../../../Context/FormContext";
 import URLcontext from '../../../Context/URLcontext';
 
@@ -8,27 +8,21 @@ function Login() {
     const FormContextValue = useContext(FormContext);
     const URLContextValue = useContext(URLcontext)
 
-    useEffect(() => {
-        FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
-    }, [])
-
     return (
-        <div
-            className="login-form"
+        <div className="login-form"
             onClick={FormContextValue.handleClick}>
             <div
                 className="login"
                 onClick={(e) => e.stopPropagation()}>
-                <form
-                    className="login-container"
-                    onSubmit={FormContextValue.handleSubmit}>
+                <form className="login-container"
+                    onSubmit={(e) => {
+                        FormContextValue.handleSubmit(e)
+                    }}>
                     <h4 className="login-title"> Se Connecter</h4>
                     <div className="login-container-email">
                         <div className="login-container-email">
                             <label>Email</label>
-                            <input
-                                values={FormContextValue.data.email || ""}
-                                className="login-input email"
+                            <input className="login-input email"
                                 type="mail"
                                 placeholder="Julien.Dupuy@updown.street"
                                 required
@@ -37,9 +31,7 @@ function Login() {
                         </div>
                         <div className="login-container-mdp">
                             <label>Mot de Passe</label>
-                            <input
-                                values={FormContextValue.data.password || ""}
-                                className="login-input mdp"
+                            <input className="login-input mdp"
                                 type="password"
                                 placeholder="**********"
                                 required
@@ -47,14 +39,14 @@ function Login() {
                                 onChange={FormContextValue.handleChange} />
                         </div>
                     </div>
-                    <button
-                        className="login-button"
+                    <button onMouseEnter={() => {
+                        FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
+                    }} className="login-button"
                         type="submit">
                         Valider
                     </button>
                 </form>
-                <p
-                    className="login-fasle-link"
+                <p className="login-fasle-link"
                     onClick={FormContextValue.handleSigin}>
                     Créer un compte
                 </p>

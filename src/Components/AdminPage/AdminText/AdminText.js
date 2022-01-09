@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import './AdminText.css'
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
@@ -7,10 +7,6 @@ function AdminText() {
 
     const URLContextValue = useContext(URLcontext)
     const FormContextValue = useContext(FormContext);
-
-    useEffect(() => {
-        FormContextValue.handleURL(`${URLContextValue.url}/admin/maintext`)
-    }, [])
 
     return (
         <div className="admintext-container-container">
@@ -52,6 +48,9 @@ function AdminText() {
                         </div>
                         <br />
                         <button
+                            onMouseEnter={() => {
+                                FormContextValue.handleURL(`${URLContextValue.url}/admin/maintext`)
+                            }}
                             type="sumbit"
                             className="admintext-button-validate ">
                             Valider !

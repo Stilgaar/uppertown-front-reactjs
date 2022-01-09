@@ -95,6 +95,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifPi`)
                                             FormContextValue.handleData({ email: userdata.email })
                                         }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
+                                        }}
                                         onClick={() => click("/admin/verifPi")}>
                                         Identité Verifiée
                                     </button>
@@ -103,6 +106,9 @@ function UserLine({ userdata, adminRefresh }) {
                                         onMouseEnter={() => {
                                             FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifJDD`)
                                             FormContextValue.handleData({ email: userdata.email })
+                                        }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
                                         }}
                                         onClick={() => click()}>
                                         Justificatif de Domcile Verifié
@@ -113,6 +119,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifAVIS`)
                                             FormContextValue.handleData({ email: userdata.email })
                                         }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
+                                        }}
                                         onClick={() => click()}>
                                         Avis d'imposition verifié
                                     </button>
@@ -122,6 +131,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             FormContextValue.handleURL(`${UrlContextValue.url}/admin/goAdmin`)
                                             FormContextValue.handleData({ email: userdata.email })
                                         }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
+                                        }}
                                         onClick={() => click()}>
                                         Passer Admin
                                     </button>
@@ -130,6 +142,9 @@ function UserLine({ userdata, adminRefresh }) {
                                         onMouseEnter={() => {
                                             FormContextValue.handleData({ email: userdata.email })
                                             FormContextValue.handleURL(`${UrlContextValue.url}/admin/noAdmin`)
+                                        }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
                                         }}
                                         onClick={() => click()}>
                                         Retirer Admin
@@ -149,6 +164,9 @@ function UserLine({ userdata, adminRefresh }) {
                                                 FormContextValue.handleData({ email: userdata.email })
                                                 FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transactionDone`)
                                             }}
+                                            onMouseLeave={() => {
+                                                FormContextValue.setClickData("")
+                                            }}
                                             onClick={() => click()}>
                                             Toutes les operations sont terminés
                                         </button>}
@@ -166,13 +184,16 @@ function UserLine({ userdata, adminRefresh }) {
                                                 FormContextValue.handleData({ email: userdata.email }, { argent: argent })
                                                 FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveMoney`)
                                             }}
+                                            onMouseLeave={() => {
+                                                FormContextValue.setClickData("")
+                                            }}
                                             onClick={() => click()}>
                                             Stable Coins Transférés
                                         </button>
                                     </div>)}
                             </div>
 
-                            <StableCoins userdata={userdata} adminRefresh={adminRefresh} />
+                            <StableCoins key={userdata._id} userdata={userdata} adminRefresh={adminRefresh} />
 
                             <div className="userline-container-boxed">
                                 <div> <span className="userline-text-awaiting">
@@ -186,6 +207,9 @@ function UserLine({ userdata, adminRefresh }) {
                                             onMouseEnter={() => {
                                                 FormContextValue.handleData({ email: userdata.email })
                                                 FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone`)
+                                            }}
+                                            onMouseLeave={() => {
+                                                FormContextValue.setClickData("")
                                             }}
                                             onClick={() => click()}>
                                             Toutes les operations sont terminés
@@ -203,6 +227,9 @@ function UserLine({ userdata, adminRefresh }) {
                                         onMouseEnter={() => {
                                             FormContextValue.handleData({ email: userdata.email }, { argent: argent })
                                             FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveEuros`)
+                                        }}
+                                        onMouseLeave={() => {
+                                            FormContextValue.setClickData("")
                                         }}
                                         onClick={() => click(argent)}>
                                         Euros Transférés

@@ -5,7 +5,6 @@ import { Carousel } from "react-responsive-carousel";
 import { numberSpaces } from "../../Func/numberSpace";
 import Invest from "./Invest";
 
-
 function AnnounceDetail({ user }) {
 
   const d = new Date();
@@ -13,11 +12,9 @@ function AnnounceDetail({ user }) {
   const location = useLocation();
   const announce = location.state?.data;
 
-  // il faut encore déterminer pourquoi il avait cette variable et pourquoi je la garde ? 
-  // renvoie juste un BOOL si la personne à des tokens sur le bien. Mais ne sert à rien par la suite.... 
   return (
     <div className="announce-detail-page">
-      <h4>Bonjour Mr {user.firstname} {user.lastname}, montant actuel de votre portefeuille : "PLACEHOLDER"
+      <h4>Bonjour {user.firstname} , montant actuel de votre portefeuille : "PLACEHOLDER"
       </h4>
       <div className="detail-container">
         <div className="detail-upper-container">
@@ -31,11 +28,11 @@ function AnnounceDetail({ user }) {
               dynamicHeight={false}
               centerMode={true}
               centerSlidePercentage={100} >
-              {announce?.image.map((item, index) => (
-                <div key={index}>
+              {announce?.image.map((item) => (
+                <div key={item._id}>
                   <img className="image-carousel"
                     src={item}
-                    alt={`apercu n°${index} du bien immo`} />
+                    alt={`apercu du bien immo`} />
                 </div>
               ))}
             </Carousel>
@@ -43,7 +40,7 @@ function AnnounceDetail({ user }) {
           </div>
           <div className="detail-description-container">
 
-            <Invest />
+            <Invest user={user} ann={announce} />
 
             <h4>{announce?.title}</h4>
             <p>{announce?.type}</p>

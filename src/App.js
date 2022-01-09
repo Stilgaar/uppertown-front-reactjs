@@ -13,7 +13,6 @@ import UserPage from "./Components/UserPage/UserPage";
 import AnnounceDetail from "./Components/AnnounceDetail/AnnounceDetail";
 import Error from "./Components/Error/Error";
 //temporaire :
-import AnnounceDetailAdmin from "./Components/AnnounceManager/AnnounceDetailAdmin";
 import axios from "axios";
 import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
@@ -80,9 +79,6 @@ function App() {
                   ) : (
                     <Error />
                   )}
-                </Route>
-                <Route path="/announce-detail-admin">
-                  {isLog ? <AnnounceDetailAdmin /> : <Error />}
                 </Route>
                 <Route path="/announce-detail">
                   {isLog ? <AnnounceDetail user={user} /> : <Error />}

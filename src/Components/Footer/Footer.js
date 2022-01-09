@@ -6,7 +6,7 @@ import React from 'react'
 function Footer() {
     return (
         <div className="footer">
-            <p>UpperTown réalisé par Jeff, Jérémy, Loïs et Marc-Aurèle pour le Bocal Academy. </p>
+            <p>Uppertown, par Jeff &copy; </p>
         </div>
     )
 }

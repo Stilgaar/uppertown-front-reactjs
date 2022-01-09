@@ -16,6 +16,8 @@ function UserPage({ user, hardRefresh }) {
     const [showParam, setShowParam] = useState(false)
     const [showUp, setShowUp] = useState(false)
 
+    console.log(user)
+
     useEffect(() => {
         hardRefresh()
     }, [])

@@ -5,12 +5,10 @@ import OneLineUpdate from './OneLineUpdate';
 function UserUpdate({ user, hardRefresh }) {
 
     return (
-
         <div className="userupdate-generalcontainer">
             <div className="userupdate-container-params">
-                <div><h3> Paramètres généraux du compte </h3> </div>
+                <div><h3> Paramètres généraux du compte </h3></div>
             </div>
-
             {userUpate.map((entry, index) => (
                 <OneLineUpdate user={user} key={index} entry={entry} hardRefresh={hardRefresh} />
             ))}

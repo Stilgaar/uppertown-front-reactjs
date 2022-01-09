@@ -1,9 +1,9 @@
 import './UserTransac.css'
 import { useState } from 'react';
-import AllPropertiesSmart from '../UserProperties/propertiesSmart';
-import AllTransacSmart from '../UserProperties/allTransacSmart';
 
 function UserTransac({ user, hardRefresh }) {
+
+    // en cours de refonte, ya du taff ... 
 
     const [modalAcien, setModalAncien] = useState(false);
     const [modalAcienEuro, setModalAncienEuro] = useState(false);
@@ -55,11 +55,10 @@ function UserTransac({ user, hardRefresh }) {
             {modalAcienEuro && <div>{user.ancientMontantsEuro.map((argent, index) => <div className="usertransac-line">Transaction N#{index} {argent}</div>)}</div>}
 
             <div>
-                {modalImmo &&
-                    <AllPropertiesSmart />}
 
-                {modalTransac &&
-                    <AllTransacSmart />}
+                WIP REFAIRE LE TRUC DU IEUV ...
+                <br />
+                Pouet
 
             </div>
         </div>

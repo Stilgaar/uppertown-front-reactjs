@@ -22,7 +22,7 @@ function useSubmit() {
   console.log("URL", url)
   console.log("DATA", data)
   //  console.log("IMAGES", images)
-  //  console.log("CLICKDATA", clickData)
+  console.log("CLICKDATA", clickData)
   //  console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
@@ -94,17 +94,17 @@ function useSubmit() {
 
   // fonction récuperant sur un click, sans forumaire
   // penser à envoyer les x et y de la façon suivante {key : value}
-  const handleData = (x, y) => {
-    if (x) {
-      setClickData((clickData) => ({ ...clickData, x }))
-    }
-    if (y) {
-      setClickData((clickData => ({ ...clickData, y })))
+  const handleData = (...args) => {
+    for (let i = 0; i < args.length; i++) {
+      let key = Object.keys(args[i])
+      let val = Object.values(args[i])
+      setClickData((clickData) => ({ ...clickData, [key]: val[0] }))
     }
   }
 
   // fonction envoyant les datas sur les clicks de boutons simple
-  const handleEnvoi = () => {
+  const handleEnvoi = (e) => {
+    e.preventDefault()
     axios.post(url, clickData)
       .then((res) => {
         console.log(res.data)
@@ -114,30 +114,37 @@ function useSubmit() {
 
   // fonction récuperant sur les inputs de formulaire
   const handleChange = (e, info, val) => {
-    if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
     e.persist()
+    if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
+
     if (info) {
       setData((data) => ({ ...data, [info]: e.target.value }));
     }
     else {
       setData((data) => ({ ...data, [e.target.name]: e.target.value }))
     }
-    if (clickData?.x?._id) {
-      setData((data) => ({ ...data, ["_id"]: clickData.x }));
-    }
-    if (clickData?.x?.email) {
-      setData((data) => ({ ...data, ["email"]: clickData.x.email }));
-    }
 
-  };
-
-  const handleFile = (e) => {
-    setImages((images) => (({ ...images, [e.target.name]: e.target.files })))
-    if (clickData?.x?.email) {
-      setData((data) => ({ ...data, ["email"]: clickData.x.email }));
+    if (clickData) {
+      let key = Object.keys(clickData)
+      let val = Object.values(clickData)
+      for (let i = 0; i < Object.keys(clickData).length; i++) {
+        setData((data => ({ ...data, [key[i]]: val[i] })))
+      }
     }
   }
 
+  // gestion du de la récuperation de fichiers.
+  // mets également les variables clicks dans data avant de l'envoyer dans le back
+  const handleFile = (e) => {
+    setImages((images) => (({ ...images, [e.target.name]: e.target.files })))
+    if (clickData) {
+      let key = Object.keys(clickData)
+      let val = Object.values(clickData)
+      for (let i = 0; i < Object.keys(clickData).length; i++) {
+        setData((data => ({ ...data, [key[i]]: val[i] })))
+      }
+    }
+  }
   // Gestion de la Navbar
   const logout = () => {
     localStorage.removeItem("@updownstreet-token");
@@ -164,6 +171,9 @@ function useSubmit() {
     form: form,
     data: data,
     resMsg: resMsg,
+    setData: setData,
+    setClickData: setClickData,
+    setUrl: setUrl,
     handleChange: handleChange,
     handleLogin: handleLogin,
     handleSigin: handleSigin,

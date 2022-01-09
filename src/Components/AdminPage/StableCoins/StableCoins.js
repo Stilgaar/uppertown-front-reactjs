@@ -14,7 +14,10 @@ function StableCoins({ userdata, adminRefresh }) {
 
     return (
         <div>
-            <div className="stableC-container">
+            <div className="stableC-container"
+                onMouseLeave={() => {
+                    FormContextValue.setClickData("")
+                }}>
                 <label>
                     Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
                 </label>
@@ -31,12 +34,15 @@ function StableCoins({ userdata, adminRefresh }) {
                         placeholder="Nombre de Stable coins commandés"
                         className="inputstable"
                         onChange={(e) => {
-                            FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins`)
                             FormContextValue.handleChange(e)
                             FormContextValue.handleData({ _id: userdata._id })
-                        }
-                        } />
+
+                        }} />
+
                     <button
+                        onMouseEnter={() => {
+                            FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins`)
+                        }}
                         className="userline-button-validate"
                         type="submit">
                         Valider

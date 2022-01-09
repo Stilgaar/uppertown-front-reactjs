@@ -6,7 +6,6 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
 
     const FormContextValue = useContext(FormContext)
     const UrlContextvalue = useContext(URLcontext)
-    const [box, setBox] = useState(false)
 
     return (
         <div>
@@ -14,22 +13,23 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
             <img className="userupdate-imageuser" src={data} alt="justificatif" />
             <button
                 className="userupdate-button-delete"
-                onClick={(e) => {
-                    e.preventDefault()
+                onMouseEnter={() => {
                     FormContextValue.handleURL(`${UrlContextvalue.url}/up/delete`)
-                    FormContextValue.handleData({ email: user.email, pic: data })
-                    FormContextValue.handleEnvoi()
-                    setBox(c => !c)
+                    FormContextValue.handleData({ email: user.email }, { pic: data })
+                }}
+                onClick={(e) => {
+                    FormContextValue.handleEnvoi(e)
                     hardRefresh()
+                }}
+                onMouseLeave={() => {
+                    FormContextValue.setClickData()
                 }}>
                 Supprimer
-                {box && <div>Êtes vous bien sur de vouloir supprimer votre justificatif ?
-                    <br /> Veuillez confirmer en cliquant à nouveau sur Supprimer</div>}
             </button>
             <br /> <br />
 
 
-        </div>
+        </div >
     )
 }
 

@@ -35,10 +35,9 @@ function AnnounceLine({ entry }) {
                     {FormContextValue?.data?.price !== undefined && FormContextValue?.data?.share_number !== undefined ?
                         <div>{FormContextValue?.data?.price / FormContextValue?.data?.share_number}</div>
                         : <div>0</div>}
-                </>
-            }
-            {
-                entry.option &&
+                </>}
+
+            {entry.option &&
                 <> <label>{entry.label}</label>
                     {entry.list.map((option, index) => (
                         <div key={index}>
@@ -50,8 +49,7 @@ function AnnounceLine({ entry }) {
                             {option.label}
                         </div>
                     ))}
-                </>
-            }
+                </>}
 
             {entry.photos &&
                 <><label>{entry.label}</label>
