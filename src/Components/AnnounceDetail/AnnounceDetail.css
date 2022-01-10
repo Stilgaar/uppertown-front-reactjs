@@ -19,7 +19,7 @@
 }
 
 .image-carousel {
-  object-fit: contain;
+  height: 300px;
 }
 
 .detail-image-container {
@@ -103,7 +103,12 @@
   list-style: none;
 }
 
-.announce-detail-page{
+.announce-detail-page {
   width: 80%;
   margin: auto;
+}
+
+.announce-detail-page > h5 {
+  margin: 1em;
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
@@ -19,7 +19,7 @@ function useSubmit() {
 
   // A laisser : pour la verification des données sur le site en général
   // console.log("URL", url)
-  // console.log("DATA", data)
+  console.log("DATA", data)
   // console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
   // console.log("RESMSG", resMsg)
@@ -164,7 +164,7 @@ function useSubmit() {
     setUrl(data)
   }
 
-  // useContext
+  // useContext, utilisable partout =)
   const FormContextValue = {
     form: form,
     data: data,
@@ -184,6 +184,17 @@ function useSubmit() {
     handleFile: handleFile,
     logout: logout,
   };
+
+
+  // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons
+  // ne se trigger que s'il y a un 'amount' dans le setter data
+  useEffect(() => {
+    if (FormContextValue.data.amount) {
+      let amountStableCoins = (FormContextValue.data.amount * FormContextValue.data.share_price)
+      setData((data) => ({ ...data, ['amountStableCoins']: amountStableCoins }))
+    }
+
+  }, [FormContextValue.data.amount])
 
   return [FormContextValue];
 }

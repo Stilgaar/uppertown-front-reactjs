@@ -9,8 +9,8 @@ function GetALlTransacs({ user, id }) {
     const [rep] = useAxios(`${UrlContextValue.url}/api/users/transacs/${id}`)
 
     return (
-        <div>
-            <div>Transactions de {user.lastname} {user.firstname}</div>
+        <div> <br />
+            <div>Transactions de {user.firstname} {user.lastname} </div>
             {rep.map(elem => (
                 <Biens key={elem._id} elem={elem} />
             ))}

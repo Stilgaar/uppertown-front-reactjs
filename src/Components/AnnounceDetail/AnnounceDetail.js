@@ -13,9 +13,9 @@ function AnnounceDetail({ user }) {
   const announce = location.state?.data;
 
   return (
+
     <div className="announce-detail-page">
-      <h4>Bonjour {user.firstname} , montant actuel de votre portefeuille : "PLACEHOLDER"
-      </h4>
+      <h5>Bonjour {user.firstname}, votre portefeuille s'éléve à {user?.stableCoins} stableCoins.</h5>
       <div className="detail-container">
         <div className="detail-upper-container">
           <div className="detail-image-container">
@@ -40,7 +40,8 @@ function AnnounceDetail({ user }) {
           </div>
           <div className="detail-description-container">
 
-            <Invest user={user} ann={announce} />
+            {user.userType === "userType4" &&
+              <Invest user={user} ann={announce} />}
 
             <h4>{announce?.title}</h4>
             <p>{announce?.type}</p>
@@ -59,9 +60,8 @@ function AnnounceDetail({ user }) {
         <div className="detail-lower-container">
           <div className="detail-economic-container">
             <p>Prix: {numberSpaces(announce.price)} €</p>
-            {/*<p>Prix du jeton: { (announce.share_price && sc.stableCoin ? announce.price/(announce.share_number - invest) : announce.share_price).toFixed(2)} SC</p>*/}
             <p>Prix du jeton: {(announce?.share_price).toFixed(2)} SC</p>
-            <p>Nombre de jetons: PLACEHOLDER </p>
+            <p>Nombre de jetons: {announce?.share_number} </p>
           </div>
 
           <div className="detail-rent-container">
