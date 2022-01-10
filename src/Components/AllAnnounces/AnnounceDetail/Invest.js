@@ -10,8 +10,8 @@ function Invest({ user, ann }) {
     return (
         <div>
             <form
-                onSubmit={FormContextValue.handleSubmit}
-                onMouseEnter={(e) => FormContextValue.handleData({ lastname: user.lastname }, { id: user._id }, { annonceId: ann._id }, { share_price: ann.share_price })}>
+                onSubmit={(e) => FormContextValue.handleSubmit(e)}
+                onMouseEnter={() => FormContextValue.handleData({ lastname: user.lastname }, { id: user._id }, { annonceId: ann._id }, { share_price: ann.share_price })}>
                 <p>Combien de Tokens désirez vous acheter ?</p>
                 <input
                     value={FormContextValue.data.amount || ""}
@@ -29,7 +29,7 @@ function Invest({ user, ann }) {
                         {FormContextValue?.data?.amountStableCoins} StableCoins
                     </div>}
 
-                {FormContextValue?.data?.amountStableCoins < ann.share_number && FormContextValue?.data?.amountStableCoins < user.stableCoins ?
+                {FormContextValue?.data?.amountStableCoins < ann.share_number && FormContextValue?.data?.amountStableCoins < user.stableCoins || FormContextValue?.data?.amountStableCoins === undefined ?
                     <button
                         type="submit"
                         onMouseEnter={() => { FormContextValue.handleURL(`${UrlContextvalue.url}/transac/transac`) }}>

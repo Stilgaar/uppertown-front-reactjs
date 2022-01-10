@@ -1,6 +1,7 @@
 import './UserTransac.css'
 import { useState } from 'react';
 import GetALlTransacs from './GetAllTransacs';
+import GetProps from './GellAllProps';
 
 function UserTransac({ user, hardRefresh }) {
 
@@ -11,33 +12,13 @@ function UserTransac({ user, hardRefresh }) {
     const [modalTransac, setModalTransac] = useState(false)
     const [modalImmo, setModalImmo] = useState(false)
 
-    const ancien = () => {
-        setModalAncien(current => !current)
-        setModalImmo(false)
-        setModalTransac(false)
-        setModalAncienEuro(false)
-    }
+    const ancien = () => { setModalAncien(current => !current); setModalImmo(false); setModalTransac(false); setModalAncienEuro(false) }
 
-    const ancienEuro = () => {
-        setModalAncien(false)
-        setModalImmo(false)
-        setModalAncienEuro(current => !current)
-        setModalTransac(false)
-    }
+    const ancienEuro = () => { setModalAncien(false); setModalImmo(false); setModalAncienEuro(current => !current); setModalTransac(false) }
 
-    const transac = () => {
-        setModalTransac(current => !current)
-        setModalImmo(false)
-        setModalAncienEuro(false)
-        setModalAncien(false)
-    }
+    const transac = () => { setModalTransac(current => !current); setModalImmo(false); setModalAncienEuro(false); setModalAncien(false) }
 
-    const immo = () => {
-        setModalImmo(current => !current)
-        setModalAncienEuro(false)
-        setModalAncien(false)
-        setModalTransac(false)
-    }
+    const immo = () => { setModalImmo(current => !current); setModalAncienEuro(false); setModalAncien(false); setModalTransac(false) }
 
     return (
 
@@ -57,10 +38,11 @@ function UserTransac({ user, hardRefresh }) {
 
             <div>
 
-
                 {modalTransac &&
                     <GetALlTransacs user={user} id={user._id} />}
 
+                {modalImmo &&
+                    <GetProps user={user} id={user._id} />}
             </div>
         </div>
 

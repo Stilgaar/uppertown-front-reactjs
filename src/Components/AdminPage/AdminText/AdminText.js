@@ -41,7 +41,7 @@ function AdminText() {
                         <div className="couleurs">
                             <label>Couleur principale du site (fonction non implentée WIP)</label>
                             <input
-                                values={FormContextValue.data.color}
+                                values={FormContextValue.data.color || ""}
                                 name="color"
                                 type="color"
                                 onChange={FormContextValue.handleChange} />
