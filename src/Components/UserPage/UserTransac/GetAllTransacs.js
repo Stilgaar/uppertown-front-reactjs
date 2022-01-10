@@ -1,18 +1,19 @@
 import { useContext } from 'react'
 import URLcontect from '../../../Context/URLcontext'
 import useAxios from '../../../Hooks/useAxios'
+import Biens from './Bien'
 
-function GetALlTransacs({id}) {
-    console.log(id)
+function GetALlTransacs({ user, id }) {
 
     const UrlContextValue = useContext(URLcontect)
     const [rep] = useAxios(`${UrlContextValue.url}/api/users/transacs/${id}`)
 
-    console.log(rep)
-
-    return(
+    return (
         <div>
-poeut
+            <div>Transactions de {user.lastname} {user.firstname}</div>
+            {rep.map(elem => (
+                <Biens key={elem._id} elem={elem} />
+            ))}
         </div>
     )
 }

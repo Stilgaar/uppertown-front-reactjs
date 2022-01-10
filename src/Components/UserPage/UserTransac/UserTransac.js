@@ -57,8 +57,8 @@ function UserTransac({ user, hardRefresh }) {
 
             <div>
 
-                <GetALlTransacs id={user._id}/>
-            
+                <GetALlTransacs user={user} id={user._id} />
+
             </div>
         </div>
 

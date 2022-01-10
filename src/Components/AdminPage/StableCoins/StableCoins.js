@@ -10,7 +10,7 @@ function StableCoins({ userdata, adminRefresh }) {
 
     useEffect(() => {
         adminRefresh()
-    }, [])
+    }, [FormContextValue.resMsg])
 
     return (
         <div>

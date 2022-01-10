@@ -18,7 +18,7 @@ function Announce({ announce }) {
         <img src={announce?.image[0]} alt="" />
       </div>
       <p className="image-bottom-grey-bar">{announce?.region} / {announce?.city}</p>
-      <h6 className="announce-title">{announce?.title}</h6>
+      <h6 className="announce-title">{announce?.title} </h6>
       <div className="bottom-container">
         <div className="price-block">
           <p className="title-block">Prix</p>

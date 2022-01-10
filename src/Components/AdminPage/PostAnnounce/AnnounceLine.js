@@ -65,7 +65,7 @@ function AnnounceLine({ entry }) {
             {entry.values && <>
                 <label>{entry.label}</label>
                 {entry?.values?.map((elem) => (
-                    <div><input
+                    <div key={elem}><input
                         type={entry.type}
                         placeholder={entry.placeholder}
                         name={entry.name}

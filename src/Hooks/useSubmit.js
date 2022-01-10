@@ -17,13 +17,12 @@ function useSubmit() {
   // url est l'url d'envoi pour axios
   const [url, setUrl] = useState()
 
-
-  // A laisser : pour la verification des données qui arrvivent
+  // A laisser : pour la verification des données sur le site en général
   // console.log("URL", url)
-  console.log("DATA", data)
-  //  console.log("IMAGES", images)
-  //console.log("CLICKDATA", clickData)
-  console.log("RESMSG", resMsg)
+  // console.log("DATA", data)
+  // console.log("IMAGES", images)
+  // console.log("CLICKDATA", clickData)
+  // console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
