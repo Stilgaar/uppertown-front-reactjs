@@ -1,7 +1,7 @@
 import React from "react";
 import "./Announce.scss"
 import { Link } from "react-router-dom";
-import { numberSpaces } from "../../Func/numberSpace";
+import { numberSpaces } from "../../../Func/numberSpace";
 
 function Announce({ announce }) {
 

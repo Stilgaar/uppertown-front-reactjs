@@ -2,7 +2,7 @@ import "./AnnounceDetail.css";
 import { useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { numberSpaces } from "../../Func/numberSpace";
+import { numberSpaces } from "../../../Func/numberSpace";
 import Invest from "./Invest";
 
 function AnnounceDetail({ user }) {

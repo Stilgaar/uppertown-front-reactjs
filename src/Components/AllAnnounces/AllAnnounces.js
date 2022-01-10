@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
-import Announce from "../Announce/Announce";
+import Announce from "./Announce/Announce"
 import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import URLContext from "../../Context/URLcontext";

@@ -10,7 +10,7 @@ import AllAnnounces from "./Components/AllAnnounces/AllAnnounces";
 import Footer from "./Components/Footer/Footer";
 import NavBar from "./Components/NavBar/NavBar";
 import UserPage from "./Components/UserPage/UserPage";
-import AnnounceDetail from "./Components/AnnounceDetail/AnnounceDetail";
+import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDetail";
 import Error from "./Components/Error/Error";
 //temporaire :
 import axios from "axios";
