@@ -17,8 +17,8 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                 {box && <div>
                     <form onSubmit={(e) => {
                         FormContextValue.handleForm(e);
-                        setBox(c => !c)
                         hardRefresh();
+                        setBox(c => !c)
                     }}>
                         <div className="userupdate-container-label">
                             <label className="userupdate-label">{entry.label}</label>
@@ -28,7 +28,7 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                                 multiple
                                 onChange={(e) => {
                                     FormContextValue.handleFile(e)
-                                    FormContextValue.handleURL(`${UrlContextvalue.url}${entry.url}`);
+                                    FormContextValue.handleURL(`${UrlContextvalue.url}${entry.url}/${user._id}`);
                                 }} />
                         </div>
                         <div className="userupdate-container-warning">{entry.update}</div>

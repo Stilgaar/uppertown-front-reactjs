@@ -25,9 +25,9 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                 </div>}
                 {box &&
                     <form onSubmit={(e) => {
-                        FormContextValue.handleSubmit(e);
-                        setBox(c => !c)
+                        FormContextValue.handleSubmit(e)
                         hardRefresh()
+                        setBox(c => !c)
                     }}>
                         <div className="userupdate-container-label" onClick={(e) => e.stopPropagation()}>
                             <label className="userupdate-label"> {entry.label} </label>
@@ -36,17 +36,13 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                                 type={entry.type}
                                 placeholder={entry.placeholder}
                                 onChange={(e) => {
-                                    FormContextValue.handleURL(`${UrlContextvalue.url}/api/users/modifyUser`)
+                                    FormContextValue.handleURL(`${UrlContextvalue.url}/api/users/modifyUser/${user._id}`)
                                     FormContextValue.handleChange(e);
                                 }}
                                 name={entry.newinput} />
                         </div>
                         <div className="userupdate-container-warning"> {entry.update} </div>
-                        <button
-                            onMouseEnter={() => {
-                                FormContextValue.handleData({ email: user.email })
-                            }}
-                            className="userupdate-button-validate"
+                        <button className="userupdate-button-validate"
                             type="submit">
                             Valider
                         </button>

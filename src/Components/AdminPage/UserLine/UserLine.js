@@ -91,23 +91,15 @@ function UserLine({ userdata, adminRefresh }) {
                                     <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifPi`)
-                                            FormContextValue.handleData({ email: userdata.email })
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifPi/${userdata._id}`)
                                         }}
-                                        onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
-                                        }}
-                                        onClick={() => click("/admin/verifPi")}>
+                                        onClick={() => click()}>
                                         Identité Verifiée
                                     </button>
                                     <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifJDD`)
-                                            FormContextValue.handleData({ email: userdata.email })
-                                        }}
-                                        onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifJDD/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Justificatif de Domcile Verifié
@@ -115,11 +107,7 @@ function UserLine({ userdata, adminRefresh }) {
                                     <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifAVIS`)
-                                            FormContextValue.handleData({ email: userdata.email })
-                                        }}
-                                        onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifAVIS/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Avis d'imposition verifié
@@ -127,11 +115,7 @@ function UserLine({ userdata, adminRefresh }) {
                                     <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/goAdmin`)
-                                            FormContextValue.handleData({ email: userdata.email })
-                                        }}
-                                        onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/goAdmin/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Passer Admin
@@ -139,11 +123,7 @@ function UserLine({ userdata, adminRefresh }) {
                                     <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleData({ email: userdata.email })
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/noAdmin`)
-                                        }}
-                                        onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/admin/noAdmin/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Retirer Admin
@@ -160,11 +140,7 @@ function UserLine({ userdata, adminRefresh }) {
                                     {userdata.awaiting &&
                                         <button className="userline-button-validate"
                                             onMouseEnter={() => {
-                                                FormContextValue.handleData({ email: userdata.email })
-                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transactionDone`)
-                                            }}
-                                            onMouseLeave={() => {
-                                                FormContextValue.setClickData("")
+                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transactionDone/${userdata._id}`)
                                             }}
                                             onClick={() => click()}>
                                             Toutes les operations sont terminés
@@ -180,8 +156,8 @@ function UserLine({ userdata, adminRefresh }) {
                                         {argent}
                                         <button className="userline-button-validate"
                                             onMouseEnter={() => {
-                                                FormContextValue.handleData({ email: userdata.email }, { argent: argent })
-                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveMoney`)
+                                                FormContextValue.handleData({ argent: argent })
+                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveMoney/${userdata._id}`)
                                             }}
                                             onMouseLeave={() => {
                                                 FormContextValue.setClickData("")
@@ -204,11 +180,7 @@ function UserLine({ userdata, adminRefresh }) {
                                         <button
                                             className="userline-button-validate"
                                             onMouseEnter={() => {
-                                                FormContextValue.handleData({ email: userdata.email })
-                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone`)
-                                            }}
-                                            onMouseLeave={() => {
-                                                FormContextValue.setClickData("")
+                                                FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone/${userdata._id}`)
                                             }}
                                             onClick={() => click()}>
                                             Toutes les operations sont terminés
@@ -224,8 +196,8 @@ function UserLine({ userdata, adminRefresh }) {
                                     <div >{argent} <button
                                         className="userline-button-validate"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleData({ email: userdata.email }, { argent: argent })
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveEuros`)
+                                            FormContextValue.handleData({ argent: argent })
+                                            FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveEuros/${userdata._id}`)
                                         }}
                                         onMouseLeave={() => {
                                             FormContextValue.setClickData("")

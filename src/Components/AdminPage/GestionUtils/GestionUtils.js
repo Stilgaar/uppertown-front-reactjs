@@ -1,7 +1,16 @@
+import { useEffect, useContext } from 'react';
 import UtilLine from './UtilLine';
 import './GestionUtils.css'
+import URLcontext from '../../../Context/URLcontext';
+import useAxios from '../../../Hooks/useAxios';
 
-function GestionUtils({ users, adminRefresh }) {
+
+function GestionUtils() {
+
+    const URLContextValue = useContext(URLcontext)
+    const [users, adminRefresh] = useAxios(`${URLContextValue.url}/api/users/users`)
+
+    useEffect(() => { adminRefresh(); }, [])
 
     const user1 = users.filter(user => user.userType === "userType1")
     const user2 = users.filter(user => user.userType === "userType2")

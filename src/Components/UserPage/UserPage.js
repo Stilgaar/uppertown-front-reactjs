@@ -10,83 +10,49 @@ import UserUploads from './UserUpdate/UserUploads';
 
 function UserPage({ user, hardRefresh }) {
 
-    const [showSplash, setShowSplash] = useState(true)
-    const [showTransac, setShowTransac] = useState(false)
-    const [showSell, setShowSell] = useState(false)
-    const [showParam, setShowParam] = useState(false)
-    const [showUp, setShowUp] = useState(false)
+    const [state, setState] = useState('splash')
 
     useEffect(() => {
         hardRefresh()
     }, [])
 
-    useEffect(() => {
-        if (showTransac === true || showSell === true || showParam === true || showUp === true) { setShowSplash(false) }
-        else { setShowSplash(true) }
-    }, [showTransac, showSell, showParam, showUp])
-
-
-    const transac = () => {
-        setShowTransac(current => !current)
-        setShowSell(false)
-        setShowParam(false)
-        setShowUp(false)
-    }
-
-    const virement = () => {
-        setShowSell(current => !current)
-        setShowTransac(false)
-        setShowParam(false)
-        setShowUp(false)
-    }
-
-    const param = () => {
-        setShowParam(current => !current)
-        setShowTransac(false)
-        setShowSell(false)
-        setShowUp(false)
-    }
-
-    const up = () => {
-        setShowTransac(false)
-        setShowSell(false)
-        setShowParam(false)
-        setShowUp(current => !current)
-    }
-
     return (
         <div className="user-page">
             <div className="userpage-buttons-list">
-                <button onClick={() => transac()}
+                {state !== 'splash' &&
+                    < button onClick={() => setState('splash')}
+                        className="userpage-button-validate">
+                        Retours
+                    </button>}
+                <button onClick={() => setState('transac')}
                     className="userpage-button-validate">
                     Historique de vos Transactions
                 </button>
-                <button onClick={() => virement()}
+                <button onClick={() => setState('money')}
                     className="userpage-button-validate">
                     Acheter ou Vendre Stable Coins
                 </button>
-                <button onClick={() => param()}
+                <button onClick={() => setState('params')}
                     className="userpage-button-validate">
                     Gèrer son compte
                 </button>
-                <button onClick={() => up()}
+                <button onClick={() => setState('upload')}
                     className="userpage-button-validate">
                     Upload Fichiers
                 </button>
             </div>
 
-            {showSplash &&
-                <UserSplash
-                    user={user}
-                    param={param} />}
+            {
+                state === 'splash' &&
+                <UserSplash user={user} setState={setState} />
+            }
 
-            {showTransac &&
-                <div>
+            {
+                state === 'transac' && <div>
                     {user?.userType === "userType4" ?
-                        <div>
-                            <UserTransac
-                                user={user}
-                                hardRefresh={hardRefresh} />
+                        <div> <UserTransac
+                            user={user}
+                            hardRefresh={hardRefresh} />
                         </div>
                         :
                         <div className="userpage-warning">
@@ -94,15 +60,16 @@ function UserPage({ user, hardRefresh }) {
                             Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
                             <br />
                             <br />
-                            <button onClick={() => param()}
+                            <button onClick={() => setState('params')}
                                 className="userpage-button-validate-gestion">
                                 Gèrer son compte
                             </button>
                         </div>}
-                </div>}
+                </div>
+            }
 
-            {showSell &&
-                <div>
+            {
+                state === 'money' && <div>
                     {user?.userType === "userType4" ?
                         <div>
                             <UserVirement user={user} hardRefresh={hardRefresh} />
@@ -110,23 +77,24 @@ function UserPage({ user, hardRefresh }) {
                         <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />
                             Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
                             <br /> <br />
-                            <button onClick={() => param()}
+                            <button onClick={() => setState('params')}
                                 className="userpage-button-validate-gestion">
                                 Gèrer son compte
                             </button>
                         </div>}
-                </div>}
+                </div>
+            }
 
-            {showParam &&
-                <UserUpdate
-                    user={user}
-                    hardRefresh={hardRefresh} />}
+            {
+                state === 'params' &&
+                <UserUpdate user={user} hardRefresh={hardRefresh} />
+            }
 
-            {showUp &&
-                <UserUploads
-                    user={user}
-                    hardRefresh={hardRefresh} />}
-        </div>
+            {
+                state === 'upload' &&
+                <UserUploads user={user} hardRefresh={hardRefresh} />
+            }
+        </div >
     )
 }
 export default UserPage

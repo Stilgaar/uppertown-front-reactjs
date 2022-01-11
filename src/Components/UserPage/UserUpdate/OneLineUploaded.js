@@ -1,6 +1,6 @@
 import FormContext from '../../../Context/FormContext'
 import URLcontext from '../../../Context/URLcontext'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 function OneLineUploaded({ user, data, hardRefresh, entry }) {
 
@@ -14,8 +14,8 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
             <button
                 className="userupdate-button-delete"
                 onMouseEnter={() => {
-                    FormContextValue.handleURL(`${UrlContextvalue.url}/up/delete`)
-                    FormContextValue.handleData({ email: user.email }, { pic: data })
+                    FormContextValue.handleURL(`${UrlContextvalue.url}/up/delete/${user._id}`)
+                    FormContextValue.handleData({ pic: data })
                 }}
                 onClick={(e) => {
                     FormContextValue.handleEnvoi(e)

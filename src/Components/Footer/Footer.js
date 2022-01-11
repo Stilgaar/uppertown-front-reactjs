@@ -5,9 +5,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className="footer">
-            <p>Uppertown, par Jeff &copy; </p>
-        </div>
+        <div className="footer"><p>Uppertown, par Jeff &copy; (++Loïs && ++Jeremy) </p></div>
     )
 }
 

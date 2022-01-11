@@ -35,13 +35,11 @@ function StableCoins({ userdata, adminRefresh }) {
                         className="inputstable"
                         onChange={(e) => {
                             FormContextValue.handleChange(e)
-                            FormContextValue.handleData({ _id: userdata._id })
-
                         }} />
 
                     <button
                         onMouseEnter={() => {
-                            FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins`)
+                            FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins/${userdata._id}`)
                         }}
                         className="userline-button-validate"
                         type="submit">

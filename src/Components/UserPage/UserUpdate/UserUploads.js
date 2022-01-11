@@ -1,15 +1,8 @@
-import { useContext, useEffect } from 'react'
-import FormContext from '../../../Context/FormContext'
 import { userUpload } from '../../../JSON/Arrays';
 import OneLineUpload from './OneLineUpload';
 
 function Uploads({ user, hardRefresh }) {
 
-    const FormContextValue = useContext(FormContext)
-
-    useEffect(() => {
-        FormContextValue.handleData({ email: user.email });
-    }, [])
 
     return (
 

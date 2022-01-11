@@ -2,47 +2,19 @@ import { useState, useContext } from 'react';
 import './UserVirement.css'
 import axios from 'axios';
 import URLcontext from '../../../Context/URLcontext';
-import useAxios from '../../../Hooks/useAxios'
+import FormContext from '../../../Context/FormContext'
+import Rib from './Rib';
+
 
 function UserVirement({ user, hardRefresh }) {
-
 
     const [acheter, setAcheter] = useState(false);
     const [vendre, setVendre] = useState(false);
     const [validation, setValidation] = useState(false);
     const [pending, setPending] = useState(false)
 
-    const [montant, setMontant] = useState();
-    const [change, setChange] = useState()
-    const [theRib, setTheRib] = useState();
     const URLContextValue = useContext(URLcontext)
-
-    let currentStable = user.stableCoins
-
-    const [rib] = useAxios(`${URLContextValue.url}/admin/getRib`)
-
-    const payement = (e, email) => {
-        e.preventDefault();
-        let sumbit = { email, montant }
-        axios.post(`${URLContextValue.url}/api/users/addMoney`, sumbit)
-            .then((res) => console.log(res.data))
-            .then(() => setValidation(true))
-    }
-
-    const virement = (e, id) => {
-        e.preventDefault()
-        let submit = { change, theRib, id, currentStable }
-        axios.post(`${URLContextValue.url}/api/users/askMoney`, submit)
-            .then((res) => {
-                if (res.data === 'error') { alert("Vous n'avez pas assez de Stable Coins") }
-                else {
-                    setPending(true);
-                    hardRefresh()
-                }
-            }).catch((err) => console.log(err))
-    }
-
-    const handleInput = (e, setter) => { setter(e.target.value) }
+    const FormContexValue = useContext(FormContext)
 
     return (
 
@@ -60,57 +32,20 @@ function UserVirement({ user, hardRefresh }) {
 
                 {acheter &&
                     <div className="uservirement-singlecontainer" >
-                        <div>Pour acheter des Stable Coins, veuillez faire un virement sur le compte en banque suivant</div>
-                        <div>Virement SEPA</div>
-                        <div>Titulaire : {rib?.[0]?.titulaire}</div>
-                        <div>Domiciliation : {rib?.[0]?.domiciliation}</div>
-                        <div className="uservirement-container-totalRIB">
-
-                            <div className="uservirement-container-rib-iban-bic">
-                                <div className="uservirement-container-rib">
-                                    RIB
-                                    <div className="uservirement-container-value">
-                                        <div>Code Banque</div>
-                                        <div>{rib?.[0]?.codeBanque}</div>
-                                    </div>
-
-                                    <div className="uservirement-container-value">
-                                        <div>Code Guichet</div>
-                                        <div>{rib?.[0]?.codeGuichet}</div>
-                                    </div>
-
-                                    <div className="uservirement-container-value">
-                                        <div>Numero de Compte</div>
-                                        <div>{rib?.[0]?.numeroCompte}</div>
-                                    </div>
-
-                                    <div className="uservirement-container-value">
-                                        <div>Clefs RIB</div>
-                                        <div>{rib?.[0]?.clefRib}</div>
-                                    </div>
-                                </div>
-                                <div className="uservirement-container-iban">
-                                    I.B.A.N
-                                    <div className="uservirement-container-value-iban-bic">
-                                        <div>
-                                            {rib?.[0]?.iban} {rib?.[0]?.codeBanque} {rib?.[0]?.codeGuichet} {rib?.[0]?.clefRib}</div>
-                                    </div>
-
-                                </div>
-                                <div className="uservirement-container-bic">
-                                    B.I.C / SWIFT
-                                    <div className="uservirement-container-value-iban-bic">
-                                        <div>{rib?.[0]?.bicSwift}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <form onSubmit={(e) => payement(e, user.email)}>
+                        <Rib />
+                        <form onSubmit={(e) => {
+                            FormContexValue.handleSubmit(e)
+                            setValidation(true)
+                            hardRefresh()
+                        }}>
                             <label>Combien désirez vous transferer ?</label>
                             <input type="number"
+                                name="montant"
                                 placeholder="Montant"
-                                onInput={(e) => handleInput(e, setMontant)} />
+                                onChange={(e) => {
+                                    FormContexValue.handleChange(e)
+                                    FormContexValue.handleURL(`${URLContextValue.url}/api/users/addMoney/${user._id}`)
+                                }} />
                             <button className="uservirement-button-validate"
                                 type="submit">
                                 Valider
@@ -135,21 +70,33 @@ function UserVirement({ user, hardRefresh }) {
                 {vendre &&
                     <div className="uservirement-singlecontainer">
                         {user?.rib?.[0] !== undefined ? <div> Vous disposez de {user.stableCoins} StableCoins
-                            <form onSubmit={(e) => virement(e, user._id)}>
+                            <form onSubmit={(e) => {
+                                FormContexValue.handleSubmit(e)
+                                setPending(true)
+                                hardRefresh()
+                            }}>
                                 <label>Sur quel compte désirez vous réaliser votre virement ?</label>
                                 {user.rib.map((ribz, index) =>
                                     <div key={index} >
                                         <input type="radio"
-                                            value="rib"
+                                            value={ribz}
                                             name="rib"
-                                            onChange={() => setTheRib(ribz)} />
+                                            onChange={(e) => {
+                                                FormContexValue.handleURL(`${URLContextValue.url}/api/users/askMoney/${user._id}`)
+                                                FormContexValue.handleChange(e, undefined, 'radio')
+                                            }} />
                                         RIB #{index + 1} - {ribz}
                                     </div>
                                 )}
 
                                 <label>Combien de Stable Coin désirez vous échanger contre des Euros ?</label>
-                                <input type="number"
-                                    onInput={(e) => handleInput(e, setChange)} />
+                                <input
+                                    type="number"
+                                    name="change"
+                                    onChange={(e) => {
+                                        FormContexValue.handleChange(e)
+                                        FormContexValue.handleData({ currentStable: user.stableCoins })
+                                    }} />
                                 <button className="uservirement-button-vendre"
                                     type="submit">Valider</button>
                             </form>

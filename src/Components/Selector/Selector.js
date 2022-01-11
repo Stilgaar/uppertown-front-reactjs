@@ -34,8 +34,7 @@ function Selector({
     <div className="selector-line">
       <div className="select-block">
         <label>Dans quel type:</label>
-        <Select
-          className="select-type"
+        <Select className="select-type"
           options={type}
           placeholder="Choisissez un type"
           value={type.find((obj) => obj.value === filterType)}
@@ -45,8 +44,7 @@ function Selector({
       </div>
       <div className="select-block">
         <label>Dans quelle région:</label>
-        <Select
-          className="select-region"
+        <Select className="select-region"
           options={region}
           placeholder="Choisissez une région"
           value={region.find((obj) => obj.value === filterRegion)}
@@ -56,8 +54,7 @@ function Selector({
       </div>
       <div className="select-block">
         <label>Nombre de chambre:</label>
-        <Select
-          className="select-chambre"
+        <Select className="select-chambre"
           options={bedrooms}
           placeholder="Choisissez par nombre de chambres"
           value={bedrooms.find((obj) => obj.value === filterBedrooms)}
@@ -66,8 +63,7 @@ function Selector({
         />
         <div>
           <label>Prix Max : </label>
-          <input
-            className="price-slider"
+          <input className="price-slider"
             type="range"
             id="volume"
             name="volume"

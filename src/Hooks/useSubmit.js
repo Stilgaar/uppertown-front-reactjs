@@ -21,7 +21,7 @@ function useSubmit() {
   console.log("URL", url)
   console.log("DATA", data)
   // console.log("IMAGES", images)
-  // console.log("CLICKDATA", clickData)
+  console.log("CLICKDATA", clickData)
   // console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
