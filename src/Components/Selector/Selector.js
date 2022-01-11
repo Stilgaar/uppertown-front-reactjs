@@ -73,7 +73,7 @@ function Selector({
             step="50000"
             value={filterPrice}
           />
-          <label className="selected-price" for="price">
+          <label className="selected-price" htmlFor="price">
             {numberSpaces(filterPrice)} €
           </label>
         </div>

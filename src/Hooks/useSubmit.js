@@ -18,10 +18,10 @@ function useSubmit() {
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données sur le site en général
-  console.log("URL", url)
+  // console.log("URL", url)
   console.log("DATA", data)
   // console.log("IMAGES", images)
-  console.log("CLICKDATA", clickData)
+  // console.log("CLICKDATA", clickData)
   // console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
@@ -77,15 +77,17 @@ function useSubmit() {
     if (images) {
       let key = Object.keys(images)
       let val = Object.values(images)
-      for (let i = 0; i < val.length; i++) {
+      for (let i = 0; i < images?.image?.length; i++) {
         form.append(key, val[0][i])
       }
     }
-
+    e.target.reset()
     axios.post(url, form, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data)
+      })
       .catch(err => console.log(err))
       .then(() => setData({}))
       .then(() => setImages([]))
@@ -115,6 +117,7 @@ function useSubmit() {
     e.persist()
     if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
 
+    console.log(info)
     if (info) {
       setData((data) => ({ ...data, [info]: e.target.value }));
     }
@@ -184,7 +187,6 @@ function useSubmit() {
     handleFile: handleFile,
     logout: logout,
   };
-
 
   // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons
   // ne se trigger que s'il y a un 'amount' dans le setter data

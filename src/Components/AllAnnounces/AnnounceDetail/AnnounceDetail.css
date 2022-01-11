@@ -19,7 +19,7 @@
 }
 
 .image-carousel {
-  height: 300px;
+  width: 100%;
 }
 
 .detail-image-container {
@@ -27,8 +27,8 @@
   overflow: hidden;
   justify-content: center;
   align-items: center;
-
-  height: 100%;
+  height: fit-content;
+  width: fit-content;
   background-color: black;
 }
 
@@ -57,7 +57,7 @@
   flex-direction: column;
   border-left: 2px solid lightgray;
   border-radius: 3px;
-  width: 100%;
+  width: 1000px;
   padding: 10px;
 }
 

@@ -7,8 +7,6 @@ import Invest from "./Invest";
 
 function AnnounceDetail({ user }) {
 
-  const d = new Date();
-
   const location = useLocation();
   const announce = location.state?.data;
 
@@ -29,8 +27,8 @@ function AnnounceDetail({ user }) {
               centerMode={true}
               centerSlidePercentage={100} >
               {announce?.image.map((item) => (
-                <div key={item._id}>
-                  <img className="image-carousel"
+                <div key={item._id} className="image-carousel">
+                  <img
                     src={item}
                     alt={`apercu du bien immo`} />
                 </div>

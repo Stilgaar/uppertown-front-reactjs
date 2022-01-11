@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import './UserVirement.css'
-import axios from 'axios';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext'
 import Rib from './Rib';

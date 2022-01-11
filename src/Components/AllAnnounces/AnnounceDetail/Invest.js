@@ -10,7 +10,9 @@ function Invest({ user, ann }) {
     return (
         <div>
             <form
-                onSubmit={(e) => FormContextValue.handleSubmit(e)}
+                onSubmit={(e) => {
+                    FormContextValue.handleSubmit(e)
+                }}
                 onMouseEnter={() => FormContextValue.handleData({ lastname: user.lastname }, { id: user._id }, { annonceId: ann._id }, { share_price: ann.share_price })}>
                 <p>Combien de Tokens désirez vous acheter ?</p>
                 <input value={FormContextValue.data.amount || ""}

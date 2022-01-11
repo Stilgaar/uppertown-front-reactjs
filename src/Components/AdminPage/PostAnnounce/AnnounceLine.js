@@ -8,8 +8,7 @@ function AnnounceLine({ entry }) {
         <div className="postannounce">
             {!entry.select && !entry.option && !entry.photos && !entry.values && !entry.part &&
                 <> <label>{entry.label}</label>
-                    <input
-                        type={entry.type}
+                    <input type={entry.type}
                         placeholder={entry.placeholder}
                         name={entry.name}
                         onChange={FormContextValue.handleChange} />
@@ -20,8 +19,7 @@ function AnnounceLine({ entry }) {
                     <select onChange={(e) => FormContextValue.handleChange(e, entry.name)}>
                         <option disabled selected>--  Faites votre choix --</option>
                         {entry.list.slice(1).map((region, index) => (
-                            <option
-                                values={entry.name}
+                            <option values={entry.name}
                                 key={index}
                                 name={entry.name}
                                 type={entry.type}>
@@ -41,8 +39,8 @@ function AnnounceLine({ entry }) {
                 <> <label>{entry.label}</label>
                     {entry.list.map((option, index) => (
                         <div key={index}>
-                            <input
-                                values={option.value}
+                            <input value={option.value}
+                                text={option.value}
                                 type={entry.type}
                                 name={entry.name}
                                 onChange={(e) => FormContextValue.handleChange(e, option.value, entry.type)} />
@@ -53,8 +51,7 @@ function AnnounceLine({ entry }) {
 
             {entry.photos &&
                 <><label>{entry.label}</label>
-                    <input
-                        multiple
+                    <input multiple
                         type={entry.type}
                         name={entry.name}
                         onChange={(e) => {

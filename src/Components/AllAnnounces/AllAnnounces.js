@@ -4,9 +4,12 @@ import Announce from "./Announce/Announce"
 import Selector from "../Selector/Selector";
 import "./AllAnnounces.css";
 import URLContext from "../../Context/URLcontext";
+// import FormContext from "../../Context/FormContext"
+// import useAxios from '../../Hooks/useAxios'
 
 function AllAnnounces() {
   const URLContextValue = useContext(URLContext)
+  //  const FormContextValue = useContext(FormContext)
   const [announcesList, setAnnouncesList] = useState([]);
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
@@ -15,19 +18,21 @@ function AllAnnounces() {
   const [filterPrice, setFilterPrice] = useState(10000000)
 
   //Au chargement fait un requete pour recuperer toutes les annonces de la BDD
+  //Place la reponse dans les states
+  //State des annonces global
+  //State des annonces filtrées, initialisé avec toutes les annonces
+
+  // const [announcesList] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
+  // console.log(announcesList)
+
   useEffect(() => {
     Axios.get(`${URLContextValue.url}/api/announces/allAnnounces`)
-      .then(
-        (response) => {
-          //Place la reponse dans les states
-          //State des annonces global
-          setAnnouncesList(response.data);
-          //State des annonces filtrées, initialisé avec toutes les annonces
-          setFilteredList(response.data);
-        }
-      );
+      .then((res) => {
+        setAnnouncesList(res.data);
+        setFilteredList(res.data);
+      })
   }, []);
-
+  // 
   //A chaque changement dans les filtres
   //passe a la moulinette les annonces
   useEffect(() => {

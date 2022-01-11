@@ -1,16 +1,12 @@
 import "./Signup.css";
 import FormContext from "../../../Context/FormContext";
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import URLcontext from "../../../Context/URLcontext";
 
 function Signup() {
 
   const URLContextValue = useContext(URLcontext)
   const FormContextValue = useContext(FormContext);
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <div className="signup-form" onClick={FormContextValue.handleClick}>

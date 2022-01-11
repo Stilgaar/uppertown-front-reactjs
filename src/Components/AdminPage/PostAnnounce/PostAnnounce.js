@@ -13,7 +13,7 @@ function PostAnnounce() {
         <div>
             <div className="postannounce-container-container">
                 <div className="postannounce-container"><h3>Publier une nouvelle Annonce</h3></div>
-                <form onSubmit={FormContextValue.handleForm}>
+                <form onSubmit={(e) => FormContextValue.handleForm(e)}>
                     <div>
                         {annonce.map((entry) => (
                             <AnnounceLine key={entry.name} entry={entry} />))}
