@@ -2,27 +2,66 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   box-sizing: border-box;
   z-index: 5;
+  background-color: rgba(15, 12, 12, 0.39);
 }
 
 .navbar {
   @extend %flex-layout;
   padding: $base-padding $base-padding * 2;
-  box-shadow: $base-box-shadow;
-  background-color: rgba(59, 59, 59, 0.39);
 
   .site-title {
+    display: block;
     font-size: $font-size-lg;
     letter-spacing: 0.5rem;
   }
   .site-texts {
+    display: block;
     font-size: $base-font-size;
     letter-spacing: 0.2rem;
+    @include xs {
+      display: none;
+    }
+    @include sm {
+      display: none;
+    }
+    @include md {
+      display: none;
+    }
+    @include lg {
+      display: block;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      letter-spacing: 0.2rem;
+    }
+    @include xl {
+      display: block;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      letter-spacing: 0.2rem;
+    }
   }
   .container {
     @extend %flex-layout;
+    @include xs {
+      width: 200px;
+    }
+    @include sm {
+      width: 400px;
+    }
+    @include md {
+      width: 700px;
+    }
+    @include lg {
+      width: 900px;
+      flex-direction: column;
+    }
+    @include xl {
+      width: 1200px;
+      flex-direction: row;
+    }
   }
 }
 
@@ -30,5 +69,49 @@
   .navbar-#{$key} {
     @extend .navbar;
     background-color: $val;
+  }
+}
+
+.ham-menu .hide-menu {
+  z-index: 5;
+  position: relative;
+  .site-text {
+    z-index: 5;
+    color: white;
+    font-size: $base-font-size;
+    letter-spacing: 0.2rem;
+    @include xs {
+      display: block;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      letter-spacing: 0.2rem;
+    }
+    @include sm {
+      display: block;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      letter-spacing: 0.2rem;
+    }
+    @include md {
+      display: block;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      letter-spacing: 0.2rem;
+    }
+    @include lg {
+      display: none;
+    }
+    @include xl {
+      display: none;
+    }
+  }
+  .hide-menu {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    background-color: white;
+    z-index: 100;
   }
 }

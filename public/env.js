@@ -183,7 +183,7 @@ window.env = {
   "npm_package_devDependencies_sass": "^1.47.0",
   "npm_package_eslintConfig_extends_0": "react-app",
   "npm_package_eslintConfig_extends_1": "react-app/jest",
-  "npm_package_gitHead": "bf8a3b228624ef5a869d319b156b9228037698ce",
+  "npm_package_gitHead": "76ffff09c31c41e536796581485cd90c19a415aa",
   "npm_package_name": "frontend",
   "npm_package_private": "true",
   "npm_package_readmeFilename": "README.md",

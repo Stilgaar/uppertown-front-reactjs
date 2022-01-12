@@ -7,7 +7,7 @@ function RibLine({ entry }) {
     return (
         <div>
             <label className="label">{entry.label}</label>
-            <input className="input mt-1 mb-1"
+            <input className="input"
                 name={entry.name}
                 type={entry.type}
                 placeholder={entry.placeholder}

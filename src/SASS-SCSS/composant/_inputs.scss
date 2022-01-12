@@ -5,7 +5,6 @@
   display: inline-block;
   padding: $base-padding $base-padding * 2;
   background-color: rgb(248, 248, 248);
-  width: 500px;
 }
 
 .input {
@@ -14,5 +13,25 @@
     outline: none;
     background-color: rgb(245, 245, 245);
     border-bottom: 1px solid $primary;
+  }
+}
+.input {
+  @include xs {
+    width: 200px;
+  }
+  @include sm {
+    width: 300px;
+  }
+  @include md {
+    width: 400px;
+  }
+  @include lg {
+    width: 500px;
+  }
+  @include xl {
+    width: 500px;
+  }
+  @include breakpoint(1400px) {
+    width: 600px;
   }
 }
