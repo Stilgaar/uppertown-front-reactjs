@@ -11,7 +11,9 @@ import Footer from "./Components/Footer/Footer";
 import NavBar from "./Components/NavBar/NavBar";
 import UserPage from "./Components/UserPage/UserPage";
 import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDetail";
+import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
 import Error from "./Components/Error/Error";
+
 //temporaire :
 import axios from "axios";
 import useURL from "./Hooks/useURL";
@@ -74,14 +76,13 @@ function App() {
                 </Route>
                 <Route path="/admin">{isLog ? <AdminPage /> : <Error />}</Route>
                 <Route path="/userpage">
-                  {isLog ? (
-                    <UserPage user={user} hardRefresh={hardRefresh} />
-                  ) : (
-                    <Error />
-                  )}
+                  {isLog ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
                 </Route>
                 <Route path="/announce-detail">
-                  {isLog ? <AnnounceDetail user={user} /> : <Error />}
+                  {isLog ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
+                </Route>
+                <Route path="/user-detail">
+                  {isLog ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
                 </Route>
               </Switch>
             </div>

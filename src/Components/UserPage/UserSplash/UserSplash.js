@@ -6,8 +6,7 @@ function UserSplash({ user, setState }) {
         <div className="usersplash-container">
             <h3>Bienvenue dans votre espace utilistateur {user?.firstname} {user?.lastname}
 
-                {user?.stableCoins !== 0 && <div>Votre portefeuille de StableCoins s'éléve à
-                    {user?.stableCoins}
+                {user?.stableCoins !== 0 && <div>Votre portefeuille de StableCoins s'éléve à {user?.stableCoins?.toLocaleString()}
                 </div>} </h3>
 
             <div className="usersplash-text-container">

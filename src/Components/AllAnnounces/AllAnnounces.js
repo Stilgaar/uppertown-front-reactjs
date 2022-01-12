@@ -1,16 +1,12 @@
+import "./AllAnnounces.css";
 import React, { useState, useEffect, useContext } from "react";
-import Axios from "axios";
 import Announce from "./Announce/Announce"
 import Selector from "../Selector/Selector";
-import "./AllAnnounces.css";
+import useAxios from "../../Hooks/useAxios";
 import URLContext from "../../Context/URLcontext";
-// import FormContext from "../../Context/FormContext"
-// import useAxios from '../../Hooks/useAxios'
 
 function AllAnnounces() {
   const URLContextValue = useContext(URLContext)
-  //  const FormContextValue = useContext(FormContext)
-  const [announcesList, setAnnouncesList] = useState([]);
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
@@ -22,18 +18,9 @@ function AllAnnounces() {
   //State des annonces global
   //State des annonces filtrées, initialisé avec toutes les annonces
 
-  // const [announcesList] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
-  // console.log(announcesList)
+  const [announcesList, annRefresh] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
+  useEffect(() => { annRefresh() }, [])
 
-  useEffect(() => {
-    Axios.get(`${URLContextValue.url}/api/announces/allAnnounces`)
-      .then((res) => {
-        setAnnouncesList(res.data);
-        setFilteredList(res.data);
-      })
-  }, []);
-  // 
-  //A chaque changement dans les filtres
   //passe a la moulinette les annonces
   useEffect(() => {
     //1: prend toutes les annonces et les filtre par rapport au filtre de region et return un array
@@ -46,7 +33,7 @@ function AllAnnounces() {
     const filteredByPrice = filteredByType.filter((announce) => verifyPrice(announce))
     // le resultat est mis dans le setter
     setFilteredList(filteredByPrice);
-  }, [filterRegion, filterBedrooms, filterPrice, filterType])
+  }, [filterRegion, filterBedrooms, filterPrice, filterType, announcesList])
 
   //fonction qui filtre par rapport a la region
   const verifyRegion = (announce) => {

@@ -2,7 +2,7 @@ import FormContext from '../../../Context/FormContext'
 import URLcontext from '../../../Context/URLcontext'
 import { useContext } from 'react'
 
-function Invest({ user, ann }) {
+function Invest({ user, ann, thisAnnRefresh, hardRefresh }) {
 
     const FormContextValue = useContext(FormContext)
     const UrlContextvalue = useContext(URLcontext)
@@ -11,7 +11,11 @@ function Invest({ user, ann }) {
         <div>
             <form
                 onSubmit={(e) => {
-                    FormContextValue.handleSubmit(e)
+                    FormContextValue.handleSubmit(e);
+                    setTimeout(() => {
+                        thisAnnRefresh();
+                        hardRefresh()
+                    }, 50)
                 }}
                 onMouseEnter={() => FormContextValue.handleData({ lastname: user.lastname }, { id: user._id }, { annonceId: ann._id }, { share_price: ann.share_price })}>
                 <p>Combien de Tokens désirez vous acheter ?</p>

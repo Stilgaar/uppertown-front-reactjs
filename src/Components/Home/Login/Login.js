@@ -2,6 +2,8 @@ import './Login.css'
 import { useContext } from 'react';
 import FormContext from "../../../Context/FormContext";
 import URLcontext from '../../../Context/URLcontext';
+import { login } from '../../../JSON/Arrays';
+import RibLine from '../../AdminPage/Addrib/RibLine';
 
 function Login() {
 
@@ -14,31 +16,13 @@ function Login() {
             <div
                 className="login"
                 onClick={(e) => e.stopPropagation()}>
-                <form className="login-container"
-                    onSubmit={(e) => {
-                        FormContextValue.handleSubmit(e)
-                    }}>
+                <form className="login-container" onSubmit={FormContextValue.handleSubmit}>
                     <h4 className="login-title"> Se Connecter</h4>
-                    <div className="login-container-email">
-                        <div className="login-container-email">
-                            <label>Email</label>
-                            <input className="login-input email"
-                                type="mail"
-                                placeholder="Julien.Dupuy@updown.street"
-                                required
-                                name="email"
-                                onChange={FormContextValue.handleChange} />
-                        </div>
-                        <div className="login-container-mdp">
-                            <label>Mot de Passe</label>
-                            <input className="login-input mdp"
-                                type="password"
-                                placeholder="**********"
-                                required
-                                name="password"
-                                onChange={FormContextValue.handleChange} />
-                        </div>
-                    </div>
+
+                    {login.map((entry) => (
+                        <RibLine entry={entry} key={entry.name} />
+                    ))}
+
                     <button onMouseEnter={() => {
                         FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
                     }} className="login-button"

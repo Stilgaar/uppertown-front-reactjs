@@ -1,16 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./StableCoins.css";
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
 
-function StableCoins({ userdata, adminRefresh }) {
+function StableCoins({ userdata, refreshUser }) {
 
     const URLContextValue = useContext(URLcontext)
     const FormContextValue = useContext(FormContext)
-
-    useEffect(() => {
-        adminRefresh()
-    }, [FormContextValue.resMsg])
 
     return (
         <div>
@@ -25,7 +21,9 @@ function StableCoins({ userdata, adminRefresh }) {
                 <form className="stableC-input"
                     onSubmit={(e) => {
                         FormContextValue.handleSubmit(e)
-                        adminRefresh()
+                        setTimeout(() => {
+                            refreshUser()
+                        }, 50)
                     }}>
                     <input
                         values={FormContextValue.data.stableCoins || ""}

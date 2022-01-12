@@ -6,8 +6,6 @@ import cart from './cart-plus.svg';
 import { useContext } from "react";
 import URLContext from "../../../Context/URLcontext";
 import useAxios from "../../../Hooks/useAxios";
-import { numberSpaces } from "../../../Func/numberSpace"
-
 
 function Infos() {
 
@@ -35,22 +33,22 @@ function Infos() {
       <div className="infos-container-container">
         <div className="infos-container">
           <div><img src={coin} alt="coin" className="infos-svg-coin" /><p className="infos-coin">StableCoins échangés</p></div>
-          <div>{numberSpaces(clienttokens)}</div>
+          <div>{(clienttokens?.toLocaleString())}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={people} alt="people" className="infos-svg-people" /><p className="infos-people">Utilisateurs</p></div>
-          <div>{numberSpaces(users?.length)}</div>
+          <div>{(users?.length?.toLocaleString())}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={building} alt="building" className="infos-svg-building" /><p className="infos-building">Biens Immobiliers</p></div>
-          <div>{numberSpaces(ann.length)}</div>
+          <div>{(ann.length?.toLocaleString())}</div>
         </div>
 
         <div className="infos-container">
           <div><img src={cart} alt="cart" className="infos-svg-cart" /><p className="infos-cart">Tokens disponibles</p></div>
-          <div>{numberSpaces(freetokens)}</div>
+          <div>{(freetokens?.toLocaleString())}</div>
         </div>
       </div>
     </div>

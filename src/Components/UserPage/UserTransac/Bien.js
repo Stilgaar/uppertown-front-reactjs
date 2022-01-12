@@ -10,7 +10,7 @@ function Biens({ elem }) {
 
     return (
         <div className="biens">
-            <div> Vous avez investis : {elem.amountStableCoins} StableCoins</div>
+            <div> Vous avez investis : {elem.amountStableCoins?.toLocaleString()} StableCoins</div>
             <div> Sur : {announce.title} </div>
             <Link to={{
                 pathname: '/announce-detail',

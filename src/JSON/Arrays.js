@@ -1,3 +1,67 @@
+
+export const login = [
+    {
+        "label": "Email",
+        "type": "email",
+        "placeholder": "Julien.Dupuy@upper.town",
+        "name": "email"
+
+    },
+    {
+        "label": "Mot de Passe",
+        "type": "password",
+        "placeholder": "**********",
+        "name": "password"
+    }
+
+]
+
+export const signup = [
+    {
+        "label": "Nom",
+        "type": "text",
+        "placeholder": "Dupuy",
+        "name": "lastname"
+    },
+    {
+        "label": "Prènom",
+        "type": "text",
+        "placeholder": "Julien",
+        "name": "firstname"
+    },
+    {
+        "label": "Email",
+        "type": "email",
+        "placeholder": "Julien.Dupuy@upper.town",
+        "name": "email"
+    },
+    {
+        "label": "Téléphone",
+        "type": "number",
+        "placeholder": "0606060606",
+        "name": "tel"
+    },
+    {
+        "label": "Socièté",
+        "type": "text",
+        "placeholder": "Up Down Street",
+        "name": "brandname"
+    },
+    {
+        "label": "Mot de Passe",
+        "type": "password",
+        "placeholder": "**********",
+        "name": "password"
+    },
+    {
+        "label": "Vérification Mot de Passe",
+        "type": "password",
+        "placeholder": "**********",
+        "name": "verifpassword"
+    },
+
+]
+
 export const rib = [
     {
         "name": "titulaire",

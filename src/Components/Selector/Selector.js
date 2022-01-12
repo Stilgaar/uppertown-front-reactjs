@@ -3,7 +3,6 @@ import Select from "react-select";
 import "./Selector.css";
 import "./Selector.scss"
 import { region, bedrooms, type } from '../../JSON/Arrays'
-import { numberSpaces } from "../../Func/numberSpace";
 
 function Selector({
   filterRegion,
@@ -74,7 +73,7 @@ function Selector({
             value={filterPrice}
           />
           <label className="selected-price" htmlFor="price">
-            {numberSpaces(filterPrice)} €
+            {filterPrice?.toLocaleString()} €
           </label>
         </div>
       </div>

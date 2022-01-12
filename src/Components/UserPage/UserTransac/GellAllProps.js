@@ -7,7 +7,6 @@ function GetProps({ user, id }) {
 
     const UrlContextValue = useContext(URLcontect)
     const [rep] = useAxios(`${UrlContextValue.url}/api/users/props/${id}`)
-    console.log(rep)
 
     return (
         <div> <br />

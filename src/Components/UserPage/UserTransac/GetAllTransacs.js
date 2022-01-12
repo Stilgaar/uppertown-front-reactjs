@@ -7,7 +7,6 @@ function GetALlTransacs({ user, id }) {
 
     const UrlContextValue = useContext(URLcontect)
     const [rep] = useAxios(`${UrlContextValue.url}/api/users/transacs/${id}`)
-    console.log(rep)
 
     return (
         <div> <br />

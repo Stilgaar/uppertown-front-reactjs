@@ -1,7 +1,6 @@
 import React from "react";
 import "./Announce.scss"
 import { Link } from "react-router-dom";
-import { numberSpaces } from "../../../Func/numberSpace";
 
 function Announce({ announce }) {
 
@@ -9,7 +8,7 @@ function Announce({ announce }) {
     <Link to={{
       pathname: '/announce-detail',
       state: {
-        data: announce
+        data: announce._id
       },
     }}
       style={{ textDecoration: "none", color: "black" }}
@@ -22,7 +21,7 @@ function Announce({ announce }) {
       <div className="bottom-container">
         <div className="price-block">
           <p className="title-block">Prix</p>
-          <p className="data-block">{numberSpaces(announce.price)} €</p>
+          <p className="data-block">{(announce?.price?.toLocaleString())} €</p>
         </div>
         <div className="surface-block">
           <p className="title-block">m²</p>
