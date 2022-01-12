@@ -20,10 +20,12 @@ function Home() {
         {FormContextValue.form === "login" && (
           <Login />
         )}
+
         <img
           src="https://www.icietlabas.fr/wp-content/uploads/2021/05/Photographie-Architecturale-Barlelone-que-faire-a-Barcelone-Que-faire-en-espagne-Tutoriel-Photo-Tuto-Photo-blog-voyage-32-scaled.jpg"
           alt="Photo accueil"
         />
+
         <About />
       </div>
       <OneAnnounce />
@@ -33,3 +35,6 @@ function Home() {
 }
 
 export default Home;
+
+
+

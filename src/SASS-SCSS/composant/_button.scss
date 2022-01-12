@@ -1,0 +1,58 @@
+@use "sass:math";
+
+// mixin est une type de fonction permettant de rappeller un certain nombres de valeurs dans une
+// autre classe.
+// on peut lui passer une condition, ici $bg-color et lui passer une valeur standard pour par exemple
+// un bouton sans couleur comme le btn plus bas
+@mixin btn($bg-color: #e2e2e2) {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  margin: $base-margin;
+  padding: $base-padding $base-padding * 2;
+  border-radius: math.div($base-border-radius, 4);
+  background-color: $bg-color;
+}
+
+// pour avoir un bouton de base
+.btn {
+  @include btn;
+}
+
+// pour chaque key et val dans couleurs nous créons un bouton-$key
+// on lui passe le mixin avec btn($val)
+// sur hover il change son background color avec la fonction lighten (fonction comprise dans sass)
+@each $key, $val in $couleurs {
+  .btn-#{$key} {
+    @include btn($val);
+    &:hover {
+      background-color: lighten($val, 5);
+    }
+  }
+  // et on fait pareil pour des boutons outlined. Sauf qu'ici dans le mixin nous avons passé la
+  // couleure blanche pour toutes les background color. Donc il va prendre la valeur de
+  // $base-border-thickness, solid et la $val. Puis sur hover c'est le fond qui changera de couleur.
+  // du coup faut rajouter dans le css, le hover pour text en white et le tour est joué !
+  .btn-outlined-#{$key} {
+    @include btn(white);
+    border: $base-border-thickness solid $val;
+    &:hover {
+      background-color: $val;
+    }
+  }
+
+  // appelle la fonction dans _function.scss
+  // il crée donc un bouton, avec pour nom incluant la $key
+  // le bouton aura le background-color de val et le texte aura la couleur de light-comp
+  // elle prends donc la couleur complementaire de $val et l'éclaircis
+  // au hover on inverse ces couleurs, tout simplement
+  .btn-complement-#{$key} {
+    @include btn($val);
+    color: light-comp($val);
+    &:hover {
+      color: $val;
+      background-color: light-comp($val);
+    }
+  }
+}

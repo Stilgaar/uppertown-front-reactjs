@@ -30,7 +30,7 @@ function UserDetail() {
         <div>
             <div className="userline-modal-container" onClick={(e) => e.stopPropagation()}>
                 <div><div>
-                    <h3>Détails Utilistateur : {userdata?.lastname} {userdata?.firstname}</h3><Link to="/admin">Retours</Link>
+                    <h3>Détails Utilisateur : {userdata?.lastname} {userdata?.firstname}</h3><Link to="/admin">Retours</Link>
                     <div className="userline-infodebase-buttons-admin">
                         <div className="userline-infodebase">
                             <div><span className="userline-span-usertext">

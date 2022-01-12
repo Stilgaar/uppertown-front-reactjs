@@ -13,11 +13,10 @@ function Login() {
     return (
         <div className="login-form"
             onClick={FormContextValue.handleClick}>
-            <div
-                className="login"
+            <div className="login"
                 onClick={(e) => e.stopPropagation()}>
-                <form className="login-container" onSubmit={FormContextValue.handleSubmit}>
-                    <h4 className="login-title"> Se Connecter</h4>
+                <form className="container" onSubmit={FormContextValue.handleSubmit}>
+                    <h2 className="text-primary t-center mb-3"> Se Connecter</h2>
 
                     {login.map((entry) => (
                         <RibLine entry={entry} key={entry.name} />
@@ -25,19 +24,17 @@ function Login() {
 
                     <button onMouseEnter={() => {
                         FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
-                    }} className="login-button"
+                    }} className="btn-complement-primary"
                         type="submit">
                         Valider
                     </button>
                 </form>
-                <p className="login-fasle-link"
-                    onClick={FormContextValue.handleSigin}>
-                    Créer un compte
+                <p className="text-compl-hover-primary t-center"
+                    onClick={FormContextValue.handleSigin}>Créer un compte
                 </p>
             </div>
             {FormContextValue.resMsg &&
-                <div
-                    className="message-box-login">
+                <div className="message-box-login p5">
                     {FormContextValue.resMsg}
                 </div>}
         </div>

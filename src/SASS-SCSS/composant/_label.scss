@@ -1,0 +1,13 @@
+@use "sass:math";
+
+@mixin label {
+  padding: math.div($base-padding, 2);
+  margin-bottom: $base-margin;
+  color: $primary;
+  font-weight: bolder;
+  font-size: 1em;
+}
+
+.label {
+  @include label;
+}

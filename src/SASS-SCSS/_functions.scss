@@ -1,0 +1,10 @@
+
+// fonction pour changer les couleurs
+@function light-comp($couleurs) {
+    // choppe la couleure complementaire
+    $complement: complement($couleurs);
+    // éclaircit la dite couleur de 30%
+    $light-complement: lighten($complement,30%);
+    // retourne la couleur complementaire
+    @return $light-complement;
+ }

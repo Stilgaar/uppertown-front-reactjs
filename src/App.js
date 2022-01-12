@@ -1,5 +1,6 @@
 import "./App.css";
 import "./App.scss";
+import './css/index.css'
 import React, { useState, useEffect } from "react";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -8,7 +9,7 @@ import Home from "./Components/Home/Home";
 import AdminPage from "./Components/AdminPage/AdminPage";
 import AllAnnounces from "./Components/AllAnnounces/AllAnnounces";
 import Footer from "./Components/Footer/Footer";
-import NavBar from "./Components/NavBar/NavBar";
+import Navigation from "./Components/NavBar/Navigation";
 import UserPage from "./Components/UserPage/UserPage";
 import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDetail";
 import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
@@ -63,7 +64,7 @@ function App() {
         <FormContext.Provider value={FormContextValue} >
           <Router>
             <div className="main">
-              <NavBar
+              <Navigation
                 isLog={isLog}
                 user={user} />
               <Switch>

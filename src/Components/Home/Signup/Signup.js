@@ -11,16 +11,19 @@ function Signup() {
   const FormContextValue = useContext(FormContext);
 
   return (
-    <div className="signup-form" onClick={FormContextValue.handleClick}>
-      <div className="signup" onClick={(e) => e.stopPropagation()}>
-        <form className="signup-container"
+    <div className="signup-form"
+      onClick={FormContextValue.handleClick}>
+      <div className="signup"
+        onClick={(e) => e.stopPropagation()}>
+        <form className="container"
           onSubmit={FormContextValue.handleSubmit}>
-          <h4 className="signup-title">Créer mon compte</h4>
+          <h2 className="text-primary t-center mb-3">Créer mon compte</h2>
           {signup.map((entry) => (
             <RibLine entry={entry} key={entry.name} />
           ))}
           <button
-            className="signup-button"
+            className="btn-complement-primary"
+            type="submit"
             onMouseEnter={() => {
               FormContextValue.handleURL(`${URLContextValue.url}/api/users/signup`)
             }}
@@ -28,11 +31,11 @@ function Signup() {
             Valider
           </button>
         </form>
-        <p className="signup-fasle-link" onClick={FormContextValue.handleLogin}>
+        <p className="text-compl-hover-primary t-center" onClick={FormContextValue.handleLogin}>
           J'ai deja un compte
         </p>
       </div>
-      {FormContextValue.resMsg && <div className="message-box">{FormContextValue.resMsg}</div>}
+      {FormContextValue.resMsg && <div className="message-box-login p5">{FormContextValue.resMsg}</div>}
     </div>
   );
 }
