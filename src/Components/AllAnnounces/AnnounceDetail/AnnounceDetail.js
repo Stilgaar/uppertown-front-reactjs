@@ -1,4 +1,3 @@
-import "./AnnounceDetail.css";
 import { useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -19,76 +18,88 @@ function AnnounceDetail({ user, hardRefresh }) {
 
   return (
 
-    <div className="announce-detail-page">
-      <h5>Bonjour {user.firstname}, votre portefeuille s'éléve à {user?.stableCoins?.toLocaleString()} stableCoins.</h5>
-      <div className="detail-container">
-        <div className="detail-upper-container">
-          <div className="detail-image-container">
-            <Carousel className="carousel"
+    <div className="global-container">
+      <h3 className="bg-primary text-white t-center font-xl br-xs ml-5 mr-5  p-1">
+        Salut {user.firstname}, ton portefeuille s'éléve à {user?.stableCoins?.toLocaleString()} stableCoins.</h3>
+
+      <div className="global-container bg-white br-xs p-2">
+
+        <div className="row container-xl p-3">
+
+          <div className="col-12-lg col-7-xl">
+            <Carousel className="br-xs col-10-xl"
               infiniteLoop={true}
               autoPlay={true}
               interval="5000"
               showThumbs={false}
               showStatus={false}
-              dynamicHeight={false}
+              dynamicHeight={true}
               centerMode={true}
               centerSlidePercentage={100} >
               {announce?.image?.map((item, index) => (
-                <div key={index} className="image-carousel">
+                <div key={index} className="col-12-xl">
                   <img
                     src={item}
-                    alt={`apercu du bien immo`} />
+                    alt={`apercu ${item} du bien immo`} />
                 </div>
               ))}
             </Carousel>
 
           </div>
-          <div className="detail-description-container">
+          <div className="col-12-lg col-5-xl card t-center">
 
             {user.userType === "userType4" &&
 
               <Invest user={user} ann={announce} thisAnnRefresh={thisAnnRefresh} hardRefresh={hardRefresh} />}
 
-            <h4>{announce?.title}</h4>
-            <p>{announce?.type}</p>
-            <p>{announce?.content}</p>
-            <p>Nombre de chambres: {announce?.bedrooms}</p>
-            <p>Surface habitable: {announce?.surface}m²</p>
-            <p>Options:</p>
-            <ul>
-              {announce?.options?.map((options, index) => {
-                return <li key={index}>{options}</li>;
-              })}
-            </ul>
+            <div className="card mt-2 font-lg">
+              <h4 className="p-1">{announce?.title}</h4>
+              <p className="t-start ml-3"><span className="fw-b text-primary">Type :</span> {announce?.type}</p>
+              <p className="t-start ml-3"><span className="fw-b text-primary">Description :</span> {announce?.content}</p>
+              <p className="t-start ml-3"><span className="fw-b text-primary">Nombre de chambres :</span> {announce?.bedrooms}</p>
+              <p className="t-start ml-3"><span className="fw-b text-primary">Surface habitable :</span> {announce?.surface}m²</p>
+              <p className="t-start ml-3"><span className="fw-b text-primary">Options :</span></p>
+              <ul>
+                {announce?.options?.map((options, index) => {
+                  return <li className="t-start ml-3 text-secondary fw-l" key={index}>{options}</li>;
+                })}
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="detail-lower-container">
-          <div className="detail-economic-container">
-            <p>Prix: {announce?.price?.toLocaleString()} €</p>
-            <p>Prix du jeton: {announce?.share_price?.toLocaleString()} SC</p>
-            <p>Nombre de jetons: {announce?.share_number?.toLocaleString()} </p>
+        <div className="row justify-center font-ml">
+          <div className="col-3-xl">
+            <div className="border-base p-3 m-2 br-xs">
+              <p><span className="text-primary fw-br">Prix :</span> {announce?.price?.toLocaleString()} €</p>
+              <p><span className="text-primary fw-br">Prix du jeton :</span> {announce?.share_price?.toLocaleString()} SC</p>
+              <p><span className="text-primary fw-br">Nombre de jetons :</span> {announce?.share_number?.toLocaleString()} </p>
+            </div>
           </div>
 
-          <div className="detail-rent-container">
-            <p>Loyer par an brut: {announce?.gross_rent_by_year?.toLocaleString()} €</p>
-            <p>Loyer par mois brut: {(announce?.gross_rent_by_year / 12)?.toLocaleString()} €</p>
-            <p>Coûts mensuels: {(announce?.monthly_cost?.toLocaleString())} €</p>
-            <p> Loyer net par mois :
-              {(announce?.gross_rent_by_year / 12 - announce?.monthly_cost)?.toLocaleString()} €
-            </p>
+          <div className="col-3-xl">
+            <div className="border-base p-3 m-2 br-xs">
+              <p><span className="text-primary fw-br">Loyer par an brut :</span> {announce?.gross_rent_by_year?.toLocaleString()} €</p>
+              <p><span className="text-primary fw-br">Loyer par mois brut :</span> {(announce?.gross_rent_by_year / 12)?.toLocaleString()} €</p>
+              <p><span className="text-primary fw-br">Coûts mensuels :</span> {(announce?.monthly_cost?.toLocaleString())} €</p>
+              <p><span className="text-primary fw-br"> Loyer net par mois :</span>
+                {(announce?.gross_rent_by_year / 12 - announce?.monthly_cost)?.toLocaleString()} €
+              </p>
 
-            <p> Gain mensuel par jeton :
-              {((announce?.gross_rent_by_year / 12 - announce?.monthly_cost) /
-                announce?.share_number)}{" "}
-              €
-            </p>
-
+              <p> <span className="text-primary fw-br">Gain mensuel par jeton :</span>
+                {((announce?.gross_rent_by_year / 12 - announce?.monthly_cost) /
+                  announce?.share_number)}{" "}
+                €
+              </p>
+            </div>
           </div>
-          <div className="detail-geographical-container">
-            <p>Ville: {announce?.city}</p>
-            <p>Département: {announce?.region}</p>
-            <p>Code postal: {announce?.zip_code}</p>
+
+          <div className="col-3-xl">
+            <div className="border-base p-3 m-2 br-xs">
+              <p><span className="text-primary fw-br">Ville:</span> {announce?.city}</p>
+              <p><span className="text-primary fw-br">Département: </span>{announce?.region}</p>
+              <p><span className="text-primary fw-br">Code postal: </span>{announce?.zip_code}</p>
+            </div>
           </div>
         </div>
       </div>

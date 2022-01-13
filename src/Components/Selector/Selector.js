@@ -1,7 +1,6 @@
+import './Selector.css'
 import React from "react";
 import Select from "react-select";
-import "./Selector.css";
-import "./Selector.scss"
 import { region, bedrooms, type } from '../../JSON/Arrays'
 
 function Selector({
@@ -30,39 +29,42 @@ function Selector({
   //fonction trouver sur google pour espacer les chiffres des prix
 
   return (
-    <div className="selector-line">
-      <div className="select-block">
-        <label>Dans quel type:</label>
-        <Select className="select-type"
+    <div className=" row gap-1 bg-white p-1 br-xs">
+
+      <div className="col-12-xs col-6-md col-3-lg z-6">
+        <label className="label">Dans quel type:</label>
+        <Select className="mt-1"
           options={type}
           placeholder="Choisissez un type"
           value={type.find((obj) => obj.value === filterType)}
-          onChange={handleType}
-          isSearchable
-        />
+          onChange={(e) => handleType(e)}
+          isSearchable />
       </div>
-      <div className="select-block">
-        <label>Dans quelle région:</label>
-        <Select className="select-region"
+
+      <div className="col-12-xs col-6-md col-3-lg z-6">
+        <label className="label">Dans quelle région:</label>
+        <Select className="mt-1"
           options={region}
           placeholder="Choisissez une région"
           value={region.find((obj) => obj.value === filterRegion)}
           onChange={handleRegion}
-          isSearchable
-        />
+          isSearchable />
       </div>
-      <div className="select-block">
-        <label>Nombre de chambre:</label>
-        <Select className="select-chambre"
+
+      <div className="col-12-xs col-6-md col-3-lg z-6">
+        <label className="label">Nombre de chambre:</label>
+        <Select className="mt-1"
           options={bedrooms}
           placeholder="Choisissez par nombre de chambres"
           value={bedrooms.find((obj) => obj.value === filterBedrooms)}
           onChange={(e) => handleBedrooms(e)}
-          isSearchable
-        />
+          isSearchable />
+      </div>
+
+      <div className="display-f fd-col col-12-xs col-6-md col-3-lg z-6">
         <div>
-          <label>Prix Max : </label>
-          <input className="price-slider"
+          <label className="label">Prix Max : {filterPrice?.toLocaleString()} €</label>
+          <input className="input slider mt-1"
             type="range"
             id="volume"
             name="volume"
@@ -70,14 +72,11 @@ function Selector({
             max="10000000"
             onChange={handlePrice}
             step="50000"
-            value={filterPrice}
-          />
-          <label className="selected-price" htmlFor="price">
-            {filterPrice?.toLocaleString()} €
-          </label>
+            value={filterPrice} />
         </div>
       </div>
     </div>
+
   );
 }
 

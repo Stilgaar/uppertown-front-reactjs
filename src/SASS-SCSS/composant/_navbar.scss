@@ -2,15 +2,15 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   box-sizing: border-box;
   z-index: 5;
-  background-color: rgba(15, 12, 12, 0.39);
+  background-color: rgba(24, 18, 18, 0.432);
 }
 
 .navbar {
   @extend %flex-layout;
-  padding: $base-padding $base-padding * 2;
+  padding: $base-padding * 2;
 
   .site-title {
     display: block;
@@ -46,7 +46,7 @@
   .container {
     @extend %flex-layout;
     @include xs {
-      width: 200px;
+      width: 250px;
     }
     @include sm {
       width: 400px;
@@ -56,12 +56,57 @@
     }
     @include lg {
       width: 900px;
-      flex-direction: column;
     }
     @include xl {
-      width: 1200px;
-      flex-direction: row;
+      width: 1500px;
     }
+  }
+}
+.ham-menu {
+  z-index: 5;
+  background-color: rgba(24, 18, 18, 0.432);
+  @include xs {
+    display: block;
+  }
+  @include sm {
+    display: block;
+  }
+  @include md {
+    display: block;
+  }
+  @include lg {
+    display: none;
+  }
+  @include xl {
+    display: none;
+  }
+}
+
+.hide-menu {
+  z-index: 5;
+  position: absolute;
+  right: 1%;
+  top: 100px;
+
+  @include xs {
+    display: block;
+  }
+  @include sm {
+    display: block;
+  }
+  @include md {
+    display: block;
+  }
+  @include lg {
+    display: none;
+  }
+  @include xl {
+    display: none;
+  }
+  .site-texts {
+    display: block;
+    letter-spacing: 0.2rem;
+    background-color: rgba(24, 18, 18, 0.432);
   }
 }
 
@@ -69,49 +114,5 @@
   .navbar-#{$key} {
     @extend .navbar;
     background-color: $val;
-  }
-}
-
-.ham-menu .hide-menu {
-  z-index: 5;
-  position: relative;
-  .site-text {
-    z-index: 5;
-    color: white;
-    font-size: $base-font-size;
-    letter-spacing: 0.2rem;
-    @include xs {
-      display: block;
-      margin-left: 0.75rem;
-      margin-right: 0.75rem;
-      letter-spacing: 0.2rem;
-    }
-    @include sm {
-      display: block;
-      margin-left: 0.75rem;
-      margin-right: 0.75rem;
-      letter-spacing: 0.2rem;
-    }
-    @include md {
-      display: block;
-      margin-left: 0.75rem;
-      margin-right: 0.75rem;
-      letter-spacing: 0.2rem;
-    }
-    @include lg {
-      display: none;
-    }
-    @include xl {
-      display: none;
-    }
-  }
-  .hide-menu {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    top: 2%;
-    left: 2%;
-    background-color: white;
-    z-index: 100;
   }
 }

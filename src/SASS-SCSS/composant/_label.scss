@@ -1,8 +1,9 @@
 @use "sass:math";
 
-@mixin label {
+@mixin label() {
   padding: math.div($base-padding, 2);
   margin-bottom: $base-margin;
+  margin-top: $base-margin * 2;
   color: $primary;
   font-weight: bolder;
   font-size: 1em;

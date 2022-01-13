@@ -5,6 +5,7 @@ $utilities: (
     "prefix": "p",
     "values": (
       "0": 0,
+      "075": $base-padding * 0.75,
       "1": $base-padding,
       "2": $base-padding * 2,
       "3": $base-padding * 3,
@@ -148,11 +149,19 @@ $utilities: (
       "i-b": inline-block,
     ),
   ),
+  "flex-direction": (
+    "prefix": "fd",
+    "values": (
+      "r": row,
+      "c": column,
+    ),
+  ),
   "font-size": (
     "prefix": "font",
     "values": (
       "sm": $font-size-sm,
       "md": $base-font-size,
+      "ml": $font-size-ml,
       "lg": $font-size-lg,
       "xl": $font-size-xl,
       "xxl": $font-size-xxl,
@@ -165,6 +174,32 @@ $utilities: (
       "end": end,
       "center": center,
       "justify": justify,
+    ),
+  ),
+  "z-index": (
+    "prefix": "z",
+    "values": (
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "15": 15,
+      "20": 20,
+      "100": 100,
+      "1000": 1000,
+    ),
+  ),
+  "font-weight": (
+    "prefix": "fw",
+    "values": (
+      "l": lighter,
+      "n": normal,
+      "b": bold,
+      "br": bolder,
+      "700": 700,
+      "900": 900,
     ),
   ),
 );

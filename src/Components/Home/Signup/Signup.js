@@ -1,4 +1,3 @@
-import "./Signup.css";
 import FormContext from "../../../Context/FormContext";
 import { useContext } from 'react';
 import URLcontext from "../../../Context/URLcontext";
@@ -11,9 +10,9 @@ function Signup() {
   const FormContextValue = useContext(FormContext);
 
   return (
-    <div className="signup-form"
+    <div className="form"
       onClick={FormContextValue.handleClick}>
-      <div className="signup"
+      <div className="form-form"
         onClick={(e) => e.stopPropagation()}>
         <form className="container"
           onSubmit={FormContextValue.handleSubmit}>
@@ -22,7 +21,7 @@ function Signup() {
             <RibLine entry={entry} key={entry.name} />
           ))}
           <button
-            className="btn-complement-primary"
+            className="btn-outlined-primary text-hover-white font-md"
             type="submit"
             onMouseEnter={() => {
               FormContextValue.handleURL(`${URLContextValue.url}/api/users/signup`)
@@ -35,7 +34,7 @@ function Signup() {
           J'ai deja un compte
         </p>
       </div>
-      {FormContextValue.resMsg && <div className="message-box-login p5">{FormContextValue.resMsg}</div>}
+      {FormContextValue.resMsg && <div className="message-box p5">{FormContextValue.resMsg}</div>}
     </div>
   );
 }

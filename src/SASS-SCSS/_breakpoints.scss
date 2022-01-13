@@ -45,23 +45,17 @@ $breakpoints: (
 // exemple de responsive. Pas très utile, mais on importe le mixin, et en fonction de leurs noms
 // du coup ne fonction de la taille de l'écran, on peut changer super facilement les differentes
 // propriétés du composant !
-.responsive-test {
+.xxx {
   @include xs {
-    color: red;
   }
   @include sm {
-    color: blue;
   }
   @include md {
-    color: green;
   }
   @include lg {
-    color: purple;
   }
   @include xl {
-    color: orange;
   }
   @include breakpoint(1400px) {
-    color: pink;
   }
 }

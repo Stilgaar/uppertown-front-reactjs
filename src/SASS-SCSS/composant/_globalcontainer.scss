@@ -1,0 +1,18 @@
+.global-container {
+  margin: 30px;
+}
+
+.global-page-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.animation-scale {
+  transition: transform 0.1s;
+  &:hover {
+    transform: scale(0.95);
+    background-color: mix(white, $primary, 7 * 10);
+  }
+}

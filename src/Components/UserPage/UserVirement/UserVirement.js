@@ -17,9 +17,9 @@ function UserVirement({ user, hardRefresh }) {
 
     return (
 
-        <div className="uservirement-container-general">
+        <div className="container-xl bg-white br-xl p-3">
             <div className="uservirement-container-params">
-                <div> <h3> Acheter ou Vendre des Stable Coins </h3> </div>
+                <h3 className="bg-primary text-white t-center font-lg br-xs ml-3 mr-3 mb-3 p-1"> Acheter ou Vendre des Stable Coins </h3>
                 <div> Vous disposez actuellement de {user.stableCoins?.toLocaleString()} Stable Coins</div>
             </div>
             <div>

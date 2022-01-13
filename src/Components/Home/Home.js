@@ -1,4 +1,3 @@
-import "./Home.css";
 import Signup from "../Home/Signup/Signup";
 import Login from "../Home/Login/Login";
 import Infos from "./Infos/Infos";
@@ -21,13 +20,9 @@ function Home() {
           <Login />
         )}
 
-        <img
-          src="https://www.icietlabas.fr/wp-content/uploads/2021/05/Photographie-Architecturale-Barlelone-que-faire-a-Barcelone-Que-faire-en-espagne-Tutoriel-Photo-Tuto-Photo-blog-voyage-32-scaled.jpg"
-          alt="Photo accueil"
-        />
-
         <About />
       </div>
+
       <OneAnnounce />
       <Infos />
     </div>

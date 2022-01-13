@@ -1,4 +1,3 @@
-import './UserTransac.css'
 import { useState } from 'react';
 import GetALlTransacs from './GetAllTransacs';
 import GetProps from './GellAllProps';
@@ -9,45 +8,72 @@ function UserTransac({ user }) {
 
     return (
 
-        <div className="usertransac-container-general">
-            <h3>Historique de vos transactions</h3>
-            <div className="usertransac-button-container">
-                <button className="usertransac-button-validate"
+        <div className='container-xl bg-white p-4'>
+            <h3 className="bg-primary text-white t-center font-lg br-xs ml-3 mr-3 mb-3 p-1">
+                Historique de vos transactions
+            </h3>
+
+            <div className="container justify-center row col-12-xl">
+                <button className="btn-outlined-primary text-hover-white font-sm "
                     onClick={() => setState('oldSc')}>
-                    Historique de mes transactions en StableCoins
+                    Historique StableCoins
                 </button >
-                <button className="usertransac-button-validate"
+                <button className="btn-outlined-primary text-hover-white font-sm"
                     onClick={() => setState('oldEuro')}>
-                    Historique de mes transactions en Euro
+                    Historique Euro
                 </button>
-                <button className="usertransac-button-validate"
+                <button className="btn-outlined-primary text-hover-white font-sm"
                     onClick={() => setState('allTrans')}>
                     Toutes les transactions
                 </button>
-                <button className="usertransac-button-validate"
+                <button className="btn-outlined-primary text-hover-white font-sm"
                     onClick={() => setState('allProps')}>
                     Parts de biens immobiliers
                 </button>
             </div>
 
             {state === 'oldSc' &&
-                <div>{user.ancientMontants.map((argent, index) =>
-                    <div key={index} className="usertransac-line">
-                        Transaction N#{index + 1} <br /> {argent}
-                    </div>)}</div>}
+                <div>
+                    <h3 className="bg-primary text-white t-center font-lg br-xs ml-3 mr-3 mb-3 p-1">
+                        Historique de vos achats de Stable Coins
+                    </h3>
+                    {user.ancientMontants[0] ?
+                        <div className='card bg-white'>
+                            {user.ancientMontants.map((argent, index) =>
+                                <div key={index} className="usertransac-line">
+                                    Transaction N#{index + 1} {argent}
+                                </div>)}
+                        </div>
+                        :
+                        <div className='card bg-white text-black'> Vous n'avez pas encore réalisé de transactions </div>
+                    }
+                </div>
+            }
 
             {state === 'oldEuro' &&
-                <div>{user.ancientMontantsEuro.map((argent, index) =>
-                    <div key={index} className="usertransac-line">
-                        Transaction N#{index + 1} {argent}
-                    </div>)}</div>}
+                <div>
+                    <h3 className="bg-primary text-white t-center font-lg br-xs ml-3 mr-3 mb-3 p-1">
+                        Historique de vos d'échange en Euro
+                    </h3>
+                    {user.ancientMontantsEuro[0] ?
+                        <div className='card bg-white'>
+                            {user.ancientMontantsEuro.map((argent, index) =>
+                                <div key={index} className="usertransac-line">
+                                    Transaction N#{index + 1} {argent}
+                                </div>)}
+                        </div>
+                        :
+                        <div className='card bg-white text-black'> Vous n'avez pas encore réalisé de transactions </div>
+                    }
+                </div>
+            }
 
             <div>
                 {state === 'allTrans' &&
-                    <GetALlTransacs user={user} id={user._id} />}
+                    <GetALlTransacs user={user} />}
 
                 {state === 'allProps' &&
-                    <GetProps user={user} id={user._id} />}
+                    <GetProps user={user} />}
             </div>
         </div>
 

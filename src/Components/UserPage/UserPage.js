@@ -1,5 +1,3 @@
-import './UserPage.css';
-import './UserPage.scss';
 
 import React, { useEffect, useState } from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
@@ -17,27 +15,27 @@ function UserPage({ user, hardRefresh }) {
     }, [])
 
     return (
-        <div className="user-page">
-            <div className="userpage-buttons-list">
+        <div className="container-xl">
+            <div className="display-f justify-center row">
                 {state !== 'splash' &&
                     < button onClick={() => setState('splash')}
-                        className="userpage-button-validate">
+                        className="btn-outlined-primary text-hover-white font-sm col-3-lg col-2-xl">
                         Retours
                     </button>}
                 <button onClick={() => setState('transac')}
-                    className="userpage-button-validate">
+                    className="btn-outlined-primary text-hover-white font-sm col-3-lg col-2-xl">
                     Historique de vos Transactions
                 </button>
                 <button onClick={() => setState('money')}
-                    className="userpage-button-validate">
+                    className="btn-outlined-primary text-hover-white font-sm  col-3-lg col-2-xl">
                     Acheter ou Vendre Stable Coins
                 </button>
                 <button onClick={() => setState('params')}
-                    className="userpage-button-validate">
+                    className="btn-outlined-primary text-hover-white font-sm  col-3-lgcol-2-xl">
                     Gèrer son compte
                 </button>
                 <button onClick={() => setState('upload')}
-                    className="userpage-button-validate">
+                    className="btn-outlined-primary text-hover-white font-sm  col-3-lg col-2-xl">
                     Upload Fichiers
                 </button>
             </div>
@@ -68,21 +66,20 @@ function UserPage({ user, hardRefresh }) {
                 </div>
             }
 
-            {
-                state === 'money' && <div>
-                    {user?.userType === "userType4" ?
-                        <div>
-                            <UserVirement user={user} hardRefresh={hardRefresh} />
-                        </div> :
-                        <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />
-                            Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
-                            <br /> <br />
-                            <button onClick={() => setState('params')}
-                                className="userpage-button-validate-gestion">
-                                Gèrer son compte
-                            </button>
-                        </div>}
-                </div>
+            {state === 'money' && <div>
+                {user?.userType === "userType4" ?
+                    <div>
+                        <UserVirement user={user} hardRefresh={hardRefresh} />
+                    </div> :
+                    <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />
+                        Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                        <br /> <br />
+                        <button onClick={() => setState('params')}
+                            className="userpage-button-validate-gestion">
+                            Gèrer son compte
+                        </button>
+                    </div>}
+            </div>
             }
 
             {

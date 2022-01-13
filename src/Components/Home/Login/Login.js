@@ -1,4 +1,3 @@
-import './Login.css'
 import { useContext } from 'react';
 import FormContext from "../../../Context/FormContext";
 import URLcontext from '../../../Context/URLcontext';
@@ -11,9 +10,9 @@ function Login() {
     const URLContextValue = useContext(URLcontext)
 
     return (
-        <div className="login-form"
+        <div className="form"
             onClick={FormContextValue.handleClick}>
-            <div className="login"
+            <div className="form-form"
                 onClick={(e) => e.stopPropagation()}>
                 <form className="container" onSubmit={FormContextValue.handleSubmit}>
                     <h2 className="text-primary t-center mb-3"> Se Connecter</h2>
@@ -24,7 +23,7 @@ function Login() {
 
                     <button onMouseEnter={() => {
                         FormContextValue.handleURL(`${URLContextValue.url}/api/users/login`)
-                    }} className="btn-complement-primary"
+                    }} className="btn-outlined-primary text-hover-white font-md"
                         type="submit">
                         Valider
                     </button>
@@ -34,7 +33,7 @@ function Login() {
                 </p>
             </div>
             {FormContextValue.resMsg &&
-                <div className="message-box-login p5">
+                <div className="message-box p4 br-xs">
                     {FormContextValue.resMsg}
                 </div>}
         </div>

@@ -3,16 +3,16 @@ import URLcontect from '../../../Context/URLcontext'
 import useAxios from '../../../Hooks/useAxios'
 import Biens from './Bien'
 
-function GetProps({ user, id }) {
+function GetProps({ user }) {
 
     const UrlContextValue = useContext(URLcontect)
-    const [rep] = useAxios(`${UrlContextValue.url}/api/users/props/${id}`)
+    const [rep] = useAxios(`${UrlContextValue.url}/api/users/props/${user._id}`)
 
     return (
         <div> <br />
-            <div>Part de Propriétés de {user.firstname} {user.lastname} </div>
-            {rep.map(elem => (
-                <Biens key={elem._id} elem={elem} />
+            <h3 className="bg-primary text-white t-center font-lg br-xs ml-3 mr-3 mb-3 p-1"> Parts de Proprieté de {user.firstname} {user.lastname} </h3>
+            {rep.map((elem, index) => (
+                <Biens key={elem._id} elem={elem} index={index} type={'props'} />
             ))}
         </div>
     )

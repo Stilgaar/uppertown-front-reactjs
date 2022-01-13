@@ -1,4 +1,3 @@
-import "./AllAnnounces.css";
 import React, { useState, useEffect, useContext } from "react";
 import Announce from "./Announce/Announce"
 import Selector from "../Selector/Selector";
@@ -20,6 +19,7 @@ function AllAnnounces() {
 
   const [announcesList, annRefresh] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
   useEffect(() => { annRefresh() }, [])
+
 
   //passe a la moulinette les annonces
   useEffect(() => {
@@ -75,14 +75,17 @@ function AllAnnounces() {
   }
 
   return (
-    <div className="announces-page-container">
+    <div className="container-xl">
+      <h3 className="bg-primary text-white t-center font-xl br-xs ml-5 mr-5 mb-2 p-1">
+        Annonces
+      </h3>
       <Selector
         filterRegion={filterRegion} setFilterRegion={setFilterRegion}
         filterBedrooms={filterBedrooms} setFilterBedrooms={setFilterBedrooms}
         filterPrice={filterPrice} setFilterPrice={setFilterPrice}
         filterType={filterType} setFilterType={setFilterType}
       />
-      <div className="announces-page">
+      <div className="global-page-container bg-white mt-3 p-2 br-xs">
         {filteredList &&
           filteredList.map((announce, index) => {
             return (

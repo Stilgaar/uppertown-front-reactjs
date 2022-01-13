@@ -19,7 +19,7 @@ function useSubmit() {
 
   // A laisser : pour la verification des données sur le site en général
   // console.log("URL", url)
-  console.log("DATA", data)
+  // console.log("DATA", data)
   // console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
   // console.log("RESMSG", resMsg)

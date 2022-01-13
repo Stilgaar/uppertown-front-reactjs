@@ -12,26 +12,24 @@ function OneAnnounce() {
 
   return (
 
-    <div className="oneannounce-container-container">
-      <div className="oneannounce-title-container"><h4>UpperTown vous propose</h4> </div>
+    <div className=" mt-3 mb-4 pt-2 pb-5 pl-1 pr-1 bg-white">
+      <h3 className="bg-primary text-white p-1 t-center font-xl p-1">UpperTown vous propose</h3>
 
-      <div className="oneannounce-image-text-container">
-        <div className="oneannounce-container">
-          <img
+      <div className="row gap-2 ml-2 mr-2">
+        <div className="p-3 col-6-xl z-6 bg-white t-center font-lg p-1">
+          <img className="br-xs"
             src={announceRandom?.image[0]}
             alt="announce random image"
           />
-          <p className="onennounce-image-bottom-grey-bar">
+          <p className="bg-primary text-white br-xs p-1">
             {announceRandom?.region} / {announceRandom?.city}
           </p>
         </div>
-        <div className="oneannounce-container-text">
-          <h4>Vous desirez en voir plus ?</h4>
-          <p>
+        <div className="oneanntext col-6-xl z-6 bg-white t-center font-lg">
+          <p className="m-2 bg-primary text-white br-xs p-1">Vous desirez en voir plus ?</p>
+          <p className="card font-lg">
             De nombreux biens sont disponible dans notre catalogue. Autant
-            d'opportunités d'investissement en Crowd Funding vous attendent.
-          </p>
-          <p>
+            d'opportunités d'investissement en Crowd Funding vous attendent. <br /> <br />
             Pour voir nos annonces en détail et pouvoir investir,
             inscrivez-vous!
           </p>

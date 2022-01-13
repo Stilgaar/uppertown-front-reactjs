@@ -19,7 +19,8 @@ function AnnounceLine({ entry }) {
                     <select onChange={(e) => FormContextValue.handleChange(e, entry.name)}>
                         <option disabled selected>--  Faites votre choix --</option>
                         {entry.list.slice(1).map((region, index) => (
-                            <option values={entry.name}
+                            <option
+                                value={region.value}
                                 key={index}
                                 name={entry.name}
                                 type={entry.type}>

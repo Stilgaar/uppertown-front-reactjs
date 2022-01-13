@@ -20,9 +20,21 @@ $layout-values: flex-start, flex-end, center, space-between, space-around;
   box-sizing: border-box;
 }
 
+.container-xl {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 .row {
   display: flex;
   flex-flow: row wrap;
+}
+
+.alignI {
+  align-items: center;
 }
 
 // espaces entre les grids

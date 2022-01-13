@@ -1,5 +1,4 @@
 import React from "react";
-import "./Announce.scss"
 import { Link } from "react-router-dom";
 
 function Announce({ announce }) {
@@ -12,27 +11,31 @@ function Announce({ announce }) {
       },
     }}
       style={{ textDecoration: "none", color: "black" }}
-      className="announce-container">
-      <div className="top-container">
-        <img src={announce?.image[0]} alt="" />
+      className="card container col-12-md col-9-md col-6-lg col-4-xl animation-scale">
+
+      <div>
+        <img className="br-xs" src={announce?.image[0]} alt="" />
       </div>
-      <p className="image-bottom-grey-bar">{announce?.region} / {announce?.city}</p>
-      <h6 className="announce-title">{announce?.title} </h6>
-      <div className="bottom-container">
-        <div className="price-block">
-          <p className="title-block">Prix</p>
-          <p className="data-block">{(announce?.price?.toLocaleString())} €</p>
+      <p className="bg-primary text-white t-center p-075 br-xs">{announce?.region} / {announce?.city}</p>
+      <h6 className="bg-secondary t-center text-white font-md br-xs m-1 ml-3 mr-3 p-075">{announce?.title} </h6>
+
+
+      <div className="row display-f justify-center">
+        <div className="card  col-12-md col-6-lg col-4-xl bg-white z-5 pl-2 pr-2">
+          <p className="t-center text-primary fw-br">Prix</p>
+          <p className="t-center text-secondary fw-br">{(announce?.price?.toLocaleString())} €</p>
         </div>
-        <div className="surface-block">
-          <p className="title-block">m²</p>
-          <p className="data-block">{announce.surface} m²</p>
+        <div className="card col-12-md col-6-lg col-4-xl bg-white z-5">
+          <p className="t-center text-primary fw-br">m²</p>
+          <p className="t-center text-secondary fw-br">{announce.surface} m²</p>
         </div>
-        <div className="bedroom-block">
-          <p className="title-block">Chambre(s)</p>
-          <p className="data-block">{announce.bedrooms} ch</p>
+        <div className="card col-12-md col-6-lg col-4-xl bg-white z-5">
+          <p className="t-center text-primary fw-br">Chambre(s)</p>
+          <p className="t-center text-secondary fw-br ">{announce.bedrooms} ch</p>
         </div>
       </div>
-    </Link>
+
+    </Link >
   );
 }
 
