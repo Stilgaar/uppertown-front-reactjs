@@ -5,8 +5,9 @@ import axios from "axios";
 
 function useSubmit() {
 
-  // data est pour les données des inputs
+  // data est pour les données des inputs 
   const [data, setData] = useState({});
+  // images récupére tous les files (logique)
   const [images, setImages] = useState([])
   // clickdata récupére des données aux clicks
   const [clickData, setClickData] = useState({})
@@ -28,9 +29,11 @@ function useSubmit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.persist()
+    // remets les champs à zero
     e.target.reset()
     axios.post(url, data)
       .then((res) => {
+        // check du signin
         if (res.data === "Compte crée avec Succéss !") {
           setResMsg(res.data)
           setTimeout(() => {
@@ -38,11 +41,13 @@ function useSubmit() {
             setForm('login')
           }, 1500);
         }
+        // check du login, mets le token en local storage s'il y en a un 
         else if (res.data.token) {
           localStorage.setItem("@updownstreet-token", res.data.token);
           localStorage.setItem("id", res.data.userId);
           document.location.replace('/');
         }
+        // sinon il mets le res message dans le setter. Renvoi aussi les messages au front pour l'affichage
         else {
           setResMsg(res.data)
           setTimeout(() => {
@@ -54,26 +59,23 @@ function useSubmit() {
       .then(() => setData({}))
   };
 
-  // fonction de récuperation pour les images
-  // ou quelconque formulaire qui a des images
-  // s'occupe aussi d'envoyer de la data au besoin
+  // fonction de récuperation pour les images ou quelconque formulaire qui a des images  s'occupe aussi d'envoyer de la data au besoin
   const handleForm = (e) => {
     e.preventDefault()
-
     const form = new FormData()
-
+    // dans data {key : value}
     let key = Object.keys(data)
     let value = Object.values(data)
-
+    // pour chaque key et val il fait un formdata
     for (let i = 0; i < key.length; i++) {
       form.append(key[i], value[i])
     }
-
+    // calcule le share price s'il y en a un a chopper
     if (FormContextValue?.data?.price && FormContextValue?.data?.share_number) {
       let share_price = FormContextValue?.data?.price / FormContextValue?.data?.share_number
       form.append('share_price', share_price)
     }
-
+    // fonction pour les images, en mets autant qu'il en a besoin 
     if (images) {
       let key = Object.keys(images)
       let val = Object.values(images)
@@ -81,20 +83,18 @@ function useSubmit() {
         form.append(key, val[0][i])
       }
     }
+    // remet les champs à zero
     e.target.reset()
     axios.post(url, form, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
-      .then((res) => {
-        console.log(res.data)
-      })
+      .then((res) => { console.log(res.data) }) // messages à caller dans le front
       .catch(err => console.log(err))
       .then(() => setData({}))
       .then(() => setImages([]))
   }
 
-  // fonction récuperant sur un click, sans forumaire
-  // penser à envoyer les x et y de la façon suivante {key : value}
+  // fonction récuperant sur un click, sans forumaire // avec le ...args, je récup autant d'arguments que je veux. Il me les transforme et me les mets dans clickdata
   const handleData = (...args) => {
     for (let i = 0; i < args.length; i++) {
       let key = Object.keys(args[i])
@@ -103,28 +103,28 @@ function useSubmit() {
     }
   }
 
-  // fonction envoyant les datas sur les clicks de boutons simple
+  // fonction envoyant les datas sur les clicks de boutons simple (de moins en moins utilisé)
   const handleEnvoi = () => {
     axios.post(url, clickData)
-      .then((res) => {
-        console.log(res.data)
-      })
+      .then((res) => { console.log(res.data) }) // mettre en place les retours dans le front
       .catch(err => console.log(err))
   }
 
   // fonction récuperant sur les inputs de formulaire
   const handleChange = (e, info, val) => {
     e.persist()
+    // j'ai mis une exeption pour les types=radio et type=checkbox, sinon fallait doubler clickquer
     if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
 
-    console.log(info)
+    // certains cas il mets j'avais besoin de mettre info dans le setter je crois j'en ai plus besoin mais j'ai peur que tout pète si je la vire =)
     if (info) {
       setData((data) => ({ ...data, [info]: e.target.value }));
     }
+    // sinon il met tout dans la data avec le name=machin et sa valeur (cas le plus fréquent)
     else {
       setData((data) => ({ ...data, [e.target.name]: e.target.value }))
     }
-
+    // récupére tout du clickdata pour le mettre dans le gros setter data
     if (clickData) {
       let key = Object.keys(clickData)
       let val = Object.values(clickData)
@@ -134,10 +134,11 @@ function useSubmit() {
     }
   }
 
-  // gestion du de la récuperation de fichiers.
-  // mets également les variables clicks dans data avant de l'envoyer dans le back
+  // gestion du de la récuperation de fichiers, mets également les variables clicks dans data avant de l'envoyer dans le back
   const handleFile = (e) => {
+
     setImages((images) => (({ ...images, [e.target.name]: e.target.files })))
+
     if (clickData) {
       let key = Object.keys(clickData)
       let val = Object.values(clickData)
@@ -147,25 +148,17 @@ function useSubmit() {
     }
   }
   // Gestion de la Navbar
+  const handleClick = () => { setForm('') }
+  const handleLogin = () => { setForm('login') }
+  const handleSigin = () => { setForm('signin') }
   const logout = () => {
     localStorage.removeItem("@updownstreet-token");
     localStorage.removeItem("@uppertown-url");
     document.location.replace('/');
   }
-  const handleClick = () => {
-    setForm('')
-  }
-  const handleLogin = () => {
-    setForm('login')
-  }
-  const handleSigin = () => {
-    setForm('signin')
-  }
 
-  // récupére les URL avant l'envoi dans le back
-  const handleURL = (data) => {
-    setUrl(data)
-  }
+  // récupére les URL avant l'envoi dans le back sur les fonctions spécifiques.
+  const handleURL = (data) => { setUrl(data) }
 
   // useContext, utilisable partout =)
   const FormContextValue = {
@@ -188,16 +181,15 @@ function useSubmit() {
     logout: logout,
   };
 
-  // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons
-  // ne se trigger que s'il y a un 'amount' dans le setter data
+  // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons, ne se trigger que s'il y a un 'amount' dans le setter data
   useEffect(() => {
     if (FormContextValue.data.amount) {
       let amountStableCoins = (FormContextValue.data.amount * FormContextValue.data.share_price)
       setData((data) => ({ ...data, ['amountStableCoins']: amountStableCoins }))
     }
-
   }, [FormContextValue.data.amount])
 
+  // je retourne que ça dans l'app.js, puis avec useContext je l'arose sur tous mes composants
   return [FormContextValue];
 }
 

@@ -13,7 +13,8 @@ function UserTransac({ user }) {
                 Historique de vos transactions
             </h3>
 
-            <div className="container justify-center row col-12-xl">
+
+            <div className="justify-center row col-12-xl">
                 <button className="btn-outlined-primary text-hover-white font-sm "
                     onClick={() => setState('oldSc')}>
                     Historique StableCoins
