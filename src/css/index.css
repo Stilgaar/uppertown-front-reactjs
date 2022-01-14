@@ -31,6 +31,20 @@ img {
   border: 1px solid #1b3563;
 }
 
+.noborder {
+  border: none;
+}
+
+.scroll {
+  margin: 4px, 4px;
+  padding: 4px;
+  background-color: white;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -1964,6 +1978,21 @@ img {
   font-weight: normal;
 }
 
+.textaera {
+  border: 0;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #f8f8f8;
+  height: 15rem;
+  width: 80%;
+  white-space: pre;
+}
+.textaera:focus {
+  outline: none;
+  background-color: whitesmoke;
+  border-bottom: 1px solid #1b3563;
+}
+
 .input {
   border: 0;
   display: inline-block;
@@ -1978,32 +2007,27 @@ img {
 
 @media (min-width: 0) {
   .input {
-    width: 200px;
+    width: 80px;
   }
 }
 @media (min-width: 480px) {
   .input {
-    width: 300px;
+    width: 100px;
   }
 }
 @media (min-width: 720px) {
   .input {
-    width: 400px;
+    width: 200px;
   }
 }
 @media (min-width: 960px) {
   .input {
-    width: 500px;
+    width: 300px;
   }
 }
 @media (min-width: 1200px) {
   .input {
-    width: 500px;
-  }
-}
-@media (min-width: 1400px) {
-  .input {
-    width: 600px;
+    width: 400px;
   }
 }
 
@@ -2068,8 +2092,16 @@ img {
   background-color: #bbc2d0;
 }
 
+.thumb {
+  height: 80px;
+}
+
 .p-0 {
   padding: 0;
+}
+
+.p-025 {
+  padding: 0.1875rem;
 }
 
 .p-075 {
@@ -2190,6 +2222,10 @@ img {
 
 .pb-5 {
   padding-bottom: 6rem;
+}
+
+.m-a {
+  margin: auto;
 }
 
 .m-0 {
@@ -2510,4 +2546,36 @@ img {
 
 .fw-900 {
   font-weight: 900;
+}
+
+.va-ba {
+  vertical-align: baseline;
+}
+
+.va-s {
+  vertical-align: sub;
+}
+
+.va-sup {
+  vertical-align: super;
+}
+
+.va-tt {
+  vertical-align: text-top;
+}
+
+.va-tb {
+  vertical-align: text-bottom;
+}
+
+.va-m {
+  vertical-align: middle;
+}
+
+.va-t {
+  vertical-align: top;
+}
+
+.va-b {
+  vertical-align: bottom;
 }

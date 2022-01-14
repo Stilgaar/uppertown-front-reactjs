@@ -1,4 +1,3 @@
-import './SearchUser.css'
 import { useContext, useEffect, useState } from 'react';
 import UserLine from '../UserLine/UserLine';
 import useAxios from '../../../Hooks/useAxios';
@@ -33,13 +32,20 @@ function SearchUser() {
     }
 
     return (
-        <div className="searchuser-container"> <h3>Recherche dans tous les utilisateurs, par nom, prénom, email ou ID</h3>
-            <input type="text" placeholder="Recherche" onChange={(e) => setFilterOne(e.target.value)} />
-            <div>
+        <div className="container-xl">
+            <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">Recherche dans tous les utilisateurs, par nom, prénom, email ou ID</h3>
+            <div className='display-f fd-c m-3'>
+                <label className='label'>Recherche</label>
+                <input type="text"
+                    className='input mb-2'
+                    placeholder="Tappez votre recherche"
+                    onChange={(e) => setFilterOne(e.target.value)} />
+                <div>
+                </div>
                 {filtrerdListOne &&
                     filtrerdListOne.map((userdata, key) => {
                         return (
-                            <UserLine key={key} userdata={userdata} adminRefresh={adminRefresh} />
+                            <UserLine key={key} userdata={userdata} />
                         )
                     })}
 

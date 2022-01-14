@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
 import UtilLine from './UtilLine';
-import './GestionUtils.css'
 import URLcontext from '../../../Context/URLcontext';
 import useAxios from '../../../Hooks/useAxios';
 
@@ -31,7 +30,8 @@ function GestionUtils() {
     ]
 
     return (
-        <div className="gestionutilisateurs-container"> <h3>Utilisateurs par type</h3>
+        <div className="container-xl">
+            <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">Utilisateurs par type</h3>
             {userType.map((element, index) => (
                 <UtilLine key={index} element={element} adminRefresh={adminRefresh} />
             ))}

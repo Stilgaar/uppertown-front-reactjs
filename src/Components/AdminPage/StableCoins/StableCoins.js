@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./StableCoins.css";
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
 
@@ -10,15 +9,15 @@ function StableCoins({ userdata, refreshUser }) {
 
     return (
         <div>
-            <div className="stableC-container"
+            <div className="card container col-10-xl col-10-lg col-12-md col-12-sm col-12-xs t-start mt-1 mb-1"
                 onMouseLeave={() => {
                     FormContextValue.setClickData("")
                 }}>
-                <label>
+                <label className="label mb-1">
                     Entrez le nombre de Stable Coins que {userdata.firstname} {userdata.lastname} à commandé
                 </label>
 
-                <form className="stableC-input"
+                <form className="display-f fd-c mt-1"
                     onSubmit={(e) => {
                         FormContextValue.handleSubmit(e)
                         setTimeout(() => {
@@ -26,11 +25,11 @@ function StableCoins({ userdata, refreshUser }) {
                         }, 50)
                     }}>
                     <input
+                        className='input'
                         values={FormContextValue.data.stableCoins || ""}
                         type="text"
-                        name="stableCoins"
                         placeholder="Nombre de Stable coins commandés"
-                        className="inputstable"
+                        className="input"
                         onChange={(e) => {
                             FormContextValue.handleChange(e)
                         }} />
@@ -39,7 +38,7 @@ function StableCoins({ userdata, refreshUser }) {
                         onMouseEnter={() => {
                             FormContextValue.handleURL(`${URLContextValue.url}/api/users/addCoins/${userdata._id}`)
                         }}
-                        className="userline-button-validate"
+                        className="btn-outlined-primary text-hover-white font-sm anul"
                         type="submit">
                         Valider
                     </button>

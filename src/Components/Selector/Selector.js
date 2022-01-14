@@ -1,4 +1,3 @@
-import './Selector.css'
 import React from "react";
 import Select from "react-select";
 import { region, bedrooms, type } from '../../JSON/Arrays'

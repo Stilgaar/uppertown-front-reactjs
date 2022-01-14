@@ -11,57 +11,66 @@ function OneLineUpload({ user, entry, hardRefresh }) {
     const [box, setBox] = useState(false)
 
     return (
-        <div className="userupdate-singlecontainer">
-            <div className="userupdate-container-modify">{box ? <div></div> :
-                <div className="userupdate-container-container-ternaire-avec-image"><div>{entry.title}</div></div>}
-                {box && <div>
-                    <form onSubmit={(e) => {
-                        FormContextValue.handleForm(e);
-                        hardRefresh();
-                        setBox(c => !c)
-                    }}>
-                        <div className="userupdate-container-label">
-                            <label className="userupdate-label">{entry.label}</label>
-                            <input
-                                type={entry.type}
-                                name={entry.name}
-                                multiple
-                                onChange={(e) => {
-                                    FormContextValue.handleFile(e)
-                                    FormContextValue.handleURL(`${UrlContextvalue.url}${entry.url}/${user._id}`);
-                                }} />
-                        </div>
-                        <div className="userupdate-container-warning">{entry.update}</div>
-                        <button
-                            className="userupdate-button-validate"
-                            type="submit">
-                            Valider
-                        </button>
-                    </form>
+        <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
+            <div className="m-a">
+                {box ? <></> :
+                    <p className='text-primary fw-b'>{entry.title}</p>}
+                {box &&
+                    <div>
+                        <form onSubmit={(e) => {
+                            FormContextValue.handleForm(e);
+                            hardRefresh();
+                            setBox(c => !c)
+                        }}>
+                            <div className="display-f fd-c t-center">
+                                <label className="label">{entry.label}</label>
+                                <input className='input m-a br-xs'
+                                    type={entry.type}
+                                    name={entry.name}
+                                    onChange={(e) => {
+                                        FormContextValue.handleFile(e)
+                                        FormContextValue.handleURL(`${UrlContextvalue.url}${entry.url}/${user._id}`);
+                                    }} />
+                            </div>
+                            <div className="card m-a mt-1 t-center col-9-xl">{entry.update}</div>
+                            <button
+                                className="btn-outlined-primary text-hover-white font-sm ml-5"
+                                type="submit">
+                                Valider
+                            </button>
+                        </form>
 
-                    {entry.name === "pieceidentite" && user?.pi?.[0] && <div>
-                        {user.pi.map((data, index) =>
-                            <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
+                        {entry.name === "pieceidentite" && user?.pi?.[0] &&
+                            <div className="container">
+                                <p className="fw-b text-primary t-center"> {entry.title}</p>
+                                {user.pi.map((data, index) =>
+                                    <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
+                            </div>}
+
+                        {entry.name === "justificatifdomicile" && user?.JDD?.[0] &&
+                            <div className="container">
+                                <p className=" text-primary fw-b t-center"> {entry.title}</p>
+                                {user.JDD.map((data, index) =>
+                                    <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
+                            </div>}
+
+                        {entry.name === "avisFiscal" && user?.avisFiscal?.[0] &&
+                            <div className="container">
+                                <p className="text-primary fw-b mt-1 t-center"> {entry.title}</p>
+                                {user.avisFiscal.map((data, index) =>
+                                    <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
+                            </div>}
+
+                        {entry.name === "picrib" && user?.picrib?.[0] &&
+                            <div className="container">
+                                <p className=" text-primary fw-b mt-1 t-center"> {entry.title}</p>
+                                {user.picrib.map((data, index) =>
+                                    <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
+                            </div>}
+
                     </div>}
-
-                    {entry.name === "justificatifdomicile" && user?.JDD?.[0] && <div>
-                        {user.JDD.map((data, index) =>
-                            <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
-                    </div>}
-
-                    {entry.name === "avisFiscal" && user?.avisFiscal?.[0] && <div>
-                        {user.avisFiscal.map((data, index) =>
-                            <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
-                    </div>}
-
-                    {entry.name === "picrib" && user?.picrib?.[0] && <div>
-                        {user.picrib.map((data, index) =>
-                            <OneLineUploaded entry={entry} hardRefresh={hardRefresh} user={user} data={data} key={index} />)}
-                    </div>}
-
-                </div>}
             </div>
-            <button className="userupdate-button-modify"
+            <button className="btn-outlined-primary text-hover-white font-sm anul"
                 onClick={() => setBox(current => !current)}>
                 {box ? "Annuler" : "Envoyer"}</button>
         </div>

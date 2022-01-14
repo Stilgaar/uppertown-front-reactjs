@@ -1,4 +1,3 @@
-import "./OneAnnounce.css";
 import { useContext } from "react";
 import URLContext from "../../../Context/URLcontext";
 import useAxios from "../../../Hooks/useAxios";

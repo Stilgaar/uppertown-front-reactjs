@@ -1,3 +1,4 @@
+import "./UserUpdate.css"
 import FormContext from '../../../Context/FormContext'
 import URLcontext from '../../../Context/URLcontext'
 import { useContext } from 'react'
@@ -8,11 +9,10 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
     const UrlContextvalue = useContext(URLcontext)
 
     return (
-        <div>
-            <div className="userupdate-imagecontainer"><p>{entry.title}</p></div>
-            <img className="userupdate-imageuser" src={data} alt="justificatif" />
+        <>
+            <img className="col-2-xl" src={data} alt="justificatif" />
             <button
-                className="userupdate-button-delete"
+                className="btn-outlined-primary text-hover-white font-sm anul"
                 onMouseEnter={() => {
                     FormContextValue.handleURL(`${UrlContextvalue.url}/up/delete/${user._id}`)
                     FormContextValue.handleData({ pic: data })
@@ -26,10 +26,7 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
                 }}>
                 Supprimer
             </button>
-            <br /> <br />
-
-
-        </div >
+        </>
     )
 }
 

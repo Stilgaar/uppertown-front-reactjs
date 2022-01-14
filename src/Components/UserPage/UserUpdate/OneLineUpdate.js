@@ -9,30 +9,31 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
     const [box, setBox] = useState(false)
 
     return (
-        <div className="userupdate-singlecontainer">
-            <div className="userupdate-container-modify">
+        <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
+            <div className="m-a">
                 {box ? <div>
-                </div> : <div
-                    className="userupdate-container-container-ternaire">
-                    <div>{entry.label}</div>
-                    {entry.name === "firstname" && <div> Actuel : {user.firstname}</div>}
-                    {entry.name === "lastname" && <div>Actuel : {user.lastname}</div>}
-                    {entry.name === "email" && <div> Actuel : {user.email}</div>}
-                    {entry.name === "tel" && <div> Actuel : {user.tel}</div>}
-                    {entry.name === "brandname" && <div> Actuel : {user.brandname}</div>}
-                    {entry.name === "adress" && <div> Actuel : {user.adress}</div>}
-                    {entry.name === "rib" && <div>Actuel : {user.rib}</div>}
-                </div>}
+                </div> :
+                    <div className="t-center">
+                        <div className='label'>{entry.label}</div>
+                        {entry.name === "firstname" && <div> Actuel : {user.firstname}</div>}
+                        {entry.name === "lastname" && <div>Actuel : {user.lastname}</div>}
+                        {entry.name === "email" && <div> Actuel : {user.email}</div>}
+                        {entry.name === "tel" && <div> Actuel : {user.tel}</div>}
+                        {entry.name === "brandname" && <div> Actuel : {user.brandname}</div>}
+                        {entry.name === "adress" && <div> Actuel : {user.adress}</div>}
+                        {entry.name === "rib" && <div>Actuel : {user.rib}</div>}
+                    </div>}
                 {box &&
                     <form onSubmit={(e) => {
                         FormContextValue.handleSubmit(e)
                         hardRefresh()
                         setBox(c => !c)
                     }}>
-                        <div className="userupdate-container-label" onClick={(e) => e.stopPropagation()}>
-                            <label className="userupdate-label"> {entry.label} </label>
+                        <div className='display-f fd-c t-center'
+                            onClick={(e) => e.stopPropagation()}>
+                            <label className="label"> {entry.label}</label>
                             <input
-                                className="userupdate-input"
+                                className="input m-a"
                                 type={entry.type}
                                 placeholder={entry.placeholder}
                                 onChange={(e) => {
@@ -41,18 +42,20 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                                 }}
                                 name={entry.newinput} />
                         </div>
-                        <div className="userupdate-container-warning"> {entry.update} </div>
-                        <button className="userupdate-button-validate"
+                        <div className="card m-a mt-1 t-center col-9-xl"> {entry.update} </div>
+                        <button className="btn-outlined-primary text-hover-white font-sm ml-5 t-center"
                             type="submit">
                             Valider
                         </button>
                     </form>}
             </div>
+
             <button
-                className="userupdate-button-modify"
+                className="btn-outlined-primary text-hover-white font-sm anul"
                 onClick={() => setBox(c => !c)}>
                 {box ? "Annuler" : "Modifier"}
             </button>
+
         </div>
 
     )

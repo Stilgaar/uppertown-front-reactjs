@@ -1,4 +1,3 @@
-import "./PostAnnounce.css";
 import { useContext } from "react";
 import URLcontext from "../../../Context/URLcontext";
 import FormContext from "../../../Context/FormContext";
@@ -11,14 +10,14 @@ function PostAnnounce() {
 
     return (
         <div>
-            <div className="postannounce-container-container">
-                <div className="postannounce-container"><h3>Publier une nouvelle Annonce</h3></div>
+            <div className="container-xl">
+                <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">Publier une nouvelle Annonce</h3>
                 <form onSubmit={(e) => FormContextValue.handleForm(e)}>
-                    <div>
+
+                    <div className="">
                         {annonce.map((entry) => (
                             <AnnounceLine key={entry.name} entry={entry} />))}
-
-                        <button className="postannounce-button-validate"
+                        <button className="btn-outlined-primary text-hover-white font-sm"
                             onMouseEnter={() => {
                                 FormContextValue.handleURL(`${URLContextValue.url}/api/announces/creatannouncewithpics`)
                             }}

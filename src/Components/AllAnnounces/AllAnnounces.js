@@ -75,7 +75,7 @@ function AllAnnounces() {
   }
 
   return (
-    <div className="container-xl">
+    <div className="container-xl bg-white p-1 br-xs">
       <h3 className="bg-primary text-white t-center font-xl br-xs ml-5 mr-5 mb-2 p-1">
         Annonces
       </h3>

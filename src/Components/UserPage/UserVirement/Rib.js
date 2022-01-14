@@ -6,48 +6,49 @@ function Rib() {
     const URLContextValue = useContext(URLcontext)
     const [rib] = useAxios(`${URLContextValue.url}/admin/getRib`)
     return (
-        <>
-            <div>Pour acheter des Stable Coins, veuillez faire un virement sur le compte en banque suivant</div>
-            <div>Virement SEPA</div>
-            <div>Titulaire : {rib?.[0]?.titulaire}</div>
-            <div>Domiciliation : {rib?.[0]?.domiciliation}</div>
-            <div className="uservirement-container-totalRIB">
-                <div className="uservirement-container-rib-iban-bic">
-                    <div className="uservirement-container-rib">
-                        RIB
-                        <div className="uservirement-container-value">
-                            <div>Code Banque</div>
+        <div className='p-2 col-6-xl col-12-lg'>
+            <div className='fw-b'>Pour acheter des Stable Coins, veuillez faire un virement sur le compte en banque suivant</div>
+            <div><span className='fw-br text-primary'>Virement SEPA</span></div>
+            <div><span className='fw-br text-primary'>Titulaire : </span>{rib?.[0]?.titulaire}</div>
+            <div><span className='fw-br text-primary'>Domiciliation : </span>{rib?.[0]?.domiciliation}</div>
+            <div className="card mt-2">
+                <div>
+                    <div className="row justify-center mb-1">
+                        <span className='card fw-br text-primary'>RIB</span>
+                        <div className="card col-2-xl p-1 br-xs">
+                            <div className='fw-br text-primary'>Code Banque</div>
                             <div>{rib?.[0]?.codeBanque}</div>
                         </div>
-                        <div className="uservirement-container-value">
-                            <div>Code Guichet</div>
+                        <div className="card col-2-xl p-1 br-xs">
+                            <div className='fw-br text-primary'>Code Guichet</div>
                             <div>{rib?.[0]?.codeGuichet}</div>
                         </div>
-                        <div className="uservirement-container-value">
-                            <div>Numero de Compte</div>
+                        <div className="card col-2-xl p-1 br-xs">
+                            <div className='fw-br text-primary'>Numero Compte</div>
                             <div>{rib?.[0]?.numeroCompte}</div>
                         </div>
-                        <div className="uservirement-container-value">
-                            <div>Clefs RIB</div>
+                        <div className="card col-2-xl p-1 br-xs">
+                            <div className='fw-br text-primary'>Clefs <br /> RIB</div>
                             <div>{rib?.[0]?.clefRib}</div>
                         </div>
                     </div>
-                    <div className="uservirement-container-iban">
-                        I.B.A.N
-                        <div className="uservirement-container-value-iban-bic">
+                    <div className="card p-1 mb-1">
+                        <span className='fw-br text-primary'> I.B.A.N </span>
+                        <div>
                             <div>
                                 {rib?.[0]?.iban} {rib?.[0]?.codeBanque} {rib?.[0]?.codeGuichet} {rib?.[0]?.clefRib}</div>
                         </div>
                     </div>
-                    <div className="uservirement-container-bic">
-                        B.I.C / SWIFT
-                        <div className="uservirement-container-value-iban-bic">
+                    <div className="card p-1">
+                        <span className='fw-br text-primary'>  B.I.C / SWIFT </span>
+                        <div>
                             <div>{rib?.[0]?.bicSwift}</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
+
     )
 }
 

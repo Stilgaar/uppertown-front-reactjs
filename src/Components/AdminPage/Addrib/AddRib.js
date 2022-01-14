@@ -1,4 +1,3 @@
-import './AddRib.css';
 import { useEffect, useContext } from 'react';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from "../../../Context/FormContext";
@@ -16,17 +15,17 @@ function AddRib() {
 
     return (
 
-        <div className="addributilisateurs-container"> <h3>Ajouter un RIB ou mettre à jour son RIB</h3>
-            <div>
-                <form className="addrib-container-form" onSubmit={(e) => FormContextValue.handleSubmit(e)}>
+        <div className="container-xl">
+            <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">Ajouter un RIB ou mettre à jour son RIB</h3>
+            <form onSubmit={(e) => FormContextValue.handleSubmit(e)}>
+                <div className='display-f fd-c p-0 justify-center container col-5-xl'>
                     {rib.map((entry, index) => (
                         <RibLine key={index} entry={entry} />))}
-                    <button className="addrib-button-validate" type='submit' >
+                    <button className="btn-outlined-primary text-hover-white font-sm anul" type='submit' >
                         Envoyer
                     </button>
-                </form >
-            </div>
-
+                </div>
+            </form >
         </div >
     )
 }

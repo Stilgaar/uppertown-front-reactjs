@@ -1,4 +1,3 @@
-import './UserLine.css';
 import { Link } from "react-router-dom";
 
 
@@ -13,39 +12,48 @@ function UserLine({ userdata }) {
             },
         }}
             style={{ textDecoration: "none", color: "black" }}>
-            <div>
-                <div className="userline-button-search">
-                    <div className="gestionutilisateurs-container-container">
-                        <div className="gestionutilistatuers-container-lastname">
-                            <span className="gestionutilisateurs-element-texte">
-                                Nom de famille : </span> {userdata.lastname} </div>
+            <div className="card row">
+                <div>
 
-                        <div className="gestionutilistatuers-container-firstname">
-                            <span className="gestionutilisateurs-element-texte">
-                                Prénom : </span> {userdata.firstname}</div>
+                    <div className="row">
+                        <div className="m-a">
+                            <span className="text-primary fw-br">
+                                Nom de famille :
+                            </span>
+                            {userdata.lastname}
+                        </div>
 
-                        <div className="gestionutilistatuers-container-email">
-                            <span className="gestionutilisateurs-element-texte">
-                                Email :</span> {userdata.email} </div>
+                        <div className="m-a">
+                            <span className="text-primary fw-br">
+                                Prénom :
+                            </span>
+                            {userdata.firstname}
+                        </div>
 
-                        {userdata.pi[0] && <div className="userupdate-mapped">
-                            Pieces d'ID :
+                        <div className="m-a">
+                            <span className="text-primary fw-br">
+                                Email :
+                            </span>
+                            {userdata.email}
+                        </div>
+
+                        {userdata.pi[0] && <div className="row text-primary fw-br m-a">
+                            <span className="m-a"> Pieces d'ID :</span>
                             {userdata.pi.map((data) =>
-                                <div><img className="userupdate-image" src={data} alt="piece identité" />
-                                </div>
+                                <img className="thumb p-1" src={data} alt="piece identité" />
                             )}</div>}
 
-                        {userdata.JDD[0] && <div className="userupdate-mapped">
-                            Justificatif Domicile :
+                        {userdata.JDD[0] && <div className="row text-primary fw-br m-a">
+                            <span className="m-a"> Justificatifs de Domiciles :</span>
                             {userdata.JDD.map((data) =>
-                                <div><img className="userupdate-image" src={data} alt="justif" />
+                                <div><img className="thumb  p-1" src={data} alt="justif" />
                                 </div>
                             )}</div>}
 
-                        {userdata.avisFiscal[0] && <div div className="userupdate-mapped">
-                            Avis Fiscaux :
+                        {userdata.avisFiscal[0] && <div div className="row text-primary fw-br m-a">
+                            <span className="m-a"> Avis d'impositions :</span>
                             {userdata.avisFiscal.map((data) =>
-                                <div><img className="userupdate-image" src={data} alt="avis fiscal" />
+                                <div><img className="thumb p-1" src={data} alt="avis fiscal" />
                                 </div>
                             )}</div>}</div></div>
             </div >

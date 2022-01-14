@@ -5,6 +5,7 @@ $utilities: (
     "prefix": "p",
     "values": (
       "0": 0,
+      "025": $base-padding * 0.25,
       "075": $base-padding * 0.75,
       "1": $base-padding,
       "2": $base-padding * 2,
@@ -60,6 +61,7 @@ $utilities: (
   "margin": (
     "prefix": "m",
     "values": (
+      "a": auto,
       "0": 0,
       "1": $base-margin,
       "2": $base-margin * 2,
@@ -200,6 +202,19 @@ $utilities: (
       "br": bolder,
       "700": 700,
       "900": 900,
+    ),
+  ),
+  "vertical-align": (
+    "prefix": "va",
+    "values": (
+      "ba": baseline,
+      "s": sub,
+      "sup": super,
+      "tt": text-top,
+      "tb": text-bottom,
+      "m": middle,
+      "t": top,
+      "b": bottom,
     ),
   ),
 );

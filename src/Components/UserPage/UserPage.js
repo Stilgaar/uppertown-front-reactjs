@@ -15,8 +15,8 @@ function UserPage({ user, hardRefresh }) {
     }, [])
 
     return (
-        <div className="container-xl">
-            <div className="display-f justify-center row">
+        <div className="container-xl bg-white br-xs p-3" >
+            <div className="row justify-center">
                 {state !== 'splash' &&
                     < button onClick={() => setState('splash')}
                         className="btn-outlined-primary text-hover-white font-sm col-3-lg col-2-xl">
@@ -53,15 +53,18 @@ function UserPage({ user, hardRefresh }) {
                             hardRefresh={hardRefresh} />
                         </div>
                         :
-                        <div className="userpage-warning">
-                            Pour avoir accès aux Transactions : <br />
-                            Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
-                            <br />
-                            <br />
-                            <button onClick={() => setState('params')}
-                                className="userpage-button-validate-gestion">
-                                Gèrer son compte
-                            </button>
+                        <div>
+                            <h3 className="bg-secondary text-white t-center font-lg br-xs m-3 p-1">Attention</h3>
+                            <div className="card t-center p-3">
+                                Pour avoir accès aux Transactions : <br />
+                                Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                                <br />
+                                <br />
+                                <button onClick={() => setState('params')}
+                                    className="btn-outlined-primary text-hover-white font-sm">
+                                    Gèrer son compte
+                                </button>
+                            </div>
                         </div>}
                 </div>
             }
@@ -71,13 +74,16 @@ function UserPage({ user, hardRefresh }) {
                     <div>
                         <UserVirement user={user} hardRefresh={hardRefresh} />
                     </div> :
-                    <div className="userpage-warning">Pour pouvoir acheter ou vendre des Stable Coins : <br />
-                        Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
-                        <br /> <br />
-                        <button onClick={() => setState('params')}
-                            className="userpage-button-validate-gestion">
-                            Gèrer son compte
-                        </button>
+                    <div>
+                        <h3 className="bg-secondary text-white t-center font-lg br-xs m-3 p-1">Attention</h3>
+                        <div className="card t-center p-3">Pour pouvoir acheter ou vendre des Stable Coins : <br />
+                            Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                            <br /> <br />
+                            <button onClick={() => setState('params')}
+                                className="btn-outlined-primary text-hover-white font-sm">
+                                Gèrer son compte
+                            </button>
+                        </div>
                     </div>}
             </div>
             }

@@ -19,9 +19,9 @@ function useSubmit() {
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données sur le site en général
-  // console.log("URL", url)
-  // console.log("DATA", data)
-  // console.log("IMAGES", images)
+  console.log("URL", url)
+  console.log("DATA", data)
+  console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
   // console.log("RESMSG", resMsg)
 
@@ -79,8 +79,17 @@ function useSubmit() {
     if (images) {
       let key = Object.keys(images)
       let val = Object.values(images)
-      for (let i = 0; i < images?.image?.length; i++) {
-        form.append(key, val[0][i])
+      // pour plusieurs images (l'annonce par exemple)
+      if (images.image) {
+        for (let i = 0; i < images?.image?.length; i++) {
+          form.append(key, val[0][i])
+        }
+      }
+      // pour une image simple
+      else {
+        for (let i = 0; i < key.length; i++) {
+          form.append(key[i], val[0][i])
+        }
       }
     }
     // remet les champs à zero

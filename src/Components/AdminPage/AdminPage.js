@@ -1,4 +1,3 @@
-import './AdminPage.css';
 import { useState } from 'react';
 import GestionUtils from './GestionUtils/GestionUtils';
 import SearchUser from './SearchUser/SearchUser';
@@ -12,31 +11,30 @@ function AdminPage() {
     const [state, setState] = useState('splash')
 
     return (
-        <div className="admin-page">
-            <div className="admin-page-container">
-                <div className="adminpage-boutons-admin">
-                    <button className="adminpage-button-validate"
-                        onClick={() => setState('search')}>Recherche
-                    </button>
-                    <button className="adminpage-button-validate"
-                        onClick={() => setState('gestion')}>Gestion Utilisateurs
-                    </button>
-                    <button className="adminpage-button-validate"
-                        onClick={() => setState('rib')}>Ajouter/Modifier le Rib
-                    </button>
-                    <button className="adminpage-button-validate"
-                        onClick={() => setState('ann')}>Poster une nouvelle annonce
-                    </button>
-                    <button className="adminpage-button-validate"
-                        onClick={() => setState('perso')}>Personalisation du site
-                    </button>
-                    {state !== 'splash' &&
-                        <button className="adminpage-button-validate"
-                            onClick={() => setState('splash')}>Retours
-                        </button>}
-                </div>
+        <div className="container-xl bg-white br-xs p-1">
+            <div className="row justify-center">
+                <button className="btn-outlined-primary text-hover-white font-sm"
+                    onClick={() => setState('search')}>Recherche
+                </button>
+                <button className="btn-outlined-primary text-hover-white font-sm"
+                    onClick={() => setState('gestion')}>Gestion Utilisateurs
+                </button>
+                <button className="btn-outlined-primary text-hover-white font-sm"
+                    onClick={() => setState('rib')}>Ajouter/Modifier le Rib
+                </button>
+                <button className="btn-outlined-primary text-hover-white font-sm"
+                    onClick={() => setState('ann')}>Poster une nouvelle annonce
+                </button>
+                <button className="btn-outlined-primary text-hover-white font-sm"
+                    onClick={() => setState('perso')}>Personalisation du site
+                </button>
+                {state !== 'splash' &&
+                    <button className="btn-outlined-primary text-hover-white font-sm"
+                        onClick={() => setState('splash')}>Retours
+                    </button>}
 
-                <div className="adminpage-components">
+
+                <div className="container-xl ">
                     {state === 'search' && <SearchUser />}
                     {state === 'gestion' && <GestionUtils />}
                     {state === 'rib' && <AddRib />}
