@@ -11,7 +11,9 @@ function PostAnnounce() {
     return (
         <div>
             <div className="container-xl">
-                <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">Publier une nouvelle Annonce</h3>
+                <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">
+                    Publier une nouvelle Annonce
+                </h3>
                 <form onSubmit={(e) => FormContextValue.handleForm(e)}>
 
                     <div className="">

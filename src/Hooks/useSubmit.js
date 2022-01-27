@@ -22,15 +22,20 @@ function useSubmit() {
   console.log("URL", url)
   console.log("DATA", data)
   console.log("IMAGES", images)
-  // console.log("CLICKDATA", clickData)
-  // console.log("RESMSG", resMsg)
+  console.log("CLICKDATA", clickData)
+  console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
     e.preventDefault();
     e.persist()
+    console.log(e)
+    console.log(e.target)
     // remets les champs à zero
     e.target.reset()
+
+
+
     axios.post(url, data)
       .then((res) => {
         // check du signin
@@ -171,23 +176,23 @@ function useSubmit() {
 
   // useContext, utilisable partout =)
   const FormContextValue = {
-    form: form,
-    data: data,
-    resMsg: resMsg,
-    setData: setData,
-    setClickData: setClickData,
-    setUrl: setUrl,
-    handleChange: handleChange,
-    handleLogin: handleLogin,
-    handleSigin: handleSigin,
-    handleClick: handleClick,
-    handleSubmit: handleSubmit,
-    handleURL: handleURL,
-    handleData: handleData,
-    handleEnvoi: handleEnvoi,
-    handleForm: handleForm,
-    handleFile: handleFile,
-    logout: logout,
+    form,
+    data,
+    resMsg,
+    setData,
+    setClickData,
+    setUrl,
+    handleChange,
+    handleLogin,
+    handleSigin,
+    handleClick,
+    handleSubmit,
+    handleURL,
+    handleData,
+    handleEnvoi,
+    handleForm,
+    handleFile,
+    logout,
   };
 
   // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons, ne se trigger que s'il y a un 'amount' dans le setter data

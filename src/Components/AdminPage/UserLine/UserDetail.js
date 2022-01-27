@@ -4,7 +4,7 @@ import StableCoins from '../StableCoins/StableCoins';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
 import useAxios from '../../../Hooks/useAxios';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function UserDetail() {
 
@@ -17,7 +17,6 @@ function UserDetail() {
     const [userdata, refreshUser] = useAxios(`${UrlContextValue.url}/api/users/${id}`)
 
     useEffect(() => { refreshUser() }, [])
-
 
     const click = () => {
         FormContextValue.handleEnvoi()
