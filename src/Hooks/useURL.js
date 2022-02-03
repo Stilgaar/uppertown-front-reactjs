@@ -8,6 +8,8 @@ export default function useURL() {
   // le hook choisira l'url qu'il faut en fonction si le back est online en local
   const [url, setURL] = useState(env.URLLOCAL)
 
+
+  // VU QUE JE TRAVAILLE QUE DANS LE BACK LOCAL MAINTENATN JAI DESACTIVER CETTE FONCTION
   const getURL = () => {
     axios.get(`${env.URLLOCAL}/admin/hostnamelocal`).catch(err => null)
       .then(res => {
