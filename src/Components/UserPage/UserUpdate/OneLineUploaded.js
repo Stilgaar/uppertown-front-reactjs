@@ -1,13 +1,9 @@
 import "./UserUpdate.css"
-import URLcontext from '../../../Context/URLcontext'
-import { useContext } from 'react'
 import { useCon } from "../../../Hooks/useCon"
 
 function OneLineUploaded({ user, data, hardRefresh }) {
 
-    const UrlContextvalue = useContext(URLcontext)
-
-    const { handleURL, handleData, handleEnvoi, setClickData } = useCon()
+    const { handleURL, handleData, handleEnvoi, setClickData, url } = useCon()
 
     return (
         <>
@@ -15,7 +11,7 @@ function OneLineUploaded({ user, data, hardRefresh }) {
             <button
                 className="btn-outlined-primary text-hover-white font-sm anul"
                 onMouseEnter={() => {
-                    handleURL(`${UrlContextvalue.url}/up/delete/${user._id}`)
+                    handleURL(`${url}/up/delete/${user._id}`)
                     handleData({ pic: data })
                 }}
                 onClick={(e) => {

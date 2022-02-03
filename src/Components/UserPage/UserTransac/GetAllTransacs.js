@@ -1,12 +1,11 @@
-import { useContext } from 'react'
-import URLcontect from '../../../Context/URLcontext'
+import { useCon } from '../../../Hooks/useCon'
 import useFetch from '../../../Hooks/useFetch'
 import Biens from './Bien'
 
 function GetALlTransacs({ user }) {
 
-    const UrlContextValue = useContext(URLcontect)
-    const { data: rep, error, pending } = useFetch(`${UrlContextValue.url}/api/users/props/${user._id}`)
+    const { url } = useCon()
+    const { data: rep, error, pending } = useFetch(`${url}/api/users/props/${user._id}`)
 
     return (
         <div> <br />

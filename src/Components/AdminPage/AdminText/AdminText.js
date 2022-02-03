@@ -1,12 +1,8 @@
-import { useContext } from 'react';
-import URLcontext from '../../../Context/URLcontext';
 import { useCon } from '../../../Hooks/useCon';
 
 function AdminText() {
 
-    const URLContextValue = useContext(URLcontext)
-
-    const { handleSubmit, handleChange, handleURL } = useCon()
+    const { handleSubmit, handleChange, handleURL, url } = useCon()
 
     return (
         <div className="container-xl">
@@ -46,7 +42,7 @@ function AdminText() {
                     <br />
                     <button
                         onMouseEnter={() => {
-                            handleURL(`${URLContextValue.url}/admin/maintext`)
+                            handleURL(`${url}/admin/maintext`)
                         }}
                         type="sumbit"
                         className="btn-outlined-primary text-hover-white font-sm">

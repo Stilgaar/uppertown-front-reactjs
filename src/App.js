@@ -18,12 +18,9 @@ import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
 import Error from "./Components/Error/Error";
 
 // hooks (& context)
-import useURL from "./Hooks/useURL";
-import URLContext from "./Context/URLcontext";
 import useToken from "./Hooks/useToken";
 
 function App() {
-  const [URLContextValue] = useURL();
 
   const { user, hardRefresh } = useToken()
 
@@ -31,34 +28,32 @@ function App() {
 
   return (
     <div className="app">
-      <URLContext.Provider value={URLContextValue}>
-        <Router>
-          <div className="main">
-            <Navigation
-              user={user} />
-            <Switch>
-              <Route exact path="/">
-                <Home
-                  hardRefresh={hardRefresh} />
-              </Route>
-              <Route path="/announces">
-                {user ? <AllAnnounces /> : <Error />}
-              </Route>
-              <Route path="/admin">
-                {user ? <AdminPage /> : <Error />}</Route>
-              <Route path="/userpage">
-                {user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
-              </Route>
-              <Route path="/announce-detail">
-                {user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-              </Route>
-              <Route path="/user-detail">
-                {user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </URLContext.Provider >
+      <Router>
+        <div className="main">
+          <Navigation
+            user={user} />
+          <Switch>
+            <Route exact path="/">
+              <Home
+                hardRefresh={hardRefresh} />
+            </Route>
+            <Route path="/announces">
+              {user ? <AllAnnounces /> : <Error />}
+            </Route>
+            <Route path="/admin">
+              {user ? <AdminPage /> : <Error />}</Route>
+            <Route path="/userpage">
+              {user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
+            </Route>
+            <Route path="/announce-detail">
+              {user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
+            </Route>
+            <Route path="/user-detail">
+              {user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
+            </Route>
+          </Switch>
+        </div>
+      </Router>
       <Footer />
     </div>
 

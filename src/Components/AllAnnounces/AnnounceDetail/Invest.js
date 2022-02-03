@@ -1,12 +1,9 @@
-import URLcontext from '../../../Context/URLcontext'
-import { useContext } from 'react'
 import { useCon } from '../../../Hooks/useCon'
 
 function Invest({ user, ann, thisAnnRefresh, hardRefresh }) {
 
-    const UrlContextvalue = useContext(URLcontext)
 
-    const { handleSubmit, handleData, handleChange, data, handleURL } = useCon()
+    const { handleSubmit, handleData, handleChange, data, handleURL, url } = useCon()
 
     return (
         <div className='card bg-primary-light-9 mt-2'>
@@ -37,7 +34,7 @@ function Invest({ user, ann, thisAnnRefresh, hardRefresh }) {
                 {(data?.amountStableCoins < ann.share_number && data?.amountStableCoins < user.stableCoins) || (data?.amountStableCoins === undefined) ?
                     <button type="submit"
                         className='btn-outlined-primary text-hover-white font-md"'
-                        onMouseEnter={() => { handleURL(`${UrlContextvalue.url}/transac/transac`) }}>
+                        onMouseEnter={() => { handleURL(`${url}/transac/transac`) }}>
                         Vous vous lancez ?
                     </button> :
                     <div className='text-error fw-br'>Le bien immobilier n'a pas autant de StableCoins <br />

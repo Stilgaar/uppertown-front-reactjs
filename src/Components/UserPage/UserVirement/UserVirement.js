@@ -1,8 +1,6 @@
-import { useState, useContext } from 'react';
-import URLcontext from '../../../Context/URLcontext';
+import { useState } from "react"
 import Rib from './Rib';
 import { useCon } from '../../../Hooks/useCon';
-
 
 function UserVirement({ user, hardRefresh }) {
 
@@ -11,9 +9,7 @@ function UserVirement({ user, hardRefresh }) {
     const [validation, setValidation] = useState(false);
     const [pending, setPending] = useState(false)
 
-    const URLContextValue = useContext(URLcontext)
-
-    const { handleSubmit, handleURL, handleChange, handleData } = useCon()
+    const { handleSubmit, handleURL, handleChange, handleData, url } = useCon()
 
     return (
 
@@ -50,7 +46,7 @@ function UserVirement({ user, hardRefresh }) {
                                 placeholder="Montant"
                                 onChange={(e) => {
                                     handleChange(e)
-                                    handleURL(`${URLContextValue.url}/api/users/addMoney/${user._id}`)
+                                    handleURL(`${url}/api/users/addMoney/${user._id}`)
                                 }} />
                             <button className="btn-outlined-primary text-hover-white font-sm"
                                 type="submit">
@@ -93,7 +89,7 @@ function UserVirement({ user, hardRefresh }) {
                                             value={ribz}
                                             name="rib"
                                             onChange={(e) => {
-                                                handleURL(`${URLContextValue.url}/api/users/askMoney/${user._id}`)
+                                                handleURL(`${url}/api/users/askMoney/${user._id}`)
                                                 handleChange(e, undefined, 'radio')
                                             }} /> <span className='fw-b text-primary'> RIB #{index + 1} - {ribz}</span>
                                     </div>

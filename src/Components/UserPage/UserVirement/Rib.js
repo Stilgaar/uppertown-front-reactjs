@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import URLcontext from '../../../Context/URLcontext';
 import useFetch from '../../../Hooks/useFetch';
+import { useCon } from '../../../Hooks/useCon';
 
 function Rib() {
-    const URLContextValue = useContext(URLcontext)
-    const { data: rib } = useFetch(`${URLContextValue.url}/admin/getRib`)
+    const { url } = useCon()
+    const { data: rib } = useFetch(`${url}/admin/getRib`)
 
     return (
 

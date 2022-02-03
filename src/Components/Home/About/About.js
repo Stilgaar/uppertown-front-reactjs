@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import URLContext from "../../../Context/URLcontext";
 import useFetch from "../../../Hooks/useFetch";
+import { useCon } from '../../../Hooks/useCon'
 
 function About() {
 
-  const URLContextValue = useContext(URLContext)
-  const { data: info, error, pending } = useFetch(`${URLContextValue.url}/admin/getRib`)
+  const { url } = useCon()
+  const { data: info, error, pending } = useFetch(`${url}/admin/getRib`)
 
   return (
     <div className="container mt-5 mb-5 p-4">

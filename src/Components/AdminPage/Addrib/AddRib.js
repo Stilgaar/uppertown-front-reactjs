@@ -1,14 +1,11 @@
-import { useContext } from 'react';
-import URLcontext from '../../../Context/URLcontext';
 import { rib } from '../../../JSON/Arrays';
 import RibLine from './RibLine';
 import { useCon } from '../../../Hooks/useCon';
 
 function AddRib() {
 
-    const URLContextValue = useContext(URLcontext)
-
     const { handleSubmit, handleURL } = useCon()
+    const { url } = useCon()
 
     return (
 
@@ -19,7 +16,7 @@ function AddRib() {
                     {rib.map((entry, index) => (
                         <RibLine key={index} entry={entry} />))}
                     <button
-                        onMouseEnter={() => handleURL(`${URLContextValue.url}/admin/newRib`)}
+                        onMouseEnter={() => handleURL(`${url}/admin/newRib`)}
                         className="btn-outlined-primary text-hover-white font-sm anul" type='submit' >
                         Envoyer
                     </button>

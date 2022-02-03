@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useURL from "./useURL";
 import { useCallback } from "react";
+import { useCon } from "./useCon";
 
 
 function useToken() {
@@ -10,7 +10,7 @@ function useToken() {
     const [error, setError] = useState(null)
     const [pending, setPending] = useState(false)
     const [isUser, setIsUser] = useState(false)
-    const [URLContextValue] = useURL();
+    const { url } = useCon();
 
     const hardRefresh = useCallback(() => {
 
@@ -23,7 +23,7 @@ function useToken() {
             return setUser(null);
         }
 
-        axios.get(`${URLContextValue.url}/api/users/token`, {
+        axios.get(`${url}/api/users/token`, {
             headers: { authorization: `Bearer ${localToken}` },
         })
             .then((res) => {
@@ -42,7 +42,7 @@ function useToken() {
                 setError(err.message)
                 console.log(err.message)
             });
-    }, [URLContextValue.url])
+    }, [url])
 
 
     useEffect(() => {

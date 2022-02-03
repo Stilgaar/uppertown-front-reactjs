@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Announce from "./Announce/Announce"
 import Selector from "../Selector/Selector";
 import useFetch from "../../Hooks/useFetch";
-import URLContext from "../../Context/URLcontext";
+import { useCon } from "../../Hooks/useCon";
 
 function AllAnnounces() {
-  const URLContextValue = useContext(URLContext)
+  const { url } = useCon()
+
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
@@ -17,7 +18,7 @@ function AllAnnounces() {
   //State des annonces global
   //State des annonces filtrées, initialisé avec toutes les annonces
 
-  const { data: announcesList, refresh: annRefresh, pending, error } = useFetch(`${URLContextValue.url}/api/announces/allAnnounces`)
+  const { data: announcesList, refresh: annRefresh, pending, error } = useFetch(`${url}/api/announces/allAnnounces`)
   useEffect(() => { annRefresh() }, [annRefresh])
 
 

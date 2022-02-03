@@ -1,21 +1,19 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import StableCoins from '../StableCoins/StableCoins';
-import URLcontext from '../../../Context/URLcontext';
 import useFetch from '../../../Hooks/useFetch';
 import { Link } from "react-router-dom";
 import { useCon } from '../../../Hooks/useCon'
 
 function UserDetail() {
 
-    const UrlContextValue = useContext(URLcontext)
 
-    const { handleURL, setClickData, handleData, handleEnvoi } = useCon()
+    const { handleURL, setClickData, handleData, handleEnvoi, url } = useCon()
     const [modal, setModal] = useState('')
 
     const location = useLocation();
     const id = location.state?.data;
-    const { data: userdata, refresh: refreshUser } = useFetch(`${UrlContextValue.url}/api/users/${id}`)
+    const { data: userdata, refresh: refreshUser } = useFetch(`${url}/api/users/${id}`)
 
     useEffect(() => {
         refreshUser()
@@ -48,7 +46,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    handleURL(`${UrlContextValue.url}/admin/verifPi/${userdata._id}`)
+                                    handleURL(`${url}/admin/verifPi/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Identité Verifiée
@@ -56,7 +54,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    handleURL(`${UrlContextValue.url}/admin/verifJDD/${userdata._id}`)
+                                    handleURL(`${url}/admin/verifJDD/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Justificatif de Domcile Verifié
@@ -64,7 +62,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    handleURL(`${UrlContextValue.url}/admin/verifAVIS/${userdata._id}`)
+                                    handleURL(`${url}/admin/verifAVIS/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Avis d'imposition verifié
@@ -72,7 +70,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    handleURL(`${UrlContextValue.url}/admin/goAdmin/${userdata._id}`)
+                                    handleURL(`${url}/admin/goAdmin/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Passer Admin
@@ -80,7 +78,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    handleURL(`${UrlContextValue.url}/admin/noAdmin/${userdata._id}`)
+                                    handleURL(`${url}/admin/noAdmin/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Retirer Admin
@@ -130,7 +128,7 @@ function UserDetail() {
                                 {userdata?.awaiting &&
                                     <button className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
-                                            handleURL(`${UrlContextValue.url}/api/users/transactionDone/${userdata._id}`)
+                                            handleURL(`${url}/api/users/transactionDone/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Toutes les operations sont terminés
@@ -147,7 +145,7 @@ function UserDetail() {
                                     <button className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
                                             handleData({ argent: argent })
-                                            handleURL(`${UrlContextValue.url}/api/users/archiveMoney/${userdata._id}`)
+                                            handleURL(`${url}/api/users/archiveMoney/${userdata._id}`)
                                         }}
                                         onMouseLeave={() => {
                                             setClickData("")
@@ -173,7 +171,7 @@ function UserDetail() {
                                     <button
                                         className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
-                                            handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone/${userdata._id}`)
+                                            handleURL(`${url}/api/users/transtactionEuroDone/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Toutes les operations sont terminés
@@ -194,7 +192,7 @@ function UserDetail() {
                                     className="btn-outlined-primary text-hover-white font-sm"
                                     onMouseEnter={() => {
                                         handleData({ argent: argent })
-                                        handleURL(`${UrlContextValue.url}/api/users/archiveEuros/${userdata._id}`)
+                                        handleURL(`${url}/api/users/archiveEuros/${userdata._id}`)
                                     }}
                                     onMouseLeave={() => {
                                         setClickData("")

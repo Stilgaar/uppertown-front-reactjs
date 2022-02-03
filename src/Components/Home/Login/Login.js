@@ -1,14 +1,10 @@
-import { useContext } from 'react';
-import URLcontext from '../../../Context/URLcontext';
 import { login } from '../../../JSON/Arrays';
 import RibLine from '../../AdminPage/Addrib/RibLine';
 import { useCon } from '../../../Hooks/useCon';
 
 function Login() {
 
-    const URLContextValue = useContext(URLcontext)
-
-    const { handleClick, handleSubmit, handleSigin, handleURL, resMsg } = useCon()
+    const { handleClick, handleSubmit, handleSigin, handleURL, resMsg, url } = useCon()
 
     return (
         <div className="form"
@@ -23,7 +19,7 @@ function Login() {
                     ))}
 
                     <button onMouseEnter={() => {
-                        handleURL(`${URLContextValue.url}/api/users/login`)
+                        handleURL(`${url}/api/users/login`)
                     }} className="btn-outlined-primary text-hover-white font-md"
                         type="submit">
                         Valider

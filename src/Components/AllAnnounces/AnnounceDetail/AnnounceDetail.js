@@ -2,17 +2,17 @@ import { useLocation } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Invest from "./Invest";
-import { useContext, useEffect } from "react";
-import URLcontext from "../../../Context/URLcontext";
+import { useEffect } from "react";
 import useFetch from "../../../Hooks/useFetch";
+import { useCon } from '../../../Hooks/useCon';
 
 function AnnounceDetail({ user, hardRefresh }) {
 
+  const { url } = useCon()
   const location = useLocation();
   const id = location.state?.data;
-  const URLContextValue = useContext(URLcontext)
 
-  const { data: announce, refresh: thisAnnRefresh, pending, error } = useFetch(`${URLContextValue.url}/api/announces/${id}`)
+  const { data: announce, refresh: thisAnnRefresh, pending, error } = useFetch(`${url}/api/announces/${id}`)
 
   useEffect(() => { thisAnnRefresh() }, [thisAnnRefresh])
 

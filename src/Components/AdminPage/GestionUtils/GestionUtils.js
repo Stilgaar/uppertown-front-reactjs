@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import UtilLine from './UtilLine';
-import URLcontext from '../../../Context/URLcontext';
 import useFetch from '../../../Hooks/useFetch';
+import { useCon } from '../../../Hooks/useCon'
 
 
 function GestionUtils() {
 
-    const URLContextValue = useContext(URLcontext)
-    const { data: users, refresh, error, pending } = useFetch(`${URLContextValue.url}/api/users/users`)
+    const { url } = useCon()
+    const { data: users, refresh, error, pending } = useFetch(`${url}/api/users/users`)
 
     const user1 = users?.length > 0 && users?.filter(user => user.userType === "userType1")
     const user2 = users?.length > 0 && users.filter(user => user.userType === "userType2")

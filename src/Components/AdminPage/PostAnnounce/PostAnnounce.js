@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import URLcontext from "../../../Context/URLcontext";
 import { annonce } from "../../../JSON/Arrays";
 import AnnounceLine from "./AnnounceLine";
 import { useCon } from '../../../Hooks/useCon'
 
 function PostAnnounce() {
 
-    const URLContextValue = useContext(URLcontext)
 
-    const { handleForm, handleURL } = useCon()
+    const { handleForm, handleURL, url } = useCon()
 
     return (
         <div>
@@ -23,7 +20,7 @@ function PostAnnounce() {
                             <AnnounceLine key={entry.name} entry={entry} />))}
                         <button className="btn-outlined-primary text-hover-white font-sm"
                             onMouseEnter={() => {
-                                handleURL(`${URLContextValue.url}/api/announces/creatannouncewithpics`)
+                                handleURL(`${url}/api/announces/creatannouncewithpics`)
                             }}
                             type="submit">
                             Envoyer l'annonce !

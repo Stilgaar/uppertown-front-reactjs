@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
-import URLcontext from '../../../Context/URLcontext';
 import { useCon } from "../../../Hooks/useCon";
 
 function StableCoins({ userdata, refreshUser }) {
 
-    const URLContextValue = useContext(URLcontext)
 
-    const { setClickData, handleSubmit, handleChange, handleURL, data } = useCon()
+    const { setClickData, handleSubmit, handleChange, handleURL, data, url } = useCon()
 
     return (
         <div>
@@ -37,7 +34,7 @@ function StableCoins({ userdata, refreshUser }) {
 
                     <button
                         onMouseEnter={() => {
-                            handleURL(`${URLContextValue.url}/api/users/addCoins/${userdata._id}`)
+                            handleURL(`${url}/api/users/addCoins/${userdata._id}`)
                         }}
                         className="btn-outlined-primary text-hover-white font-sm anul"
                         type="submit">

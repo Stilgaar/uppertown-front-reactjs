@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import UserLine from '../UserLine/UserLine';
 import useFetch from '../../../Hooks/useFetch';
-import URLcontext from '../../../Context/URLcontext';
+import { useCon } from '../../../Hooks/useCon';
+
 
 
 function SearchUser() {
 
-    const URLContextValue = useContext(URLcontext)
-    const { data: users, refresh: adminRefresh } = useFetch(`${URLContextValue.url}/api/users/users`)
+    const { url } = useCon()
+    const { data: users, refresh: adminRefresh } = useFetch(`${url}/api/users/users`)
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
 

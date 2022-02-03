@@ -1,15 +1,12 @@
-import URLContext from '../../../Context/URLcontext'
 import OneLineUploaded from './OneLineUploaded'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { useCon } from '../../../Hooks/useCon'
 
 
 function OneLineUpload({ user, entry, hardRefresh }) {
-
-    const UrlContextvalue = useContext(URLContext)
     const [box, setBox] = useState(false)
 
-    const { handleForm, handleFile, handleURL } = useCon()
+    const { handleForm, handleFile, handleURL, url } = useCon()
 
     return (
         <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
@@ -30,7 +27,7 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                                     name={entry.name}
                                     onChange={(e) => {
                                         handleFile(e)
-                                        handleURL(`${UrlContextvalue.url}${entry.url}/${user._id}`);
+                                        handleURL(`${url}${entry.url}/${user._id}`);
                                     }} />
                             </div>
                             <div className="card m-a mt-1 t-center col-9-xl">{entry.update}</div>

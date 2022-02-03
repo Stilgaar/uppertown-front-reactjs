@@ -2,15 +2,15 @@ import people from './people.svg';
 import coin from './coin.svg';
 import building from './building.svg';
 import cart from './cart-plus.svg';
-import { useContext } from "react";
-import URLContext from "../../../Context/URLcontext";
 import useFetch from '../../../Hooks/useFetch';
+import { useCon } from '../../../Hooks/useCon'
 
 function Infos() {
 
-  const URLContextValue = useContext(URLContext)
-  const { data: ann, error: annerror, pending: annpending } = useFetch(`${URLContextValue.url}/api/announces/allAnnounces`)
-  const { data: users, error: uerror, pending: upending } = useFetch(`${URLContextValue.url}/api/users/users`)
+  const { url } = useCon()
+  const { data: ann, error: annerror, pending: annpending } = useFetch(`${url}/api/announces/allAnnounces`)
+  const { data: users, error: uerror, pending: upending } = useFetch(`${url}/api/users/users`)
+
 
 
   let clienttokens = 0;

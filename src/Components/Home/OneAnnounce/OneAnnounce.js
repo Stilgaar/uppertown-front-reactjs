@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import URLContext from "../../../Context/URLcontext";
 import useFetch from "../../../Hooks/useFetch";
+import { useCon } from "../../../Hooks/useCon";
 
 function OneAnnounce() {
 
-  const URLContextValue = useContext(URLContext)
-  const { data: ann, error, pending } = useFetch(`${URLContextValue.url}/api/announces/allAnnounces`)
+  const { url } = useCon()
+  const { data: ann, error, pending } = useFetch(`${url}/api/announces/allAnnounces`)
 
   let announceRandom = ann[Math.floor(Math.random() * ann.length)];
 

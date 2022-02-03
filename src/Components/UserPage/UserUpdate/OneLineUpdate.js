@@ -1,14 +1,11 @@
-import { useState, useContext } from 'react'
-
-import URLContext from '../../../Context/URLcontext'
+import { useState } from 'react'
 import { useCon } from '../../../Hooks/useCon'
 
 function OneLineUpdate({ entry, user, hardRefresh }) {
 
-    const UrlContextvalue = useContext(URLContext)
     const [box, setBox] = useState(false)
 
-    const { handleURL, handleChange, handleSubmit } = useCon()
+    const { handleURL, handleChange, handleSubmit, url } = useCon()
 
     return (
         <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
@@ -39,7 +36,7 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                                 type={entry.type}
                                 placeholder={entry.placeholder}
                                 onChange={(e) => {
-                                    handleURL(`${UrlContextvalue.url}/api/users/modifyUser/${user._id}`)
+                                    handleURL(`${url}/api/users/modifyUser/${user._id}`)
                                     handleChange(e);
                                 }}
                                 name={entry.newinput} />
