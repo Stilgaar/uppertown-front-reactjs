@@ -22,7 +22,7 @@ function OneAnnounce() {
           {pending && <p className="bg-primary text-white br-xs p-1"> Chargment ... </p>}
           {error && <p className="bg-primary text-white br-xs p-1"> {error} </p>}
         </div>
-        <div className="oneanntext col-6-xl z-6 bg-white t-center font-lg">
+        <div className="oneanntext col-6-xl z-6 bg-white t-center font-lg mt-7">
           <p className="m-2 bg-primary text-white br-xs p-1">Vous desirez en voir plus ?</p>
           <p className="card font-lg">
             De nombreux biens sont disponible dans notre catalogue. Autant

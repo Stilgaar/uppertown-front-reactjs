@@ -577,14 +577,6 @@ img {
   padding: 0;
 }
 
-.p-025 {
-  padding: 0.1875rem;
-}
-
-.p-075 {
-  padding: 0.5625rem;
-}
-
 .p-1 {
   padding: 0.75rem;
 }
@@ -695,6 +687,10 @@ img {
 
 .mt-5 {
   margin-top: 6rem;
+}
+
+.mt-7 {
+  margin-top: 9rem;
 }
 
 .mb-1 {

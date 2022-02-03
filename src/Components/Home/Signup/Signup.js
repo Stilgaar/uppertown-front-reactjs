@@ -20,10 +20,7 @@ function Signup() {
           <button
             className="btn-outlined-primary text-hover-white font-md"
             type="submit"
-            onMouseEnter={() => {
-              handleURL(`${url}/api/users/signup`)
-            }}
-          >
+            onMouseEnter={() => { handleURL(`${url}/api/users/signup`) }}>
             Valider
           </button>
         </form>
