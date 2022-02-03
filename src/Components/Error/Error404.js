@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-
-
 function Error() {
     return (
         <div className="bg-white container br-xs p-5 mt-5">

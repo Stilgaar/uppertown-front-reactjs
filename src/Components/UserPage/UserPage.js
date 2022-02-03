@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import UserUpdate from './UserUpdate/UserUpdate';
 import UserVirement from './UserVirement/UserVirement';
@@ -15,6 +14,7 @@ function UserPage({ user, hardRefresh }) {
     return (
         <div className="container-xl bg-white br-xs p-3" >
             <div className="row justify-center">
+
                 {state !== 'splash' &&
                     < button onClick={() => setState('splash')}
                         className="btn-outlined-primary text-hover-white font-sm col-3-lg col-2-xl">
@@ -38,33 +38,31 @@ function UserPage({ user, hardRefresh }) {
                 </button>
             </div>
 
-            {
-                state === 'splash' &&
+            {state === 'splash' &&
                 <UserSplash user={user} setState={setState} />
             }
 
-            {
-                state === 'transac' && <div>
-                    {user?.userType === "userType4" ?
-                        <div> <UserTransac
-                            user={user}
-                            hardRefresh={hardRefresh} />
+            {state === 'transac' && <div>
+                {user?.userType === "userType4" ?
+                    <div> <UserTransac
+                        user={user}
+                        hardRefresh={hardRefresh} />
+                    </div>
+                    :
+                    <div>
+                        <h3 className="bg-secondary text-white t-center font-lg br-xs m-3 p-1">Attention</h3>
+                        <div className="card t-center p-3">
+                            Pour avoir accès aux Transactions : <br />
+                            Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
+                            <br />
+                            <br />
+                            <button onClick={() => setState('params')}
+                                className="btn-outlined-primary text-hover-white font-sm">
+                                Gèrer son compte
+                            </button>
                         </div>
-                        :
-                        <div>
-                            <h3 className="bg-secondary text-white t-center font-lg br-xs m-3 p-1">Attention</h3>
-                            <div className="card t-center p-3">
-                                Pour avoir accès aux Transactions : <br />
-                                Vous devez d'abord procèder aux étapes de verifications avant de procéder à cette étape
-                                <br />
-                                <br />
-                                <button onClick={() => setState('params')}
-                                    className="btn-outlined-primary text-hover-white font-sm">
-                                    Gèrer son compte
-                                </button>
-                            </div>
-                        </div>}
-                </div>
+                    </div>}
+            </div>
             }
 
             {state === 'money' && <div>
@@ -86,13 +84,11 @@ function UserPage({ user, hardRefresh }) {
             </div>
             }
 
-            {
-                state === 'params' &&
+            {state === 'params' &&
                 <UserUpdate user={user} hardRefresh={hardRefresh} />
             }
 
-            {
-                state === 'upload' &&
+            {state === 'upload' &&
                 <UserUploads user={user} hardRefresh={hardRefresh} />
             }
         </div >

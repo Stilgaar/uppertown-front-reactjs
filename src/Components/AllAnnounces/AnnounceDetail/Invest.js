@@ -2,7 +2,6 @@ import { useCon } from '../../../Hooks/useCon'
 
 function Invest({ user, ann, thisAnnRefresh, hardRefresh }) {
 
-
     const { handleSubmit, handleData, handleChange, data, handleURL, url } = useCon()
 
     return (

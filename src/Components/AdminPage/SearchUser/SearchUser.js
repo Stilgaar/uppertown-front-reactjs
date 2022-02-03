@@ -3,8 +3,6 @@ import UserLine from '../UserLine/UserLine';
 import useFetch from '../../../Hooks/useFetch';
 import { useCon } from '../../../Hooks/useCon';
 
-
-
 function SearchUser() {
 
     const { url } = useCon()
@@ -49,7 +47,6 @@ function SearchUser() {
                             <UserLine key={key} userdata={userdata} />
                         )
                     })}
-
 
             </div>
         </div>

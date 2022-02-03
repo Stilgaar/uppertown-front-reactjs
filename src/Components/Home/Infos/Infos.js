@@ -1,3 +1,4 @@
+import "./Infos.css"
 import people from './people.svg';
 import coin from './coin.svg';
 import building from './building.svg';

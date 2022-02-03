@@ -2,7 +2,6 @@ import { useCon } from "../../../Hooks/useCon";
 
 function StableCoins({ userdata, refreshUser }) {
 
-
     const { setClickData, handleSubmit, handleChange, handleURL, data, url } = useCon()
 
     return (

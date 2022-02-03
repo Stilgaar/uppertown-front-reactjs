@@ -6,7 +6,6 @@ import { useCon } from "../../Hooks/useCon";
 
 function AllAnnounces() {
   const { url } = useCon()
-
   const [filteredList, setFilteredList] = useState();
   const [filterRegion, setFilterRegion] = useState("all");
   const [filterBedrooms, setFilterBedrooms] = useState("all");
@@ -19,9 +18,10 @@ function AllAnnounces() {
   //State des annonces filtrées, initialisé avec toutes les annonces
 
   const { data: announcesList, refresh: annRefresh, pending, error } = useFetch(`${url}/api/announces/allAnnounces`)
+
+  console.log(announcesList)
+
   useEffect(() => { annRefresh() }, [annRefresh])
-
-
 
   //fonction qui filtre par rapport a la region
   const verifyRegion = useCallback((announce) => {

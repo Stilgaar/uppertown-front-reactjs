@@ -39,8 +39,8 @@ function App() {
             <Route path="/announces" element={user ? <AllAnnounces /> : <Error />} />
             <Route path="/admin" element={user ? <AdminPage /> : <Error />} />
             <Route path="/userpage" element={user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />} />
-            <Route path="/announce-detail" element={user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
-            <Route path="/user-detail" element={user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
+            <Route path="/announce-detail/:id" element={user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
+            <Route path="/user-detail/:id" element={user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
 

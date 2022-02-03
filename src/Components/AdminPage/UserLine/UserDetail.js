@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import StableCoins from '../StableCoins/StableCoins';
 import useFetch from '../../../Hooks/useFetch';
 import { Link } from "react-router-dom";
@@ -7,12 +7,9 @@ import { useCon } from '../../../Hooks/useCon'
 
 function UserDetail() {
 
-
+    const { id } = useParams()
     const { handleURL, setClickData, handleData, handleEnvoi, url } = useCon()
     const [modal, setModal] = useState('')
-
-    const location = useLocation();
-    const id = location.state?.data;
     const { data: userdata, refresh: refreshUser } = useFetch(`${url}/api/users/${id}`)
 
     useEffect(() => {

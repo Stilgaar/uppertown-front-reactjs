@@ -26,7 +26,6 @@ function useSubmit() {
   // console.log("CLICKDATA", clickData)
   //console.log("RESMSG", resMsg)
 
-
   // REDUCER POUR LE LOGIN FORM (c'est un peu overkill mais c'est classe non ? )
   const formReducer = (state, action) => {
     switch (action.type) {

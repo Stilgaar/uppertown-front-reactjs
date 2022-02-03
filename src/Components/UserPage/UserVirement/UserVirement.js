@@ -8,7 +8,6 @@ function UserVirement({ user, hardRefresh }) {
     const [vendre, setVendre] = useState(false);
     const [validation, setValidation] = useState(false);
     const [pending, setPending] = useState(false)
-
     const { handleSubmit, handleURL, handleChange, handleData, url } = useCon()
 
     return (
@@ -28,7 +27,6 @@ function UserVirement({ user, hardRefresh }) {
                 {acheter &&
 
                     <div className="card display-f row" >
-
 
                         <Rib />
 

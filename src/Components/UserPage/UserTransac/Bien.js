@@ -5,7 +5,6 @@ import { useCon } from "../../../Hooks/useCon";
 function Biens({ elem, index, type }) {
 
     const { url } = useCon()
-
     const { data: announce } = useFetch(`${url}/api/announces/${elem.annonceId}`)
 
     return (

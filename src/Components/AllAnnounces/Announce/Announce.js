@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 function Announce({ announce }) {
 
   return (
-    <Link to={{
-      pathname: '/announce-detail',
-      state: {
-        data: announce._id
-      },
-    }}
+    <Link to={{ pathname: `/announce-detail/${announce._id}` }}
       style={{ textDecoration: "none", color: "black" }}
       className="card container col-12-md col-9-md col-6-lg col-4-xl animation-scale">
 

@@ -1,16 +1,8 @@
 import { Link } from "react-router-dom";
 
-
 function UserLine({ userdata }) {
-
     return (
-
-        <Link to={{
-            pathname: '/user-detail',
-            state: {
-                data: userdata._id
-            },
-        }}
+        <Link to={{ pathname: `/user-detail/${userdata._id}` }}
             style={{ textDecoration: "none", color: "black" }}>
             <div className="card row">
                 <div>

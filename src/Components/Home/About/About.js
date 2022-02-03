@@ -15,7 +15,7 @@ function About() {
         <br />
         {pending && <p className="font-md">Chargment ... </p>}
         {error && <p className="font-md">{error}</p>}
-        {info && <p className="font-md">{info?.[0]?.maincontent}</p>}
+        {info && <p className="font-md pre">{info?.[0]?.maincontent}</p>}
       </div>
     </div>
   );

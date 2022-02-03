@@ -2,7 +2,6 @@ import OneLineUploaded from './OneLineUploaded'
 import { useState } from 'react'
 import { useCon } from '../../../Hooks/useCon'
 
-
 function OneLineUpload({ user, entry, hardRefresh }) {
     const [box, setBox] = useState(false)
 

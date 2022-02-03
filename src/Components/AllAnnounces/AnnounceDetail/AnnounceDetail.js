@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Invest from "./Invest";
@@ -9,8 +9,7 @@ import { useCon } from '../../../Hooks/useCon';
 function AnnounceDetail({ user, hardRefresh }) {
 
   const { url } = useCon()
-  const location = useLocation();
-  const id = location.state?.data;
+  const { id } = useParams()
 
   const { data: announce, refresh: thisAnnRefresh, pending, error } = useFetch(`${url}/api/announces/${id}`)
 
@@ -27,9 +26,7 @@ function AnnounceDetail({ user, hardRefresh }) {
       {announce &&
         <div className="global-container bg-white br-xs p-2">
 
-
           <div className="row container-xl p-3">
-
 
             <div className="col-12-lg col-7-xl">
               <Carousel className="br-xs col-10-xl"
