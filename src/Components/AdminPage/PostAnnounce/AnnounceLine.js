@@ -1,8 +1,8 @@
-import FormContext from "../../../Context/FormContext";
-import { useContext } from "react";
+import { useCon } from "../../../Hooks/useCon";
 
 function AnnounceLine({ entry }) {
-    const FormContextValue = useContext(FormContext)
+
+    const { handleChange, data, handleFile } = useCon()
 
     return (
         <div className="display-f fd-c p-0 justify-center container col-5-xl">
@@ -12,12 +12,12 @@ function AnnounceLine({ entry }) {
                         type={entry.type}
                         placeholder={entry.placeholder}
                         name={entry.name}
-                        onChange={FormContextValue.handleChange} />
+                        onChange={handleChange} />
                 </>}
 
             {entry.select &&
                 <> <label className="label">{entry.label}</label>
-                    <select onChange={(e) => FormContextValue.handleChange(e, entry.name)}>
+                    <select onChange={(e) => handleChange(e, entry.name)}>
                         <option disabled selected>--  Faites votre choix --</option>
                         {entry.list.slice(1).map((region, index) => (
                             <option
@@ -33,8 +33,8 @@ function AnnounceLine({ entry }) {
 
             {entry.part &&
                 <><label className="label">{entry.label}</label>
-                    {FormContextValue?.data?.price !== undefined && FormContextValue?.data?.share_number !== undefined ?
-                        <div>{FormContextValue?.data?.price / FormContextValue?.data?.share_number}</div>
+                    {data?.price !== undefined && data?.share_number !== undefined ?
+                        <div>{data?.price / data?.share_number}</div>
                         : <div>0</div>}
                 </>}
 
@@ -47,7 +47,7 @@ function AnnounceLine({ entry }) {
                                 text={option.value}
                                 type={entry.type}
                                 name={entry.name}
-                                onChange={(e) => FormContextValue.handleChange(e, option.value, entry.type)} />
+                                onChange={(e) => handleChange(e, option.value, entry.type)} />
                             {option.label}
                         </div>
                     ))}
@@ -61,7 +61,7 @@ function AnnounceLine({ entry }) {
                         type={entry.type}
                         name={entry.name}
                         onChange={(e) => {
-                            FormContextValue.handleFile(e)
+                            handleFile(e)
                         }} />
                 </>}
 
@@ -74,7 +74,7 @@ function AnnounceLine({ entry }) {
                             placeholder={entry.placeholder}
                             name={entry.name}
                             value={elem}
-                            onChange={(e) => FormContextValue.handleChange(e, entry.name, entry.type)} />
+                            onChange={(e) => handleChange(e, entry.name, entry.type)} />
                         {elem}
                     </div>))}
             </>}

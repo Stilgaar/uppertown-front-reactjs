@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import React from 'react'
-import { useState, useContext } from 'react';
-import FormContext from "../../Context/FormContext";
+import { useState } from 'react';
+import { useCon } from "../../Hooks/useCon";
 
-function Navigation(props) {
+
+function Navigation({ user }) {
 
     const [showMenu, setShowMenu] = useState(false)
-    const FormContextValue = useContext(FormContext);
+
+    const { logout, handleLogin, handleSigin } = useCon()
 
     return (
         <>
@@ -14,7 +16,7 @@ function Navigation(props) {
                 <div className="container p-1 br-xs">
                     <h1 className="site-title o-80 text-white">UpperTown</h1>
 
-                    {props.isLog ?
+                    {user ?
                         <><div className="display-f">
 
                             <Link to="/">
@@ -31,17 +33,17 @@ function Navigation(props) {
 
                             <Link to="/userpage">
                                 <p className="text-white text-hover-primary-light-7 site-texts">
-                                    Chez {props?.user?.firstname}
+                                    Chez {user?.firstname}
                                 </p>
                             </Link>
 
-                            {props?.user?.isAdmin && <Link to="/admin">
+                            {user?.isAdmin && <Link to="/admin">
                                 <p className="text-white text-hover-primary-light-7 site-texts">
                                     Administratif
                                 </p>
                             </Link>}
 
-                            <p className="text-white text-hover-primary-light-7 site-texts" onClick={FormContextValue.logout}>
+                            <p className="text-white text-hover-primary-light-7 site-texts" onClick={logout}>
                                 Logout
                             </p>
 
@@ -50,11 +52,11 @@ function Navigation(props) {
                         :
                         <div className="display-f">
                             <div className="text-white text-hover-primary-light-7 site-texts"
-                                onClick={FormContextValue.handleLogin}>
+                                onClick={handleLogin}>
                                 Login
                             </div>
                             <div className="text-white text-hover-primary-light-7 site-texts"
-                                onClick={FormContextValue.handleSigin}>
+                                onClick={handleSigin}>
                                 Sign Up
                             </div>
                         </div>
@@ -69,7 +71,7 @@ function Navigation(props) {
 
                 {showMenu &&
                     <><div className="hide-menu">
-                        {props.isLog ?
+                        {user ?
                             <><div className="display-f fd-c">
                                 <Link to="/" onClick={() => setShowMenu(false)}>
                                     <p className="text-white text-hover-primary-light-7 site-texts mb-1 font-lg p-1" >
@@ -89,7 +91,7 @@ function Navigation(props) {
                                     </p>
                                 </Link>
 
-                                {props?.user?.isAdmin &&
+                                {user?.isAdmin &&
                                     <Link to="/admin" onClick={() => setShowMenu(false)}>
                                         <p className="text-white text-hover-primary-light-7 site-texts mb-1 font-lg p-1">
                                             Administratif
@@ -98,7 +100,7 @@ function Navigation(props) {
 
                                 <p className="text-white text-hover-primary-light-7 site-texts mb-1 font-lg p-1"
                                     onClick={() => {
-                                        FormContextValue.logout();
+                                        logout();
                                         setShowMenu(false);
                                     }}>Logout</p>
                             </div>
@@ -107,12 +109,12 @@ function Navigation(props) {
                             <><div className="display-f fd-c">
                                 <p className="text-white text-hover-primary-light-7 site-texts mb-1 font-lg p-1"
                                     onClick={() => {
-                                        FormContextValue.handleLogin();
+                                        handleLogin();
                                         setShowMenu(false);
                                     }}>Log In</p>
                                 <p className="text-white text-hover-primary-light-7 site-texts font-lg p-1"
                                     onClick={() => {
-                                        FormContextValue.handleSigin();
+                                        handleSigin();
                                         setShowMenu(false);
                                     }
                                     }>Sign Up</p>

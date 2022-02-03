@@ -10,9 +10,7 @@ function UserPage({ user, hardRefresh }) {
 
     const [state, setState] = useState('splash')
 
-    useEffect(() => {
-        hardRefresh()
-    }, [hardRefresh])
+    useEffect(() => { hardRefresh() }, [hardRefresh])
 
     return (
         <div className="container-xl bg-white br-xs p-3" >

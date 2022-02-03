@@ -1,11 +1,12 @@
 // Styles
 import "./App.css";
-import "./App.scss";
 import './css/index.css'
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
+// routeur dom
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+// pages // composants
 import Home from "./Components/Home/Home";
 import AdminPage from "./Components/AdminPage/AdminPage";
 import AllAnnounces from "./Components/AllAnnounces/AllAnnounces";
@@ -16,76 +17,47 @@ import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDet
 import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
 import Error from "./Components/Error/Error";
 
-//temporaire :
-import axios from "axios";
+// hooks (& context)
 import useURL from "./Hooks/useURL";
-import useSubmit from "./Hooks/useSubmit";
-import FormContext from "./Context/FormContext";
 import URLContext from "./Context/URLcontext";
+import useToken from "./Hooks/useToken";
 
 function App() {
-  const [user, setUser] = useState({});
   const [URLContextValue] = useURL();
-  const [FormContextValue] = useSubmit();
 
-  let isLog = user !== null;
+  const { user, hardRefresh } = useToken()
 
-  function hardRefresh() {
-    let localToken = localStorage.getItem("@updownstreet-token");
-    if (localToken === null) {
-      return setUser(null);
-    }
-    axios
-      .get(`${URLContextValue.url}/api/users/token`, {
-        headers: { authorization: `Bearer ${localToken}` },
-      })
-      .then((res) => {
-        if (res.data === "token expire") {
-          localStorage.removeItem("@updownstreet-token");
-          localStorage.removeItem("@uppertown-url");
-          document.location.replace("/");
-        } else {
-          setUser(res.data);
-        }
-      })
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    hardRefresh();
-  }, []);
+  useEffect(() => { hardRefresh() }, [hardRefresh]);
 
   return (
     <div className="app">
       <URLContext.Provider value={URLContextValue}>
-        <FormContext.Provider value={FormContextValue} >
-          <Router>
-            <div className="main">
-              <Navigation
-                isLog={isLog}
-                user={user} />
-              <Switch>
-                <Route exact path="/">
-                  <Home
-                    hardRefresh={hardRefresh} />
-                </Route>
-                <Route path="/announces">
-                  {isLog ? <AllAnnounces /> : <Error />}
-                </Route>
-                <Route path="/admin">{isLog ? <AdminPage /> : <Error />}</Route>
-                <Route path="/userpage">
-                  {isLog ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
-                </Route>
-                <Route path="/announce-detail">
-                  {isLog ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-                </Route>
-                <Route path="/user-detail">
-                  {isLog ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </FormContext.Provider>
+        <Router>
+          <div className="main">
+            <Navigation
+              user={user} />
+            <Switch>
+              <Route exact path="/">
+                <Home
+                  hardRefresh={hardRefresh} />
+              </Route>
+              <Route path="/announces">
+                {user ? <AllAnnounces /> : <Error />}
+              </Route>
+              <Route path="/admin">
+                {user ? <AdminPage /> : <Error />}</Route>
+              <Route path="/userpage">
+                {user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
+              </Route>
+              <Route path="/announce-detail">
+                {user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
+              </Route>
+              <Route path="/user-detail">
+                {user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
+              </Route>
+            </Switch>
+          </div>
+        </Router>
       </URLContext.Provider >
       <Footer />
     </div>

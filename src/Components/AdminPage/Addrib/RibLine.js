@@ -1,9 +1,8 @@
-import FormContext from "../../../Context/FormContext";
-import { useContext } from 'react';
+import { useCon } from "../../../Hooks/useCon";
 
 function RibLine({ entry }) {
 
-    const FormContextValue = useContext(FormContext);
+    const { handleChange } = useCon()
     return (
         <>
             <div><label className="label">{entry.label}</label></div>
@@ -11,7 +10,7 @@ function RibLine({ entry }) {
                 name={entry.name}
                 type={entry.type}
                 placeholder={entry.placeholder}
-                onChange={FormContextValue.handleChange} />
+                onChange={handleChange} />
         </>
     )
 }

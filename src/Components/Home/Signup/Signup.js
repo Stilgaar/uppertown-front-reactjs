@@ -1,21 +1,22 @@
-import FormContext from "../../../Context/FormContext";
 import { useContext } from 'react';
 import URLcontext from "../../../Context/URLcontext";
 import RibLine from "../../AdminPage/Addrib/RibLine";
 import { signup } from "../../../JSON/Arrays";
+import { useCon } from "../../../Hooks/useCon";
 
 function Signup() {
 
   const URLContextValue = useContext(URLcontext)
-  const FormContextValue = useContext(FormContext);
+
+  const { handleClick, handleSubmit, handleURL, handleLogin, resMsg } = useCon()
 
   return (
     <div className="form"
-      onClick={FormContextValue.handleClick}>
+      onClick={handleClick}>
       <div className="form-form"
         onClick={(e) => e.stopPropagation()}>
         <form className="container"
-          onSubmit={FormContextValue.handleSubmit}>
+          onSubmit={handleSubmit}>
           <h2 className="text-primary t-center mb-3">Créer mon compte</h2>
           {signup.map((entry) => (
             <RibLine entry={entry} key={entry.name} />
@@ -24,17 +25,17 @@ function Signup() {
             className="btn-outlined-primary text-hover-white font-md"
             type="submit"
             onMouseEnter={() => {
-              FormContextValue.handleURL(`${URLContextValue.url}/api/users/signup`)
+              handleURL(`${URLContextValue.url}/api/users/signup`)
             }}
           >
             Valider
           </button>
         </form>
-        <p className="text-compl-hover-primary t-center" onClick={FormContextValue.handleLogin}>
+        <p className="text-compl-hover-primary t-center" onClick={handleLogin}>
           J'ai deja un compte
         </p>
       </div>
-      {FormContextValue.resMsg && <div className="message-box p5">{FormContextValue.resMsg}</div>}
+      {resMsg && <div className="message-box p5">{resMsg}</div>}
     </div>
   );
 }

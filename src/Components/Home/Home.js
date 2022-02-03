@@ -3,20 +3,19 @@ import Login from "../Home/Login/Login";
 import Infos from "./Infos/Infos";
 import About from "./About/About";
 import OneAnnounce from "./OneAnnounce/OneAnnounce";
-import { useContext } from "react";
-import FormContext from "../../Context/FormContext";
+import { useCon } from "../../Hooks/useCon";
 
 function Home() {
 
-  const FormContextValue = useContext(FormContext)
+  const { form } = useCon()
 
   return (
     <div>
       <div className="home">
-        {FormContextValue.form === "signin" && (
+        {form === "signin" && (
           <Signup />
         )}
-        {FormContextValue.form === "login" && (
+        {form === "login" && (
           <Login />
         )}
 

@@ -1,12 +1,13 @@
 import "./UserUpdate.css"
-import FormContext from '../../../Context/FormContext'
 import URLcontext from '../../../Context/URLcontext'
 import { useContext } from 'react'
+import { useCon } from "../../../Hooks/useCon"
 
-function OneLineUploaded({ user, data, hardRefresh, entry }) {
+function OneLineUploaded({ user, data, hardRefresh }) {
 
-    const FormContextValue = useContext(FormContext)
     const UrlContextvalue = useContext(URLcontext)
+
+    const { handleURL, handleData, handleEnvoi, setClickData } = useCon()
 
     return (
         <>
@@ -14,15 +15,15 @@ function OneLineUploaded({ user, data, hardRefresh, entry }) {
             <button
                 className="btn-outlined-primary text-hover-white font-sm anul"
                 onMouseEnter={() => {
-                    FormContextValue.handleURL(`${UrlContextvalue.url}/up/delete/${user._id}`)
-                    FormContextValue.handleData({ pic: data })
+                    handleURL(`${UrlContextvalue.url}/up/delete/${user._id}`)
+                    handleData({ pic: data })
                 }}
                 onClick={(e) => {
-                    FormContextValue.handleEnvoi(e)
+                    handleEnvoi(e)
                     hardRefresh()
                 }}
                 onMouseLeave={() => {
-                    FormContextValue.setClickData()
+                    setClickData()
                 }}>
                 Supprimer
             </button>

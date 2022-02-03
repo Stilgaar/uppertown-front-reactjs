@@ -2,14 +2,15 @@ import { useState, useContext, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import StableCoins from '../StableCoins/StableCoins';
 import URLcontext from '../../../Context/URLcontext';
-import FormContext from '../../../Context/FormContext';
 import useFetch from '../../../Hooks/useFetch';
 import { Link } from "react-router-dom";
+import { useCon } from '../../../Hooks/useCon'
 
 function UserDetail() {
 
     const UrlContextValue = useContext(URLcontext)
-    const FormContextValue = useContext(FormContext)
+
+    const { handleURL, setClickData, handleData, handleEnvoi } = useCon()
     const [modal, setModal] = useState('')
 
     const location = useLocation();
@@ -21,7 +22,7 @@ function UserDetail() {
     }, [refreshUser])
 
     const click = () => {
-        FormContextValue.handleEnvoi()
+        handleEnvoi()
         setTimeout(() => {
             refreshUser()
         }, 50)
@@ -47,7 +48,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifPi/${userdata._id}`)
+                                    handleURL(`${UrlContextValue.url}/admin/verifPi/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Identité Verifiée
@@ -55,7 +56,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifJDD/${userdata._id}`)
+                                    handleURL(`${UrlContextValue.url}/admin/verifJDD/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Justificatif de Domcile Verifié
@@ -63,7 +64,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    FormContextValue.handleURL(`${UrlContextValue.url}/admin/verifAVIS/${userdata._id}`)
+                                    handleURL(`${UrlContextValue.url}/admin/verifAVIS/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Avis d'imposition verifié
@@ -71,7 +72,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    FormContextValue.handleURL(`${UrlContextValue.url}/admin/goAdmin/${userdata._id}`)
+                                    handleURL(`${UrlContextValue.url}/admin/goAdmin/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Passer Admin
@@ -79,7 +80,7 @@ function UserDetail() {
                             <button
                                 className="btn-outlined-primary text-hover-white font-sm"
                                 onMouseEnter={() => {
-                                    FormContextValue.handleURL(`${UrlContextValue.url}/admin/noAdmin/${userdata._id}`)
+                                    handleURL(`${UrlContextValue.url}/admin/noAdmin/${userdata._id}`)
                                 }}
                                 onClick={() => click()}>
                                 Retirer Admin
@@ -129,7 +130,7 @@ function UserDetail() {
                                 {userdata?.awaiting &&
                                     <button className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transactionDone/${userdata._id}`)
+                                            handleURL(`${UrlContextValue.url}/api/users/transactionDone/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Toutes les operations sont terminés
@@ -145,11 +146,11 @@ function UserDetail() {
                                     {argent}
                                     <button className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleData({ argent: argent })
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveMoney/${userdata._id}`)
+                                            handleData({ argent: argent })
+                                            handleURL(`${UrlContextValue.url}/api/users/archiveMoney/${userdata._id}`)
                                         }}
                                         onMouseLeave={() => {
-                                            FormContextValue.setClickData("")
+                                            setClickData("")
                                         }}
                                         onClick={() => click()}>
                                         Stable Coins Transférés
@@ -172,7 +173,7 @@ function UserDetail() {
                                     <button
                                         className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
-                                            FormContextValue.handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone/${userdata._id}`)
+                                            handleURL(`${UrlContextValue.url}/api/users/transtactionEuroDone/${userdata._id}`)
                                         }}
                                         onClick={() => click()}>
                                         Toutes les operations sont terminés
@@ -192,11 +193,11 @@ function UserDetail() {
                                 <div key={argent}>{argent} <button
                                     className="btn-outlined-primary text-hover-white font-sm"
                                     onMouseEnter={() => {
-                                        FormContextValue.handleData({ argent: argent })
-                                        FormContextValue.handleURL(`${UrlContextValue.url}/api/users/archiveEuros/${userdata._id}`)
+                                        handleData({ argent: argent })
+                                        handleURL(`${UrlContextValue.url}/api/users/archiveEuros/${userdata._id}`)
                                     }}
                                     onMouseLeave={() => {
-                                        FormContextValue.setClickData("")
+                                        setClickData("")
                                     }}
                                     onClick={() => click(argent)}>
                                     Euros Transférés

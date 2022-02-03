@@ -3,7 +3,6 @@ import OneLineUpload from './OneLineUpload';
 
 function Uploads({ user, hardRefresh }) {
 
-
     return (
 
         <div className="container-xl bg-white p-1">

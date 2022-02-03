@@ -1,12 +1,14 @@
 import { useState, useContext } from 'react'
-import FormContext from '../../../Context/FormContext'
+
 import URLContext from '../../../Context/URLcontext'
+import { useCon } from '../../../Hooks/useCon'
 
 function OneLineUpdate({ entry, user, hardRefresh }) {
 
     const UrlContextvalue = useContext(URLContext)
-    const FormContextValue = useContext(FormContext)
     const [box, setBox] = useState(false)
+
+    const { handleURL, handleChange, handleSubmit } = useCon()
 
     return (
         <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
@@ -25,7 +27,7 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                     </div>}
                 {box &&
                     <form onSubmit={(e) => {
-                        FormContextValue.handleSubmit(e)
+                        handleSubmit(e)
                         hardRefresh()
                         setBox(c => !c)
                     }}>
@@ -37,8 +39,8 @@ function OneLineUpdate({ entry, user, hardRefresh }) {
                                 type={entry.type}
                                 placeholder={entry.placeholder}
                                 onChange={(e) => {
-                                    FormContextValue.handleURL(`${UrlContextvalue.url}/api/users/modifyUser/${user._id}`)
-                                    FormContextValue.handleChange(e);
+                                    handleURL(`${UrlContextvalue.url}/api/users/modifyUser/${user._id}`)
+                                    handleChange(e);
                                 }}
                                 name={entry.newinput} />
                         </div>

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import URLcontext from '../../../Context/URLcontext';
-import FormContext from '../../../Context/FormContext'
 import Rib from './Rib';
+import { useCon } from '../../../Hooks/useCon';
 
 
 function UserVirement({ user, hardRefresh }) {
@@ -12,7 +12,8 @@ function UserVirement({ user, hardRefresh }) {
     const [pending, setPending] = useState(false)
 
     const URLContextValue = useContext(URLcontext)
-    const FormContexValue = useContext(FormContext)
+
+    const { handleSubmit, handleURL, handleChange, handleData } = useCon()
 
     return (
 
@@ -37,7 +38,7 @@ function UserVirement({ user, hardRefresh }) {
 
                         <form className='display-f fd-c col-6-xl col-12-lg'
                             onSubmit={(e) => {
-                                FormContexValue.handleSubmit(e)
+                                handleSubmit(e)
                                 setValidation(true)
                                 hardRefresh()
                             }}>
@@ -48,8 +49,8 @@ function UserVirement({ user, hardRefresh }) {
                                 name="montant"
                                 placeholder="Montant"
                                 onChange={(e) => {
-                                    FormContexValue.handleChange(e)
-                                    FormContexValue.handleURL(`${URLContextValue.url}/api/users/addMoney/${user._id}`)
+                                    handleChange(e)
+                                    handleURL(`${URLContextValue.url}/api/users/addMoney/${user._id}`)
                                 }} />
                             <button className="btn-outlined-primary text-hover-white font-sm"
                                 type="submit">
@@ -80,7 +81,7 @@ function UserVirement({ user, hardRefresh }) {
                         {user?.rib?.[0] !== undefined ? <div> Vous disposez de {user.stableCoins} StableCoins
                             <form className='display-f fd-c'
                                 onSubmit={(e) => {
-                                    FormContexValue.handleSubmit(e)
+                                    handleSubmit(e)
                                     setPending(true)
                                     hardRefresh()
                                 }}>
@@ -92,8 +93,8 @@ function UserVirement({ user, hardRefresh }) {
                                             value={ribz}
                                             name="rib"
                                             onChange={(e) => {
-                                                FormContexValue.handleURL(`${URLContextValue.url}/api/users/askMoney/${user._id}`)
-                                                FormContexValue.handleChange(e, undefined, 'radio')
+                                                handleURL(`${URLContextValue.url}/api/users/askMoney/${user._id}`)
+                                                handleChange(e, undefined, 'radio')
                                             }} /> <span className='fw-b text-primary'> RIB #{index + 1} - {ribz}</span>
                                     </div>
                                 )}
@@ -105,8 +106,8 @@ function UserVirement({ user, hardRefresh }) {
                                         type="number"
                                         name="change"
                                         onChange={(e) => {
-                                            FormContexValue.handleChange(e)
-                                            FormContexValue.handleData({ currentStable: user.stableCoins })
+                                            handleChange(e)
+                                            handleData({ currentStable: user.stableCoins })
                                         }} />
                                     <button className="btn-outlined-primary text-hover-white font-sm col-5-xl"
                                         type="submit">Valider</button>

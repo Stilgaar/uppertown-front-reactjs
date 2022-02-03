@@ -19,8 +19,8 @@ function useSubmit() {
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données sur le site en général
-  // console.log("URL", url)
-  //console.log("DATA", data)
+  console.log("URL", url)
+  console.log("DATA", data)
   // console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
   //console.log("RESMSG", resMsg)
@@ -193,11 +193,11 @@ function useSubmit() {
 
   // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons, ne se trigger que s'il y a un 'amount' dans le setter data
   useEffect(() => {
-    if (FormContextValue.data.amount) {
-      let amountStableCoins = (FormContextValue.data.amount * FormContextValue.data.share_price)
+    if (data.amount) {
+      let amountStableCoins = (data.amount * data.share_price)
       setData((data) => ({ ...data, amountStableCoins }))
     }
-  }, [FormContextValue.data.amount, FormContextValue.data.share_price])
+  }, [data.amount, data.share_price])
 
   // je retourne que ça dans l'app.js, puis avec useContext je l'arose sur tous mes composants
   return [FormContextValue];
