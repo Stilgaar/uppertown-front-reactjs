@@ -12,7 +12,7 @@ function UserPage({ user, hardRefresh }) {
 
     useEffect(() => {
         hardRefresh()
-    }, [])
+    }, [hardRefresh])
 
     return (
         <div className="container-xl bg-white br-xs p-3" >

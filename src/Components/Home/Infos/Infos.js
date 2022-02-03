@@ -4,13 +4,14 @@ import building from './building.svg';
 import cart from './cart-plus.svg';
 import { useContext } from "react";
 import URLContext from "../../../Context/URLcontext";
-import useAxios from "../../../Hooks/useAxios";
+import useFetch from '../../../Hooks/useFetch';
 
 function Infos() {
 
   const URLContextValue = useContext(URLContext)
-  const [users] = useAxios(`${URLContextValue.url}/api/users/users`)
-  const [ann] = useAxios(`${URLContextValue.url}/api/announces/allAnnounces`)
+  const { data: ann, error: annerror, pending: annpending } = useFetch(`${URLContextValue.url}/api/announces/allAnnounces`)
+  const { data: users, error: uerror, pending: upending } = useFetch(`${URLContextValue.url}/api/users/users`)
+
 
   let clienttokens = 0;
   for (let i = 0; i < users.length; i++) {
@@ -34,7 +35,9 @@ function Infos() {
             <div><img src={coin} alt="coin"
               className="infos-svg-coin" />
               <p className="card-title" >StableCoins échangés</p></div>
-            <div>{(clienttokens?.toLocaleString())}</div>
+            {uerror && <p>{uerror}</p>}
+            {upending && <p>Chargement ...</p>}
+            {users && <div>{(clienttokens?.toLocaleString())}</div>}
           </div>
         </div>
 
@@ -43,7 +46,9 @@ function Infos() {
             <div><img src={people} alt="people"
               className="infos-svg-people" />
               <p className=" card-title">Utilisateurs Inscrit</p></div>
-            <div>{(users?.length?.toLocaleString())}</div>
+            {uerror && <p>{uerror}</p>}
+            {upending && <p>Chargement ...</p>}
+            {users && <div>{(users?.length?.toLocaleString())}</div>}
           </div>
         </div>
 
@@ -52,7 +57,9 @@ function Infos() {
             <div><img src={building} alt="building"
               className="infos-svg-building" />
               <p className=" card-title" >Biens Immobiliers</p></div>
-            <div>{(ann.length?.toLocaleString())}</div>
+            {annerror && <p>{annerror}</p>}
+            {annpending && <p>Chargement ...</p>}
+            {ann && <div>{(ann.length?.toLocaleString())}</div>}
           </div>
         </div>
 
@@ -61,7 +68,9 @@ function Infos() {
             <div><img src={cart} alt="cart"
               className="infos-svg-cart" />
               <p className=" card-title">Tokens disponibles</p></div>
-            <div>{(freetokens?.toLocaleString())}</div>
+            {annerror && <p>{annerror}</p>}
+            {annpending && <p>Chargement ...</p>}
+            {ann && <div>{(freetokens?.toLocaleString())}</div>}
           </div>
         </div>
       </div>

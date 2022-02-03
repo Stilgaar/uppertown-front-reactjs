@@ -1,4 +1,4 @@
-import useAxios from "../../../Hooks/useAxios";
+import useFetch from "../../../Hooks/useFetch";
 import URLcontect from '../../../Context/URLcontext'
 import { useContext } from 'react'
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Biens({ elem, index, type }) {
 
     const UrlContextValue = useContext(URLcontect)
-    const [announce] = useAxios(`${UrlContextValue.url}/api/announces/${elem.annonceId}`)
+    const { data: announce } = useFetch(`${UrlContextValue.url}/api/announces/${elem.annonceId}`)
 
     return (
         <div className='card bg-white t-center mr-5 ml-5 fw-b'>

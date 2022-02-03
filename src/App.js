@@ -1,3 +1,4 @@
+// Styles
 import "./App.css";
 import "./App.scss";
 import './css/index.css'
@@ -21,7 +22,6 @@ import useURL from "./Hooks/useURL";
 import useSubmit from "./Hooks/useSubmit";
 import FormContext from "./Context/FormContext";
 import URLContext from "./Context/URLcontext";
-import env from "react-dotenv";
 
 function App() {
   const [user, setUser] = useState({});
@@ -52,11 +52,8 @@ function App() {
   }
 
   useEffect(() => {
-    if (!URLContextValue.url !== env.URLLOCAL) {
-      URLContextValue.getURL()
-    }
     hardRefresh();
-  }, [URLContextValue.url]);
+  }, []);
 
   return (
     <div className="app">

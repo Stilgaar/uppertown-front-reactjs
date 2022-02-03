@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import useAxios from '../../../Hooks/useAxios'
 import URLcontext from '../../../Context/URLcontext';
+import useFetch from '../../../Hooks/useFetch';
 
 function Rib() {
     const URLContextValue = useContext(URLcontext)
-    const [rib] = useAxios(`${URLContextValue.url}/admin/getRib`)
+    const { data: rib } = useFetch(`${URLContextValue.url}/admin/getRib`)
+
     return (
+
         <div className='p-2 col-6-xl col-12-lg'>
             <div className='fw-b'>Pour acheter des Stable Coins, veuillez faire un virement sur le compte en banque suivant</div>
             <div><span className='fw-br text-primary'>Virement SEPA</span></div>

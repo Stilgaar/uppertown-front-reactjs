@@ -48,7 +48,7 @@ function Navigation(props) {
                         </div>
                         </>
                         :
-                        <div class="display-f">
+                        <div className="display-f">
                             <div className="text-white text-hover-primary-light-7 site-texts"
                                 onClick={FormContextValue.handleLogin}>
                                 Login

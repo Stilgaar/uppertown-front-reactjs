@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from "../../../Context/FormContext";
 import { rib } from '../../../JSON/Arrays';
@@ -9,10 +9,6 @@ function AddRib() {
     const FormContextValue = useContext(FormContext);
     const URLContextValue = useContext(URLcontext)
 
-    useEffect(() => {
-        FormContextValue.handleURL(`${URLContextValue.url}/admin/newRib`)
-    }, [])
-
     return (
 
         <div className="container-xl">
@@ -21,7 +17,9 @@ function AddRib() {
                 <div className='display-f fd-c p-0 justify-center container col-5-xl'>
                     {rib.map((entry, index) => (
                         <RibLine key={index} entry={entry} />))}
-                    <button className="btn-outlined-primary text-hover-white font-sm anul" type='submit' >
+                    <button
+                        onMouseEnter={() => FormContextValue.handleURL(`${URLContextValue.url}/admin/newRib`)}
+                        className="btn-outlined-primary text-hover-white font-sm anul" type='submit' >
                         Envoyer
                     </button>
                 </div>

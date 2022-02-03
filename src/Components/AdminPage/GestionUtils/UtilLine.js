@@ -10,7 +10,7 @@ function UtilLine({ element, adminRefresh }) {
             <div className=" card container bg-white display-f noborder p-1"
                 onClick={() => setBox(current => !current)
                 }>
-                <h3>{element.label} </h3>
+                <h3>{element?.label} </h3>
                 {
                     element?.status?.length !== 0 ?
                         <div className="ml-1 badge-secondary text-white fw-br">

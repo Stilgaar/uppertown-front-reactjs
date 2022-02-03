@@ -33,9 +33,7 @@ function Invest({ user, ann, thisAnnRefresh, hardRefresh }) {
                     Votre investissement l'éléve à <span className='text-secondary fw-br'>{FormContextValue?.data?.amountStableCoins}</span> StableCoins
                 </div>}
 
-                {FormContextValue?.data?.amountStableCoins < ann.share_number
-                    && FormContextValue?.data?.amountStableCoins < user.stableCoins
-                    || FormContextValue?.data?.amountStableCoins === undefined ?
+                {(FormContextValue?.data?.amountStableCoins < ann.share_number && FormContextValue?.data?.amountStableCoins < user.stableCoins) || (FormContextValue?.data?.amountStableCoins === undefined) ?
                     <button type="submit"
                         className='btn-outlined-primary text-hover-white font-md"'
                         onMouseEnter={() => { FormContextValue.handleURL(`${UrlContextvalue.url}/transac/transac`) }}>

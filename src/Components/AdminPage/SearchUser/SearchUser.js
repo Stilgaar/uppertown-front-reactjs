@@ -1,26 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import UserLine from '../UserLine/UserLine';
-import useAxios from '../../../Hooks/useAxios';
+import useFetch from '../../../Hooks/useFetch';
 import URLcontext from '../../../Context/URLcontext';
 
 
 function SearchUser() {
 
     const URLContextValue = useContext(URLcontext)
-    const [users, adminRefresh] = useAxios(`${URLContextValue.url}/api/users/users`)
+    const { data: users, refresh: adminRefresh } = useFetch(`${URLContextValue.url}/api/users/users`)
     const [filterOne, setFilterOne] = useState("");
     const [filtrerdListOne, setFiltrerdListOne] = useState();
 
-    useEffect(() => { adminRefresh() }, [])
-
-    useEffect(() => {
-        const filtrerdListOne = users.filter((userOne) =>
-            verifiyOne(userOne)
-        );
-        setFiltrerdListOne(filtrerdListOne);
-    }, [filterOne, users]);
-
-    const verifiyOne = (userOne) => {
+    const verifiyOne = useCallback((userOne) => {
         let regex = new RegExp(filterOne.toLowerCase());
         if (
             regex.test(userOne?.lastname?.toLowerCase())
@@ -29,7 +20,16 @@ function SearchUser() {
             || regex.test(userOne?._id?.toLowerCase())) {
             return userOne;
         }
-    }
+    }, [filterOne])
+
+    useEffect(() => { adminRefresh() }, [adminRefresh])
+
+    useEffect(() => {
+        const filtrerdListOne = users?.length > 0 && users.filter((userOne) =>
+            verifiyOne(userOne)
+        );
+        setFiltrerdListOne(filtrerdListOne);
+    }, [users, verifiyOne]);
 
     return (
         <div className="container-xl">

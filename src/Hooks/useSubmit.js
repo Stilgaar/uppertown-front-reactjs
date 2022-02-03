@@ -19,22 +19,18 @@ function useSubmit() {
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données sur le site en général
-  console.log("URL", url)
-  console.log("DATA", data)
-  console.log("IMAGES", images)
-  console.log("CLICKDATA", clickData)
-  console.log("RESMSG", resMsg)
+  // console.log("URL", url)
+  //console.log("DATA", data)
+  // console.log("IMAGES", images)
+  // console.log("CLICKDATA", clickData)
+  //console.log("RESMSG", resMsg)
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
     e.preventDefault();
     e.persist()
-    console.log(e)
-    console.log(e.target)
     // remets les champs à zero
     e.target.reset()
-
-
 
     axios.post(url, data)
       .then((res) => {
@@ -199,9 +195,9 @@ function useSubmit() {
   useEffect(() => {
     if (FormContextValue.data.amount) {
       let amountStableCoins = (FormContextValue.data.amount * FormContextValue.data.share_price)
-      setData((data) => ({ ...data, ['amountStableCoins']: amountStableCoins }))
+      setData((data) => ({ ...data, amountStableCoins }))
     }
-  }, [FormContextValue.data.amount])
+  }, [FormContextValue.data.amount, FormContextValue.data.share_price])
 
   // je retourne que ça dans l'app.js, puis avec useContext je l'arose sur tous mes composants
   return [FormContextValue];

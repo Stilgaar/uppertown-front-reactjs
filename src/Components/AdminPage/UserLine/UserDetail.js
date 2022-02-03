@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import StableCoins from '../StableCoins/StableCoins';
 import URLcontext from '../../../Context/URLcontext';
 import FormContext from '../../../Context/FormContext';
-import useAxios from '../../../Hooks/useAxios';
+import useFetch from '../../../Hooks/useFetch';
 import { Link } from "react-router-dom";
 
 function UserDetail() {
@@ -14,9 +14,11 @@ function UserDetail() {
 
     const location = useLocation();
     const id = location.state?.data;
-    const [userdata, refreshUser] = useAxios(`${UrlContextValue.url}/api/users/${id}`)
+    const { data: userdata, refresh: refreshUser } = useFetch(`${UrlContextValue.url}/api/users/${id}`)
 
-    useEffect(() => { refreshUser() }, [])
+    useEffect(() => {
+        refreshUser()
+    }, [refreshUser])
 
     const click = () => {
         FormContextValue.handleEnvoi()
@@ -139,7 +141,7 @@ function UserDetail() {
                                 </span>
                                 </div>}
                             {userdata?.montant?.map((argent) =>
-                                <div>
+                                <div key={argent}>
                                     {argent}
                                     <button className="btn-outlined-primary text-hover-white font-sm"
                                         onMouseEnter={() => {
@@ -187,7 +189,7 @@ function UserDetail() {
                             }
 
                             {userdata?.montantEuro?.map((argent) =>
-                                <div >{argent} <button
+                                <div key={argent}>{argent} <button
                                     className="btn-outlined-primary text-hover-white font-sm"
                                     onMouseEnter={() => {
                                         FormContextValue.handleData({ argent: argent })
@@ -221,7 +223,7 @@ function UserDetail() {
                         {modal === "sc" &&
                             <div className="scroll card container col-5-xl col-5-lg col-6-md col-12-sm col-12-xs t-start mt-1 mb-1 bg-primary-light-9">
                                 {userdata?.ancientMontants?.map((argent, index) =>
-                                    <div className="card bg-primary-light-8 m-1">
+                                    <div key={argent} className="card bg-primary-light-8 m-1">
                                         Transaction N#{index + 1} {argent}
                                     </div>
                                 )} </div>}
@@ -230,7 +232,7 @@ function UserDetail() {
                         {modal === "euro" &&
                             <div className="card container col-5-xl col-5-lg col-6-md col-12-sm col-12-xs t-start mt-1 mb-1 bg-primary-light-9">
                                 {userdata?.ancientMontantsEuro?.map((argent, index) =>
-                                    <div className="scroll card mb-1 bg-primary-light-8">
+                                    <div key={argent} className="scroll card mb-1 bg-primary-light-8">
                                         <span className="fw-br text-primary"> Transaction N#{index + 1} <br /></span>
                                         {argent}
                                     </div>)}
@@ -241,8 +243,9 @@ function UserDetail() {
                         <div className="card container col-5-xl col-5-lg col-6-md col-12-sm col-12-xs t-start mt-1 mb-1">
                             <span className="fw-br text-primary"> Pieces d'identité :</span>
                             <div> {userdata?.pi?.[0] ?
-                                < div > {userdata?.pi?.map((image) => <a href={image}>
-                                    <img className="ml-1 mr-1 border-base thumb" src={image} alt="" /></a>)}
+                                < div > {userdata?.pi?.map((image) =>
+                                    <a key={image} href={image}>
+                                        <img className="ml-1 mr-1 border-base thumb" src={image} alt="" /></a>)}
                                 </div>
                                 : <div> "Non renseigné"</div>
                             }
@@ -254,7 +257,7 @@ function UserDetail() {
                                 Justificatif de Domicile:</span>
                             <div>{userdata?.JDD?.[0] ?
                                 < div >{userdata?.JDD?.map((image) =>
-                                    <a href={image}><img className="ml-1 mr-1 border-base  thumb" src={image} alt="" /></a>)}
+                                    <a key={image} href={image}><img className="ml-1 mr-1 border-base  thumb" src={image} alt="" /></a>)}
                                 </div>
                                 : <div> "Non renseigné"</div>
                             }
@@ -265,7 +268,7 @@ function UserDetail() {
                             <span className="fw-br text-primary">Avis d'imposition :</span>
                             <div> {userdata?.avisFiscal?.[0] ?
                                 <div> {userdata?.avisFiscal?.map((image) =>
-                                    <a href={image}><img className="ml-1 mr-1 border-base  thumb" src={image} alt="" /></a>
+                                    <a key={image} href={image}><img className="ml-1 mr-1 border-base  thumb" src={image} alt="" /></a>
                                 )}
                                 </div>
                                 : <div> "Non renseigné"</div>

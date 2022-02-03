@@ -29,7 +29,6 @@ function StableCoins({ userdata, refreshUser }) {
                         values={FormContextValue.data.stableCoins || ""}
                         type="text"
                         placeholder="Nombre de Stable coins commandés"
-                        className="input"
                         name="stableCoins"
                         onChange={(e) => {
                             FormContextValue.handleChange(e)

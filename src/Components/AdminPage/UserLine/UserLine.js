@@ -40,20 +40,20 @@ function UserLine({ userdata }) {
                         {userdata.pi[0] && <div className="row text-primary fw-br m-a">
                             <span className="m-a"> Pieces d'ID :</span>
                             {userdata.pi.map((data) =>
-                                <img className="thumb p-1" src={data} alt="piece identité" />
+                                <img key={data} className="thumb p-1" src={data} alt="piece identité" />
                             )}</div>}
 
                         {userdata.JDD[0] && <div className="row text-primary fw-br m-a">
                             <span className="m-a"> Justificatifs de Domiciles :</span>
                             {userdata.JDD.map((data) =>
-                                <div><img className="thumb  p-1" src={data} alt="justif" />
+                                <div><img key={data} className="thumb  p-1" src={data} alt="justif" />
                                 </div>
                             )}</div>}
 
                         {userdata.avisFiscal[0] && <div div className="row text-primary fw-br m-a">
                             <span className="m-a"> Avis d'impositions :</span>
                             {userdata.avisFiscal.map((data) =>
-                                <div><img className="thumb p-1" src={data} alt="avis fiscal" />
+                                <div key={data} ><img className="thumb p-1" src={data} alt="avis fiscal" />
                                 </div>
                             )}</div>}</div></div>
             </div >
