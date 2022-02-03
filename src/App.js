@@ -4,7 +4,7 @@ import './css/index.css'
 import React, { useEffect } from "react";
 
 // routeur dom
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // pages // composants
 import Home from "./Components/Home/Home";
@@ -16,6 +16,7 @@ import UserPage from "./Components/UserPage/UserPage";
 import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDetail";
 import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
 import Error from "./Components/Error/Error";
+import Error404 from "./Components/Error/Error404";
 
 // hooks (& context)
 import useToken from "./Hooks/useToken";
@@ -32,26 +33,17 @@ function App() {
         <div className="main">
           <Navigation
             user={user} />
-          <Switch>
-            <Route exact path="/">
-              <Home
-                hardRefresh={hardRefresh} />
-            </Route>
-            <Route path="/announces">
-              {user ? <AllAnnounces /> : <Error />}
-            </Route>
-            <Route path="/admin">
-              {user ? <AdminPage /> : <Error />}</Route>
-            <Route path="/userpage">
-              {user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />}
-            </Route>
-            <Route path="/announce-detail">
-              {user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-            </Route>
-            <Route path="/user-detail">
-              {user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />}
-            </Route>
-          </Switch>
+
+          <Routes>
+            <Route path="/" element={<Home hardRefresh={hardRefresh} />} />
+            <Route path="/announces" element={user ? <AllAnnounces /> : <Error />} />
+            <Route path="/admin" element={user ? <AdminPage /> : <Error />} />
+            <Route path="/userpage" element={user ? <UserPage user={user} hardRefresh={hardRefresh} /> : <Error />} />
+            <Route path="/announce-detail" element={user ? <AnnounceDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
+            <Route path="/user-detail" element={user ? <UserDetail user={user} hardRefresh={hardRefresh} /> : <Error />} />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+
         </div>
       </Router>
       <Footer />
