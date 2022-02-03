@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
+import useURL from './useURL'
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
 function useSubmit() {
 
+  const [theUrl] = useURL()
   // data est pour les données des inputs 
   const [data, setData] = useState({});
   // images récupére tous les files (logique)
@@ -14,16 +16,30 @@ function useSubmit() {
   // resmsg sont les messages récupérés par res.send
   const [resMsg, setResMsg] = useState();
   // form est l'état de la barre de navigation
-  const [form, setForm] = useState();
   // url est l'url d'envoi pour axios
   const [url, setUrl] = useState()
 
   // A laisser : pour la verification des données sur le site en général
-  console.log("URL", url)
-  console.log("DATA", data)
+  // console.log("URL", url)
+  // console.log("DATA", data)
   // console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
   //console.log("RESMSG", resMsg)
+
+  const formReducer = (state, action) => {
+    switch (action.type) {
+      case "LOGIN":
+        return { state: action.payload }
+      case "SIGN":
+        return { state: action.payload }
+      case "NULL":
+        return { state: action.payload }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(formReducer, { state: "" })
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
@@ -39,7 +55,7 @@ function useSubmit() {
           setResMsg(res.data)
           setTimeout(() => {
             setResMsg('');
-            setForm('login')
+            dispatch({ type: "LOGIN", payload: 'login' })
           }, 1500);
         }
         // check du login, mets le token en local storage s'il y en a un 
@@ -158,9 +174,9 @@ function useSubmit() {
     }
   }
   // Gestion de la Navbar
-  const handleClick = () => { setForm('') }
-  const handleLogin = () => { setForm('login') }
-  const handleSigin = () => { setForm('signin') }
+  const handleLogin = () => { dispatch({ type: "LOGIN", payload: 'login' }) }
+  const handleSignup = () => { dispatch({ type: "SIGN", payload: 'signin' }) }
+  const handleClick = () => { dispatch({ type: "NULL", payload: null }) }
   const logout = () => {
     localStorage.removeItem("@updownstreet-token");
     localStorage.removeItem("@uppertown-url");
@@ -172,7 +188,8 @@ function useSubmit() {
 
   // useContext, utilisable partout =)
   const FormContextValue = {
-    form,
+    state: state.state,
+    url: theUrl,
     data,
     resMsg,
     setData,
@@ -180,14 +197,14 @@ function useSubmit() {
     setUrl,
     handleChange,
     handleLogin,
-    handleSigin,
-    handleClick,
+    handleSignup,
     handleSubmit,
     handleURL,
     handleData,
     handleEnvoi,
     handleForm,
     handleFile,
+    handleClick,
     logout,
   };
 

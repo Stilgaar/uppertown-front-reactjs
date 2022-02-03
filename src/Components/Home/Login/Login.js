@@ -4,7 +4,7 @@ import { useCon } from '../../../Hooks/useCon';
 
 function Login() {
 
-    const { handleClick, handleSubmit, handleSigin, handleURL, resMsg, url } = useCon()
+    const { handleClick, handleSubmit, handleSignup, handleURL, resMsg, url } = useCon()
 
     return (
         <div className="form"
@@ -26,7 +26,7 @@ function Login() {
                     </button>
                 </form>
                 <p className="text-compl-hover-primary t-center"
-                    onClick={handleSigin}>Créer un compte
+                    onClick={handleSignup}>Créer un compte
                 </p>
             </div>
             {resMsg &&

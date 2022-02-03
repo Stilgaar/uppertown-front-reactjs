@@ -9,7 +9,6 @@ function useToken() {
     const [user, setUser] = useState(null)
     const [error, setError] = useState(null)
     const [pending, setPending] = useState(false)
-    const [isUser, setIsUser] = useState(false)
     const { url } = useCon();
 
     const hardRefresh = useCallback(() => {
@@ -33,7 +32,6 @@ function useToken() {
                     document.location.replace("/")
                 } else {
                     setUser(res.data)
-                    setIsUser(true)
                     setPending(false)
                     setError(null)
                 }
@@ -49,7 +47,7 @@ function useToken() {
         hardRefresh()
     }, [hardRefresh]);
 
-    return { user, hardRefresh, error, pending, isUser }
+    return { user, hardRefresh, error, pending }
 
 }
 

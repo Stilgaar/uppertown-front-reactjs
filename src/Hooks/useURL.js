@@ -18,10 +18,6 @@ export default function useURL() {
       .catch(err => { if (err) { return null } })
   };
 
-  const URLContextValue = {
-    url: url,
-    getURL: getURL
-  };
 
-  return [URLContextValue];
+  return [url];
 }

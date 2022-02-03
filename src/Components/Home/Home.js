@@ -7,15 +7,15 @@ import { useCon } from "../../Hooks/useCon";
 
 function Home() {
 
-  const { form } = useCon()
+  const { state } = useCon()
 
   return (
     <div>
       <div className="home">
-        {form === "signin" && (
+        {state === "signin" && (
           <Signup />
         )}
-        {form === "login" && (
+        {state === "login" && (
           <Login />
         )}
 

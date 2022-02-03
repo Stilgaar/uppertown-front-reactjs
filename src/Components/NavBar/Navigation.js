@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import React from 'react'
 import { useState } from 'react';
 import { useCon } from "../../Hooks/useCon";
-
 
 function Navigation({ user }) {
 
     const [showMenu, setShowMenu] = useState(false)
 
-    const { logout, handleLogin, handleSigin } = useCon()
+    const { logout, handleLogin, handleSignup } = useCon()
 
     return (
         <>
@@ -56,7 +54,7 @@ function Navigation({ user }) {
                                 Login
                             </div>
                             <div className="text-white text-hover-primary-light-7 site-texts"
-                                onClick={handleSigin}>
+                                onClick={handleSignup}>
                                 Sign Up
                             </div>
                         </div>
@@ -114,7 +112,7 @@ function Navigation({ user }) {
                                     }}>Log In</p>
                                 <p className="text-white text-hover-primary-light-7 site-texts font-lg p-1"
                                     onClick={() => {
-                                        handleSigin();
+                                        handleSignup();
                                         setShowMenu(false);
                                     }
                                     }>Sign Up</p>
