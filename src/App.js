@@ -6,17 +6,21 @@ import React, { useEffect } from "react";
 // routeur dom
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// pages // composants
+// pages 
 import Home from "./Components/Home/Home";
 import AdminPage from "./Components/AdminPage/AdminPage";
 import AllAnnounces from "./Components/AllAnnounces/AllAnnounces";
 import Footer from "./Components/Footer/Footer";
-import Navigation from "./Components/NavBar/Navigation";
 import UserPage from "./Components/UserPage/UserPage";
 import AnnounceDetail from "./Components/AllAnnounces/AnnounceDetail/AnnounceDetail";
 import UserDetail from "./Components/AdminPage/UserLine/UserDetail";
-import Error from "./Components/Error/Error";
-import Error404 from "./Components/Error/Error404";
+
+// pages d'erreurs
+import Error from "./Components/Error/Error"; // 401
+import Error404 from "./Components/Error/Error404"; // 404
+
+// composants
+import Navigation from "./Components/NavBar/Navigation";
 
 // hooks (& context)
 import useToken from "./Hooks/useToken";
@@ -31,8 +35,7 @@ function App() {
     <div className="app">
       <Router>
         <div className="main">
-          <Navigation
-            user={user} />
+          <Navigation user={user} />
 
           <Routes>
             <Route path="/" element={<Home hardRefresh={hardRefresh} />} />

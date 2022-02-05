@@ -19,6 +19,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^5.2.1",
     "react-slideshow-image": "^3.6.0",
+    "socket.io-client": "^4.4.1",
     "sweetalert2": "^11.1.9",
     "web-vitals": "^1.1.2"
   },

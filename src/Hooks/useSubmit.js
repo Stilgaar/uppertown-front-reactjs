@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-import useURL from './useURL'
+import useURL from './useURL' // j'ai fait venir useURL ici parce que la flemme de faire un hook global à injecter dans le useCon (use global context)
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
@@ -26,7 +26,7 @@ function useSubmit() {
   // console.log("CLICKDATA", clickData)
   //console.log("RESMSG", resMsg)
 
-  // REDUCER POUR LE LOGIN FORM (c'est un peu overkill mais c'est classe non ? )
+  // REDUCER POUR LE LOGIN FORM // NAVBAR (c'est un peu overkill mais c'est classe non ? )
   const formReducer = (state, action) => {
     switch (action.type) {
       case "LOGIN":
@@ -39,8 +39,17 @@ function useSubmit() {
         return state
     }
   }
-
   const [state, dispatch] = useReducer(formReducer, { state: "" })
+
+  // Gestion de la Navbar
+  const handleLogin = () => { dispatch({ type: "LOGIN", payload: 'login' }) }
+  const handleSignup = () => { dispatch({ type: "SIGN", payload: 'signin' }) }
+  const handleClick = () => { dispatch({ type: "NULL", payload: null }) }
+  const logout = () => {
+    localStorage.removeItem("@updownstreet-token");
+    localStorage.removeItem("@uppertown-url");
+    document.location.replace('/');
+  }
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
@@ -65,7 +74,8 @@ function useSubmit() {
           localStorage.setItem("id", res.data.userId);
           document.location.replace('/');
         }
-        // sinon il mets le res message dans le setter. Renvoi aussi les messages au front pour l'affichage
+        // sinon il mets le res message dans le setter. 
+        // Renvoi aussi les messages au front pour l'affichage
         else {
           setResMsg(res.data)
           setTimeout(() => {
@@ -163,9 +173,7 @@ function useSubmit() {
 
   // gestion du de la récuperation de fichiers, mets également les variables clicks dans data avant de l'envoyer dans le back
   const handleFile = (e) => {
-
     setImages((images) => (({ ...images, [e.target.name]: e.target.files })))
-
     if (clickData) {
       let key = Object.keys(clickData)
       let val = Object.values(clickData)
@@ -173,15 +181,6 @@ function useSubmit() {
         setData((data => ({ ...data, [key[i]]: val[i] })))
       }
     }
-  }
-  // Gestion de la Navbar
-  const handleLogin = () => { dispatch({ type: "LOGIN", payload: 'login' }) }
-  const handleSignup = () => { dispatch({ type: "SIGN", payload: 'signin' }) }
-  const handleClick = () => { dispatch({ type: "NULL", payload: null }) }
-  const logout = () => {
-    localStorage.removeItem("@updownstreet-token");
-    localStorage.removeItem("@uppertown-url");
-    document.location.replace('/');
   }
 
   // récupére les URL avant l'envoi dans le back sur les fonctions spécifiques.

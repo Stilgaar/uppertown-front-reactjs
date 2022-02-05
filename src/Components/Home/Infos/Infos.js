@@ -28,7 +28,7 @@ function Infos() {
 
   return (
     <div className="mt-4 mb-3 pt-2 pb-5 pl-1 pr-1 bg-white">
-      <h3 className="bg-primary text-white p-1 t-center font-xl p-1">Uppertown en quelques chiffres</h3>
+      <h3 className="bg-primary text-white p-1 t-center font-xl p-1 br-xs" >Uppertown en quelques chiffres</h3>
       <div className="row ml-1 mr-1  gap-3">
 
         <div className="col-12-xs col-6-md col-3-lg z-6 ">

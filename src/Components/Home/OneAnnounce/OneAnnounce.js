@@ -11,7 +11,7 @@ function OneAnnounce() {
   return (
 
     <div className=" mt-3 mb-4 pt-2 pb-5 pl-1 pr-1 bg-white">
-      <h3 className="bg-primary text-white p-1 t-center font-xl p-1">UpperTown vous propose</h3>
+      <h3 className="bg-primary text-white p-1 t-center font-xl p-1 br-xs">UpperTown vous propose</h3>
 
       <div className="row gap-2 ml-2 mr-2">
         <div className="p-3 col-6-xl z-6 bg-white t-center font-lg p-1">
