@@ -60,9 +60,7 @@ function AnnounceLine({ entry }) {
                         multiple
                         type={entry.type}
                         name={entry.name}
-                        onChange={(e) => {
-                            handleFile(e)
-                        }} />
+                        onChange={handleFile} />
                 </>}
 
             {entry.values && <>

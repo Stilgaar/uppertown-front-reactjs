@@ -1,14 +1,14 @@
 import { createContext } from "react";
-import useSubmit from "../Hooks/useSubmit";
+import useAll from '../Hooks/useAll'
 
 export const GlobalContext = createContext()
 
 export const GlobalContextProvider = ({ children }) => {
 
-    const [FormContextValue] = useSubmit()
+    const { all } = useAll()
 
     return (
-        <GlobalContext.Provider value={FormContextValue} >
+        <GlobalContext.Provider value={all} >
             {children}
         </GlobalContext.Provider>
     )

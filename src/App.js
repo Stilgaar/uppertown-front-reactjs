@@ -22,7 +22,7 @@ import Error404 from "./Components/Error/Error404"; // 404
 // composants
 import Navigation from "./Components/NavBar/Navigation";
 
-// hooks (& context)
+// hooks persos
 import useToken from "./Hooks/useToken";
 
 function App() {

@@ -5,8 +5,7 @@ import { useCon } from '../../../Hooks/useCon'
 function OneLineUpload({ user, entry, hardRefresh }) {
     const [box, setBox] = useState(false)
 
-    const { handleForm, handleFile, handleURL, url } = useCon()
-
+    const { handleSubmit, handleFile, handleURL, url } = useCon()
     return (
         <div className="display-f fd-r justify-space-between card mt-1 br-xs p-1">
             <div className="m-a">
@@ -15,8 +14,10 @@ function OneLineUpload({ user, entry, hardRefresh }) {
                 {box &&
                     <div>
                         <form onSubmit={(e) => {
-                            handleForm(e);
-                            hardRefresh();
+                            handleSubmit(e);
+                            setTimeout(() => {
+                                hardRefresh();
+                            }, 50)
                             setBox(c => !c)
                         }}>
                             <div className="display-f fd-c t-center">

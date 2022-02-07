@@ -5,7 +5,7 @@ import Biens from './Bien'
 function GetALlTransacs({ user }) {
 
     const { url } = useCon()
-    const { data: rep, error, pending } = useFetch(`${url}/api/users/props/${user._id}`)
+    const { data: rep, error, pending } = useFetch(`${url}/api/users/transacs/${user._id}`)
 
     return (
         <div> <br />
@@ -13,7 +13,7 @@ function GetALlTransacs({ user }) {
             {error && <div>{error}</div>}
             {pending && <div>Chargement ...</div>}
             {rep.length > 0 && rep.map((elem, index) => (
-                <Biens key={elem._id} elem={elem} index={index} type={'props'} />
+                <Biens key={elem._id} elem={elem} index={index} type={'transac'} />
             ))}
         </div>
     )

@@ -1,12 +1,12 @@
 import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-import useURL from './useURL' // j'ai fait venir useURL ici parce que la flemme de faire un hook global à injecter dans le useCon (use global context)
+import { formReducer } from '../Reducer/reducer'
+import { log, sig, noform } from '../Reducer/action'
 
 // HOOK PERSONNEL POUR LES FORMULAIRES && LA BARRE DE NAVIGATION
 
 function useSubmit() {
 
-  const [theUrl] = useURL()
   // data est pour les données des inputs 
   const [data, setData] = useState({});
   // images récupére tous les files (logique)
@@ -14,8 +14,7 @@ function useSubmit() {
   // clickdata récupére des données aux clicks
   const [clickData, setClickData] = useState({})
   // resmsg sont les messages récupérés par res.send
-  const [resMsg, setResMsg] = useState();
-  // form est l'état de la barre de navigation
+  const [resMsg, setResMsg] = useState(null);
   // url est l'url d'envoi pour axios
   const [url, setUrl] = useState()
 
@@ -24,48 +23,56 @@ function useSubmit() {
   // console.log("DATA", data)
   // console.log("IMAGES", images)
   // console.log("CLICKDATA", clickData)
-  //console.log("RESMSG", resMsg)
+  // console.log("RESMSG", resMsg)
 
   // REDUCER POUR LE LOGIN FORM // NAVBAR (c'est un peu overkill mais c'est classe non ? )
-  const formReducer = (state, action) => {
-    switch (action.type) {
-      case "LOGIN":
-        return { state: action.payload }
-      case "SIGN":
-        return { state: action.payload }
-      case "NULL":
-        return { state: action.payload }
-      default:
-        return state
-    }
-  }
+  // decoposé dans le sous dossier src/Reducer
   const [state, dispatch] = useReducer(formReducer, { state: "" })
-
-  // Gestion de la Navbar
-  const handleLogin = () => { dispatch({ type: "LOGIN", payload: 'login' }) }
-  const handleSignup = () => { dispatch({ type: "SIGN", payload: 'signin' }) }
-  const handleClick = () => { dispatch({ type: "NULL", payload: null }) }
-  const logout = () => {
-    localStorage.removeItem("@updownstreet-token");
-    localStorage.removeItem("@uppertown-url");
-    document.location.replace('/');
-  }
 
   // fonction submit destiné aux inputs
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.persist()
-    // remets les champs à zero
-    e.target.reset()
+    // pour chaque key et val il fait un formdata
+    const formdata = new FormData()
 
-    axios.post(url, data)
+    let key = Object.keys(data)
+    let value = Object.values(data)
+    for (let i = 0; i < key.length; i++) {
+      formdata.append(key[i], value[i])
+    }
+
+    // calcule le share price s'il y en a un a chopper
+    if (data?.price && data?.share_number) {
+      let share_price = data?.price / data?.share_number
+      formdata.append('share_price', share_price)
+    }
+
+    // fonction pour les images, en mets autant qu'il en a besoin 
+    if (images) {
+      let key = Object.keys(images)
+      let val = Object.values(images)
+      // pour plusieurs images (l'annonce par exemple)
+      if (images.image) {
+        for (let i = 0; i < images?.image?.length; i++) {
+          formdata.append(key, val[0][i])
+        }
+      }
+      // pour une image simple
+      else {
+        for (let i = 0; i < key.length; i++) {
+          formdata.append(key[i], val[0][i])
+        }
+      }
+    }
+
+    axios.post(url, formdata,
+      { headers: { 'Content-Type': 'multipart/form-data' } })
       .then((res) => {
-        // check du signin
         if (res.data === "Compte crée avec Succéss !") {
           setResMsg(res.data)
           setTimeout(() => {
-            setResMsg('');
-            dispatch({ type: "LOGIN", payload: 'login' })
+            setResMsg(null);
+            dispatch(log())
           }, 1500);
         }
         // check du login, mets le token en local storage s'il y en a un 
@@ -79,57 +86,19 @@ function useSubmit() {
         else {
           setResMsg(res.data)
           setTimeout(() => {
-            setResMsg('');
+            setResMsg(null);
           }, 2500);
         }
       })
+      .then(() => {
+        setImages([])
+        setData({})
+      })
       .catch((err) => console.log(err))
-      .then(() => setData({}))
-  };
 
-  // fonction de récuperation pour les images ou quelconque formulaire qui a des images  s'occupe aussi d'envoyer de la data au besoin
-  const handleForm = (e) => {
-    e.preventDefault()
-    const form = new FormData()
-    // dans data {key : value}
-    let key = Object.keys(data)
-    let value = Object.values(data)
-    // pour chaque key et val il fait un formdata
-    for (let i = 0; i < key.length; i++) {
-      form.append(key[i], value[i])
-    }
-    // calcule le share price s'il y en a un a chopper
-    if (FormContextValue?.data?.price && FormContextValue?.data?.share_number) {
-      let share_price = FormContextValue?.data?.price / FormContextValue?.data?.share_number
-      form.append('share_price', share_price)
-    }
-    // fonction pour les images, en mets autant qu'il en a besoin 
-    if (images) {
-      let key = Object.keys(images)
-      let val = Object.values(images)
-      // pour plusieurs images (l'annonce par exemple)
-      if (images.image) {
-        for (let i = 0; i < images?.image?.length; i++) {
-          form.append(key, val[0][i])
-        }
-      }
-      // pour une image simple
-      else {
-        for (let i = 0; i < key.length; i++) {
-          form.append(key[i], val[0][i])
-        }
-      }
-    }
-    // remet les champs à zero
     e.target.reset()
-    axios.post(url, form, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    })
-      .then((res) => { console.log(res.data) }) // messages à caller dans le front
-      .catch(err => console.log(err))
-      .then(() => setData({}))
-      .then(() => setImages([]))
-  }
+
+  };
 
   // fonction récuperant sur un click, sans forumaire // avec le ...args, je récup autant d'arguments que je veux. Il me les transforme et me les mets dans clickdata
   const handleData = (...args) => {
@@ -154,13 +123,11 @@ function useSubmit() {
     if (val !== "radio" && val !== "checkbox") { e.preventDefault() }
 
     // certains cas il mets j'avais besoin de mettre info dans le setter je crois j'en ai plus besoin mais j'ai peur que tout pète si je la vire =)
-    if (info) {
-      setData((data) => ({ ...data, [info]: e.target.value }));
-    }
+    if (info) { setData((data) => ({ ...data, [info]: e.target.value.trim() })); }
+
     // sinon il met tout dans la data avec le name=machin et sa valeur (cas le plus fréquent)
-    else {
-      setData((data) => ({ ...data, [e.target.name]: e.target.value }))
-    }
+    else { setData((data) => ({ ...data, [e.target.name]: e.target.value.trim() })) }
+
     // récupére tout du clickdata pour le mettre dans le gros setter data
     if (clickData) {
       let key = Object.keys(clickData)
@@ -183,13 +150,30 @@ function useSubmit() {
     }
   }
 
+  // Gestion de la Navbar
+  const handleLogin = () => { dispatch(log()) }
+  const handleSignup = () => { dispatch(sig()) }
+  const handleClick = () => { dispatch(noform()) }
+  const logout = () => {
+    localStorage.removeItem("@updownstreet-token");
+    localStorage.removeItem("@uppertown-url");
+    document.location.replace('/');
+  }
+
   // récupére les URL avant l'envoi dans le back sur les fonctions spécifiques.
   const handleURL = (data) => { setUrl(data) }
 
-  // useContext, utilisable partout =)
-  const FormContextValue = {
+  // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons, ne se trigger que s'il y a un 'amount' dans le setter data
+  useEffect(() => {
+    if (data.amount) {
+      let amountStableCoins = (data.amount * data.share_price)
+      setData((data) => ({ ...data, amountStableCoins }))
+    }
+  }, [data.amount, data.share_price])
+
+  // je retourne que ça dans l'app.js, puis avec useContext je l'arose sur tous mes composants
+  return {
     state: state.state,
-    url: theUrl,
     data,
     resMsg,
     setData,
@@ -202,22 +186,10 @@ function useSubmit() {
     handleURL,
     handleData,
     handleEnvoi,
-    handleForm,
     handleFile,
     handleClick,
     logout,
   };
-
-  // useEffect me calculant le nombre de stablecoins en fonction du prix des jetons, ne se trigger que s'il y a un 'amount' dans le setter data
-  useEffect(() => {
-    if (data.amount) {
-      let amountStableCoins = (data.amount * data.share_price)
-      setData((data) => ({ ...data, amountStableCoins }))
-    }
-  }, [data.amount, data.share_price])
-
-  // je retourne que ça dans l'app.js, puis avec useContext je l'arose sur tous mes composants
-  return [FormContextValue];
 }
 
 export default useSubmit;

@@ -4,7 +4,9 @@ import { useCon } from '../../../Hooks/useCon'
 
 function PostAnnounce() {
 
-    const { handleForm, handleURL, url } = useCon()
+    const { handleSubmit, handleURL, url } = useCon()
+
+
 
     return (
         <div>
@@ -12,7 +14,7 @@ function PostAnnounce() {
                 <h3 className="bg-primary text-white t-center font-lg br-xs m-1 mb-3 p-1">
                     Publier une nouvelle Annonce
                 </h3>
-                <form onSubmit={(e) => handleForm(e)}>
+                <form onSubmit={handleSubmit}>
 
                     <div className="">
                         {annonce.map((entry) => (

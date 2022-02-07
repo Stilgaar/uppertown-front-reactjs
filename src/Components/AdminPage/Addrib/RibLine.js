@@ -3,6 +3,7 @@ import { useCon } from "../../../Hooks/useCon";
 function RibLine({ entry }) {
 
     const { handleChange } = useCon()
+
     return (
         <>
             <div><label className="label">{entry.label}</label></div>

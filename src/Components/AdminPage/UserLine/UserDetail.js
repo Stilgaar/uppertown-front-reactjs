@@ -7,14 +7,13 @@ import { useCon } from '../../../Hooks/useCon'
 
 function UserDetail() {
 
+    const [modal, setModal] = useState('')
+
     const { id } = useParams()
     const { handleURL, setClickData, handleData, handleEnvoi, url } = useCon()
-    const [modal, setModal] = useState('')
     const { data: userdata, refresh: refreshUser } = useFetch(`${url}/api/users/${id}`)
 
-    useEffect(() => {
-        refreshUser()
-    }, [refreshUser])
+    useEffect(() => { refreshUser() }, [refreshUser])
 
     const click = () => {
         handleEnvoi()
