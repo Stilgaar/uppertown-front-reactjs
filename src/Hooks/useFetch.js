@@ -41,7 +41,6 @@ const useFetch = (url) => {
     }, [refresh])
 
     return { data, refresh, pending, error };
-
 }
 
 export default useFetch;

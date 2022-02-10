@@ -8,6 +8,8 @@ function GestionUtils() {
     const { url } = useCon()
     const { data: users, refresh, error, pending } = useFetch(`${url}/api/users/users`)
 
+    console.log(users)
+
     const user1 = users?.length > 0 && users?.filter(user => user.userType === "userType1")
     const user2 = users?.length > 0 && users.filter(user => user.userType === "userType2")
     const user3 = users?.length > 0 && users.filter(user => user.userType === "userType3")

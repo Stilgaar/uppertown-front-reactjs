@@ -12,8 +12,6 @@ function Infos() {
   const { data: ann, error: annerror, pending: annpending } = useFetch(`${url}/api/announces/allAnnounces`)
   const { data: users, error: uerror, pending: upending } = useFetch(`${url}/api/users/users`)
 
-
-
   let clienttokens = 0;
   for (let i = 0; i < users.length; i++) {
     clienttokens += users[i].stableCoins;
